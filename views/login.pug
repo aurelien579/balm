@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  if errorMessage
+    div(class='alert alert-danger' role='alert') #{errorMessage}
+  if successMessage
+    div(class='alert alert-success' role='alert') #{successMessage} 
+  
+  div(class='row')
+    div(class='col-lg-6')
+      div(class='card')
+        div(class='card-body')
+          h5(class='card-title') Connexion
+          form(action='/user/login' method='post')
+            div(class='form-group row')
+              label(for='username' class='col-lg-4 col-form-label') Nom d'utilisateur
+              div(class='col-lg-8')
+                input(type='username' class='form-control' name='username' placeholder="Nom d'utilisateur")
+
+            div(class='form-group row')
+              label(for='password' class='col-lg-4 col-form-label') Mot de passe
+              div(class='col-lg-8')
+                input(type='password' class='form-control' name='password' placeholder="Mot de passe")
+
+            button(type='submit' class='form-control btn btn-success') Valider
+
+    div(class='col-lg-6')
+      div(class='card')
+        div(class='card-body')
+          h5(class='card-title') Nouveau compte
+          form(action='/user/register' method='post')
+            div(class='form-group row')
+              label(for='email' class='col-lg-4 col-form-label') Email
+              div(class='col-lg-8')
+                input(type='email' class='form-control' name='email' placeholder='Email')
+
+            div(class='form-group row')
+              label(for='username' class='col-lg-4 col-form-label') Nom d'utilisateur
+              div(class='col-lg-8')
+                input(type='username' class='form-control' name='username' placeholder="Nom d'utilisateur")
+
+            div(class='form-group row')
+              label(for='password' class='col-lg-4 col-form-label') Mot de passe
+              div(class='col-lg-8')
+                input(type='password' class='form-control' name='password' placeholder="Mot de passe")
+            
+            button(type='submit' class='form-control btn btn-success') Valider

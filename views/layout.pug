@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    nav(class='navbar navbar-expand-lg navbar-light bg-light')
+      a(class='navbar-brand', href="/") BALM
+      
+      button(class='navbar-toggler', type='button', data-toggle='collapse',
+             data-target='#navbarContent')        
+        span(class='navbar-toggler-icon')
+      
+      div(class='navbar-collapse collapse', id='navbarContent')
+        ul(class='navbar-nav mr-auto')
+          li(class='nav-item')
+            a(class='nav-link', href='/') Accueil
+          li(class='nav-item')
+            a(class='nav-link', href='/') TEST
+        
+        form(class='form-inline my-2 my-lg-0', action='/search' method='GET')
+          input(class='form-control mr-sm-2' name="searchText" type='search'
+                placeholder="Entrez le nom d'une ville")
+          button(class='btn btn-outline-success my-2 my-sm-0'
+                 type='submit') Recherche
+        
+        ul(class='navbar-nav ml-auto')          
+          if user
+            li(class='nav-item')
+              span(class='navbar-text') Connecté: #{user.username}
+            li(class='nav-item')
+              a(class='nav-link', href='/user/logout') Déconnection
+          else
+            li(class='nav-item')
+              a(class='nav-link', href='/user/login') Connection
+        
+    
+    div(class='container')
+      block content
+    
+    script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js')
