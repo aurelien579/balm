@@ -20,7 +20,7 @@ html
           li(class='nav-item')
             a(class='nav-link', href='/') TEST
         
-        form(class='form-inline my-2 my-lg-0', action='/search' method='post')
+        form(class='form-inline my-2 my-lg-0', action='/search' method='get')
           input(class='form-control mr-sm-2' name="searchText" type='search'
                 placeholder="Entrez le nom d'une ville")
           button(class='btn btn-outline-success my-2 my-sm-0'
@@ -31,10 +31,10 @@ html
             li(class='nav-item')
               span(class='navbar-text') Connecté: #{user.username}
             li(class='nav-item')
-              a(class='nav-link', href='/user/logout') Déconnection
+              a(class='nav-link', href='/user/logout') Déconnexion
           else
             li(class='nav-item')
-              a(class='nav-link', href='/user/login') Connection
+              a(class='nav-link', href='/user/login') Connexion
         
     div(class='container')
       block content

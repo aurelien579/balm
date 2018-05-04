@@ -5,9 +5,9 @@ var router = express.Router();
 // req -> recuperer les informations que le client m'envoi
 // res -> reponse a envoyer au client
 
-router.post('/', function(req, res, next) {
-//  var sea = req.params.searchText;
-  console.log(req.body.searchText);
+router.get('/', function(req, res, next) {
+  res.render('search', {title: 'Recherche' });
+  console.log(req.params);
   next();
 });
 
