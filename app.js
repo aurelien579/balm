@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.json());
 //app.use(express.urlencoded({ extended: false }));
 
-app.use(session({ secret: 'qsfqsdlgjksdfmjxcbxcv' ,
+app.use(session({ secret: 'qsfqsdlgjksdfmjxcbxcvvfuhvlzks' ,
                   resave: false,
                   saveUninitialized: true }));
 
