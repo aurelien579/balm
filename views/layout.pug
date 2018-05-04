@@ -4,6 +4,7 @@ html
     title= title
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
   body
     nav(class='navbar navbar-expand-lg navbar-light bg-light')
       a(class='navbar-brand', href="/") BALM
@@ -24,7 +25,7 @@ html
                 placeholder="Entrez le nom d'une ville")
           button(class='btn btn-outline-success my-2 my-sm-0'
                  type='submit') Recherche
-        
+
         ul(class='navbar-nav ml-auto')          
           if user
             li(class='nav-item')
@@ -35,10 +36,25 @@ html
             li(class='nav-item')
               a(class='nav-link', href='/user/login') Connection
         
-    
     div(class='container')
       block content
     
+    <!-- carousel--> 
+    div(class="diapo")        
+      div(id="carousel-inner" class="carousel slide carousel-fade" data-ride="carousel" data-interval="3000")
+        div(class="carousel-inner")
+          div(class="carousel-item active")
+            img(class="d-block w-100" src="images/balm1,5.jpg" alt="First slide")
+          div(class="carousel-item")
+            img(class="d-block w-100" src="images/balm2,5.jpg" alt="Second slide")
+      div(class="centered")
+        form(class="example" action='/search' method='GET' style="margin:auto;max-width:300px")
+          input(type="text" placeholder="Indiquer votre destination" name="search2")
+          button(type="submit")
+            i(class="fa fa-search")
+      
+      
+      
     script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js')
     script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js')
