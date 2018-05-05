@@ -1,20 +1,17 @@
 .carousel {
-  pause: "false"; /* don't stop even with cursor on him */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
-.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.carousel-inner {
+  min-width: 1000px;
 }
 
-.front {
-  z-index: 1;
-}
-img {
+#img {
     /* -webkit-filter: blur(2px);
     filter: blur(2px); */  /* image fading */
-    height:94%;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
@@ -27,7 +24,7 @@ img {
   height: 40px;
   border-radius: 0px;
   outline: none; /* je sais pas ce que c'est a test */
-  color: #9DBFAF;
+  color: #000000;
 }
 
 .searchTerm:focus{
@@ -47,7 +44,21 @@ img {
   cursor: pointer;
   font-size: 20px;
 }
-
+.dropdown-toggle {
+  position: absolute;
+  right: -213px;
+  height: 40px;
+  width: 170px;
+  border: 1px solid #00FF00;
+  color: #fff;
+  background: #00FF00;
+  border-radius: 0px;
+}
+.dropdown-menu {
+  border: 0px solid #00FF00;
+  border-radius: 0px;
+  width: 500px;
+}
 .wrap{
   width: 30%;
   position: absolute;
