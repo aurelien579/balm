@@ -1,18 +1,23 @@
-extends layout
+extend layout
 
 block header
     link(rel='stylesheet', href='/stylesheets/index.css')
 
 block content
-    <!-- carousel-->
-    div(class="carousel slide carousel-fade" data-ride="carousel")
-      div(class="carousel-inner")
-        div(class="carousel-item active")
-          img(class="d-block w-100" id="img" src="images/balm2,5.jpg" alt="First slide")
-        div(class="carousel-item")
-          img(class="d-block w-100" id="img" src="images/balm1.jpg" alt="Second slide")
-    div(class="wrap")
-       div(class="search")
-          input(type="text" class="searchTerm" placeholder="Where do you want to go?")
-          button(type="submit" class="searchButton")
-            i(class="fa fa-search")
+  <!-- carousel-->
+  div(class="carousel slide carousel-fade" data-ride="carousel" data-interval="4000" data-pause="false")
+    div(class="carousel-inner")
+      div(class="carousel-item active")
+        img(class="d-block w-100" id="img" src="images/balm2,5.jpg" alt="First slide")
+      div(class="carousel-item")
+        img(class="d-block w-100" id="img" src="images/balm1.jpg" alt="Second slide")
+  div(class="wrap")
+     div(class="search")
+        input(type="text" class="searchTerm" placeholder="Where do you want to go?")
+        button(type="submit" class="searchButton")
+          i(class="fa fa-search")
+        button( class="dropdown-toggle" type="button" data-toggle="dropdown") Advanced options
+          div(class="dropdown-menu")
+            a(class="dropdown-item" href="#") à faire :extend vers la gauche
+            a(class="dropdown-item" href="#") extend vers la gauche, bonne taille fenetre
+            a(class="dropdown-item" href="#") ajouter les paramètres
