@@ -1,21 +1,29 @@
 extends layout
 
-block content
+block header
+    link(rel='stylesheet', href='/stylesheets/search.css')
 
-.container
-  h1 Recherche : #{Search}
-  h1 Nombre de Recherche : #{NBResult}
-  h1 Maison : #{Result}
-  - var i = 0;
-  if NBResult < 1
-    h1 Aucun Résultat pour : #{Search}
-  if NBResult > 0
-    div(class="container")
-      div(class="row justify-content-around")
-        each val in Result
-          div(class="col-lg-4 square")=val
-            img(class="imagesearch" src="images/maison_search.png")
-          - i++;
-          if i === 3
-            div(class="w-100")
-            - i = 0;
+block content
+  .container
+    h1 Barre de Recherche : #{Search}
+    h1 Nombre de Recherche : #{Result.Lenght}
+    h1 Resultat Recherche : #{Result.Data}
+    h1 Nombre de Maison : #{Maison.Lenght}
+    //h1 Resultat Maison : #{Maison.Data}
+    - var i = 0;
+    if Result.Lenght < 1
+      h1 Aucun Résultat pour : #{Search}
+    if Result.Lenght > 0
+      div(class="container")
+        div(class="row justify-content-around")
+          each House in Maison.Data
+            div(class="col-lg-4 square")
+              img(class="Offer_Image" src="images/maison_search.png")
+              p(class="Offer_Title") #{House[0]}
+              p(class="Offer_Price") #{House[1]}€
+              p(class="Offer_Night")  la nuit.
+              p(class="Offer_Nb_People") #{House[2]} Personnes
+            - i++;
+            if i === 3
+              div(class="w-100")
+              - i = 0;
