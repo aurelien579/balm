@@ -1,0 +1,3 @@
+CREATE USER IF NOT EXISTS balm IDENTIFIED BY 'balm';
+GRANT ALL ON Balm.* TO balm;
+
