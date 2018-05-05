@@ -1,6 +1,8 @@
 extends layout
 
 block content
+
+.container
   h1 Recherche : #{Search}
   h1 Nombre de Recherche : #{NBResult}
   h1 Maison : #{Result}
@@ -17,5 +19,3 @@ block content
           if i === 3
             div(class="w-100")
             - i = 0;
-    
-    

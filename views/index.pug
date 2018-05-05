@@ -1,7 +1,9 @@
-html
-  include layout.pug
-  
-  body
+extends layout
+
+block header
+    link(rel='stylesheet', href='/stylesheets/index.css')
+
+block content
     <!-- carousel-->
     div(class="carousel slide carousel-fade" data-ride="carousel")
       div(class="carousel-inner")
