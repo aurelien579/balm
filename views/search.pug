@@ -1,1 +1,21 @@
 extends layout
+
+block content
+  h1 Recherche : #{Search}
+  h1 Nombre de Recherche : #{NBResult}
+  h1 Maison : #{Result}
+  - var i = 0;
+  if NBResult < 1
+    h1 Aucun Résultat pour : #{Search}
+  if NBResult > 0
+    div(class="container")
+      div(class="row justify-content-around")
+        each val in Result
+          div(class="col-lg-3 square")=val
+            img(class="imagesearch" src="images/maison_search.png")
+          - i++;
+          if i === 3
+            div(class="w-100")
+            - i = 0;
+    
+    
