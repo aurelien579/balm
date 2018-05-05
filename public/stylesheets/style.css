@@ -1,15 +1,6 @@
-.container {
-  /* padding-top: 40px; */
+.carousel {
+  pause: "false"; /* don't stop even with cursor on him */
 }
-
-
-.diapo {
-    position: relative;
-    text-align: center;
-    color: white;
-}
-
-/* Centered text */
 .centered {
     position: absolute;
     top: 50%;
@@ -17,70 +8,50 @@
     transform: translate(-50%, -50%);
 }
 
-.custom-select {
-  position: relative;
-  font-family: Arial;
+.front {
+  z-index: 1;
+}
+img {
+    /* -webkit-filter: blur(2px);
+    filter: blur(2px); */  /* image fading */
+    height:94%;
 }
 
-{
-    box-sizing: border-box;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+.searchTerm {
+  float: left; /* je sais pas ce que c'est a test */
+  width: 100%;
+  border: 1px solid #00FF00;
+  padding: 5px; /* je sais pas ce que c'est a test */
+  height: 40px;
+  border-radius: 0px;
+  outline: none; /* je sais pas ce que c'est a test */
+  color: #9DBFAF;
 }
 
-form.example input[type=text] {
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
+.searchTerm:focus{
+  color: #000000;
 }
 
-form.example button {
-    float: left;
-    width: 20%;
-    padding: 10px;
-    background: #00FF00;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
+.searchButton {
+  position: absolute;
+  right: -40px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #00FF00;
+  background: #00FF00;
+  text-align: center;
+  color: #fff;
+  border-radius: 0px;
+  cursor: pointer;
+  font-size: 20px;
 }
 
-form.example button:hover {
-    background: #00FF00;
-}
-
-form.example::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-/* Bottom left text */
-.bottom-left {
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
-}
-
-/* Top left text */
-.top-left {
-    position: absolute;
-    top: 8px;
-    left: 16px;
-}
-
-/* Top right text */
-.top-right {
-    position: absolute;
-    top: 8px;
-    right: 16px;
-}
-
-/* Bottom right text */
-.bottom-right {
-    position: absolute;
-    bottom: 8px;
-    right: 16px;
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
