@@ -15,9 +15,17 @@ function clearSession(req) {
     app.locals.session = undefined;
 }
 
+function mustBeConnected(req, res, next) {
+    if (!req.session.user) {
+        console.log('Access violation!');
+        res.redirect('/');
+    } else {
+        next();
+    }
+}
+
 router.post('/login', function(req, res, next) {
     userModel.getByUsername(req.body.email, (err, user) => {
-        console.log(user);
         createSession(req, user);
 
         if (user !== undefined) {
@@ -63,11 +71,14 @@ router.post('/register', function(req, res, next) {
     });
 });
 
-router.get('/logout', function(req, res, next) {
+router.get('/logout', mustBeConnected, function(req, res, next) {
     clearSession(req);
+    res.redirect('/');
+});
 
-    res.render('index', {
-        title: 'BALM'
+router.get('/', mustBeConnected, function(req, res, next) {
+    res.render('user.pug', {
+        user: req.session.user
     });
 });
 

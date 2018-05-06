@@ -30,7 +30,7 @@ html
         ul(class='navbar-nav ml-auto')
           if session
             li(class='nav-item')
-              span(class='navbar-text') #{session.email}
+              a(class='nav-link' href='/user') #{session.email}
             li(class='nav-item')
               a(class='nav-link', href='/user/logout') Déconnexion
           else
