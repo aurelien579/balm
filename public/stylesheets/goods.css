@@ -1,3 +1,15 @@
 .titre-maison {
-  padding-top: 20px;
+  padding-top: 1%;
+}
+
+.carousel {
+  position:relative;;
+  top: 0;
+  left: 0;
+  right: 0;
+
+}
+.carousel-inner {
+  max-height: 500px;
+  width: auto;
 }
