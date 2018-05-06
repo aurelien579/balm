@@ -1,10 +1,24 @@
-var express = require('express');
-var router = express.Router();
-var userModel = require('../models/user');
+const express = require('express');
+const router = express.Router();
+const userModel = require('../models/user');
+const app = require('../app');
+
+function createSession(req, user) {
+    console.log(app);
+    req.session.user = user;
+    app.locals.session = {
+        email: user.email
+    };
+}
+
+function clearSession(req) {
+    req.session.user = undefined;
+    app.locals.session = undefined;
+}
 
 router.post('/login', function(req, res, next) {
     userModel.getByUsername(req.body.email, (err, user) => {
-        req.session.user = user;
+        createSession(req, user);
 
         if (user !== undefined) {
             var successMessage = "Vous êtes bien connecté";
@@ -14,7 +28,6 @@ router.post('/login', function(req, res, next) {
 
         res.render('login', {
             title: 'Connexion',
-            user: req.session.user,
             successMessage: successMessage,
             errorMessage: errorMessage
         });
@@ -23,7 +36,6 @@ router.post('/login', function(req, res, next) {
 
 router.get('/login', function(req, res, next) {
     res.render('login', {
-        user: req.session.user,
         title: 'Connexion'
     });
 });
@@ -40,13 +52,11 @@ router.post('/register', function(req, res, next) {
 
             res.render('login', {
                 title: 'Erreur',
-                user: req.session.user,
                 errorMessage: errorMessage
             });
         } else {
             res.render('login', {
                 title: 'Compte créé',
-                user: req.session.user,
                 successMessage: 'Votre compte a bien été créé'
             });
         }
@@ -54,7 +64,8 @@ router.post('/register', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res, next) {
-    req.session.user = undefined;
+    clearSession(req);
+
     res.render('index', {
         title: 'BALM'
     });

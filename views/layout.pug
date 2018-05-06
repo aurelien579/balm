@@ -28,9 +28,9 @@ html
                  type='submit') Recherche
 
         ul(class='navbar-nav ml-auto')
-          if user
+          if session
             li(class='nav-item')
-              span(class='navbar-text') Connecté: #{user.username}
+              span(class='navbar-text') Connecté: #{session.email}
             li(class='nav-item')
               a(class='nav-link', href='/user/logout') Déconnexion
           else
