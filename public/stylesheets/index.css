@@ -90,11 +90,16 @@
   cursor: pointer;
 }
 
+#collapseExample {
+  padding-top: 5px;
+}
+
 .card {
   border-radius: 0px;
   border: 1px solid #00FF00;
 }
 
-#collapseExample {
-  padding-top: 5px;
+.row {
+  position : relative;
+  left:5%
 }
