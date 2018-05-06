@@ -9,21 +9,17 @@ block content
     h1 Nombre de Recherche : #{Result.Lenght}
     h1 Resultat Recherche : #{Result.Data}
     h1 Nombre de Maison : #{Maison.Lenght}
-    //h1 Resultat Maison : #{Maison.Data}
-    - var i = 0;
-    if Result.Lenght < 1
+    if Maison.Lenght < 1
       h1 Aucun Résultat pour : #{Search}
-    if Result.Lenght > 0
+    if Maison.Lenght > 0
       div(class="container")
         div(class="row justify-content-around")
-          each House in Maison.Data
-            div(class="col-lg-4 square")
-              img(class="Offer_Image" src="images/maison_search.png")
-              p(class="Offer_Title") #{House[0]}
-              p(class="Offer_Price") #{House[1]}€
-              p(class="Offer_Night")  la nuit.
-              p(class="Offer_Nb_People") #{House[2]} Personnes
-            - i++;
-            if i === 3
-              div(class="w-100")
-              - i = 0;
+          each row in Maison.Data
+            each House in row
+              div(class="col-lg-4 square")
+                img(class="Offer_Image" src="images/maison_search.png")
+                p(class="Offer_Title") #{House[0]}
+                p(class="Offer_Price") #{House[1]}€
+                p(class="Offer_Night")  la nuit.
+                p(class="Offer_Nb_People") #{House[2]} Personnes
+            div(class="w-100")
