@@ -19,6 +19,8 @@
 -- Dumping data for table `Image`
 --
 
+USE Balm;
+
 LOCK TABLES `Image` WRITE;
 /*!40000 ALTER TABLE `Image` DISABLE KEYS */;
 INSERT INTO `Image` VALUES (1,1,'/images/offers/1-1.png'),(2,1,'/images/offers/1-2.png');
