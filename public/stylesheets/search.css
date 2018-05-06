@@ -1,6 +1,6 @@
 .square {
   z-index: 0;
-  background-color: yellow;
+  background-color: white;
   padding: 10px;
   height: same-as-width;
   margin-bottom: 10px;
@@ -17,6 +17,11 @@
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
   padding: 0px;
+  text-decoration: none;
+}
+
+.a {
+  text-decoration: none;
 }
 
 .Offer_Image {

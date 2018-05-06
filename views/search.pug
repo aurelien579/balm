@@ -16,10 +16,10 @@ block content
         div(class="row justify-content-around")
           each row in Maison.Data
             each House in row
-              div(class="col-lg-4 square")
-                img(class="Offer_Image" src="images/maison_search.png")
-                p(class="Offer_Title") #{House[0]}
-                p(class="Offer_Price") #{House[1]}€
-                p(class="Offer_Night")  la nuit.
-                p(class="Offer_Nb_People") #{House[2]} Personnes
+              a(class="col-lg-4 square" href="goods/" + House[0])
+                  img(class="Offer_Image" src="images/maison_search.png")
+                  p(class="Offer_Title") #{House[1]}
+                  p(class="Offer_Price") #{House[2]}€
+                  p(class="Offer_Night")  la nuit.
+                  p(class="Offer_Nb_People") #{House[3]} Personnes
             div(class="w-100")
