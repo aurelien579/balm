@@ -14,9 +14,9 @@ block content
             h5(class='card-title') Connexion
             form(action='/user/login' method='post')
               div(class='form-group row')
-                label(for='username' class='col-lg-4 col-form-label') Nom d'utilisateur
+                label(for='username' class='col-lg-4 col-form-label') Email
                 div(class='col-lg-8')
-                  input(type='username' class='form-control' name='username' placeholder="Nom d'utilisateur")
+                  input(type='username' class='form-control' name='email' placeholder="Email")
 
               div(class='form-group row')
                 label(for='password' class='col-lg-4 col-form-label') Mot de passe
@@ -31,18 +31,23 @@ block content
             h5(class='card-title') Nouveau compte
             form(action='/user/register' method='post')
               div(class='form-group row')
-                label(for='email' class='col-lg-4 col-form-label') Email
+                label(class='col-lg-4 col-form-label') Email
                 div(class='col-lg-8')
                   input(type='email' class='form-control' name='email' placeholder='Email')
 
               div(class='form-group row')
-                label(for='username' class='col-lg-4 col-form-label') Nom d'utilisateur
+                label(class='col-lg-4 col-form-label') Prénom
                 div(class='col-lg-8')
-                  input(type='username' class='form-control' name='username' placeholder="Nom d'utilisateur")
-
+                  input(type='username' class='form-control' name='firstName' placeholder='Prénom')
+                    
               div(class='form-group row')
-                label(for='password' class='col-lg-4 col-form-label') Mot de passe
+                label(class='col-lg-4 col-form-label') Nom
                 div(class='col-lg-8')
-                  input(type='password' class='form-control' name='password' placeholder="Mot de passe")
+                  input(type='username' class='form-control' name='lastName' placeholder='Nom')
+              
+              div(class='form-group row')
+                label(class='col-lg-4 col-form-label') Mot de passe
+                div(class='col-lg-8')
+                  input(type='password' class='form-control' name='password' placeholder='Mot de passe')
 
               button(type='submit' class='form-control btn btn-success') Valider

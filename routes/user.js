@@ -3,7 +3,7 @@ var router = express.Router();
 var userModel = require('../models/user');
 
 router.post('/login', function(req, res, next) {
-    userModel.getByUsername(req.body.username, (err, user) => {
+    userModel.getByUsername(req.body.email, (err, user) => {
         req.session.user = user;
 
         if (user !== undefined) {
@@ -29,7 +29,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post('/register', function(req, res, next) {
-    userModel.create(req.body.username, req.body.password, req.body.email, (err, user) => {
+    userModel.create(req.body.email, req.body.firstName, req.body.lastName, req.body.password, (err, user) => {
         if (err) {
             var errorMessage = err.message;
             if (err.code == userModel.USERNAME_EXISTS) {

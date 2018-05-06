@@ -1,27 +1,24 @@
-const sqlite = require('sqlite3').verbose();
-let db = new sqlite.Database('db/data.sqlite3', (err) => {
-    if (err) {
-        console.log(err);
-    }
-});
+const pool = require('./db').pool;
 
 const ERROR = -1;
 const USERNAME_EXISTS = 1;
 const EMAIL_EXISTS = 2;
 
-let userGetSql = 'SELECT * FROM Users WHERE username = ?';
-let userInsertSql = 'INSERT INTO Users(username, password, email) VALUES(?, ?, ?);';
+let userGetSql = 'SELECT * FROM User WHERE email = ?';
+let userInsertSql = 'INSERT INTO User(email, firstName, lastName, password) VALUES(?, ?, ?, ?);';
 
-var getByUsername = function(username, callback) {
-    db.each(userGetSql, [username], (err, row) => {
-        callback(err, row);
+var getByUsername = function(email, callback) {
+    pool.query(userGetSql, [email], (err, results) => {
+        if (err) {
+            callback(err);
+        } else {
+            callback(err, results[0]);
+        }
     });
-
-    callback();
 }
 
-var create = function(username, password, email, callback) {
-    db.run(userInsertSql, [username, password, email], (err) => {
+var create = function(email, firstName, lastName, password, callback) {
+    pool.query(userInsertSql, [email, firstName, lastName, password], (err, result) => {
         if (err) {
             err.code = ERROR;
             if (err.message.indexOf("UNIQUE constraint failed") != -1) {
@@ -30,13 +27,9 @@ var create = function(username, password, email, callback) {
                 else if (err.message.indexOf("email") != -1)
                     err.code = EMAIL_EXISTS;
             }
-
-            callback(err);
-        } else {
-            getByUsername(username, (_, row) => {
-                callback(err, username);
-            });
         }
+
+        callback(err, result);
     });
 }
 
