@@ -100,6 +100,11 @@
 }
 
 .row {
+  padding-top: 5px;
   position : relative;
   left:5%
+}
+
+.form-check {
+  padding-right: 25px;
 }
