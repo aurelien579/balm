@@ -4,7 +4,6 @@ const userModel = require('../models/user');
 const app = require('../app');
 
 function createSession(req, user) {
-    console.log(app);
     req.session.user = user;
     app.locals.session = {
         email: user.email
@@ -18,6 +17,7 @@ function clearSession(req) {
 
 router.post('/login', function(req, res, next) {
     userModel.getByUsername(req.body.email, (err, user) => {
+        console.log(user);
         createSession(req, user);
 
         if (user !== undefined) {
