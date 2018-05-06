@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `Balm` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `Balm`;
 -- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: Balm
@@ -18,6 +16,45 @@ USE `Balm`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Availability`
+--
+
+DROP TABLE IF EXISTS `Availability`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Availability` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `offerId` int(11) NOT NULL,
+  `start` varchar(45) NOT NULL,
+  `end` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Availability_1_idx` (`offerId`),
+  CONSTRAINT `fk_Availability_1` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Comment`
+--
+
+DROP TABLE IF EXISTS `Comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idUser` int(11) NOT NULL,
+  `idOffer` int(11) NOT NULL,
+  `content` varchar(45) NOT NULL,
+  `rating` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Comment_1_idx` (`idUser`),
+  KEY `fk_Comment_2_idx` (`idOffer`),
+  CONSTRAINT `fk_Comment_1` FOREIGN KEY (`idUser`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Comment_2` FOREIGN KEY (`idOffer`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `Image`
 --
 
@@ -25,12 +62,12 @@ DROP TABLE IF EXISTS `Image`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Image` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `OfferId` int(11) NOT NULL,
-  `Path` varchar(45) NOT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `OfferIdFK_idx` (`OfferId`),
-  CONSTRAINT `OfferIdFK` FOREIGN KEY (`OfferId`) REFERENCES `Offer` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `offerId` int(11) NOT NULL,
+  `path` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `OfferIdFK_idx` (`offerId`),
+  CONSTRAINT `OfferIdFK` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -42,18 +79,19 @@ DROP TABLE IF EXISTS `Offer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Offer` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `UserId` int(11) NOT NULL,
-  `Title` varchar(45) NOT NULL,
-  `Description` varchar(45) NOT NULL,
-  `Price` varchar(45) NOT NULL,
-  `City` varchar(45) NOT NULL,
-  `Department` varchar(45) NOT NULL,
-  `Region` varchar(45) NOT NULL,
-  `Address` varchar(45) NOT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `fk_Offer_1_idx` (`UserId`),
-  CONSTRAINT `UserIdKey` FOREIGN KEY (`UserId`) REFERENCES `User` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `postcode` int(11) NOT NULL,
+  `title` varchar(45) NOT NULL,
+  `description` varchar(45) NOT NULL,
+  `price` varchar(45) NOT NULL,
+  `city` varchar(45) NOT NULL,
+  `department` varchar(45) NOT NULL,
+  `region` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Offer_1_idx` (`userId`),
+  CONSTRAINT `UserIdKey` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -65,13 +103,14 @@ DROP TABLE IF EXISTS `User`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `User` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `FirstName` varchar(45) NOT NULL,
-  `LastName` varchar(45) NOT NULL,
-  `Email` varchar(45) NOT NULL,
-  `Password` varchar(45) NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -83,4 +122,4 @@ CREATE TABLE `User` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-05 21:46:38
+-- Dump completed on 2018-05-06 18:29:27

@@ -16,10 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `Image`
+-- Dumping data for table `Availability`
 --
 
-USE Balm;
+LOCK TABLES `Availability` WRITE;
+/*!40000 ALTER TABLE `Availability` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Availability` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `Comment`
+--
+
+LOCK TABLES `Comment` WRITE;
+/*!40000 ALTER TABLE `Comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `Image`
+--
 
 LOCK TABLES `Image` WRITE;
 /*!40000 ALTER TABLE `Image` DISABLE KEYS */;
@@ -33,7 +49,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `Offer` WRITE;
 /*!40000 ALTER TABLE `Offer` DISABLE KEYS */;
-INSERT INTO `Offer` VALUES (1,1,'Offre Titre','Offre Description','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein');
+INSERT INTO `Offer` VALUES (1,1,0,'Offre Titre','Offre Description','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein');
 /*!40000 ALTER TABLE `Offer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -43,7 +59,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'Aurélien','Martin','aurelien.martin@insa-lyon.fr','toto'),(2,'Camille','Moriot','camille.moriot@insa-lyon.fr','toto'),(3,'Alexandre','Sabathier','alexandre.sabathier@insa-lyon.fr','toto'),(4,'Mael','Brouard','mael.brouard@insa-lyon.fr','toto');
+INSERT INTO `User` VALUES (1,'Aurélien','Martin','aurelien.martin@insa-lyon.fr','toto'),(2,'Camille','Moriot','camille.moriot@insa-lyon.fr','toto'),(3,'Alexandre','Sabathier','alexandre.sabathier@insa-lyon.fr','toto'),(4,'Mael','Brouard','mael.brouard@insa-lyon.fr','toto'),(5,'Test','Test','test@test.co','test'),(6,'Test','Test','test@tttt.c','tttt');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +72,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-05 21:46:24
+-- Dump completed on 2018-05-06 18:29:35
