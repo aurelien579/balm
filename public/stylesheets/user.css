@@ -1,0 +1,7 @@
+.card-content {
+    text-align: left;
+}
+
+.card-header a:hover {
+    cursor: pointer;
+}

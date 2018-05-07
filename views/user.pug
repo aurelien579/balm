@@ -1,5 +1,23 @@
 extends layout
 
+block header
+  link(rel='stylesheet', href='/stylesheets/user.css')
+
 block content
   .container
-    h1 #{user.firstName}
+    h1.text-center Mon Compte
+    br
+    
+    .card.text-center
+      .card-header
+        ul.nav.nav-tabs.card-header-tabs#cardHeader
+          li.nav-item
+            a.nav-link#userInfoButton Informations personelles
+          li.nav-item
+            a.nav-link#offersButton Mes offres
+          li.nav-item
+            a.nav-link#commentsButton Mes commentaires
+      .card-body#ajaxContent
+
+block scripts
+  script(src='/js/user.js')

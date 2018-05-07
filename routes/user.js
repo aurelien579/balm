@@ -77,7 +77,19 @@ router.get('/logout', mustBeConnected, function(req, res, next) {
 });
 
 router.get('/', mustBeConnected, function(req, res, next) {
-    res.render('user.pug', {
+    res.render('user', {
+        user: req.session.user
+    });
+});
+
+router.get('/infos', mustBeConnected, function(req, res, next) {
+    res.render('user-infos', {
+        user: req.session.user
+    });
+});
+
+router.get('/offers', mustBeConnected, function(req, res, next) {
+    res.render('user-offers', {
         user: req.session.user
     });
 });
