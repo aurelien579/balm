@@ -5,7 +5,8 @@ var searchModel = require('../models/search');
 router.get('/', function(req, res, next) {
   searchModel.getByOfferCity(req.query.searchText, (err, results) => {
     var search = req.query.searchText;  // Récupère le texte de recherche
-
+    var house_lgt = results.length;
+    // Passe d'un tableau 1D à tableau 2D
     var house = [];
     for(var i = 0; i < results.length; i += 3) {
       house[i/3] = [];
@@ -16,7 +17,6 @@ router.get('/', function(req, res, next) {
         }
       }
     }
-    house_lgt = house.length;
 
     res.render('search', {
       title: 'Recherche',
