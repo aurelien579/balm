@@ -1,7 +1,7 @@
 const pool = require('./db').pool;
 
 
-let sqlGetById = 'SELECT * FROM Offer WHERE id = ?';
+let sqlGetById = 'SELECT * FROM Offer WHERE id = ?;'
 let sqlGetByUserId = 'SELECT * FROM Offer WHERE userId = ?;'
 
 var getById = function(id, callback) {
