@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userModel = require('../models/user');
 const goodsModel = require('../models/goods');
+const imageModel = require('../models/image');
 const app = require('../app');
 
 function createSession(req, user) {
@@ -90,18 +91,41 @@ router.get('/infos', mustBeConnected, function(req, res, next) {
 });
 
 router.get('/offers', mustBeConnected, function(req, res, next) {
-    goodsModel.getByUserId(req.session.user.id, (err, results) => {
+    goodsModel.getByUserId(req.session.user.id, (err, offers) => {
         if (err) {
             res.render('error', {
                 error: err
             });
         } else {
-            res.render('user/user-offers', {
-                user: req.session.user,
-                offers: results
+            imageModel.getByUserId(req.session.user.id, (err, images) => {
+                offers.forEach((offer) => {
+                    if (!images) {
+                        offer.images = [];
+                    } else {
+                        offer.images = images.filter((image) => {
+                            image.offerId = offer.id
+                        });
+                    }
+                });
+                console.log(offers.images);
+
+                if (err) {
+                    res.render('error', {
+                        error: err
+                    });
+                } else {
+                    res.render('user/user-offers', {
+                        user: req.session.user,
+                        offers: results
+                    });
+                }
             });
         }
     });
+});
+
+router.get('/comments', mustBeConnected, function(req, res, next) {
+    res.render('uesr/comments');
 });
 
 module.exports = router;
