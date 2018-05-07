@@ -1,17 +1,3 @@
-function fixclick() {
-  var x = document.getElementById("barre");
-  x.style.display = "none";
-}
-function myFunction() {
-    var x = document.getElementById("barre");
-
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-}
-
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
@@ -26,7 +12,10 @@ var yyyy = today.getFullYear();
 today = yyyy+'-'+mm+'-'+dd;
 document.getElementById("date").setAttribute("min", today);
 
-
+/*function fixclick() {
+  var x = document.getElementById("barre");
+  x.style.display = "none";
+}
 $(function() {
   fixclick();
-});
+});*/

@@ -1,4 +1,4 @@
-.block {
+/*.block {
   position: absolute;
   top: 110%;
   border-bottom: 2px solid #00FF00;
@@ -15,7 +15,7 @@
   font-size: 50px;
   color: #00FF00;
   z-index: 1;
-}
+}*/
 
 .carousel {
   position: fixed;
@@ -36,7 +36,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-.wrap{
+#form1 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -44,67 +44,25 @@
   transform: translate(-50%, -50%);
 }
 
-.search { /* search bar */
-  width: 60%;
-}
-
-#test:hover{color:black;}
-
-.searchTerm { /* texte dans la search bar */
-  float: left;
-  width: 100%;
-  border: 1px solid #00FF00;
-  padding: 5px;
-  height: 40px;
+#searchbar {
   border-radius: 0px;
-  outline: none;
-  color: #000000;
+  border: 1px solid #00FF00;
 }
 
-.searchButton { /* block launch search */
-  position: relative;
-  width: 40px;
-  height: 40px;
-  border: 1px solid #00FF00;
-  background: #00FF00;
-  text-align: center;
-  color: #fff;
-  border-radius: 0px;
-  cursor: pointer;
-  font-size: 20px;
-}
+#button:hover{color:black;}
 
-
-.parameters { /* block advanced options */
-  position: relative;
-  right: -2px;
-  top: -1px;
-  height: 40px;
-  width: 170px;
-  border: 1px solid #00FF00;
-  text-align: center;
-  color: #fff;
-  font-size: 18px;
+#button {
   background: #00FF00;
   border-radius: 0px;
-  cursor: pointer;
-}
-
-#collapseExample {
-  padding-top: 5px;
+  color: white;
 }
 
 .card {
+  padding-top: 5px;
   border-radius: 0px;
   border: 1px solid #00FF00;
 }
 
-.row {
+#input2 {
   padding-top: 5px;
-  position : relative;
-  left:5%
-}
-
-.form-check {
-  padding-right: 25px;
 }
