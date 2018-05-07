@@ -3,7 +3,6 @@ block header
     link(rel='stylesheet', href='/stylesheets/goods.css')
 
 block content
-
     .container
       if offer
         div(id="carouselExampleIndicators" class="carousel" data-ride="carousel" data-interval ="5000")
@@ -14,7 +13,7 @@ block content
 
             div(class="carousel-inner")
                 div(class="carousel-item active")
-                    img(class="d-block w-100 " src="http://prixmaison.fr/IMG/arton42.jpg"  alt="Second slide")
+                    img(class="d-block w-100 " src="http://prixmaison.f"  alt="Second slide")
                 div(class="carousel-item")
                     img(class="d-block w-100 "  src="http://waaqeffannaa.org/wp-content/uploads/2018/02/tonnant-decoration-cuisine-provence-id-es-de-design-accessoires-salle-bain-fresh-in-campagne-w641h478.jpg"  alt="Second slide")
                 div(class="carousel-item")
@@ -34,6 +33,12 @@ block content
           h1() &#9734; &#9734; &#9734; &#9734; &#9734; #{Notes}
           h4(class="text-justify") Description :
           p(class="text-justify") #{offer.description}
+          div(class = "commentaire")
+            h4(class="text-justify") Commentaires
+            each row in comments
+              h1() &#9734; &#9734; &#9734; &#9734; &#9734;
+              p(class="text-justify") #{comments.content}
 
-      else Erreur
-        h1() Erreur cette maison n'existe pas encore
+
+      else
+        p Cette maison n'existe pas encore...
