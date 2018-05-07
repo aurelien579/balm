@@ -1,6 +1,6 @@
 const pool = require('./db').pool;
 
-let offerCityGetSql = 'SELECT * FROM Offer WHERE City = ?';
+let offerCityGetSql = 'SELECT * FROM Offer WHERE city = ?';
 
 var getByOfferCity = function(city, callback) {
     pool.query(offerCityGetSql, [city], (err, results) => {

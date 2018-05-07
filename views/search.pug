@@ -5,21 +5,32 @@ block header
 
 block content
   .container
-    h1 Barre de Recherche : #{Search}
-    h1 Nombre de Recherche : #{Result.Lenght}
-    h1 Resultat Recherche : #{Result.Data}
-    h1 Nombre de Maison : #{Maison.Lenght}
-    if Maison.Lenght < 1
-      h1 Aucun Résultat pour : #{Search}
-    if Maison.Lenght > 0
+    h1 Barre de Recherche : #{search}
+    h1 Nombre de Maison : #{house_lgt}
+    if house_lgt < 1
+      h1 Aucun Résultat pour : #{search}
+    if house_lgt > 0
       div(class="container")
         div(class="row justify-content-around")
-          each row in Maison.Data
-            each House in row
-              a(class="col-lg-4 square" href="goods/" + House[0])
-                  img(class="Offer_Image" src="images/maison_search.png")
-                  p(class="Offer_Title") #{House[1]}
-                  p(class="Offer_Price") #{House[2]}€
-                  p(class="Offer_Night")  la nuit.
-                  p(class="Offer_Nb_People") #{House[3]} Personnes
+          each row in house
+            each elem in row
+              a(class="col-lg-4 square" href="goods/" + elem.id)
+                //-div(id="carouselExampleControls" class="carousel slide" data-ride="carousel")
+                  div(class="carousel-inner")
+                    div(class="carousel-item active")
+                      img(class="d-block w-100 Offer_Image" src="images/maison_search.png" alt="First slide")
+                    div(class="carousel-item")
+                      img(class="d-block w-100 Offer_Image" src="images/maison_search.png" alt="Second slide")
+                  a(class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev")
+                    span(class="carousel-control-prev-icon" aria-hidden="true")
+                    span(class="sr-only") Previous
+                  a(class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next")
+                    span(class="carousel-control-next-icon" aria-hidden="true")
+                    span(class="sr-only") Next
+                img(class="Offer_Image" src="images/maison_search.png")
+                p(class="Offer_Title") #{elem.title}
+                p(class="Offer_Price") #{elem.price}€
+                p(class="Offer_Night")  la nuit.
+                p(class="Offer_Nb_People") #{elem.userId} Personnes
+                  //- Changer userId par Nb_personne
             div(class="w-100")

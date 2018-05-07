@@ -4,27 +4,25 @@ var searchModel = require('../models/search');
 
 router.get('/', function(req, res, next) {
   searchModel.getByOfferCity(req.query.searchText, (err, results) => {
-    console.log(results);
-    console.log(results.length);
-    console.log(results[0]);
-    console.log(results[0].Id);
-    var Search = req.query.searchText;
-    var Maison = [];
-    Maison.Data = [[[11,"Maison1",100,1],[22,"Maison2",200,2],[33,"Maison3",300,3]],
-                  [[44,"Maison4",400,4],[55,"Maison5",500,5],[66,"Maison6",600,6]],
-                  [[77,"Maison7",700,7],[88,"Maison8",800,8],[99,"Maison9",900,9]],
-                  [[1010,"Maison10",1000,10]]];
-    if (Maison.Data[0][0] === null)   // En attente Nombre MySQL
-      Maison.Lenght = 0;              //
-    else Maison.Lenght = 1;           //
-    var Result = [];
-    Result.Data = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-    Result.Lenght = Result.Data.length;
+    var search = req.query.searchText;  // Récupère le texte de recherche
+
+    var house = [];
+    for(var i = 0; i < results.length; i += 3) {
+      house[i/3] = [];
+      for (var j = 0; j < 3; j++) {
+        if ((i+j) < results.length) {
+          //house[i/3][j] = [];
+          house[i/3][j] = results[i+j];
+        }
+      }
+    }
+    house_lgt = house.length;
+
     res.render('search', {
       title: 'Recherche',
-      Search: Search,
-      Result: Result,
-      Maison: Maison
+      search: search,
+      house: house,
+      house_lgt: house_lgt
     });
   });
 });
