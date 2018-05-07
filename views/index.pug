@@ -13,40 +13,44 @@ block content
         img(class="d-block w-100" id="img" src="images/balm2,5.jpg" alt="First slide")
       div(class="carousel-item")
         img(class="d-block w-100" id="img" src="images/balm1.jpg" alt="Second slide")
-  //div(class="title") Bienvenue a la maison
-  div(class="wrap")
-    div(class="search")
-        input(type="text" class="searchTerm" placeholder="Ou voulez-vous aller ?")
-    button(type="submit" class="searchButton" id="test")
-      i(class="fa fa-search")
-    button(class="parameters" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" id="test") Options avancées
-    div(id="collapseExample" class="collapse")
+  form(id="form1" action='/search' method='get')
+    div(id="input1" class="input-group")
+      input(id='searchbar' type="text" class="form-control" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2")
+      div(class="input-group-append")
+        button(id="button" class="btn" type="submit")
+          i(class="fa fa-search")
+        button(id="button" class="btn" type="button" data-toggle="collapse" href="#input2" aria-controls="input2") Options avancées
+    div(id="input2" class="collapse")
       div(class="card")
-        div(class="row")
+        div(class="form-group")
           div(class="col-sm") Date de départ :
             input(id="date" type="date" min="2018-01-01")
           div(class="col-sm") Date d'arrivée :
             input(id="date" type="date")
-        div(class="row")  
-          div(class="form-group")
-            label(for="exampleFormControlSelect1") Nombre de personnes :
-            select(class="form-control" id="exampleFormControlSelect1")
-              option() 1
-              option() 2
-              option() 3
-              option() 4
-              option() 5
-        div(class="row")
-          div(class="text") Et pour les plus exigeants :
-          div(class="form-check")
-            input(class="form-check-input" type="checkbox" name="additional" value="Pool")
-            label(class="form-check-label" for="defaultCheck1") Piscine
-          div(class="form-check")
-            input(class="form-check-input" type="checkbox" name="additional" value="Garden")
-            label(class="form-check-label" for="defaultCheck2") Jardin
-          div(class="form-check")
-            input(class="form-check-input" type="checkbox" name="additional" value="Citycenter")
-            label(class="form-check-label" for="TEST") Centre ville
+        div(class="form-group")
+          label(for="exampleFormControlSelect1") Nombre de personnes :
+          select(class="form-control" id="exampleFormControlSelect1")
+            option() 1
+            option() 2
+            option() 3
+            option() 4
+            option() 5
+            option() 6
+            option() 7
+            option() 8
+            option() 9
+            option() 10+
+        div(class="form-group")
+            div(class="text") Et pour les plus exigeants :
+            div(class="form-check")
+              input(class="form-check-input" type="checkbox" name="additional" value="Pool")
+              label(class="form-check-label" for="defaultCheck1") Piscine
+            div(class="form-check")
+              input(class="form-check-input" type="checkbox" name="additional" value="Garden")
+              label(class="form-check-label" for="defaultCheck2") Jardin
+            div(class="form-check")
+              input(class="form-check-input" type="checkbox" name="additional" value="Citycenter")
+              label(class="form-check-label" for="TEST") Centre ville
 
 block scripts
   script(src="functions.js")

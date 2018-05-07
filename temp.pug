@@ -1,0 +1,34 @@
+form(class="wrap")
+  div(id="search" class="imput-group")
+    input(type="text" class="searchTerm" placeholder="Ou voulez-vous aller ?")
+    div(class="input-group-append")
+      button(type="submit" class="searchButton" id="test")
+        i(class="fa fa-search")
+      div(id="test" class="parameters" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="test") Options avancées
+  div(id="collapseExample" class="collapse")
+    div(class="card")
+      div(class="row")
+        div(class="col-sm") Date de départ :
+          input(id="date" type="date" min="2018-01-01")
+        div(class="col-sm") Date d'arrivée :
+          input(id="date" type="date")
+      div(class="row")  
+        div(class="form-group")
+          label(for="exampleFormControlSelect1") Nombre de personnes :
+          select(class="form-control" id="exampleFormControlSelect1")
+            option() 1
+            option() 2
+            option() 3
+            option() 4
+            option() 5
+      div(class="row")
+        div(class="text") Et pour les plus exigeants :
+        div(class="form-check")
+          input(class="form-check-input" type="checkbox" name="additional" value="Pool")
+          label(class="form-check-label" for="defaultCheck1") Piscine
+        div(class="form-check")
+          input(class="form-check-input" type="checkbox" name="additional" value="Garden")
+          label(class="form-check-label" for="defaultCheck2") Jardin
+        div(class="form-check")
+          input(class="form-check-input" type="checkbox" name="additional" value="Citycenter")
+          label(class="form-check-label" for="TEST") Centre ville
