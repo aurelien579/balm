@@ -1,9 +1,9 @@
 extend layout
 
-
 block header
     link(rel='stylesheet', href='/stylesheets/index.css')
-
+    link(rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css")
 
 block content
   <!-- carousel-->
@@ -15,7 +15,7 @@ block content
         img(class="d-block w-100" id="img" src="images/balm1.jpg" alt="Second slide")
   form(id="form1" action='/search' method='get')
     div(id="input1" class="input-group")
-      input(id='searchbar' type="text" class="form-control" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2")
+      input(id='searchbar' name="searchText" type="text" class="form-control" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2")
       div(class="input-group-append")
         button(id="button" class="btn" type="submit")
           i(class="fa fa-search")
@@ -23,13 +23,16 @@ block content
     div(id="input2" class="collapse")
       div(class="card")
         div(class="form-group")
-          div(class="col-sm") Date de départ :
-            input(id="date" type="date" min="2018-01-01")
-          div(class="col-sm") Date d'arrivée :
-            input(id="date" type="date")
+          label(class="control-label" for="date") Date de départ :
+          input(class="form-control" id="date" name="datedep" placeholder="MM/DD/YYY" type="date")
+          //input(id="date" name="datedep" type="date" min="2018-01-01")
+          div(class="control-label" for="date") Date d'arrivée :
+          label(class="control-label" for="date") Date de départ :
+          input(class="form-control" id="date" name="datearr" placeholder="MM/DD/YYY" type="date")
         div(class="form-group")
           label(for="exampleFormControlSelect1") Nombre de personnes :
-          select(class="form-control" id="exampleFormControlSelect1")
+          select(class="form-control" name="numberpers" id="exampleFormControlSelect1")
+            option() 0
             option() 1
             option() 2
             option() 3
@@ -43,14 +46,16 @@ block content
         div(class="form-group")
             div(class="text") Et pour les plus exigeants :
             div(class="form-check")
-              input(class="form-check-input" type="checkbox" name="additional" value="Pool")
+              input(class="form-check-input" type="checkbox" name="addPool" value="1")
               label(class="form-check-label" for="defaultCheck1") Piscine
             div(class="form-check")
-              input(class="form-check-input" type="checkbox" name="additional" value="Garden")
+              input(class="form-check-input" type="checkbox" name="addGarden" value="1")
               label(class="form-check-label" for="defaultCheck2") Jardin
             div(class="form-check")
-              input(class="form-check-input" type="checkbox" name="additional" value="Citycenter")
+              input(class="form-check-input" type="checkbox" name="addCity" value="1")
               label(class="form-check-label" for="TEST") Centre ville
 
 block scripts
   script(src="functions.js")
+  script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js")
+  script(type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js")
