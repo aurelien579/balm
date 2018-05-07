@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userModel = require('../models/user');
+const goodsModel = require('../models/goods');
 const app = require('../app');
 
 function createSession(req, user) {
@@ -34,7 +35,7 @@ router.post('/login', function(req, res, next) {
             var errorMessage = "Erreur lors de la connection";
         }
 
-        res.render('login', {
+        res.render('user/login', {
             title: 'Connexion',
             successMessage: successMessage,
             errorMessage: errorMessage
@@ -43,7 +44,7 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-    res.render('login', {
+    res.render('user/login', {
         title: 'Connexion'
     });
 });
@@ -58,12 +59,12 @@ router.post('/register', function(req, res, next) {
                 errorMessage = "Erreur lors de la création du compte, cet email est déjà prise";
             }
 
-            res.render('login', {
+            res.render('user/login', {
                 title: 'Erreur',
                 errorMessage: errorMessage
             });
         } else {
-            res.render('login', {
+            res.render('user/login', {
                 title: 'Compte créé',
                 successMessage: 'Votre compte a bien été créé'
             });
@@ -77,20 +78,29 @@ router.get('/logout', mustBeConnected, function(req, res, next) {
 });
 
 router.get('/', mustBeConnected, function(req, res, next) {
-    res.render('user', {
+    res.render('user/user', {
         user: req.session.user
     });
 });
 
 router.get('/infos', mustBeConnected, function(req, res, next) {
-    res.render('user-infos', {
+    res.render('user/user-infos', {
         user: req.session.user
     });
 });
 
 router.get('/offers', mustBeConnected, function(req, res, next) {
-    res.render('user-offers', {
-        user: req.session.user
+    goodsModel.getByUserId(req.session.user.id, (err, results) => {
+        if (err) {
+            res.render('error', {
+                error: err
+            });
+        } else {
+            res.render('user/user-offers', {
+                user: req.session.user,
+                offers: results
+            });
+        }
     });
 });
 
