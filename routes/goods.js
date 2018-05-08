@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const goodsModel = require('../models/goods');
 const commentModel = require('../models/comment');
+const imageModel = require('../models/image');
 const app = require('../app');
 
 // req -> recuperer les informations que le client m'envoi
@@ -23,18 +24,20 @@ router.get('/:id', function(req, res, next) {
 
   goodsModel.getById(id, (err, offer) => {
     commentModel.getById(id, (err, comments)=>{
+      imageModel.getByOfferId(id, (err, images)=>{
 
-      if (err) {
-        res.render('goods', {err:err});
-      } else {
-        res.render('goods', {
-          offer: offer,
-          comments: comments
-        });
-      }
+        if (err) {
+          res.render('goods', {err:err});
+        } else {
+          res.render('goods', {
+            offer: offer,
+            comments: comments,
+            images: images
+          });
+        }
+      });
     });
   });
-
 });
 
 module.exports = router;
