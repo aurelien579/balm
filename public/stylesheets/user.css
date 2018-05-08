@@ -5,3 +5,36 @@
 .card-header a:hover {
     cursor: pointer;
 }
+
+.offer-title {
+    margin-left: 5px;
+    margin-bottom: 7px;
+}
+
+.img-col {
+    padding-left: 0px;
+    float: left;
+}
+
+.crop {
+    width: 100%;
+    padding-top: 50%;
+    background-color: red;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.offer-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    height: 100%;
+
+}
+
+.desc-col {
+}

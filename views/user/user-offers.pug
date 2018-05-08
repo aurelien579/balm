@@ -3,7 +3,7 @@ h5.card-title Mes Offres
   if offers.length > 0
     ul.list-group
       each offer in offers
-        li.list-group-item
+        a.list-group-item.list-group-item-action(href="/goods/" + offer.id)
           include user-offer
   else
     p Vous n'avez pas d'offres actuellement

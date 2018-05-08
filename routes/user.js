@@ -99,15 +99,16 @@ router.get('/offers', mustBeConnected, function(req, res, next) {
         } else {
             imageModel.getByUserId(req.session.user.id, (err, images) => {
                 offers.forEach((offer) => {
+                    console.log("Processing " + offer.id);
                     if (!images) {
                         offer.images = [];
                     } else {
                         offer.images = images.filter((image) => {
-                            image.offerId = offer.id
+                            console.log("filtering " + image.offerId == offer.id);
+                            return image.offerId == offer.id;
                         });
                     }
                 });
-                console.log(offers.images);
 
                 if (err) {
                     res.render('error', {
@@ -116,7 +117,7 @@ router.get('/offers', mustBeConnected, function(req, res, next) {
                 } else {
                     res.render('user/user-offers', {
                         user: req.session.user,
-                        offers: results
+                        offers: offers
                     });
                 }
             });
