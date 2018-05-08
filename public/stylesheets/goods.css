@@ -13,3 +13,11 @@
   max-height: 500px;
   width: auto;
 }
+
+.inline {
+  display: inline;
+}
+
+.commentaires {
+  padding-bottom: : 30px;
+}

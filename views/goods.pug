@@ -35,9 +35,14 @@ block content
           p(class="text-justify") #{offer.description}
           div(class = "commentaire")
             h4(class="text-justify") Commentaires
-            each row in comments
-              h1() &#9734; &#9734; &#9734; &#9734; &#9734;
-              p(class="text-justify") #{comments.content}
+            if comments
+              each row in comments
+                - for (var x = 0; x < row.rating; x++)
+                  h1(class = "inline") &#9734
+                p(class="text-justify commentaires") #{row.content}
+                h1(class = "commentaires")
+            else
+              p Il n'y a pas encore de commentaires disponibles pour cette offre
 
 
       else

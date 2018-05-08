@@ -19,10 +19,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
 //  var sea = req.params.searchText;
-  var Description;
   var id = req.params.id;
-  var Titre;
-  var Lieux;
 
   goodsModel.getById(id, (err, offer) => {
     commentModel.getById(id, (err, comments)=>{

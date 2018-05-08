@@ -8,7 +8,7 @@ var getById = function(id, callback) {
         if (err) {
             callback(err);
         } else {
-            callback(err, results[0]);
+            callback(err, results);
         }
     });
 }
