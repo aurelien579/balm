@@ -91,7 +91,7 @@ router.get('/infos', mustBeConnected, function(req, res, next) {
 });
 
 router.get('/offers', mustBeConnected, function(req, res, next) {
-    goodsModel.getByUserId(req.session.user.id, (err, offers) => {
+    /*goodsModel.getByUserId(req.session.user.id, (err, offers) => {
         if (err) {
             res.render('error', {
                 error: err
@@ -122,7 +122,20 @@ router.get('/offers', mustBeConnected, function(req, res, next) {
                 }
             });
         }
-    });
+    });*/
+
+    goodsModel.getByUserId(req.session.user.id)
+        .then((offers) => {
+            res.render('user/user-offers', {
+                user: req.session.user,
+                offers: offers
+            });
+        })
+        .catch((err) => {
+            res.render('error', {
+                error: err
+            });
+        });
 });
 
 router.get('/comments', mustBeConnected, function(req, res, next) {

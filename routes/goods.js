@@ -10,34 +10,38 @@ const app = require('../app');
 
 
 router.get('/', function(req, res, next) {
-//  var sea = req.params.searchText;
-  console.log(req.body.searchText);
-  res.render('goods', {title: 'goods' });
-  next();
+    //  var sea = req.params.searchText;
+    console.log(req.body.searchText);
+    res.render('goods', {
+        title: 'goods'
+    });
+    next();
 });
 
 
 
 router.get('/:id', function(req, res, next) {
-//  var sea = req.params.searchText;
-  var id = req.params.id;
+    //  var sea = req.params.searchText;
+    var id = req.params.id;
 
-  goodsModel.getById(id, (err, offer) => {
-    commentModel.getById(id, (err, comments)=>{
-      imageModel.getByOfferId(id, (err, images)=>{
+    goodsModel.getById(id, (err, offer) => {
+        commentModel.getById(id, (err, comments) => {
+            imageModel.getByOfferId(id, (err, images) => {
 
-        if (err) {
-          res.render('goods', {err:err});
-        } else {
-          res.render('goods', {
-            offer: offer,
-            comments: comments,
-            images: images
-          });
-        }
-      });
+                if (err) {
+                    res.render('goods', {
+                        err: err
+                    });
+                } else {
+                    res.render('goods', {
+                        offer: offer,
+                        comments: comments,
+                        images: images
+                    });
+                }
+            });
+        });
     });
-  });
 });
 
 module.exports = router;
