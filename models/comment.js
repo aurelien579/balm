@@ -3,7 +3,7 @@ const pool = require('./db').pool;
 
 let sqlGetById = 'SELECT * FROM Comment WHERE idOffer = ?;'
 
-var getById = function(id, callback) {
+var getByOfferId = function(id, callback) {
     pool.query(sqlGetById, [id], (err, results) => {
         if (err) {
             callback(err);
@@ -13,4 +13,4 @@ var getById = function(id, callback) {
     });
 }
 
-exports.getById = getById;
+exports.getByOfferId = getByOfferId;

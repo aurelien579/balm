@@ -7,7 +7,7 @@ html
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
     block header
   body
-    nav(class='navbar navbar-expand-lg navbar-light bg-light')
+    nav(class='navbar transparent navbar-expand-lg navbar-light bg-light')
       a(class='navbar-brand', href="/") BALM
 
       button(class='navbar-toggler', type='button', data-toggle='collapse',
@@ -18,14 +18,6 @@ html
         ul(class='navbar-nav mr-auto')
           li(class='nav-item')
             a(class='nav-link', href='/') Accueil
-          li(class='nav-item')
-            a(class='nav-link', href='/') TEST
-
-        form(class='form-inline my-2 my-lg-0', action='/search' method='get')
-          input(class='form-control mr-sm-2' name="searchText" type='search'
-                placeholder="Entrez le nom d'une ville")
-          button(class='btn btn-outline-success my-2 my-sm-0'
-                 type='submit') Recherche
 
         ul(class='navbar-nav ml-auto')
           if session
