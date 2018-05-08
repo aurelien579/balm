@@ -24,8 +24,8 @@ router.get('/', function(req, res, next) {
     } else search_class = 1;
   })
 
-  searchModel.getByOffer(search, search_class, (err, results) => {
-    if (err) {
+  .then(searchModel.getByOffer(search, search_class, (err, results) => {
+    if (err) {  // Voir results undefined
       res.render('error', {
         error: err
       });
@@ -48,7 +48,7 @@ router.get('/', function(req, res, next) {
       house: house,
       house_lgt: house_lgt
     });
-  });
+  }));
 });
 
 module.exports = router;

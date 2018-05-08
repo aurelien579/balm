@@ -1,8 +1,8 @@
 const pool = require('./db').pool;
 
-let findRegionGetSql = 'SELECT COUNT(*) FROM Region WHERE regionname = ?;';
-let findDepartmentGetSql = 'SELECT COUNT(*) FROM Department WHERE departmentname = ?;';
-let findCityGetSql = 'SELECT COUNT(*) FROM City WHERE cityname = ?;';
+let findRegionGetSql = 'SELECT COUNT(*) FROM Region WHERE name = ?;';
+let findDepartmentGetSql = 'SELECT COUNT(*) FROM Department WHERE name = ?;';
+let findCityGetSql = 'SELECT COUNT(*) FROM City WHERE name = ?;';
 let findPostCodeGetSql = 'SELECT COUNT(*) FROM City WHERE postcode = ?;';
 
 let offerRegionGetSql = 'SELECT * FROM Offer WHERE region = ?;';
@@ -37,7 +37,7 @@ var getByOffer = function(search, search_class, callback) {
     pool.query(offerCityGetSql, [search], callback);
   } else if (search_class == 4) {
     pool.query(offerPostCodeGetSql, [search], callback);
-  }
+  } else callback(err);
 }
 
 exports.getByFindRegion = getByFindRegion;
