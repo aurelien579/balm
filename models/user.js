@@ -1,4 +1,4 @@
-const pool = require('./db').pool;
+const db = require('./db');
 const goodsModel = require('./goods');
 
 const ERROR = -1;

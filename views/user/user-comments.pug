@@ -3,8 +3,10 @@ h5 Mes Commentaires
   if comments.length > 0
     ul.list-group
       each comment in comments
-        a.list-group-item
-          h5 #{comment.firstName} vous a laissé un commentaire sur #{comment.title}
+        .list-group-item
+          h5
+            | #{comment.firstName} vous a laissé un commentaire sur 
+            a(href="/goods/" + comment.idOffer) #{comment.title}
           .row
             .col-1
               img.profile-img(src=comment.imagePath, height="90", width="90")

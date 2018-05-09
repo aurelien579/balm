@@ -5,3 +5,7 @@
 .navbar {
   z-index: 2;
 }
+
+body {
+    background-image:url(/images/back0.jpg);
+}

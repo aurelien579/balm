@@ -1,7 +1,7 @@
 const db = require('./db');
 
-const sqlGetById = 'SELECT * FROM Offer WHERE id = ?;'
-const sqlGetByUserId = 'SELECT * FROM Offer WHERE userId = ?;'
+const sqlGetById = 'SELECT * FROM Offer WHERE id = ?;';
+const sqlGetByUserId = 'SELECT * FROM Offer WHERE userId = ?;';
 
 const slqGetByUserIdWithFirstImage =
     `SELECT Offer.title, Offer.description, Offer.price, Image.path FROM Offer LEFT JOIN Image ON Image.id =

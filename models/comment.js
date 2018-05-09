@@ -4,7 +4,7 @@ const sqlGetById = 'SELECT * FROM Comment WHERE idOffer = ?;'
 const sqlGetByUserId =
     `
     SELECT
-        User.firstName, Comment.rating, Comment.content, Offer.title, User.imagePath
+        Comment.idOffer, User.firstName, Comment.rating, Comment.content, Offer.title, User.imagePath
     FROM
         Offer, Comment, User
     WHERE
