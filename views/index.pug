@@ -13,8 +13,8 @@ block content
         img(class="d-block w-100" id="img" src="images/balm1.jpg" alt="Second slide")
   form(autocomplete="off" id="form" action='/search' method='get')
     div(class="row")
-      div(id="input1" class="input-group")
-        input(id='searchbar' name="searchText" type="text" class="form-control" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2")
+      div(id="input1" class="input-group autocomplete")
+        input(id='searchbar' name="searchText" type="text" class="form-control" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2")      
         button(id="button1" class="btn" type="submit")
           i(class="fa fa-search")
       button(id="button2" class="btn" type="button" data-toggle="collapse" href="#input2" aria-controls="input2") Options avancées
