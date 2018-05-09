@@ -3,6 +3,7 @@ const router = express.Router();
 const userModel = require('../models/user');
 const goodsModel = require('../models/goods');
 const imageModel = require('../models/image');
+const commentModel = require('../models/comment');
 const app = require('../app');
 
 function createSession(req, user) {
@@ -106,7 +107,19 @@ router.get('/offers', mustBeConnected, function(req, res, next) {
 });
 
 router.get('/comments', mustBeConnected, function(req, res, next) {
-    res.render('user/user-comments');
+    commentModel.getByUserId(req.session.user.id)
+        .then((comments) => {
+            res.render('user/user-comments', {
+                user: req.session.user,
+                comments: comments
+            })
+        })
+        .catch((err) => {
+            console.log(err);
+            res.render('error', {
+                error: err
+            });
+        });
 });
 
 module.exports = router;

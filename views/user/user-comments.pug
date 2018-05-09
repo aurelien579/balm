@@ -1,1 +1,18 @@
-h1 Mes Commentaires
+h5 Mes Commentaires
+.card-content
+  if comments.length > 0
+    ul.list-group
+      each comment in comments
+        a.list-group-item
+          h5 #{comment.firstName} vous a laissé un commentaire sur #{comment.title}
+          .row
+            .col-1
+              img.profile-img(src=comment.imagePath, height="90", width="90")
+
+            .col-11.comment-content
+              - for (var x = 0; x < comment.rating; x++)
+                h4.inline &#9734
+              p #{comment.content}
+          
+  else
+    p Vous n'avez pas encore de commentaires

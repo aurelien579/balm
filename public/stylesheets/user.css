@@ -35,5 +35,15 @@
     height: 100%;
 }
 
-.desc-col {
+.profile-img {
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.inline {
+    display: inline;
+}
+
+.comment-content {
+    padding-left: 30px;
 }
