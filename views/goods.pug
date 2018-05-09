@@ -11,7 +11,6 @@ block content
                   li(data-target="#carouselExampleIndicators" data-slide-to="0" class="active")
                     - for (var x = 1; x < images.length; x++)
                       li(data-target="#carouselExampleIndicators"  data-slide-to= "x")
-                      
 
               div(class="carousel-inner")
                   div(class="carousel-item active")
@@ -32,21 +31,32 @@ block content
           p Il n'y a pas d'images pour cette offre
 
 
-        div(class = "page")
+        div(class = "page ")
           h1(class="display-4 titre-maison") #{offer.title}
           h4(class="text-justify")  Lieux : #{offer.city}
-          h1() &#9734; &#9734; &#9734; &#9734; &#9734; #{Notes}
+          if comments
+            - var somme =0;
+            -var nbNote =0;
+            -var moyenne =0;
+            each row in comments
+              - somme+= row.rating;
+              - nbNote ++;
+            - moyenne = somme/nbNote;
+            - for (var x = 0; x < moyenne; x++)
+              h1(class = "display-4 inline etoile") &#9733
+          else
+            h1() Pas de notes disponibles
           h4(class = "text-justify") #{offer.price} €
-          h4(class="text-justify") Description :
+          h4(class="text-justify") Description
           p(class="text-justify") #{offer.description}
-          div(class = "commentaire")
+          div(class = "commentaires")
             h4(class="text-justify") Commentaires
             if comments
               each row in comments
                 - for (var x = 0; x < row.rating; x++)
-                  h1(class = "inline") &#9734
+                  h1(class = "inline etoile") &#9733
                 p(class="text-justify commentaires") #{row.content}
-                h1(class = "commentaires")
+
             else
               p Il n'y a pas encore de commentaires disponibles pour cette offre
 
