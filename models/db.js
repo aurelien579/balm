@@ -7,4 +7,17 @@ const pool = mysql.createPool({
     connectionLimit: 10
 });
 
+function sqlQuery(sql, args) {
+    return new Promise(function(resolve, reject) {
+        pool.query(sql, args, (err, results) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        });
+    });
+}
+
 module.exports.pool = pool;
+module.exports.sqlQuery = sqlQuery;
