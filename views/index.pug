@@ -11,9 +11,9 @@ block content
         img(class="d-block w-100" id="img" src="images/balm2,5.jpg" alt="First slide")
       div(class="carousel-item")
         img(class="d-block w-100" id="img" src="images/balm1.jpg" alt="Second slide")
-  form(id="form" action='/search' method='get' autocomplete="off")
+  form(autocomplete="off" id="form" action='/search' method='get')
     div(class="row")
-      div(id="input1" class="autocomplete input-group")
+      div(id="input1" class="input-group")
         input(id='searchbar' name="searchText" type="text" class="form-control" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2")
         button(id="button1" class="btn" type="submit")
           i(class="fa fa-search")
@@ -28,7 +28,7 @@ block content
         div(class="form-group")
           label(for="FormControlSelect1") Nombre de personnes :
           select(class="form-control" name="numberpers" id="FormControlSelect1")
-            option() 0
+            option() 
             option() 1
             option() 2
             option() 3
@@ -43,13 +43,13 @@ block content
             div(class="text") Et pour les plus exigeants :
             div(class="row")
               div(class="col form-check form-check-inline")
-                input(id="defaultCheck1" class="form-check-input" type="checkbox" name="Pool" value="1")
+                input(id="defaultCheck1" class="form-check-input" type="checkbox" name="pool" value="1")
                 label(class="form-check-label" for="defaultCheck1") Piscine
               div(class="col form-check form-check-inline")
-                input(id="defaultCheck2" class="form-check-input" type="checkbox" name="Garden" value="1")
+                input(id="defaultCheck2" class="form-check-input" type="checkbox" name="garden" value="1")
                 label(class="form-check-label" for="defaultCheck2") Jardin
               div(class="col form-check form-check-inline")
-                input(id="defaultCheck3" class="form-check-input" type="checkbox" name="City" value="1")
+                input(id="defaultCheck3" class="form-check-input" type="checkbox" name="city" value="1")
                 label(class="form-check-label" for="defaultCheck3") Centre ville
 
 block scripts
