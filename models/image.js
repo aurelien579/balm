@@ -1,15 +1,18 @@
-const pool = require('./db').pool;
+const db = require('./db');
 
-let sqlGetByUserId = "SELECT path, offerId FROM Image, Offer, User WHERE User.id = Offer.userId AND Image.offerId = Offer.id AND User.id = ?;";
-let sqlGetByOfferId = "SELECT path FROM Image WHERE offerId = ?;";
+const DEFAULT_OFFER_IMAGE = "/images/offers/default.png";
 
-var getByUserId = function(userId, callback) {
-    pool.query(sqlGetByUserId, userId, callback);
+const sqlGetByUserId = "SELECT path, offerId FROM Image, Offer, User WHERE User.id = Offer.userId AND Image.offerId = Offer.id AND User.id = ?;";
+const sqlGetFirstByOfferId = "SELECT path FROM Image WHERE offerId = ? LIMIT 1;";
+
+function getByUserId(userId, callback) {
+    db.pool.query(sqlGetByUserId, userId, callback);
 }
 
-var getByOfferId = function(offerId, callback) {
-    pool.query(sqlGetByOfferId, [offerId], callback);
+function getFirstByOfferId(offerId, callback) {
+    return db.sqlQuery(sqlGetFirstByOfferId, [offerId]);
 }
 
+module.exports.DEFAULT_OFFER_IMAGE = DEFAULT_OFFER_IMAGE;
 module.exports.getByUserId = getByUserId;
-module.exports.getByOfferId = getByOfferId;
+module.exports.getFirstByOfferId = getFirstByOfferId;
