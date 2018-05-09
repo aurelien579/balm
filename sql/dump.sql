@@ -19,6 +19,8 @@
 -- Table structure for table `Availability`
 --
 
+USE Balm;
+
 DROP TABLE IF EXISTS `Availability`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
