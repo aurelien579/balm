@@ -5,14 +5,14 @@ block header
 
 block content
   .container
-    h1 Barre de Recherche : #{search.data}
-    h1 Nombre de Maison : #{house_lgt}
-    if house_lgt < 1
-      h1 Aucun Résultat pour : #{search}
-    if house_lgt > 0
+    h1 Barre de Recherche : #{search.text}
+    h1 Nombre de Maison : #{house.lgt}
+    if house.lgt < 1
+      h1 Aucun Résultat pour : #{search.text}
+    if house.lgt > 0
       div(class="container")
         div(class="row justify-content-around")
-          each row in house
+          each row in house.data
             each elem in row
               a(class="col-lg-4 square" href="goods/" + elem.id)
                 img(class="Offer_Image" src="images/maison_search.png")
