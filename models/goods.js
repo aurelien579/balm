@@ -1,6 +1,5 @@
 const pool = require('./db').pool;
 
-
 let sqlGetById = 'SELECT * FROM Offer WHERE id = ?;'
 let sqlGetByUserId = 'SELECT * FROM Offer WHERE userId = ?;'
 
@@ -14,9 +13,27 @@ var getById = function(id, callback) {
     });
 }
 
-var getByUserId = function(userId, callback) {
+/*
+function getByUserIdPRomise(userId, callback) {
     pool.query(sqlGetByUserId, [userId], (err, results) => {
-        callback(err, results);
+        if (err) {
+            callback(err);
+        } else {
+            callback(err, results);
+        }
+    });
+}
+*/
+
+function getByUserId(userId) {
+    return new Promise(function(resolve, reject) {
+        pool.query(sqlGetByUserId, [userId], (err, results) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        });
     });
 }
 
