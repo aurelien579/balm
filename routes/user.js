@@ -91,41 +91,34 @@ router.get('/infos', mustBeConnected, function(req, res, next) {
 });
 
 router.get('/offers', mustBeConnected, function(req, res, next) {
-    /*goodsModel.getByUserId(req.session.user.id, (err, offers) => {
-        if (err) {
-            res.render('error', {
-                error: err
-            });
-        } else {
-            imageModel.getByUserId(req.session.user.id, (err, images) => {
-                offers.forEach((offer) => {
-                    console.log("Processing " + offer.id);
-                    if (!images) {
-                        offer.images = [];
-                    } else {
-                        offer.images = images.filter((image) => {
-                            console.log("filtering " + image.offerId == offer.id);
-                            return image.offerId == offer.id;
-                        });
-                    }
-                });
-
-                if (err) {
-                    res.render('error', {
-                        error: err
-                    });
-                } else {
-                    res.render('user/user-offers', {
-                        user: req.session.user,
-                        offers: offers
-                    });
-                }
-            });
-        }
-    });*/
-
     goodsModel.getByUserId(req.session.user.id)
         .then((offers) => {
+            let promises = [];
+
+            offers.forEach((offer) => {
+                promises.push(new Promise((resolve, reject) => {
+                    imageModel.getFirstByOfferId(offer.id)
+                        .then((images) => {
+                            if (images.length > 0)
+                                offer.image = images[0];
+                            else {
+                                offer.image = {
+                                    path: imageModel.DEFAULT_OFFER_IMAGE
+                                }
+                            }
+                            resolve(offer);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                            reject(err);
+                        });
+                }));
+            });
+
+            return Promise.all(promises);
+        })
+        .then((offers) => {
+            console.log(offers);
             res.render('user/user-offers', {
                 user: req.session.user,
                 offers: offers
