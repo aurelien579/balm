@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
--- Host: localhost    Database: Balm
+-- Host: 127.0.0.1    Database: Balm
 -- ------------------------------------------------------
--- Server version	5.7.22-0ubuntu0.17.10.1
+-- Server version	5.7.22-0ubuntu18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -19,20 +19,18 @@
 -- Table structure for table `Availability`
 --
 
-USE Balm;
-
 DROP TABLE IF EXISTS `Availability`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Availability` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `offerId` int(11) NOT NULL,
-  `start` varchar(45) NOT NULL,
+  `start` date NOT NULL,
   `end` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Availability_1_idx` (`offerId`),
-  CONSTRAINT `fk_Availability_1` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_Availability_1` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +39,7 @@ CREATE TABLE `Availability` (
 
 LOCK TABLES `Availability` WRITE;
 /*!40000 ALTER TABLE `Availability` DISABLE KEYS */;
+INSERT INTO `Availability` VALUES (1,2,'2018-05-09','2018-05-20'),(2,3,'2019-05-09','2019-05-20');
 /*!40000 ALTER TABLE `Availability` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,9 +89,9 @@ CREATE TABLE `Comment` (
   PRIMARY KEY (`id`),
   KEY `fk_Comment_1_idx` (`idUser`),
   KEY `fk_Comment_2_idx` (`idOffer`),
-  CONSTRAINT `fk_Comment_1` FOREIGN KEY (`idUser`) REFERENCES `User` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Comment_2` FOREIGN KEY (`idOffer`) REFERENCES `Offer` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_Comment_1` FOREIGN KEY (`idUser`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Comment_2` FOREIGN KEY (`idOffer`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,6 +100,7 @@ CREATE TABLE `Comment` (
 
 LOCK TABLES `Comment` WRITE;
 /*!40000 ALTER TABLE `Comment` DISABLE KEYS */;
+INSERT INTO `Comment` VALUES (1,2,2,'Cette maison est très bien',5),(2,2,3,'Cette maison est nulle',1);
 /*!40000 ALTER TABLE `Comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +143,7 @@ CREATE TABLE `Image` (
   `path` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `OfferIdFK_idx` (`offerId`),
-  CONSTRAINT `OfferIdFK` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `OfferIdFK` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -153,7 +153,7 @@ CREATE TABLE `Image` (
 
 LOCK TABLES `Image` WRITE;
 /*!40000 ALTER TABLE `Image` DISABLE KEYS */;
-INSERT INTO `Image` VALUES (1,1,'/images/offers/1-1.png'),(2,1,'/images/offers/1-2.png');
+INSERT INTO `Image` VALUES (1,1,'/images/offers/1-1.jpg'),(2,1,'/images/offers/1-2.jpg');
 /*!40000 ALTER TABLE `Image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +177,7 @@ CREATE TABLE `Offer` (
   `address` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Offer_1_idx` (`userId`),
-  CONSTRAINT `UserIdKey` FOREIGN KEY (`userId`) REFERENCES `User` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `UserIdKey` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -252,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-08 11:33:36
+-- Dump completed on 2018-05-09 10:53:24

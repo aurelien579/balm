@@ -6,4 +6,8 @@ function getByOfferId(id, callback) {
     pool.query(sqlGetById, [id], callback);
 }
 
+function getByUserId(userId) {
+
+}
+
 exports.getByOfferId = getByOfferId;
