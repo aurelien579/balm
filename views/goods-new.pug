@@ -1,0 +1,52 @@
+extends layout
+
+block content
+  .container
+    .jumbotron.jumbotron-custom
+      h1.text-center Nouvelle annonce
+    br
+    
+    .card
+      .card-body
+        form
+          .form-group.row
+            label.col-lg-3.col-form-label Titre de l'annonce
+            .col-lg-9
+              input.form-control(name="title", type="text")
+          .form-group.row
+            label.col-lg-3.col-form-label Description
+            .col-lg-9
+              textarea.form-control(name="title", type="text")
+          .form-group.row
+            label.col-lg-3.col-form-label Prix par nuit
+            .col-lg-2
+              .input-group
+                input.form-control(name="title", type="text")
+                .input-group-append
+                  span.input-group-text €
+          .form-group.row
+            label.col-lg-3.col-form-label Département
+            .col-lg-4
+              input.form-control(name="title", type="text")
+          .form-group.row
+            label.col-lg-3.col-form-label Ville
+            .col-lg-4
+              input.form-control(name="title", type="text")
+          .form-group.row
+            label.col-lg-3.col-form-label Code postal
+            .col-lg-4
+              input.form-control(name="title", type="text")
+          .form-group.row
+            label.col-lg-3.col-form-label Disponible du
+            .col-lg-4
+              .input-group.date
+                input.form-control(type="date")
+            label.col-lg-1.col-form-label au
+            .col-lg-4
+              .input-group.date
+                input.form-control(type="date")
+          
+          button.form-control.btn.btn-success(type="submit") Déposer
+
+block scripts
+  script(src="js/goods.js")
