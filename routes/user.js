@@ -4,6 +4,8 @@ const userModel = require('../models/user');
 const goodsModel = require('../models/goods');
 const imageModel = require('../models/image');
 const commentModel = require('../models/comment');
+const reservationModel = require('../models/reservation');
+
 const app = require('../app');
 
 function createSession(req, user) {
@@ -115,9 +117,22 @@ router.get('/comments', mustBeConnected, function(req, res, next) {
             })
         })
         .catch((err) => {
-            console.log(err);
             res.render('error', {
                 error: err
+            });
+        });
+});
+
+router.get('/reservations', mustBeConnected, function(req, res, next) {
+    reservationModel.getByUserId(req.session.user.id)
+        .then((results) => {
+            res.render('user/user-reservations', {
+                reservations: results
+            })
+        })
+        .catch((error) => {
+            res.render('error', {
+                error: error
             });
         });
 });

@@ -28,6 +28,11 @@ $(function() {
         setActive($('#offersButton'));
     });
 
+    $('#reservationsButton').click(function() {
+        ajax('/user/reservations');
+        setActive($('#reservationsButton'));
+    });
+
     ajax('/user/infos');
     setActive($('#userInfoButton'));
 });
