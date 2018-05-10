@@ -1,6 +1,15 @@
 const db = require('./db');
 
-const sqlGetById = 'SELECT * FROM Comment WHERE idOffer = ?;'
+const sqlGetById =
+                    `
+                    SELECT
+                      Comment.rating, Comment.content, User.firstName
+                    FROM
+                      Comment, User
+                    WHERE
+                      Comment.idOffer = ?
+                      AND Comment.idUser = User.id ;
+                    `;
 const sqlGetByUserId =
     `
     SELECT
@@ -13,8 +22,8 @@ const sqlGetByUserId =
             AND User.id = Comment.idUser;
     `;
 
-function getByOfferId(id, callback) {
-    db.pool.query(sqlGetById, [id], callback);
+function getByOfferId(id) {
+    return db.sqlQuery(sqlGetById, [id]);
 }
 
 function getByUserId(userId) {

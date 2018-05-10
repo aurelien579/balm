@@ -23,25 +23,31 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     //  var sea = req.params.searchText;
     var id = req.params.id;
+    let offer;
+    let comments;
 
-    goodsModel.getById(id, (err, offer) => {
-        commentModel.getByOfferId(id, (err, comments) => {
-            imageModel.getByOfferId(id, (err, images) => {
-
-                if (err) {
-                    res.render('goods', {
-                        err: err
-                    });
-                } else {
-                    res.render('goods', {
-                        offer: offer,
-                        comments: comments,
-                        images: images
-                    });
-                }
-            });
+    goodsModel.getById(id)
+      .then((_offers) => {
+        offer = _offers[0];
+        return commentModel.getByOfferId(id);
+      })
+      .then((_comments) => {
+        comments = _comments;
+        return imageModel.getByOfferId(id);
+      })
+      .then((images) => {
+        res.render('goods', {
+            offer: offer,
+            comments: comments,
+            images: images
         });
-    });
+      })
+      .catch((err) => {
+          res.render('error', {
+              error: err
+          });
+      });
+
 });
 
 module.exports = router;

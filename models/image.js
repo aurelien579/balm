@@ -7,22 +7,16 @@ const sqlGetFirstByOfferId = "SELECT path FROM Image WHERE offerId = ? LIMIT 1;"
 const sqlGetByOfferId = "SELECT path FROM Image WHERE offerId = ?;";
 
 
-function getByUserId(userId, callback) {
-    db.pool.query(sqlGetByUserId, userId, callback);
+function getByUserId(userId) {
+    return db.sqlQuery(sqlGetByUserId, [userId]);
 }
 
-function getFirstByOfferId(offerId, callback) {
+function getFirstByOfferId(offerId) {
     return db.sqlQuery(sqlGetFirstByOfferId, [offerId]);
 }
 
-var getByOfferId = function(id, callback) {
-    db.pool.query(sqlGetByOfferId, [id], (err, results) => {
-        if (err) {
-            callback(err);
-        } else {
-            callback(err, results);
-        }
-    });
+function getByOfferId(id) {
+    return db.sqlQuery(sqlGetByOfferId, [id]);
 }
 
 module.exports.DEFAULT_OFFER_IMAGE = DEFAULT_OFFER_IMAGE;
