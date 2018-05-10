@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: Balm
+-- Host: localhost    Database: Balm
 -- ------------------------------------------------------
--- Server version	5.7.22-0ubuntu18.04.1
+-- Server version	5.7.22-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,8 +18,6 @@
 --
 -- Table structure for table `Availability`
 --
-
-USE Balm;
 
 DROP TABLE IF EXISTS `Availability`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -86,14 +84,14 @@ CREATE TABLE `Comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) NOT NULL,
   `idOffer` int(11) NOT NULL,
-  `content` varchar(45) NOT NULL,
+  `content` text NOT NULL,
   `rating` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Comment_1_idx` (`idUser`),
   KEY `fk_Comment_2_idx` (`idOffer`),
   CONSTRAINT `fk_Comment_1` FOREIGN KEY (`idUser`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Comment_2` FOREIGN KEY (`idOffer`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +100,7 @@ CREATE TABLE `Comment` (
 
 LOCK TABLES `Comment` WRITE;
 /*!40000 ALTER TABLE `Comment` DISABLE KEYS */;
-INSERT INTO `Comment` VALUES (1,2,2,'Cette maison est très bien',5),(2,2,3,'Cette maison est nulle',1);
+INSERT INTO `Comment` VALUES (1,2,2,'Cette maison est très bien',5),(2,2,3,'Cette maison est nulle',1),(3,3,1,'Tres belle maison, du calme et du repos à revendre ! Terrasse et piscine ensoleillé ! un petit havre de paix',5),(4,4,1,'Maison loin du centre ville, il faut utiliser les transports en commun pour tout déplacements !',3);
 /*!40000 ALTER TABLE `Comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +169,7 @@ CREATE TABLE `Offer` (
   `userId` int(11) NOT NULL,
   `postcode` int(11) NOT NULL,
   `title` varchar(45) NOT NULL,
-  `description` varchar(45) NOT NULL,
+  `description` text NOT NULL,
   `price` varchar(45) NOT NULL,
   `city` varchar(45) NOT NULL,
   `department` varchar(45) NOT NULL,
@@ -189,7 +187,7 @@ CREATE TABLE `Offer` (
 
 LOCK TABLES `Offer` WRITE;
 /*!40000 ALTER TABLE `Offer` DISABLE KEYS */;
-INSERT INTO `Offer` VALUES (1,1,69000,'Offre Titre','Offre Description','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein'),(2,1,69000,'Maison de Campagne','Belle vue avec piscine','159','Lyon','Rhone','Rhone-Alpes','19 Avenue Albert Einstein'),(3,1,69000,'Maison en centre ville','Beaucoup de pollution','185','Lyon','Rhone','Rhone-Alpes','15 rue Barthélémy'),(4,2,69000,'Appartement','Cool man !','58','Lyon','Rhone','Rhone-Alpes','850 boulevard lafayette'),(5,3,69800,'Prairie','Pleins de champs','800','Villeurbanne','Rhone','Rhone-Alpes','8 rue des champs');
+INSERT INTO `Offer` VALUES (1,1,69000,'Maison en banlieue Lyonnaise','Très belle maison à proximité de Lyon. Piscine, terrasse et 3 chambres pouvant accueillir jusqu\'à 6 personnes ! proximité avec un arret de bus pour se rendre dans le centre ville.','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein'),(2,1,69000,'Maison de Campagne','Belle vue avec piscine','159','Lyon','Rhone','Rhone-Alpes','19 Avenue Albert Einstein'),(3,1,69000,'Maison en centre ville','Beaucoup de pollution','185','Lyon','Rhone','Rhone-Alpes','15 rue Barthélémy'),(4,2,69000,'Appartement','Cool man !','58','Lyon','Rhone','Rhone-Alpes','850 boulevard lafayette'),(5,3,69800,'Prairie','Pleins de champs','800','Villeurbanne','Rhone','Rhone-Alpes','8 rue des champs');
 /*!40000 ALTER TABLE `Offer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-09 10:53:24
+-- Dump completed on 2018-05-10 10:28:41

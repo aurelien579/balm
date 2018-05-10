@@ -11,6 +11,7 @@ const slqGetByUserIdWithFirstImage =
     	ORDER BY id
     	LIMIT 1
     ) WHERE Offer.userId = ?;`;
+    
 
 var getById = function(id, callback) {
     db.pool.query(sqlGetById, [id], (err, results) => {

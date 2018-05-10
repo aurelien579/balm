@@ -25,7 +25,7 @@ router.get('/:id', function(req, res, next) {
     var id = req.params.id;
 
     goodsModel.getById(id, (err, offer) => {
-        commentModel.getById(id, (err, comments) => {
+        commentModel.getByOfferId(id, (err, comments) => {
             imageModel.getByOfferId(id, (err, images) => {
 
                 if (err) {
