@@ -26,8 +26,18 @@ WHERE
         AND Offer.id = Reservation.offerId;
 `;
 
+const sqlAddReservation = `INSERT INTO Reservation(offerId, userId, from, to,status) VALUES(?, ?, ?, ?,?); `
+
+
+function createReservation(offerId,userId, from, to,status) {
+    db.sqlQuery(sqlAddReservation, [offerId, userId, from, to,status]);
+}
+
+
+
 function getByUserId(userId) {
     return db.sqlQuery(sqlGetByUserId, [userId]);
 }
 
 exports.getByUserId = getByUserId;
+exports.createReservation = createReservation;

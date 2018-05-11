@@ -7,6 +7,7 @@ const locationModel = require('../models/location');
 const availabilityModel = require('../models/availability');
 const app = require('../app');
 const utils = require('./utils');
+const reservationModel = require('../models/reservation');
 
 // req -> recuperer les informations que le client m'envoi
 // res -> reponse a envoyer au client
@@ -61,6 +62,23 @@ router.post('/new', utils.mustBeConnected, async function(req, res, next) {
             })
         });
 });
+
+
+
+router.post('/reservation', utils.mustBeConnected, async function(req, res, next) {
+    goodsModel.createReservation(req.body.req.params.id,req.session.user.id,req.body.from,req.body.to, 0)
+        .then((result) => {
+            res.render('goods-new', {
+                successMessage: "Votre demande de reservation a bien été prise en compte"
+            });
+        })
+        .catch((err) => {
+            res.render('goods-new', {
+                errorMessage: 'il manque des informations'
+            });
+        });
+});
+
 
 router.get('/:id', function(req, res, next) {
     //  var sea = req.params.searchText;
