@@ -27,7 +27,6 @@ var getByOffer = function(search, callback) {
   if (!!search.city)
     offerGetSql += offerSql.city;
   offerGetSql += offerSql.close;
-  console.log(offerGetSql);
   return db.sqlQuery(offerGetSql, [search.text, search.text, search.text, search.text, search.datedep, search.datedep, search.datearr, search.datearr]);
 }
 /*

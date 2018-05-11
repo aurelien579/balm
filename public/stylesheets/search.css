@@ -47,7 +47,7 @@
   background-color: white;
   border-radius: 5px;
   padding-top: 0px;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
 }
 
 .res1 {
@@ -146,6 +146,10 @@
   text-decoration: none;
 }
 
+.zres4 {
+  margin-bottom: 5%;
+}
+
 #zress {
   padding-top: 10%;
 }
@@ -182,4 +186,16 @@
 .recavance2 span {
   line-height: 30px;
   font-weight: bold;
+}
+
+.pagcolor {
+  border-color: #00FF00;
+}
+
+.pagcolor li {
+  border-color: #00FF00;
+}
+
+.pagact {
+  background-color: #00FF00;
 }

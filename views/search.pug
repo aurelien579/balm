@@ -5,12 +5,12 @@ block header
 
 block content
   div(class="container")
-    if house.lgt < 1
+    if house.total_lgt < 1
       h1(class="zres1" id="zress") Oups ! 
       h1(class="zres1") Aucun résultat pour #{search.text} ..
       a(class="zres3" href="/")
         div(class="zres2") Nouvelle Recherche
-    if house.lgt > 0
+    if house.total_lgt > 0
       div(class="titre")
         div(class="titre1")
           h1 #{search.text}
@@ -43,7 +43,7 @@ block content
                 span   Centre-Ville
       div(class="nbres1")
         div(class="nbres2")
-          h3 #{house.lgt} Résultat(s)
+          h3 #{house.total_lgt} Résultat(s)
       div(class="container contour")
         div(class="row justify-content-around")
           each row in house.data
@@ -56,3 +56,27 @@ block content
                 p(class="Offer_Nb_People")   #{elem.userId} Personnes
                   //- Changer userId par Nb_personne
             div(class="w-100")
+      a(class="zres3" href="/")
+        div(class="zres2 zres4") Nouvelle Recherche
+      - var i = 1
+      nav(aria-label="Page navigation example")
+        ul(class="pagination justify-content-center pagcolor")
+          if page.current == 1
+            li(class="page-item disabled" tabindex="-1")
+              a(class="page-link" href="") Précedent
+          else
+            li(class="page-item")
+              a(class="page-link" href="search" + url.base + "&page=" + page.current-1) Précedent
+          while i <= page.count
+            if page.current == i
+              li(class="page-item active pagact")
+                a(class="page-link" href="search" + url.base + "&page=" + i)=i++
+            else
+              li(class="page-item")
+                a(class="page-link" href="search" + url.base + "&page=" + i)=i++
+          if page.current == page.count
+            li(class="page-item disabled" tabindex="-1")
+              a(class="page-link" href="") Suivant
+          else
+            li(class="page-item")
+              a(class="page-link" href="search" + url.base + "&page=" + page.current+1) Suivant
