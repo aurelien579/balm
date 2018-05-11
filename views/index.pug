@@ -11,18 +11,19 @@ block content
         img(class="d-block w-100" id="img" src="images/balm2,5.jpg" alt="First slide")
       div(class="carousel-item")
         img(class="d-block w-100" id="img" src="images/balm1.jpg" alt="Second slide")
-  form(autocomplete="off" id="form" action='/search' method='get')
+  form(id="form" action='/search' autocomplete="off" method='get')
     div(class="row")
-      div(id="input1" class="input-group autocomplete")
-        input(id='searchbar' name="searchText" type="text" class="form-control" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2")      
+      div(id="input1" class="input-group")
+        input(type="text" class="typeahead" data-provide="typeahead" id="searchbar" name="searchText" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2")      
         button(id="button1" class="btn" type="submit")
           i(class="fa fa-search")
       button(id="button2" class="btn" type="button" data-toggle="collapse" href="#input2" aria-controls="input2") Options avancées
     div(id="input2" class="collapse")
       div(class="card")
-        div(class="form-group")
+        div(class="form-group row")
           label(class="control-label" for="date") Date de départ :
           input(id="date" class="form-control" name="datedep" placeholder="dd/mm/yyyy" type="date" min="")
+        div(class="form-group row")
           label(class="control-label" for="date2") Date de retour :
           input(id="date2" class="form-control" name="datearr" placeholder="dd/mm/yyyy" type="date" min="" onclick="setminvalue()")
         div(class="form-group")
@@ -54,3 +55,5 @@ block content
 
 block scripts
   script(src="functions.js")
+  script(src="js/bootstrap3-typeahead.min.js")
+  script(src="js/city.js")
