@@ -119,7 +119,7 @@ router.get('/:id', function(req, res, next) {
             res.render('goods', {
                 offer: offer,
                 comments: comments,
-                images: images
+                images: images,
                 id: id
             });
         })
