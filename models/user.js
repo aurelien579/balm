@@ -1,4 +1,4 @@
-const pool = require('./db').pool;
+const db = require('./db');
 const goodsModel = require('./goods');
 
 const ERROR = -1;
@@ -9,7 +9,7 @@ const userGetSql = 'SELECT * FROM User WHERE email = ?';
 const userInsertSql = 'INSERT INTO User(email, firstName, lastName, password) VALUES(?, ?, ?, ?);';
 
 function getByUsername(email, callback) {
-    pool.query(userGetSql, [email], (err, results) => {
+    db.pool.query(userGetSql, [email], (err, results) => {
         if (err) {
             callback(err);
         } else {
@@ -19,7 +19,7 @@ function getByUsername(email, callback) {
 }
 
 function create(email, firstName, lastName, password, callback) {
-    pool.query(userInsertSql, [email, firstName, lastName, password], (err, result) => {
+    db.pool.query(userInsertSql, [email, firstName, lastName, password], (err, result) => {
         if (err) {
             err.code = ERROR;
             if (err.message.indexOf("UNIQUE constraint failed") != -1) {
@@ -31,12 +31,6 @@ function create(email, firstName, lastName, password, callback) {
         }
 
         callback(err, result);
-    });
-}
-
-function getOffersWithImagesAndComments(userId) {
-    goodsModel.getByUserIdPRomise(userId).then(function(offer) {
-
     });
 }
 

@@ -4,21 +4,55 @@ block header
     link(rel='stylesheet', href='/stylesheets/search.css')
 
 block content
-  .container
-    h1 Barre de Recherche : #{search.text}
-    h1 Nombre de Maison : #{house.lgt}
+  div(class="container")
     if house.lgt < 1
-      h1 Aucun Résultat pour : #{search.text}
+      h1(class="zres1" id="zress") Oups ! 
+      h1(class="zres1") Aucun résultat pour #{search.text} ..
+      a(class="zres3" href="/")
+        div(class="zres2") Nouvelle Recherche
     if house.lgt > 0
-      div(class="container")
+      div(class="titre")
+        div(class="titre1")
+          h1 #{search.text}
+      if (!!search.datedep || !!search.datearr || !!search.numberpers || !!search.pisc || !!search.garden || !!search.city)
+        div(class="recavance")
+          div(class="recavance1")
+            if !!search.datedep
+              div(class="recavance2")
+                img(src="images/l_caldep.png") 
+                span   #{search.datedep}
+            if !!search.datearr
+              div(class="recavance2")
+                img(src="images/l_caldep.png")
+                span   #{search.datearr}
+            if !!search.numberpers
+              div(class="recavance2")
+                img(src="images/l_pers.png") 
+                span   #{search.numberpers}
+            if !!search.pisc
+              div(class="recavance2")
+                img(src="images/l_pisc.png")
+                span   Piscine
+            if !!search.garden
+              div(class="recavance2")
+                img(src="images/l_garden.png")
+                span   Jardin
+            if !!search.city
+              div(class="recavance2")
+                img(src="images/l_city.png")
+                span   Centre-Ville
+      div(class="nbres1")
+        div(class="nbres2")
+          h3 #{house.lgt} Résultat(s)
+      div(class="container contour")
         div(class="row justify-content-around")
           each row in house.data
             each elem in row
               a(class="col-lg-4 square" href="goods/" + elem.id)
                 img(class="Offer_Image" src="images/maison_search.png")
-                p(class="Offer_Title") #{elem.title}
-                p(class="Offer_Price") #{elem.price}€
+                p(class="Offer_Title")   #{elem.title}
+                p(class="Offer_Price")   #{elem.price}€
                 p(class="Offer_Night")  la nuit.
-                p(class="Offer_Nb_People") #{elem.userId} Personnes
+                p(class="Offer_Nb_People")   #{elem.userId} Personnes
                   //- Changer userId par Nb_personne
             div(class="w-100")

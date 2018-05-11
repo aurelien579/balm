@@ -7,6 +7,8 @@ const pool = mysql.createPool({
     connectionLimit: 10
 });
 
+pool.query('SET lc_time_names = "fr_FR";');
+
 function sqlQuery(sql, args) {
     return new Promise(function(resolve, reject) {
         pool.query(sql, args, (err, results) => {

@@ -5,7 +5,7 @@ block header
 block content
     .container
       if offer
-        if images
+        if images.length>0
           div(id="carouselExampleIndicators" class="carousel" data-ride="carousel" data-interval ="5000")
               ul(class="carousel-indicators")
                   li(data-target="#carouselExampleIndicators" data-slide-to="0" class="active")
@@ -34,6 +34,9 @@ block content
         div(class = "page ")
           h1(class="display-4 titre-maison") #{offer.title}
           h4(class="text-justify")  Lieux : #{offer.city}
+          h4(class = "text-justify inline" ) #{offer.price} €
+          h6(small class="text-muted inline font-italic")       .par nuit
+          h1()
           if comments
             - var somme =0;
             -var nbNote =0;
@@ -46,13 +49,32 @@ block content
               h1(class = "display-4 inline etoile") &#9733
           else
             h1() Pas de notes disponibles
-          h4(class = "text-justify") #{offer.price} €
+
           h4(class="text-justify") Description
           p(class="text-justify") #{offer.description}
-          div(class = "commentaires")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          div(class = "commentaires rounded border-0")
             h4(class="text-justify") Commentaires
             if comments
               each row in comments
+                h4(small class="text-muted inline font-italic") #{row.firstName} :
                 - for (var x = 0; x < row.rating; x++)
                   h1(class = "inline etoile") &#9733
                 p(class="text-justify commentaires") #{row.content}

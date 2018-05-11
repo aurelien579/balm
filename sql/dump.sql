@@ -19,8 +19,6 @@
 -- Table structure for table `Availability`
 --
 
-USE Balm;
-
 DROP TABLE IF EXISTS `Availability`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -32,7 +30,7 @@ CREATE TABLE `Availability` (
   PRIMARY KEY (`id`),
   KEY `fk_Availability_1_idx` (`offerId`),
   CONSTRAINT `fk_Availability_1` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +39,7 @@ CREATE TABLE `Availability` (
 
 LOCK TABLES `Availability` WRITE;
 /*!40000 ALTER TABLE `Availability` DISABLE KEYS */;
-INSERT INTO `Availability` VALUES (1,2,'2018-05-09','2018-05-20'),(2,3,'2019-05-09','2019-05-20');
+INSERT INTO `Availability` VALUES (1,2,'2018-05-09','2018-05-20'),(2,3,'2019-05-09','2019-05-20'),(3,12,'2018-05-18','2018-05-30');
 /*!40000 ALTER TABLE `Availability` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,14 +84,14 @@ CREATE TABLE `Comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) NOT NULL,
   `idOffer` int(11) NOT NULL,
-  `content` varchar(45) NOT NULL,
+  `content` text NOT NULL,
   `rating` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Comment_1_idx` (`idUser`),
   KEY `fk_Comment_2_idx` (`idOffer`),
   CONSTRAINT `fk_Comment_1` FOREIGN KEY (`idUser`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Comment_2` FOREIGN KEY (`idOffer`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +100,7 @@ CREATE TABLE `Comment` (
 
 LOCK TABLES `Comment` WRITE;
 /*!40000 ALTER TABLE `Comment` DISABLE KEYS */;
-INSERT INTO `Comment` VALUES (1,2,2,'Cette maison est très bien',5),(2,2,3,'Cette maison est nulle',1);
+INSERT INTO `Comment` VALUES (1,2,2,'Cette maison est très bien',5),(2,2,3,'Cette maison est nulle',1),(3,3,1,'Tres belle maison, du calme et du repos à revendre ! Terrasse et piscine ensoleillé ! un petit havre de paix',5),(4,4,1,'Maison loin du centre ville, il faut utiliser les transports en commun pour tout déplacements !',3);
 /*!40000 ALTER TABLE `Comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,16 +169,16 @@ CREATE TABLE `Offer` (
   `userId` int(11) NOT NULL,
   `postcode` int(11) NOT NULL,
   `title` varchar(45) NOT NULL,
-  `description` varchar(45) NOT NULL,
+  `description` text NOT NULL,
   `price` varchar(45) NOT NULL,
   `city` varchar(45) NOT NULL,
   `department` varchar(45) NOT NULL,
-  `region` varchar(45) NOT NULL,
+  `region` varchar(45) DEFAULT NULL,
   `address` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Offer_1_idx` (`userId`),
   CONSTRAINT `UserIdKey` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +187,7 @@ CREATE TABLE `Offer` (
 
 LOCK TABLES `Offer` WRITE;
 /*!40000 ALTER TABLE `Offer` DISABLE KEYS */;
-INSERT INTO `Offer` VALUES (1,1,69000,'Offre Titre','Offre Description','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein'),(2,1,69000,'Maison de Campagne','Belle vue avec piscine','159','Lyon','Rhone','Rhone-Alpes','19 Avenue Albert Einstein'),(3,1,69000,'Maison en centre ville','Beaucoup de pollution','185','Lyon','Rhone','Rhone-Alpes','15 rue Barthélémy'),(4,2,69000,'Appartement','Cool man !','58','Lyon','Rhone','Rhone-Alpes','850 boulevard lafayette'),(5,3,69800,'Prairie','Pleins de champs','800','Villeurbanne','Rhone','Rhone-Alpes','8 rue des champs');
+INSERT INTO `Offer` VALUES (1,1,69000,'Maison en banlieue Lyonnaise','Très belle maison à proximité de Lyon. Piscine, terrasse et 3 chambres pouvant accueillir jusqu\'à 6 personnes ! proximité avec un arret de bus pour se rendre dans le centre ville.','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein'),(2,1,69000,'Maison de Campagne','Belle vue avec piscine','159','Lyon','Rhone','Rhone-Alpes','19 Avenue Albert Einstein'),(3,1,69000,'Maison en centre ville','Beaucoup de pollution','185','Lyon','Rhone','Rhone-Alpes','15 rue Barthélémy'),(4,2,69000,'Appartement','Cool man !','58','Lyon','Rhone','Rhone-Alpes','850 boulevard lafayette'),(5,3,69800,'Prairie','Pleins de champs','800','Villeurbanne','Rhone','Rhone-Alpes','8 rue des champs'),(9,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(10,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(11,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(12,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi');
 /*!40000 ALTER TABLE `Offer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,6 +216,38 @@ INSERT INTO `Region` VALUES (1,'Alsace'),(2,'Aquitaine'),(3,'Auvergne'),(4,'Bass
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Reservation`
+--
+
+DROP TABLE IF EXISTS `Reservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Reservation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `offerId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `from` date NOT NULL,
+  `to` date NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Reservation_1_idx` (`offerId`),
+  KEY `fk_Reservation_2_idx` (`userId`),
+  CONSTRAINT `fk_Reservation_1` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Reservation_2` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Reservation`
+--
+
+LOCK TABLES `Reservation` WRITE;
+/*!40000 ALTER TABLE `Reservation` DISABLE KEYS */;
+INSERT INTO `Reservation` VALUES (1,2,2,'2018-05-02','2018-06-02',0),(2,5,1,'2018-01-31','2018-12-01',0);
+/*!40000 ALTER TABLE `Reservation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `User`
 --
 
@@ -230,6 +260,7 @@ CREATE TABLE `User` (
   `lastName` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
+  `imagePath` varchar(45) DEFAULT '/images/users/default.png',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
@@ -241,7 +272,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'Aurélien','Martin','aurelien.martin@insa-lyon.fr','toto'),(2,'Camille','Moriot','camille.moriot@insa-lyon.fr','toto'),(3,'Alexandre','Sabathier','alexandre.sabathier@insa-lyon.fr','toto'),(4,'Mael','Brouard','mael.brouard@insa-lyon.fr','toto'),(5,'Test','Test','test@test.co','test'),(6,'Test','Test','test@tttt.c','tttt');
+INSERT INTO `User` VALUES (1,'Aurélien','Martin','aurelien.martin@insa-lyon.fr','toto','/images/users/default.png'),(2,'Camille','Moriot','camille.moriot@insa-lyon.fr','toto','/images/users/default.png'),(3,'Alexandre','Sabathier','alexandre.sabathier@insa-lyon.fr','toto','/images/users/2.jpg'),(4,'Mael','Brouard','mael.brouard@insa-lyon.fr','toto','/images/users/default.png'),(5,'Test','Test','test@test.co','test','/images/users/default.png'),(6,'Test','Test','test@tttt.c','tttt','/images/users/default.png');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -254,4 +285,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-09 10:53:24
+-- Dump completed on 2018-05-11 12:28:02

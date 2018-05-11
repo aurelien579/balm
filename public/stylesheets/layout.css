@@ -5,3 +5,12 @@
 .navbar {
   z-index: 2;
 }
+
+body {
+
+}
+
+.jumbotron-custom {
+    padding-bottom: 20px;
+    padding-top: 30px;
+}

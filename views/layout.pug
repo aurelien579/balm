@@ -21,6 +21,8 @@ html
 
         ul(class='navbar-nav ml-auto')
           if session
+            li.nav-item
+              a.btn.btn-outline-secondary.my-2.my-lg-0(href="/goods/new") Déposer une annonce
             li(class='nav-item')
               a(class='nav-link' href='/user') #{session.email}
             li(class='nav-item')

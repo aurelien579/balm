@@ -1,0 +1,23 @@
+h5.card-title Mes Réservations
+.card-content
+  if reservations.length > 0
+    ul.list-group
+      each res in reservations
+        li.list-group-item
+          .col-lg-3.img-col
+            .crop
+              img.offer-img(src=res.path)
+          .col-lg-9
+            h5 
+              a(href="/goods/" + res.offerId) #{res.title} 
+              | - #{res.price} € par nuit
+            br
+            h6 Du #{res.from} au #{res.to}
+            if res.status == 0
+              h6 Etat de la réservation : 
+                span.text-warning.font-weight-bold En attente
+            else
+              h6 Etat de la réservation : 
+                span.text-success.font-weight-bold Acceptée
+  else
+    p Vous n'avez pas encore fait de réservations

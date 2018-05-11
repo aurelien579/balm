@@ -1,11 +1,69 @@
+/* *** Résultat ***/
+.titre {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.titre1 {
+  border-radius: 5px;
+  background-color: white;
+  display: inline-flex;
+  text-align: center;
+  margin: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.titre1 h1 {
+  font-size: 500%;
+  font-weight: bold;
+}
+
+.nbres1 {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.nbres2 {
+  border-radius: 5px;
+  background-color: white;
+  display: inline-flex;
+  text-align: center;
+  margin: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.nbres2 h3 {
+  font-size: 150%;
+  font-weight: bold;
+}
+
+
+.contour {
+  border: 2px solid white;
+  background-color: white;
+  border-radius: 5px;
+  padding-top: 0px;
+  margin-bottom: 5%;
+}
+
+.res1 {
+  padding-top: 2%;
+  text-align: center;
+  font-weight: bold;
+  color: grey;
+}
+
 .square {
   z-index: 0;
   background-color: white;
   padding: 10px;
   height: same-as-width;
-  margin-bottom: 10px;
-  border-radius: 3px;
-  /*border: 1px white solid;*/
+  margin-bottom: 2%;
+  border-radius: 5px;
   -webkit-transform: scale(1);
   transform: scale(1);
   -webkit-transition: .3s ease-in-out;
@@ -13,21 +71,17 @@
 }
 
 .square:hover {
-  z-index: 1;
+  z-index: 1;/*
   -webkit-transform: scale(1.05);
-  transform: scale(1.05);
+  transform: scale(1.05);*/
   padding: 0px;
-  text-decoration: none;
-}
-
-.a {
   text-decoration: none;
 }
 
 .Offer_Image {
   width: 100%;
   max-height: 70%;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 .Offer_Title {
@@ -67,4 +121,65 @@
 
 .Offer_Note {
   text-align: right;
+}
+
+/* *** Zero Résultat *** */
+.zres1 {
+  text-align: center;
+  font-weight: bold;
+  color: grey;
+}
+
+.zres2 {
+  margin: auto;
+  margin-top: 2%;
+  width: 45%;
+  border-radius: 5px;
+  color: white;
+  background-color : #00FF00;
+  text-align: center;
+  font-weight: bold;
+  font-size: 200%;
+}
+
+.zres3:hover {
+  text-decoration: none;
+}
+
+#zress {
+  padding-top: 10%;
+}
+
+.recavance {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.recavance1 {
+  border-radius: 5px;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 5px;
+}
+
+.recavance2 {
+  display: inline;
+  background-color: white;
+  border-radius: 5px;
+  height: 40px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.recavance2 img {
+  display: inline;
+  height: 30px;
+}
+
+.recavance2 span {
+  line-height: 30px;
+  font-weight: bold;
 }

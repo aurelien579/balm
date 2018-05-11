@@ -8,12 +8,15 @@ router.get('/', function(req, res, next) {
   search.datedep = req.query.datedep;
   search.datearr = req.query.datearr;
   search.numberpers = req.query.numberpers;
-  search.pool = req.query.Pool;
-  search.garden = req.query.Garden;
-  search.city = req.query.City;
+  search.pool = req.query.pool;
+  search.garden = req.query.garden;
+  search.city = req.query.city;
+
+  console.log(search);
 
   searchModel.getByOffer(search)
     .then((results) => {
+      console.log(results);
       var house = [];
       house.lgt = results.length;
       house.data = []

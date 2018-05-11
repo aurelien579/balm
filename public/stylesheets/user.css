@@ -47,3 +47,7 @@
 .comment-content {
     padding-left: 30px;
 }
+
+.card-content a:hover {
+    text-decoration: none;
+}

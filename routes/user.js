@@ -4,6 +4,9 @@ const userModel = require('../models/user');
 const goodsModel = require('../models/goods');
 const imageModel = require('../models/image');
 const commentModel = require('../models/comment');
+const reservationModel = require('../models/reservation');
+const utils = require('./utils');
+
 const app = require('../app');
 
 function createSession(req, user) {
@@ -16,15 +19,6 @@ function createSession(req, user) {
 function clearSession(req) {
     req.session.user = undefined;
     app.locals.session = undefined;
-}
-
-function mustBeConnected(req, res, next) {
-    if (!req.session.user) {
-        console.log('Access violation!');
-        res.redirect('/');
-    } else {
-        next();
-    }
 }
 
 router.post('/login', function(req, res, next) {
@@ -74,24 +68,24 @@ router.post('/register', function(req, res, next) {
     });
 });
 
-router.get('/logout', mustBeConnected, function(req, res, next) {
+router.get('/logout', utils.mustBeConnected, function(req, res, next) {
     clearSession(req);
     res.redirect('/');
 });
 
-router.get('/', mustBeConnected, function(req, res, next) {
+router.get('/', utils.mustBeConnected, function(req, res, next) {
     res.render('user/user', {
         user: req.session.user
     });
 });
 
-router.get('/infos', mustBeConnected, function(req, res, next) {
+router.get('/infos', utils.mustBeConnected, function(req, res, next) {
     res.render('user/user-infos', {
         user: req.session.user
     });
 });
 
-router.get('/offers', mustBeConnected, function(req, res, next) {
+router.get('/offers', utils.mustBeConnected, function(req, res, next) {
     goodsModel.getByUserIdWithFirstImage(req.session.user.id)
         .then((offers) => {
             res.render('user/user-offers', {
@@ -106,7 +100,7 @@ router.get('/offers', mustBeConnected, function(req, res, next) {
         });
 });
 
-router.get('/comments', mustBeConnected, function(req, res, next) {
+router.get('/comments', utils.mustBeConnected, function(req, res, next) {
     commentModel.getByUserId(req.session.user.id)
         .then((comments) => {
             res.render('user/user-comments', {
@@ -115,9 +109,22 @@ router.get('/comments', mustBeConnected, function(req, res, next) {
             })
         })
         .catch((err) => {
-            console.log(err);
             res.render('error', {
                 error: err
+            });
+        });
+});
+
+router.get('/reservations', utils.mustBeConnected, function(req, res, next) {
+    reservationModel.getByUserId(req.session.user.id)
+        .then((results) => {
+            res.render('user/user-reservations', {
+                reservations: results
+            })
+        })
+        .catch((error) => {
+            res.render('error', {
+                error: error
             });
         });
 });
