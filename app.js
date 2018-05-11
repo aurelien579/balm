@@ -4,6 +4,7 @@ const path = require('path');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+const fileUpload = require('express-fileupload');
 
 const app = express();
 module.exports = app;
@@ -25,6 +26,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
+
+app.use(fileUpload());
 
 app.use(session({
     secret: 'qsfqsdlgjksdfmjxcbxcvvfuhvlzks',
