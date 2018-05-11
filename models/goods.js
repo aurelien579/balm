@@ -12,6 +12,11 @@ const slqGetByUserIdWithFirstImage =
     	LIMIT 1
     ) WHERE Offer.userId = ?;`;
 
+const sqlCreate =
+    `INSERT INTO Offer
+        (userId, title, description, price, department, city, postcode, address)
+     VALUES
+        (?, ?, ?, ?, ?, ?, ?, ?);`
 
 function getById(id) {
     return db.sqlQuery(sqlGetById, [id]);
@@ -25,6 +30,11 @@ function getByUserIdWithFirstImage(userId) {
     return db.sqlQuery(slqGetByUserIdWithFirstImage, [userId]);
 }
 
+function create(userId, title, description, price, department, city, postcode, address) {
+    return db.sqlQuery(sqlCreate, [userId, title, description, price, department, city, postcode, address]);
+}
+
 exports.getByUserId = getByUserId;
 exports.getById = getById;
 exports.getByUserIdWithFirstImage = getByUserIdWithFirstImage;
+exports.create = create;
