@@ -79,24 +79,30 @@ router.post('/new', utils.mustBeConnected, async function(req, res, next) {
 
 
 
-router.post('/reservation', utils.mustBeConnected, async function(req, res, next) {
-    goodsModel.createReservation(req.body.req.params.id,req.session.user.id,req.body.from,req.body.to, 0)
+router.get('/reservation', utils.mustBeConnected, function(req, res, next) {
+  goods.from = req.query.from; // Récupère le texte de recherche
+  goods.to = req.query.to;
+  goods.numberpers = req.query.numberpers;
+  goods.id =req.query.id;
+
+    goodsModel.createReservation(goods.id,req.session.user.id,goods.from,goods.to, 0)
         .then((result) => {
-            res.render('goods-new', {
+            res.render('reservation', {
                 successMessage: "Votre demande de reservation a bien été prise en compte"
             });
         })
         .catch((err) => {
-            res.render('goods-new', {
+            res.render('reservation', {
                 errorMessage: 'il manque des informations'
             });
         });
 });
 
 
+
 router.get('/:id', function(req, res, next) {
     //  var sea = req.params.searchText;
-    var id = req.params.id;
+    let id = req.params.id;
     let offer;
     let comments;
 
@@ -114,6 +120,7 @@ router.get('/:id', function(req, res, next) {
                 offer: offer,
                 comments: comments,
                 images: images
+                id: id
             });
         })
         .catch((err) => {

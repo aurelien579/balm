@@ -58,6 +58,7 @@ block content
 
 
             div(class="col-sm cadre reservation")
+              form( action='/reservation' method='get')
                 div(class = "row-res")
                   h1(class = "lead") Demande de réservation :
                 div(class="row")
@@ -68,10 +69,9 @@ block content
                 div(class="row")
                   div(class="col-sm padding-res")
                     label(for="" class="sr-only") Nombre de personne
-                    input(class="form-control-lg" placeholder="Nombre de personne")
+                    input(class="form-control-lg" placeholder="Nombre de personne" name="numberpers")
                   div(class="col-sm padding-res")
-                    form(action='/goods/reservation' method='post')
-                    button(type="button submit" class="button btn btn-outline-success inline") Réserver
+                    button(type="submit" class="button btn btn-outline-success") Réserver
 
           div(class = "commentaires  border-0")
             h4(class="text-justify") Commentaires
