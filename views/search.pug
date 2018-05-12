@@ -53,30 +53,38 @@ block content
                 p(class="Offer_Title")   #{elem.title}
                 p(class="Offer_Price")   #{elem.price}€
                 p(class="Offer_Night")  la nuit.
-                p(class="Offer_Nb_People")   #{elem.userId} Personnes
+                if elem.nbCom == 0
+                  p(class="Offer_nbCom yellow") NOUVEAU
+                else 
+                  p(class="Offer_nbCom") (#{elem.nbCom})
+                  - for (var x = 0; x < elem.avg; x++)
+                    p(class="Offer_Note") &#9733
+                p(class="Offer_Nb_People")   #{elem.userId} Personnes  
+                
                   //- Changer userId par Nb_personne
             div(class="w-100")
       a(class="zres3" href="/")
         div(class="zres2 zres4") Nouvelle Recherche
-      - var i = 1
-      nav(aria-label="Page navigation example")
-        ul(class="pagination justify-content-center pagcolor")
-          if page.current == 1
-            li(class="page-item disabled" tabindex="-1")
-              a(class="page-link" href="") Précedent
-          else
-            li(class="page-item")
-              a(class="page-link" href="search" + url.base + "&page=" + page.current-1) Précedent
-          while i <= page.count
-            if page.current == i
-              li(class="page-item active pagact")
-                a(class="page-link" href="search" + url.base + "&page=" + i)=i++
+      if page.count != 1
+        - var i = 1
+        nav(aria-label="Page navigation example")
+          ul(class="pagination justify-content-center pagcolor")
+            if page.current == 1
+              li(class="page-item disabled" tabindex="-1")
+                a(class="page-link" href="") Précedent
             else
               li(class="page-item")
-                a(class="page-link" href="search" + url.base + "&page=" + i)=i++
-          if page.current == page.count
-            li(class="page-item disabled" tabindex="-1")
-              a(class="page-link" href="") Suivant
-          else
-            li(class="page-item")
-              a(class="page-link" href="search" + url.base + "&page=" + page.current+1) Suivant
+                a(class="page-link" href="search" + url.base + "&page=" + page.inf) Précedent #{page.inf}
+            while i <= page.count
+              if page.current == i
+                li(class="page-item active pagact")
+                  a(class="page-link" href="search" + url.base + "&page=" + i)=i++
+              else
+                li(class="page-item")
+                  a(class="page-link" href="search" + url.base + "&page=" + i)=i++
+            if page.current == page.count
+              li(class="page-item disabled" tabindex="-1")
+                a(class="page-link" href="") Suivant
+            else
+              li(class="page-item")
+                a(class="page-link" href="search" + url.base + "&page=" + page.sup) Suivant #{page.sup}
