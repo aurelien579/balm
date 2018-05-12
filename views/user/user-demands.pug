@@ -1,0 +1,24 @@
+h5.card-title Mes Demandes de Réservation
+.card-content
+  if demands.length > 0
+    ul.list-group
+      each demand in demands
+        li.list-group-item
+          .row
+            .col-lg-3
+              .crop
+                img.offer-img(src=demand.path)
+            .col-lg-9
+              h5 
+                | Demande de réservation pour 
+                a(href="/goods/" + demand.offerId) #{demand.title} 
+                | à #{demand.price} € par nuit
+              h6 Du #{demand.from} au #{demand.to}, par #{demand.firstName}
+              if demand.status == 0
+                .text-right.pt-4
+                  a.btn.btn-success.mr-2(href="/reservation/" + demand.reservationId + "/accept") Accepter
+                  a.btn.btn-danger.mr-2(href="/reservation/" + demand.reservationId + "/reject") Refuser
+              else
+                h6.text-success.font-weight-bold Vous avez déjà accepté cette réservation
+  else
+    p Vous n'avez pas encore fait de réservations

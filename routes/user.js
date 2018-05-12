@@ -129,4 +129,18 @@ router.get('/reservations', utils.mustBeConnected, function(req, res, next) {
         });
 });
 
+router.get('/demands', utils.mustBeConnected, function(req, res, next) {
+    reservationModel.getDemandsTo(req.session.user.id)
+        .then((results) => {
+            res.render('user/user-demands', {
+                demands: results
+            });
+        })
+        .catch((err) => {
+            res.render('error', {
+                error: error
+            });
+        })
+});
+
 module.exports = router;

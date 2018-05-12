@@ -33,6 +33,11 @@ $(function() {
         setActive($('#reservationsButton'));
     });
 
+    $('#demandsButton').click(function() {
+        ajax('/user/demands');
+        setActive($('#demandsButton'));
+    });
+
     ajax('/user/infos');
     setActive($('#userInfoButton'));
 });
