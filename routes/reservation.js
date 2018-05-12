@@ -37,8 +37,26 @@ router.get('/new', function(req, res, next) {
 });
 
 router.get('/:id/accept', utils.mustBeConnected, async function(req, res, next) {
-    let id = req.params.id;
-    //  let status = await reservationModel.getStatus(id);
+    let id = parseInt(req.params.id);
+    let status = (await reservationModel.getStatus(id))[0].status;
+
+    if (status == reservationModel.WAITING) {
+        console.log("waiting");
+        await reservationModel.accept(id);
+    }
+
+    res.redirect('/user');
+});
+
+router.get('/:id/reject', utils.mustBeConnected, async function(req, res, next) {
+    let id = parseInt(req.params.id);
+    let status = (await reservationModel.getStatus(id))[0].status;
+
+    if (status == reservationModel.WAITING) {
+        await reservationModel.reject(id);
+    }
+
+    res.redirect('/user');
 });
 
 

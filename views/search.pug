@@ -11,39 +11,43 @@ block content
       a(class="zres3" href="/")
         div(class="zres2") Nouvelle Recherche
     if house.total_lgt > 0
-      div(class="titre")
-        div(class="titre1")
-          h1 #{search.text}
-      if (!!search.datedep || !!search.datearr || !!search.numberpers || !!search.pisc || !!search.garden || !!search.city)
-        div(class="recavance")
-          div(class="recavance1")
-            if !!search.datedep
-              div(class="recavance2")
-                img(src="images/l_caldep.png") 
-                span   #{search.datedep}
-            if !!search.datearr
-              div(class="recavance2")
-                img(src="images/l_caldep.png")
-                span   #{search.datearr}
-            if !!search.numberpers
-              div(class="recavance2")
-                img(src="images/l_pers.png") 
-                span   #{search.numberpers}
-            if !!search.pisc
-              div(class="recavance2")
-                img(src="images/l_pisc.png")
-                span   Piscine
-            if !!search.garden
-              div(class="recavance2")
-                img(src="images/l_garden.png")
-                span   Jardin
-            if !!search.city
-              div(class="recavance2")
-                img(src="images/l_city.png")
-                span   Centre-Ville
-      div(class="nbres1")
-        div(class="nbres2")
-          h3 #{house.total_lgt} Résultat(s)
+      div(class="jumbotron jumbotron-custom")
+        div(class="titre")
+          div(class="titre1")
+            h1 #{search.text}
+        if (!!search.datedep || !!search.datearr || !!search.numberpers || !!search.pisc || !!search.garden || !!search.city)
+          div(class="recavance")
+            div(class="recavance1")
+              if !!search.datedep
+                div(class="recavance2")
+                  img(src="images/l_caldep.png") 
+                  span   #{search.datedep}
+              if !!search.datearr
+                div(class="recavance2")
+                  img(src="images/l_caldep.png")
+                  span   #{search.datearr}
+              if !!search.numberpers
+                div(class="recavance2")
+                  img(src="images/l_pers.png") 
+                  span   #{search.numberpers}
+              if !!search.pisc
+                div(class="recavance2")
+                  img(src="images/l_pisc.png")
+                  span   Piscine
+              if !!search.garden
+                div(class="recavance2")
+                  img(src="images/l_garden.png")
+                  span   Jardin
+              if !!search.city
+                div(class="recavance2")
+                  img(src="images/l_city.png")
+                  span   Centre-Ville
+        div(class="nbres1")
+          div(class="nbres2")
+            if house.total_lgt > 1
+              h3 #{house.total_lgt} Résultats
+            else
+              h3 #{house.total_lgt} Résultat
       div(class="container contour")
         div(class="row justify-content-around")
           each row in house.data
@@ -74,7 +78,7 @@ block content
                 a(class="page-link" href="") Précedent
             else
               li(class="page-item")
-                a(class="page-link" href="search" + url.base + "&page=" + page.inf) Précedent #{page.inf}
+                a(class="page-link" href="search" + url.base + "&page=" + page.inf) Précédent
             while i <= page.count
               if page.current == i
                 li(class="page-item active pagact")
@@ -87,4 +91,4 @@ block content
                 a(class="page-link" href="") Suivant
             else
               li(class="page-item")
-                a(class="page-link" href="search" + url.base + "&page=" + page.sup) Suivant #{page.sup}
+                a(class="page-link" href="search" + url.base + "&page=" + page.sup) Suivant

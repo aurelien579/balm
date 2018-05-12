@@ -1,4 +1,20 @@
 $(function() {
+  $("#date").datepicker({
+    format: "yyyy-mm-dd",
+    startDate: '+d1',
+    autoclose: true,
+    orientation: "bottom"
+  }).on('changeDate', function(e){
+    $('#date2').datepicker('setStartDate', e.date);
+  });
+
+  $("#date2").datepicker({
+    format: "yyyy-mm-dd",
+    startDate: '+d1',
+    autoclose: true,
+    orientation: "bottom"
+  })
+
   $("#searchbar").keyup(function(e) {
     let count = 0;
     let exeptions = [9, 13, 16, 17, 18, 20, 37, 38, 39, 40, 91, 93, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 192, 225];

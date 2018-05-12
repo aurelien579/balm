@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var searchModel = require('../models/search');
 
+const blocPerPage = parseInt(2);
+
 router.get('/', function(req, res, next) {
   var search = [];
   search.text = req.query.searchText; // Récupère le texte de recherche
@@ -16,17 +18,20 @@ router.get('/', function(req, res, next) {
     .then((results) => {
 
       var _page = [];
-      _page.size = 3;
+      _page.size = blocPerPage * 3;
       _page.count = Math.ceil(results.length / _page.size);
       _page.current = parseInt(req.query.page);
-      if (!_page.current)
+      if ((!_page.current) || (_page.current < 1))
         _page.current = 1;
+      else if (_page.current > _page.count)
+        _page.current = _page.count;
       _page.inf = _page.current - 1;
       _page.sup = _page.current + 1;
 
       var url = []
       url.current = req.url.substring(1);
-      url.base = url.current.replace("&page=" + _page.current,"");
+      url.base = url.current.replace(/-?[0-9]*$/g,"");
+      url.base = url.base.replace("&page=","");
 
       if ((_page.current == _page.count) && ((results.length % _page.size) > 0))
         _page.rst = results.length % _page.size;
@@ -36,7 +41,6 @@ router.get('/', function(req, res, next) {
       for (var i = 0; i < _page.rst; i++) {
         result[i] = results[i + ((_page.current - 1) * _page.size)];
       }
-      console.log(result);
 
       var house = [];
       house.total_lgt = results.length;
