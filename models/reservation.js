@@ -58,7 +58,10 @@ WHERE
         AND Offer.userId = ?;
 `;
 
-const sqlAddReservation = `INSERT INTO Reservation(offerId, userId, from, to,status) VALUES(?, ?, ?, ?,?); `
+const sqlAddReservation = `INSERT INTO Reservation(offerId, userId, from, to,status) VALUES(?, ?, ?, ?,?);`;
+
+const sqlAccept = 'UPDATE Reservation SET status = 1 WHERE id = ?;';
+const sqlReject = 'UPDATE Reservation SET status = 2 WHERE id = ?;';
 
 function createReservation(offerId, userId, from, to, status) {
     db.sqlQuery(sqlAddReservation, [offerId, userId, from, to, status]);
@@ -72,6 +75,16 @@ function getDemandsTo(userId) {
     return db.sqlQuery(sqlGetDemandsTo, [userId]);
 }
 
+function accept(reservationId) {
+    return db.sqlQuery(sqlAccept, [reservationId]);
+}
+
+function reject(reservationId) {
+    return db.sqlQuery(sqlReject, [reservationId]);
+}
+
 exports.getByUserId = getByUserId;
 exports.createReservation = createReservation;
 exports.getDemandsTo = getDemandsTo;
+exports.accept = accept;
+exports.reject = reject;

@@ -11,12 +11,12 @@ const utils = require('./utils');
 
 
 router.get('/new', utils.mustBeConnected, function(req, res, next) {
-  from = req.query.from; // Récupère le texte de recherche
-  to = req.query.to;
-  numberpers = req.query.numberpers;
-  id =req.query.id;
+    from = req.query.from; // Récupère le texte de recherche
+    to = req.query.to;
+    numberpers = req.query.numberpers;
+    id = req.query.id;
 
-    reservationModel.createReservation(id,req.session.user.id,from,to, 0)
+    reservationModel.createReservation(id, req.session.user.id, from, to, 0)
         .then((result) => {
             console.log(result);
             res.render('reservation', {
@@ -28,6 +28,10 @@ router.get('/new', utils.mustBeConnected, function(req, res, next) {
                 errorMessage: 'il manque des informations'
             });
         });
+});
+
+router.get('/:id/accept', utils.mustBeConnected, function(req, res, next) {
+
 });
 
 
