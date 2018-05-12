@@ -28,6 +28,7 @@
   top: 50%;
   left: 50%;
   width: 45%;
+  min-width: 300px;
   transform: translate(-50%, -50%);
 
 }
@@ -40,6 +41,10 @@
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   border: 1px solid #00FF00;
+}
+
+#input2 {
+  padding-top: 5px;
 }
 
 #input1 {
@@ -66,7 +71,7 @@
   background: #00FF00;
   border-radius: 5px;
   color: white;
-  width: 150px;
+  /*width: 150px;*/
 }
 
 .card {
@@ -93,26 +98,9 @@ body {
   font: 16px Arial;
 }
 
-/*input {
-  border: 1px solid transparent;
-  background-color: #f1f1f1;
-  padding: 10px;
-  font-size: 16px;
-}
-input[type=text] {
-  background-color: #f1f1f1;
-  width: 100%;
-}
-input[type=submit] {
-  background-color: DodgerBlue;
-  color: #fff;
-}*/
-
 .autocomplete-items {
   position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
+  border-left: 2px solid #00FF00;
   z-index: 99;
   /*position the autocomplete items to be the same width as the container:*/
   top: 100%;
@@ -127,7 +115,8 @@ input[type=submit] {
 }
 .autocomplete-items div:hover {
   /*when hovering an item:*/
-  background-color: #e9e9e9;
+  background-color: #00FF00;
+  color: white;
 }
 .autocomplete-active {
   /*when navigating through the items using the arrow keys:*/
