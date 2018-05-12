@@ -7,6 +7,7 @@ const locationModel = require('../models/location');
 const availabilityModel = require('../models/availability');
 const app = require('../app');
 const utils = require('./utils');
+const reservationModel = require('../models/reservation');
 
 // req -> recuperer les informations que le client m'envoi
 // res -> reponse a envoyer au client
@@ -47,6 +48,20 @@ router.post('/new', utils.mustBeConnected, async function(req, res, next) {
             req.body.postcode,
             req.body.address)
         .then((result) => {
+            let i = 1;
+            for (let property in req.files) {
+                if (req.files.hasOwnProperty(property)) {
+                    let file = req.files[property];
+
+                    let path = "public/images/offers/" + result.insertId + "-" + i + "." + file.name.split('.').pop();
+                    imageModel.add(result.insertId, path);
+                    file.mv(path, function(err) {
+                        console.log("Move error: ", err);
+                    });
+                }
+                i++;
+            }
+
             return availabilityModel.add(result.insertId, req.body.from, req.body.to);
         })
         .then((result) => {
@@ -62,9 +77,12 @@ router.post('/new', utils.mustBeConnected, async function(req, res, next) {
         });
 });
 
+
+
+
 router.get('/:id', function(req, res, next) {
     //  var sea = req.params.searchText;
-    var id = req.params.id;
+    let id = req.params.id;
     let offer;
     let comments;
 
@@ -81,7 +99,8 @@ router.get('/:id', function(req, res, next) {
             res.render('goods', {
                 offer: offer,
                 comments: comments,
-                images: images
+                images: images,
+                id: id
             });
         })
         .catch((err) => {

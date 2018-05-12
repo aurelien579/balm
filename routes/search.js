@@ -12,27 +12,52 @@ router.get('/', function(req, res, next) {
   search.garden = req.query.garden;
   search.city = req.query.city;
 
-  console.log(search);
-
   searchModel.getByOffer(search)
     .then((results) => {
-      console.log(results);
+
+      var _page = [];
+      _page.size = 2;
+      _page.count = Math.ceil(results.length / _page.size);
+      _page.current = req.query.page;
+
+      if (!_page.current)
+        _page.current = 1;
+
+      var url = []
+      url.current = req.url;
+      url.base = url.current.replace("&page=" + _page.current,"");
+      console.log(url.current);
+      console.log(url.base);
+
+      if (_page.current == _page.count)
+        _page.rst = results.length % _page.size;
+      else _page.rst = _page.size;
+
+      var result = [];
+      for (var i = 0; i < _page.rst; i++) {
+        result[i] = results[i + ((_page.current - 1) * _page.size)];
+      }
+
       var house = [];
-      house.lgt = results.length;
-      house.data = []
+      house.total_lgt = results.length;
+      house.lgt = result.length;
+      house.data = [];
+
       // Passe d'un tableau 1D à tableau 2D
       for (var i = 0; i < house.lgt; i += 3) {
         house.data[i / 3] = [];
         for (var j = 0; j < 3; j++) {
           if ((i + j) < house.lgt) {
-            house.data[i / 3][j] = results[i + j];
+            house.data[i / 3][j] = result[i + j];
           }
         }
       }
       res.render('search', {
-        title: 'Recherche',
+        title: 'Recherche : '+search.text,
         search: search,
-        house: house
+        house: house,
+        url: url,
+        page: _page
       });
     })
     .catch((err) => {

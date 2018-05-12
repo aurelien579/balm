@@ -13,7 +13,7 @@ block content
         if successMessage
           .alert.alert-success #{successMessage}
         
-        form(action='/goods/new' method='post')
+        form(action='/goods/new' method='post' enctype="multipart/form-data")
           .form-group.row
             label.col-lg-3.col-form-label Titre de l'annonce
             .col-lg-9
@@ -62,18 +62,18 @@ block content
           .form-group.row
             .col-lg-4
               .custom-file
-                input.custom-file-input#file(type='file' name='image1')
+                input.custom-file-input#file(type='file' name='image1' required)
                 label.custom-file-label(for="file") Choisir une image
                 
             .col-lg-4
               .custom-file
-                input.custom-file-input#file(type='file' name='image2')
-                label.custom-file-label(for="file") Choisir une image
+                input.custom-file-input#file1(type='file' name='image2')
+                label.custom-file-label(for="file1") Choisir une image
                 
             .col-lg-4
               .custom-file
-                input.custom-file-input#file(type='file' name='image3')
-                label.custom-file-label(for="file") Choisir une image
+                input.custom-file-input#file2(type='file' name='image3')
+                label.custom-file-label(for="file2") Choisir une image
           button.form-control.btn.btn-success(type="submit") Déposer
 
 block scripts

@@ -12,7 +12,7 @@
 }
 
 .page{
-
+  padding-bottom: 20px;
 }
 .carousel-indicators {
     position: absolute;
@@ -39,14 +39,46 @@
 .inline {
   display: inline;
 }
+.button{
+  margin: 5%;
+}
 
 .commentaires {
-  padding-top: 10px;
+  margin-top: 5%;
+  padding-top: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  padding-bottom: : 30px;
+  padding-bottom: : 1px;
   background-color:#e6ffcc;
+  border-radius: 10px;
 }
 .etoile{
   color: #ffc107;
+}
+.form-control-lg {
+    padding-top: 0.2rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.2rem;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+}
+
+.reservation{
+
+  height: 100%;
+  width: 100%;
+  background-color: #D5F9D2;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2%;
+
+}
+.cadre{
+  margin-right: 15px;
+}
+.padding-res{
+  padding: 3%;
 }
