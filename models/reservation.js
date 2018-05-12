@@ -97,6 +97,7 @@ exports.createReservation = createReservation;
 exports.getDemandsTo = getDemandsTo;
 exports.accept = accept;
 exports.reject = reject;
+exports.getStatus = getStatus;
 
 exports.WAITING = WAITING;
 exports.ACCEPTED = ACCEPTED;
