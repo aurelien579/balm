@@ -57,22 +57,22 @@ block content
               p(class="text-justify") #{offer.description}
 
 
-            div(class="col-sm cadre reservation")
+            div(class="col-sm-5 cadre reservation")
               form(action='/reservation/new' method='get')
                 div(class = "row-res")
                   h1(class = "lead") Demande de réservation :
                 div(class="row")
-                  div(class="col-sm padding-res")
-                    input(id="date" class="form-control-lg" name="from" placeholder="Arrivée" type="date" min="")
-                  div(class="col-sm padding-res")
-                    input(id="date" class="form-control-lg" name="to" placeholder="Départ" type="date" min="" onclick="setminvalue()")
+                  div(class="col-sm-6 padding-res")
+                    input(id="date" class="form-control" name="from" placeholder="Arrivée" required type="text" onfocus="(this.type='date')" onblur="(this.type='text')" min="")
+                  div(class="col-sm-6 padding-res")
+                    input(id="date" class="form-control" name="to" placeholder="Départ" required type="text" onfocus="(this.type='date')" onblur="(this.type='text')" min="" onclick="setminvalue()")
                 div(class="row")
                   div(class="col-sm padding-res")
                     label(for="" class="sr-only") Nombre de personne
-                    input(class="form-control" placeholder="Nombre de personne" name="numberpers")
+                    input(class="form-control" placeholder="Nombre de personne" name="numberpers" required )
                   div(class="col-sm padding-res")
-                    button(type="submit" class="button btn btn-outline-success") Réserver
-                input(type="hidden" name="id" value=id) 
+                    button(type="submit" class="btn btn-outline-success form-control") Réserver
+                input(type="hidden" name="id" value=id)
 
           div(class = "commentaires  border-0")
             h4(class="text-justify") Commentaires
