@@ -31,7 +31,8 @@ router.get('/new', utils.mustBeConnected, function(req, res, next) {
 });
 
 router.get('/:id/accept', utils.mustBeConnected, function(req, res, next) {
-
+    let id = req.params.id;
+    let status = await reservationModel.getStatus(id);
 });
 
 

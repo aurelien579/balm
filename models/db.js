@@ -11,7 +11,6 @@ pool.query('SET lc_time_names = "fr_FR";');
 
 pool.on('connection', function(connection) {
     connection.on('enqueue', function(sequence) {
-        // if (sequence instanceof mysql.Sequence.Query) {
         if ('Query' === sequence.constructor.name) {
             console.log('SQL ', sequence.sql);
         }

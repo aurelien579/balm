@@ -1,5 +1,9 @@
 const db = require('./db');
 
+const WAITING = 0;
+const ACCEPTED = 1;
+const REJECTED = 2;
+
 const sqlGetByUserId = `
 SELECT
     DATE_FORMAT(Reservation.from, '%d %M %Y') AS 'from',
@@ -62,6 +66,7 @@ const sqlAddReservation = `INSERT INTO Reservation(offerId, userId, from, to,sta
 
 const sqlAccept = 'UPDATE Reservation SET status = 1 WHERE id = ?;';
 const sqlReject = 'UPDATE Reservation SET status = 2 WHERE id = ?;';
+const sqlGetStatus = 'SELECT status FROM Reservation WHERE id = ?;';
 
 function createReservation(offerId, userId, from, to, status) {
     db.sqlQuery(sqlAddReservation, [offerId, userId, from, to, status]);
@@ -83,8 +88,16 @@ function reject(reservationId) {
     return db.sqlQuery(sqlReject, [reservationId]);
 }
 
+function getStatus(reservationId) {
+    return db.sqlQuery(sqlGetStatus, [reservationId]);
+}
+
 exports.getByUserId = getByUserId;
 exports.createReservation = createReservation;
 exports.getDemandsTo = getDemandsTo;
 exports.accept = accept;
 exports.reject = reject;
+
+exports.WAITING = WAITING;
+exports.ACCEPTED = ACCEPTED;
+exports.REJECTED = REJECTED;
