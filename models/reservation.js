@@ -3,6 +3,9 @@ const db = require('./db');
 const WAITING = 0;
 const ACCEPTED = 1;
 const REJECTED = 2;
+const sqlAccept = 'UPDATE Reservation SET status = 1 WHERE id = ?;';
+const sqlReject = 'UPDATE Reservation SET status = 2 WHERE id = ?;';
+const sqlGetStatus = 'SELECT status FROM Reservation WHERE id = ?;';
 
 const sqlGetByUserId = `
 SELECT
@@ -62,14 +65,11 @@ WHERE
         AND Offer.userId = ?;
 `;
 
-const sqlAddReservation = `INSERT INTO Reservation(offerId, userId, from, to,status) VALUES(?, ?, ?, ?,?);`;
+const sqlAddReservation = `INSERT INTO Reservation(offerId, userId, \`from\`, \`to\`,\`status\`) VALUES(?, ?, ?, ?, ?); `;
 
-const sqlAccept = 'UPDATE Reservation SET status = 1 WHERE id = ?;';
-const sqlReject = 'UPDATE Reservation SET status = 2 WHERE id = ?;';
-const sqlGetStatus = 'SELECT status FROM Reservation WHERE id = ?;';
 
 function createReservation(offerId, userId, from, to, status) {
-    db.sqlQuery(sqlAddReservation, [offerId, userId, from, to, status]);
+    return db.sqlQuery(sqlAddReservation, [offerId, userId, from, to, status]);
 }
 
 function getByUserId(userId) {
@@ -97,6 +97,7 @@ exports.createReservation = createReservation;
 exports.getDemandsTo = getDemandsTo;
 exports.accept = accept;
 exports.reject = reject;
+exports.getStatus = getStatus;
 
 exports.WAITING = WAITING;
 exports.ACCEPTED = ACCEPTED;
