@@ -16,20 +16,19 @@ router.get('/', function(req, res, next) {
     .then((results) => {
 
       var _page = [];
-      _page.size = 2;
+      _page.size = 3;
       _page.count = Math.ceil(results.length / _page.size);
-      _page.current = req.query.page;
-
+      _page.current = parseInt(req.query.page);
       if (!_page.current)
         _page.current = 1;
+      _page.inf = _page.current - 1;
+      _page.sup = _page.current + 1;
 
       var url = []
-      url.current = req.url;
+      url.current = req.url.substring(1);
       url.base = url.current.replace("&page=" + _page.current,"");
-      console.log(url.current);
-      console.log(url.base);
 
-      if (_page.current == _page.count)
+      if ((_page.current == _page.count) && ((results.length % _page.size) > 0))
         _page.rst = results.length % _page.size;
       else _page.rst = _page.size;
 
@@ -37,6 +36,7 @@ router.get('/', function(req, res, next) {
       for (var i = 0; i < _page.rst; i++) {
         result[i] = results[i + ((_page.current - 1) * _page.size)];
       }
+      console.log(result);
 
       var house = [];
       house.total_lgt = results.length;

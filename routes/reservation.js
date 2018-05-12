@@ -9,21 +9,25 @@ const reservationModel = require('../models/reservation');
 const app = require('../app');
 const utils = require('./utils');
 
-
 router.get('/new', utils.mustBeConnected, function(req, res, next) {
-    from = req.query.from; // Récupère le texte de recherche
-    to = req.query.to;
-    numberpers = req.query.numberpers;
-    id = req.query.id;
+    let from = req.query.from; // Récupère le texte de recherche
+    let to = req.query.to;
+    let numberpers = req.query.numberpers;
+    let id = req.query.id;
 
     reservationModel.createReservation(id, req.session.user.id, from, to, 0)
         .then((result) => {
             console.log(result);
             res.render('reservation', {
-                successMessage: "Votre demande de reservation a bien été prise en compte"
+                successMessage: "Votre demande de reservation a bien été prise en compte",
+                from: from,
+                to: to,
+                numberpers: numberpers,
+                id: id
             });
         })
         .catch((err) => {
+            console.log(err);
             res.render('reservation', {
                 errorMessage: 'il manque des informations'
             });
