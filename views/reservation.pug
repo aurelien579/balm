@@ -2,11 +2,12 @@ extends layout
 block header
     link(rel='stylesheet', href='/stylesheets/goods.css')
 
-block content
-    if errorMessage
-      div(class='alert alert-danger' role='alert') #{errorMessage}
-    if successMessage
-      div(class='alert alert-success' role='alert') #{successMessage}
+  block content
+      if errorMessage
+        div(class='alert alert-danger' role='alert') #{errorMessage}
+      if successMessage
+        div(class='alert alert-success' role='alert') #{successMessage}
+
       div(class="row")
         h4(class="display-4") Récapitulatif de votre demande de réservation
       div(class="row")
@@ -15,5 +16,4 @@ block content
         h1() Départ le #{goods.to}
       div(class="row")
         h1() Nombre de personnes voyageant : #{goods.numberpers}
-      form(action='/' method='get')
-      button(type="submit" class="button btn btn-outline-success inline") Retour à la page d'acceuil
+    

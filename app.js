@@ -13,6 +13,7 @@ const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
 const searchRouter = require('./routes/search');
 const goodsRouter = require('./routes/goods');
+const reservationRouter = require('./routes/reservation');
 
 
 // view engine setup
@@ -39,6 +40,7 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/search', searchRouter);
 app.use('/goods', goodsRouter);
+app.use('/reservation',reservationRouter);
 
 
 // catch 404 and forward to error handler

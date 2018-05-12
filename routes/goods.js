@@ -79,26 +79,6 @@ router.post('/new', utils.mustBeConnected, async function(req, res, next) {
 
 
 
-router.get('/reservation', utils.mustBeConnected, function(req, res, next) {
-  goods.from = req.query.from; // Récupère le texte de recherche
-  goods.to = req.query.to;
-  goods.numberpers = req.query.numberpers;
-  goods.id =req.query.id;
-
-    goodsModel.createReservation(goods.id,req.session.user.id,goods.from,goods.to, 0)
-        .then((result) => {
-            res.render('reservation', {
-                successMessage: "Votre demande de reservation a bien été prise en compte"
-            });
-        })
-        .catch((err) => {
-            res.render('reservation', {
-                errorMessage: 'il manque des informations'
-            });
-        });
-});
-
-
 
 router.get('/:id', function(req, res, next) {
     //  var sea = req.params.searchText;
