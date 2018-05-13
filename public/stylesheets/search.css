@@ -9,6 +9,7 @@
   color: white;
   border-radius: 5px;
   background-color: none;
+  text-shadow: 2px 2px 8px black;
   display: inline-flex;
   text-align: center;
   /*margin: 10px;*/
@@ -30,6 +31,7 @@
 .nbres2 {
   border-radius: 5px;
   background-color: none;
+  text-shadow: 2px 2px 8px black;
   display: inline-flex;
   text-align: center;
   /*margin: 10px;*/
@@ -61,6 +63,7 @@
 
 .square {
   z-index: 0;
+  border-color: transparent;
   margin: 10px;
   -webkit-transform: scale(1);
   transform: scale(1);
@@ -81,8 +84,8 @@
 }
 
 .inutile {
-  background-color: #e5eade;
-  border-color: #e5eade;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .Offer_Image {
