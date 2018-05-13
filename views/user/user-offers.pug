@@ -3,7 +3,19 @@ h5.card-title Mes Offres
   if offers.length > 0
     ul.list-group
       each offer in offers
-        a.list-group-item.list-group-item-action(href="/goods/" + offer.id)
-          include user-offer
+        li.list-group-item
+          h5 
+            a(href="/goods/" + offer.id) #{offer.title} 
+            | - #{offer.price} € par nuit
+          .row
+            .col-lg-3
+              .crop
+                img.offer-img(src=offer.path)
+
+            .col-lg-9
+              p #{offer.description}
+              .text-right
+                a.btn.btn-primary.mr-2(href="/goods/update/" + offer.id) Modifier
+                a.btn.btn-danger.mr-2(href="/goods/delete/" + offer.id) Supprimer
   else
     p Vous n'avez pas d'offres actuellement
