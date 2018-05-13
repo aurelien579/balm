@@ -117,4 +117,46 @@ router.get('/:id', function(req, res, next) {
         });
 
 });
+router.get('/edit/:id', utils.mustBeConnected, function(req, res, next) {
+  goodsModel.getUserId(Number(req.params.id))
+      .then((results) => {
+          if (results[0].userId == req.session.user.id) {
+              console.log("bouton a faire");
+              return res.redirect('/user');
+          } else {
+            res.render('hack', {
+            });
+          }
+      }).catch((err) => {
+          return res.render('error', {
+              error: err
+          });
+      });
+});
+
+router.get('/delete/:id', utils.mustBeConnected, function(req, res, next) {
+    goodsModel.getUserId(Number(req.params.id))
+        .then((results) => {
+            if (results[0].userId == req.session.user.id) {
+                goodsModel.deleteOffer(Number(req.params.id))
+                    .then((results) => {
+                        return res.redirect('/user');
+                    })
+                    .catch((err) => {
+                        return res.render('error', {
+                            error: err
+                        });
+                    });
+            } else {
+              res.render('hack', {
+              });
+            }
+          })
+          .catch((err) => {
+              return res.render('error', {
+                  error: err
+              });
+          });
+});
+
 module.exports = router;

@@ -1,7 +1,14 @@
 const db = require('./db');
 
 const sqlGetById = 'SELECT * FROM Offer WHERE id = ?;';
+const sqlGetUserId = 'SELECT Offer.userId FROM Offer WHERE id = ?;';
 const sqlGetByUserId = 'SELECT * FROM Offer WHERE userId = ?;';
+
+const sqlDelete = 'DELETE FROM Offer WHERE id = ?;';
+const sqlDeleteRes = 'DELETE FROM Reservation WHERE offerid = ?;';
+const sqlDeleteImg = 'DELETE FROM Image WHERE offerId = ?;';
+const sqlDeleteCom = 'DELETE FROM Comment WHERE idOffer = ?;';
+const sqlDeleteDisp = 'DELETE FROM Availability WHERE offerId = ?;';
 
 const slqGetByUserIdWithFirstImage =
     `SELECT Offer.id, Offer.title, Offer.description, Offer.price, COALESCE(Image.path, '/images/offers/default.jpg') AS path
@@ -19,8 +26,6 @@ const sqlCreate =
      VALUES
         (?, ?, ?, ?, ?, ?, ?, ?);`
 
-const sqlDelete = 'DELETE FROM Offer WHERE id = ?;';
-
 function getById(id) {
     return db.sqlQuery(sqlGetById, [id]);
 }
@@ -37,10 +42,20 @@ function create(userId, title, description, price, department, city, postcode, a
     return db.sqlQuery(sqlCreate, [userId, title, description, price, department, city, postcode, address]);
 }
 
+function getUserId(offerId) {
+    return db.sqlQuery(sqlGetUserId, [offerId]);
+}
+
 function deleteOffer(offerId) {
+    db.sqlQuery(sqlDeleteRes, [offerId]);
+    db.sqlQuery(sqlDeleteDisp, [offerId]);
+    db.sqlQuery(sqlDeleteImg, [offerId]);
+    db.sqlQuery(sqlDeleteCom, [offerId]);
+
     return db.sqlQuery(sqlDelete, [offerId]);
 }
 
+exports.getUserId = getUserId;
 exports.deleteOffer = deleteOffer;
 exports.getByUserId = getByUserId;
 exports.getById = getById;
