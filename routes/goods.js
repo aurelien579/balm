@@ -85,6 +85,8 @@ router.get('/:id', function(req, res, next) {
     let id = req.params.id;
     let offer;
     let comments;
+    let images;
+    let availability;
 
     goodsModel.getById(id)
         .then((_offers) => {
@@ -95,12 +97,17 @@ router.get('/:id', function(req, res, next) {
             comments = _comments;
             return imageModel.getByOfferId(id);
         })
-        .then((images) => {
+        .then((_images) => {
+            images = _images;
+            return availabilityModel.getAvailabilityByOfferId(id);
+        })
+        .then((availability) => {
             res.render('goods', {
                 offer: offer,
                 comments: comments,
                 images: images,
-                id: id
+                id: id,
+                availability: availability
             });
         })
         .catch((err) => {
@@ -110,5 +117,4 @@ router.get('/:id', function(req, res, next) {
         });
 
 });
-
 module.exports = router;
