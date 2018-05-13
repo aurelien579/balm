@@ -153,4 +153,18 @@ router.get('/demands', utils.mustBeConnected, function(req, res, next) {
         })
 });
 
+router.get('/goods/delete/:id', utils.mustBeConnected, function(req, res, next) {
+    goodsModel.deleteOffer(req.params.id)
+        .then((results) => {
+          res.render('user/user-offers', {
+            user: req.session.user,
+            offers: offers
+          })
+        })
+        .catch((error) => {
+            res.render('error', {
+                error: error
+            });
+        });
+});
 module.exports = router;
