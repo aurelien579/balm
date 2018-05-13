@@ -19,6 +19,8 @@ const sqlCreate =
      VALUES
         (?, ?, ?, ?, ?, ?, ?, ?);`
 
+const sqlDelete = 'DELETE FROM Offer WHERE id = ?;';
+
 function getById(id) {
     return db.sqlQuery(sqlGetById, [id]);
 }
@@ -35,6 +37,11 @@ function create(userId, title, description, price, department, city, postcode, a
     return db.sqlQuery(sqlCreate, [userId, title, description, price, department, city, postcode, address]);
 }
 
+function deleteOffer(offerId) {
+    return db.sqlQuery(sqlDelete, [offerId]);
+}
+
+exports.deleteOffer = deleteOffer;
 exports.getByUserId = getByUserId;
 exports.getById = getById;
 exports.getByUserIdWithFirstImage = getByUserIdWithFirstImage;
