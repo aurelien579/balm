@@ -8,8 +8,9 @@ block content
     
     .card
       .card-body
-        for err in errors
-          .alert.alert-danger #{err.msg}
+        if errors
+          for err in errors
+            .alert.alert-danger #{err.msg}
         if successMessage
           .alert.alert-success #{successMessage}
         

@@ -5,7 +5,6 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload');
-const expressValidator = require('express-validator');
 
 const app = express();
 module.exports = app;

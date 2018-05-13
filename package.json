@@ -16,6 +16,7 @@
         "express-session": "",
         "mysql": "",
         "express-fileupload": "",
-        "express-validator": ""
+        "express-validator": "",
+        "bcrypt": ""
     }
 }
