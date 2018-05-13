@@ -5,6 +5,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload');
+const expressValidator = require('express-validator');
 
 const app = express();
 module.exports = app;
@@ -40,7 +41,7 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/search', searchRouter);
 app.use('/goods', goodsRouter);
-app.use('/reservation',reservationRouter);
+app.use('/reservation', reservationRouter);
 
 
 // catch 404 and forward to error handler

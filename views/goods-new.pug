@@ -8,8 +8,8 @@ block content
     
     .card
       .card-body
-        if errorMessage
-          .alert.alert-danger #{errorMessage}
+        for err in errors
+          .alert.alert-danger #{err.msg}
         if successMessage
           .alert.alert-success #{successMessage}
         
@@ -17,43 +17,43 @@ block content
           .form-group.row
             label.col-lg-3.col-form-label Titre de l'annonce
             .col-lg-9
-              input.form-control(name="title", type="text" placeholder="Titre de l'annonce" required)
+              input.form-control(name="title", type="text" placeholder="Titre de l'annonce")
           .form-group.row
             label.col-lg-3.col-form-label Description
             .col-lg-9
-              textarea.form-control(name="description", type="text" placeholder="Description" required)
+              textarea.form-control(name="description", type="text" placeholder="Description")
           .form-group.row
             label.col-lg-3.col-form-label Prix par nuit
             .col-lg-2
               .input-group
-                input.form-control(name="price", type="text" placeholder="Prix" required)
+                input.form-control(name="price", type="text" placeholder="Prix")
                 .input-group-append
                   span.input-group-text €
           .form-group.row
             label.col-lg-3.col-form-label Département
             .col-lg-4
-              input.form-control(name="department", type="text" placeholder="Département" required)
+              input.form-control(name="department", type="text" placeholder="Département")
           .form-group.row
             label.col-lg-3.col-form-label Ville
             .col-lg-4
-              input.form-control(name="city", type="text" placeholder="Ville" required)
+              input.form-control(name="city", type="text" placeholder="Ville")
           .form-group.row
             label.col-lg-3.col-form-label Code postal
             .col-lg-4
-              input.form-control(name="postcode", type="text" placeholder="Code postal" required)
+              input.form-control(name="postcode", type="text" placeholder="Code postal")
           .form-group.row
             label.col-lg-3.col-form-label Adresse
             .col-lg-4
-              input.form-control(name="address", type="text" placeholder="Adresse" required)
+              input.form-control(name="address", type="text" placeholder="Adresse")
           .form-group.row
             label.col-lg-3.col-form-label Disponible du
             .col-lg-4
               .input-group.date
-                input.form-control(name="from" type="date" required)
+                input.form-control(name="from" type="date")
             label.col-lg-1.col-form-label au
             .col-lg-4
               .input-group.date
-                input.form-control(name="to" type="date" required)
+                input.form-control(name="to" type="date")
           
           br
           .form-group.row.col-lg-4
@@ -62,7 +62,7 @@ block content
           .form-group.row
             .col-lg-4
               .custom-file
-                input.custom-file-input#file(type='file' name='image1' required)
+                input.custom-file-input#file(type='file' name='image1')
                 label.custom-file-label(for="file") Choisir une image
                 
             .col-lg-4
