@@ -14,7 +14,6 @@ router.get('/new', function(req, res, next) {
     let to = req.query.to;
     let numberpers = req.query.numberpers;
     let id = req.query.id;
-    let url: req.url;
     utils.mustBeConnectedToBook(req, res, next);
 
     reservationModel.createReservation(id, req.session.user.id, from, to, 0)
