@@ -1,7 +1,7 @@
 const db = require('./db');
 
 const sqlGetById =
-                    `
+    `
                     SELECT
                       Comment.rating, Comment.content, User.firstName
                     FROM
@@ -17,7 +17,7 @@ const sqlGetByUserId =
     FROM
         Offer, Comment, User
     WHERE
-        Offer.userId = 1
+        Offer.userId = ?
             AND Offer.id = Comment.idOffer
             AND User.id = Comment.idUser;
     `;
