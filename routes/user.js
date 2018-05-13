@@ -22,17 +22,22 @@ function clearSession(req) {
 }
 
 router.post('/login', function(req, res, next) {
-
     userModel.getByUsername(req.body.email, (err, user) => {
+        let successMessage = '';
+        let errorMessage = '';
 
         if (user !== undefined) {
-            let successMessage = "Vous êtes bien connecté";
-            createSession(req, user);
+            if (user.password == req.body.password) {
+                successMessage = "Vous êtes bien connecté";
+                createSession(req, user);
 
-            let backURL = req.header('Referer') || '/';
-            res.redirect(backURL);
+                let backURL = req.header('Referer') || '/';
+                res.redirect(backURL);
+            } else {
+                errorMessage = "Mot de passe incorrect";
+            }
         } else {
-            let errorMessage = "Erreur lors de la connection";
+            errorMessage = "Erreur lors de la connection";
         }
 
         res.render('user/login', {
