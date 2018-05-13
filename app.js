@@ -40,7 +40,7 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/search', searchRouter);
 app.use('/goods', goodsRouter);
-app.use('/reservation',reservationRouter);
+app.use('/reservation', reservationRouter);
 
 
 // catch 404 and forward to error handler

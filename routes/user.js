@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 const userModel = require('../models/user');
 const goodsModel = require('../models/goods');
 const imageModel = require('../models/image');
@@ -21,23 +22,19 @@ function clearSession(req) {
     app.locals.session = undefined;
 }
 
-router.post('/login', function(req, res, next) {
-
-    userModel.getByUsername(req.body.email, (err, user) => {
+router.post('/login', async function(req, res, next) {
+    userModel.getByUsername(req.body.email, async (err, user) => {
         let successMessage = '';
         let errorMessage = '';
-        let prev = req.query.prev;
-        console.log(prev);
 
         if (user !== undefined) {
-            if (user.password == req.body.password) {
+            let match = await bcrypt.compare(req.body.password, user.password);
+
+            if (match) {
                 successMessage = "Vous êtes bien connecté";
                 createSession(req, user);
-                if (prev) {
-
-                    console.log(prev);
-                    res.redirect(prev);
-
+                if (req.query.prev) {
+                    return res.redirect(req.query.prev);
                 }
             } else {
                 errorMessage = "Mot de passe incorrect";
@@ -46,33 +43,31 @@ router.post('/login', function(req, res, next) {
             errorMessage = "Erreur lors de la connection";
         }
 
-        res.render('user/login', {
+        return res.render('user/login', {
             title: 'Connexion',
             successMessage: successMessage,
             errorMessage: errorMessage,
-            prev: prev
-
+            prev: req.query.prev
         });
     });
 });
 
 router.get('/login', function(req, res, next) {
-    let prev = req.query.prev;
-    console.log(prev);
     userModel.getByUsername(req.body.email, (err, user) => {
         let successMessage = '';
         let errorMessage = '';
 
         res.render('user/login', {
             title: 'Connexion',
-            prev: prev
+            prev: req.query.prev
         });
 
     });
 });
 
-router.post('/register', function(req, res, next) {
-    userModel.create(req.body.email, req.body.firstName, req.body.lastName, req.body.password, (err, user) => {
+router.post('/register', async function(req, res, next) {
+    let hashed = await bcrypt.hash(req.body.password, 10);
+    userModel.create(req.body.email, req.body.firstName, req.body.lastName, hashed, (err, user) => {
         if (err) {
             var errorMessage = err.message;
             if (err.code == userModel.USERNAME_EXISTS) {
@@ -127,6 +122,7 @@ router.get('/offers', utils.mustBeConnected, function(req, res, next) {
 });
 
 router.get('/comments', utils.mustBeConnected, function(req, res, next) {
+  console.log("salut");
     commentModel.getByUserId(req.session.user.id)
         .then((comments) => {
             res.render('user/user-comments', {
@@ -167,22 +163,6 @@ router.get('/demands', utils.mustBeConnected, function(req, res, next) {
                 error: error
             });
         })
-});
-
-
-router.get('/goods/delete/:id', utils.mustBeConnected, function(req, res, next) {
-    goodsModel.deleteOffer(req.params.id)
-        .then((results) => {
-            res.render('user/user-offers', {
-                user: req.session.user,
-                offers: offers
-            })
-        })
-        .catch((error) => {
-            res.render('error', {
-                error: error
-            });
-        });
 });
 
 module.exports = router;
