@@ -22,11 +22,14 @@ function clearSession(req) {
 }
 
 router.post('/login', function(req, res, next) {
+
     userModel.getByUsername(req.body.email, (err, user) => {
         createSession(req, user);
 
         if (user !== undefined) {
             var successMessage = "Vous êtes bien connecté";
+            backURL = req.header('Referer') || '/';
+            res.redirect(backURL);
         } else {
             var errorMessage = "Erreur lors de la connection";
         }
@@ -34,7 +37,8 @@ router.post('/login', function(req, res, next) {
         res.render('user/login', {
             title: 'Connexion',
             successMessage: successMessage,
-            errorMessage: errorMessage
+            errorMessage: errorMessage,
+
         });
     });
 });
