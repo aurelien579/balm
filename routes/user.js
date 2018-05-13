@@ -22,17 +22,23 @@ function clearSession(req) {
 }
 
 router.post('/login', function(req, res, next) {
+
     userModel.getByUsername(req.body.email, (err, user) => {
         let successMessage = '';
         let errorMessage = '';
+        let prev = req.query.prev;
+        console.log(prev);
 
         if (user !== undefined) {
             if (user.password == req.body.password) {
                 successMessage = "Vous êtes bien connecté";
                 createSession(req, user);
+                if (prev) {
 
-                let backURL = req.header('Referer') || '/';
-                res.redirect(backURL);
+                    console.log(prev);
+                    res.redirect(prev);
+
+                }
             } else {
                 errorMessage = "Mot de passe incorrect";
             }
@@ -44,14 +50,24 @@ router.post('/login', function(req, res, next) {
             title: 'Connexion',
             successMessage: successMessage,
             errorMessage: errorMessage,
+            prev: prev
 
         });
     });
 });
 
 router.get('/login', function(req, res, next) {
-    res.render('user/login', {
-        title: 'Connexion'
+    let prev = req.query.prev;
+    console.log(prev);
+    userModel.getByUsername(req.body.email, (err, user) => {
+        let successMessage = '';
+        let errorMessage = '';
+
+        res.render('user/login', {
+            title: 'Connexion',
+            prev: prev
+        });
+
     });
 });
 
@@ -153,6 +169,7 @@ router.get('/demands', utils.mustBeConnected, function(req, res, next) {
         })
 });
 
+
 router.get('/goods/delete/:id', utils.mustBeConnected, function(req, res, next) {
     goodsModel.deleteOffer(req.params.id)
         .then((results) => {
@@ -167,4 +184,9 @@ router.get('/goods/delete/:id', utils.mustBeConnected, function(req, res, next) 
             });
         });
 });
+<<<<<<< HEAD
 module.exports = router;
+=======
+
+module.exports = router;
+>>>>>>> 6f0944f9a940656019a0bfc6d38f6c07cfda91a0

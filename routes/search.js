@@ -51,9 +51,7 @@ router.get('/', function(req, res, next) {
       for (var i = 0; i < house.lgt; i += 3) {
         house.data[i / 3] = [];
         for (var j = 0; j < 3; j++) {
-          if ((i + j) < house.lgt) {
-            house.data[i / 3][j] = result[i + j];
-          }
+          house.data[i / 3][j] = result[i + j];
         }
       }
       res.render('search', {

@@ -15,58 +15,61 @@ block content
         div(class="titre")
           div(class="titre1")
             h1 #{search.text}
-        if (!!search.datedep || !!search.datearr || !!search.numberpers || !!search.pisc || !!search.garden || !!search.city)
-          div(class="recavance")
-            div(class="recavance1")
-              if !!search.datedep
-                div(class="recavance2")
-                  img(src="images/l_caldep.png") 
-                  span   #{search.datedep}
-              if !!search.datearr
-                div(class="recavance2")
-                  img(src="images/l_caldep.png")
-                  span   #{search.datearr}
-              if !!search.numberpers
-                div(class="recavance2")
-                  img(src="images/l_pers.png") 
-                  span   #{search.numberpers}
-              if !!search.pisc
-                div(class="recavance2")
-                  img(src="images/l_pisc.png")
-                  span   Piscine
-              if !!search.garden
-                div(class="recavance2")
-                  img(src="images/l_garden.png")
-                  span   Jardin
-              if !!search.city
-                div(class="recavance2")
-                  img(src="images/l_city.png")
-                  span   Centre-Ville
         div(class="nbres1")
           div(class="nbres2")
             if house.total_lgt > 1
               h3 #{house.total_lgt} Résultats
             else
               h3 #{house.total_lgt} Résultat
+        if (!!search.datedep || !!search.datearr || !!search.numberpers || !!search.pisc || !!search.garden || !!search.city)
+          div(class="recavance")
+            div(class="recavance1")
+              if !!search.datedep
+                div(class="recavance2")
+                  img(src="images/l_calendar.png") 
+                  span   #{search.datedep}
+              if !!search.datearr
+                div(class="recavance2")
+                  img(src="images/l_calendar.png")
+                  span   #{search.datearr}
+              if !!search.numberpers
+                div(class="recavance2")
+                  img(src="images/l_people.png") 
+                  span   #{search.numberpers}
+              if !!search.pool
+                div(class="recavance2")
+                  img(src="images/l_pool.png")
+                  span   Piscine
+              if !!search.garden
+                div(class="recavance2")
+                  img(src="images/l_leaf.png")
+                  span   Jardin
+              if !!search.city
+                div(class="recavance2")
+                  img(src="images/l_city.png")
+                  span   Centre-Ville
       div(class="container contour")
         div(class="row justify-content-around")
           each row in house.data
-            each elem in row
-              a(class="col-lg-4 square" href="goods/" + elem.id)
-                img(class="Offer_Image" src="images/maison_search.png")
-                p(class="Offer_Title")   #{elem.title}
-                p(class="Offer_Price")   #{elem.price}€
-                p(class="Offer_Night")  la nuit.
-                if elem.nbCom == 0
-                  p(class="Offer_nbCom yellow") NOUVEAU
-                else 
-                  p(class="Offer_nbCom") (#{elem.nbCom})
-                  - for (var x = 0; x < elem.avg; x++)
-                    p(class="Offer_Note") &#9733
-                p(class="Offer_Nb_People")   #{elem.userId} Personnes  
-                
-                  //- Changer userId par Nb_personne
-            div(class="w-100")
+            div(class="card-deck pad")
+              each elem in row
+                if !elem
+                  div(class="card inutile")
+                else
+                  a(class="card square" href="goods/" + elem.id)
+                    img(class="card-img-top" src="images/maison_search.png" alt="Card image cap")
+                    div(class="card-body")
+                      p(class="Offer_Title")   #{elem.title}
+                      p(class="Offer_Price")   #{elem.price}€
+                      p(class="Offer_Night")  la nuit.
+                      if elem.nbCom == 0
+                        p(class="Offer_nbCom yellow") NOUVEAU
+                      else 
+                        p(class="Offer_nbCom") (#{elem.nbCom})
+                        - for (var x = 0; x < elem.avg; x++)
+                          p(class="Offer_Note") &#9733
+                      p(class="Offer_Nb_People")   #{elem.nbpeople} Personnes
+
       a(class="zres3" href="/")
         div(class="zres2 zres4") Nouvelle Recherche
       if page.count != 1

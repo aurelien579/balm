@@ -12,19 +12,30 @@ block content
         div(class='card')
           div(class='card-body')
             h5(class='card-title') Connexion
-            form(action='/user/login' method='post')
-              div(class='form-group row')
-                label(for='username' class='col-lg-4 col-form-label') Email
-                div(class='col-lg-8')
-                  input(type='username' class='form-control' name='email' placeholder='Email')
+            if prev
+              form(action='/user/login?prev='+prev method='post')
+                div(class='form-group row')
+                  label(for='username' class='col-lg-4 col-form-label') Email
+                  div(class='col-lg-8')
+                    input(type='username' class='form-control' name='email' placeholder='Email')
 
-              div(class='form-group row')
-                label(for='password' class='col-lg-4 col-form-label') Mot de passe
-                div(class='col-lg-8')
-                  input(type='password' class='form-control' name='password' placeholder='Mot de passe')
+                div(class='form-group row')
+                  label(for='password' class='col-lg-4 col-form-label') Mot de passe
+                  div(class='col-lg-8')
+                    input(type='password' class='form-control' name='password' placeholder='Mot de passe')
+                button(type='submit' class='form-control btn btn-success') Valider
+            else
+              form(action='/user/login' method='post')
+                div(class='form-group row')
+                  label(for='username' class='col-lg-4 col-form-label') Email
+                  div(class='col-lg-8')
+                    input(type='username' class='form-control' name='email' placeholder='Email')
 
-              button(type='submit' class='form-control btn btn-success') Valider
-
+                div(class='form-group row')
+                  label(for='password' class='col-lg-4 col-form-label') Mot de passe
+                  div(class='col-lg-8')
+                    input(type='password' class='form-control' name='password' placeholder='Mot de passe')
+                button(type='submit' class='form-control btn btn-success') Valider
       div(class='col-lg-6')
         div(class='card')
           div(class='card-body')
@@ -39,12 +50,12 @@ block content
                 label(class='col-lg-4 col-form-label') Prénom
                 div(class='col-lg-8')
                   input(type='username' class='form-control' name='firstName' placeholder='Prénom')
-                    
+
               div(class='form-group row')
                 label(class='col-lg-4 col-form-label') Nom
                 div(class='col-lg-8')
                   input(type='username' class='form-control' name='lastName' placeholder='Nom')
-              
+
               div(class='form-group row')
                 label(class='col-lg-4 col-form-label') Mot de passe
                 div(class='col-lg-8')
