@@ -62,15 +62,6 @@ block content
                 div(class = "row-res")
                   h1(class = "lead") Demande de réservation :
                 div(class="row")
-                  function unavailable(date){
-                    dmy = date.getDate() + "-" + (date.getMonth() +1)+ "-"+date.getFullYear();
-                    console.log(dmy);
-                    if $.inArray(dmy,unavailableDates)==-1
-                      return true
-                    else
-                      return false
-
-                  }
                   div(class="col-sm-6 padding-res")
                     input(id="date" class="form-control" name="from" placeholder="Arrivée" required type="text" onfocus="(this.type='date')" onblur="(this.type='text')" min="")
                   div(class="col-sm-6 padding-res")
