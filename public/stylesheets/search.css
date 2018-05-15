@@ -209,11 +209,15 @@
 .recavance2 img {
   display: inline;
   height: 30px;
+  box-shadow: 2px 2px 8px black;
+  border-radius: 25%;
+  background-color: black;
 }
 
 .recavance2 span {
   line-height: 30px;
   font-weight: bold;
+  text-shadow: 2px 2px 8px black;
 }
 
 .pagcolor {

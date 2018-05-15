@@ -7,9 +7,9 @@
 }
 
 body {
-    background-image: url("../images/test.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: url("../images/test.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover; /* version standardisée */
 }
 
 .jumbotron-custom {
