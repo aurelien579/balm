@@ -1,7 +1,9 @@
 .titre-maison {
   padding-top: 1%;
 }
-
+.gris{
+  color: #E8EEEE;
+}
 .carousel {
   position: relative;;
 }
@@ -30,7 +32,7 @@
     list-style: none;
   }
 .container{
-    background-color:#f2ffe6;
+    background-color:#B2DCDC;
     padding-top: 10px;
 
     padding-bottom: 10px;
@@ -49,7 +51,7 @@
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: : 1px;
-  background-color:#e6ffcc;
+  background-color:#8BCBCB;
   border-radius: 10px;
 }
 .etoile{
@@ -69,7 +71,7 @@
 
   height: 100%;
   width: 100%;
-  background-color: #D5F9D2;
+  background-color: #64B9B9;
   border-radius: 10px;
   margin-left: auto;
   margin-right: auto;
@@ -81,4 +83,14 @@
 }
 .padding-res{
   padding: 3%;
+}
+.body {
+  max-width: 30em;
+  margin: 1em auto;
+  text-align: center;
+}
+
+.demo {
+  text-align: left;
+
 }

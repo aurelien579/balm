@@ -1,0 +1,28 @@
+html
+  block header
+    link(rel="stylesheet",href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css")
+    link(href="css/bootstrap-datepicker3.css",rel="stylesheet")
+  block calendar
+    .container
+      input( class="form-control",type ="text",placeholder="Arrivée")
+      script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js")
+      script(src="https://cdnjs.cloudflare.com/ajax/libds/popper.js/1.14.3/umd/popper.min.js")
+      script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/jas/bootstrap.min.js")
+      script(src="js/bootstrap-datepicker.js")
+      script.
+        var availableDates =["3-9-2018","14-3-2018","15-3-2018"];
+        function unavailable(date){
+          var dmy = date.getDate() + "-" + (date.getMonth() +1)+ "-"+date.getFullYear();
+          if ( $.inArray(dmy,unavailableDates)==-1){
+            return true;
+          } else {
+            return false;
+          }
+        }
+        $(function() {
+          $("input").datepicker({
+            dateFormat: 'dd MM yy',
+            beforeShowDay: unavailable
+          });
+          $("input").val('Arrivée');
+        });

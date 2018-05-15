@@ -1,91 +1,91 @@
 extends layout
 block header
-    link(rel='stylesheet', href='/stylesheets/goods.css')
+  link(rel='stylesheet', href='/stylesheets/goods.css')
+  link(rel='stylesheet', href='/stylesheets/calendrier.css')
+  script(src='/js/calendrier.js')
 
 block content
-    .container
-      if offer
-        if images.length>0
-          div(id="carouselExampleIndicators" class="carousel" data-ride="carousel" data-interval ="5000")
-              ul(class="carousel-indicators")
-                  li(data-target="#carouselExampleIndicators" data-slide-to="0" class="active")
-                    - for (var x = 1; x < images.length; x++)
-                      li(data-target="#carouselExampleIndicators"  data-slide-to= "x")
+  .container
+    if offer
+      if images.length>0
+        div(id="carouselExampleIndicators" class="carousel" data-ride="carousel" data-interval ="5000")
+          ul(class="carousel-indicators")
+            li(data-target="#carouselExampleIndicators" data-slide-to="0" class="active")
+              - for (var x = 1; x < images.length; x++)
+                li(data-target="#carouselExampleIndicators"  data-slide-to= "x")
 
-              div(class="carousel-inner")
-                  div(class="carousel-item active")
-                      img(class="d-block w-100 " src=images[0].path)
+          div(class="carousel-inner")
+            div(class="carousel-item active")
+              img(class="d-block w-100 " src=images[0].path)
 
-                  - for (var x = 1; x < images.length; x++)
-                    div(class="carousel-item")
-                        img(class="d-block w-100 "  src=images[x].path)
+            - for (var x = 1; x < images.length; x++)
+              div(class="carousel-item")
+                img(class="d-block w-100 "  src=images[x].path)
 
-              a(class="carousel-control-prev"  href="#carouselExampleIndicators" role="button" data-slide="prev")
-                  span(class="carousel-control-prev-icon" aria-hidden="true")
-                  span(class="sr-only">Previous)
+          a(class="carousel-control-prev"  href="#carouselExampleIndicators" role="button" data-slide="prev")
+            span(class="carousel-control-prev-icon" aria-hidden="true")
+            span(class="sr-only">Previous)
 
-              a(class="carousel-control-next" href="#carouselExampleIndicators" role="button"  data-slide="next")
-                  span(class="carousel-control-next-icon"  aria-hidden="true")
-                  span(class="sr-only">Next)
-        else
-          p Il n'y a pas d'images pour cette offre
-
-
-        div(class = "page ")
-          h1(class="display-4 titre-maison") #{offer.title}
-
-          div(class="row")
-            div(class="col-sm")
-              h4(class="text-justify")  Lieux : #{offer.city}
-              h4(class = "text-justify inline" ) #{offer.price} €
-              h6(small class="text-muted inline font-italic")       .par nuit
-              h1()
-              if comments
-                - var somme =0;
-                -var nbNote =0;
-                -var moyenne =0;
-                each row in comments
-                  - somme+= row.rating;
-                  - nbNote ++;
-                - moyenne = somme/nbNote;
-                - for (var x = 0; x < moyenne; x++)
-                  h1(class = "display-4 inline etoile") &#9733
-              else
-                h1() Pas de notes disponibles
-
-              h4(class="text-justify") Description
-              p(class="text-justify") #{offer.description}
-
-
-            div(class="col-sm-5 cadre reservation")
-              form(action='/reservation/new' method='get')
-                div(class = "row-res")
-                  h1(class = "lead") Demande de réservation :
-                div(class="row")
-                  div(class="col-sm-6 padding-res")
-                    input(id="date" class="form-control" name="from" placeholder="Arrivée" required type="text" onfocus="(this.type='date')" onblur="(this.type='text')" min="")
-                  div(class="col-sm-6 padding-res")
-                    input(id="date" class="form-control" name="to" placeholder="Départ" required type="text" onfocus="(this.type='date')" onblur="(this.type='text')" min="" onclick="setminvalue()")
-                div(class="row")
-                  div(class="col-sm padding-res")
-                    label(for="" class="sr-only") Nombre de personne
-                    input(class="form-control" placeholder="Nombre de personne" name="numberpers" required )
-                  div(class="col-sm padding-res")
-                    button(type="submit" class="btn btn-outline-success form-control") Réserver
-                input(type="hidden" name="id" value=id)
-
-          div(class = "commentaires  border-0")
-            h4(class="text-justify") Commentaires
-            if comments
-              each row in comments
-                h4(small class="text-muted inline font-italic") #{row.firstName} :
-                - for (var x = 0; x < row.rating; x++)
-                  h1(class = "inline etoile") &#9733
-                p(class="text-justify") #{row.content}
-
-            else
-              p Il n'y a pas encore de commentaires disponibles pour cette offre
-
-
+          a(class="carousel-control-next" href="#carouselExampleIndicators" role="button"  data-slide="next")
+            span(class="carousel-control-next-icon"  aria-hidden="true")
+            span(class="sr-only">Next)
       else
-        p Cette maison n'existe pas encore...
+        p Il n'y a pas d'images pour cette offre
+
+
+      div(class = "page ")
+        h1(class="display-4 titre-maison") #{offer.title}
+
+        div(class="row")
+          div(class="col-sm")
+            h4(class="text-justify")  Lieux : #{offer.city}
+            h4(class = "text-justify inline" ) #{offer.price} €
+            h6(small class="text-muted inline font-italic gris ")       .par nuit
+            h1()
+            if comments
+              - var somme =0;
+              -var nbNote =0;
+              -var moyenne =0;
+              each row in comments
+                - somme+= row.rating;
+                - nbNote ++;
+              - moyenne = somme/nbNote;
+              - for (var x = 0; x < moyenne; x++)
+                h1(class = "display-4 inline etoile") &#9733
+            else
+              h1() Pas de notes disponibles
+
+            h4(class="text-justify") Description
+            p(class="text-justify") #{offer.description}
+
+
+          div(class="col-sm-5 cadre reservation")
+            form(action='/reservation/new' method='get')
+              div(class = "row-res")
+                h1(class = "lead") Demande de réservation :
+              div(class="row")
+                    include calendrier.pug
+
+              div(class="row")
+                div(class="col-sm padding-res")
+                  label(for="" class="sr-only") Nombre de personne
+                  input(class="form-control" placeholder="Nombre de personne" name="numberpers" required )
+                div(class="col-sm padding-res")
+                  button(type="submit" class="btn btn-info form-control") Réserver
+              input(type="hidden" name="id" value=id)
+
+        div(class = "commentaires  border-0")
+          h4(class="text-justify") Commentaires
+          if comments
+            each row in comments
+              h4(small class="text-muted inline font-italic") #{row.firstName} :
+              - for (var x = 0; x < row.rating; x++)
+                h1(class = "inline etoile") &#9733
+              p(class="text-justify") #{row.content}
+
+          else
+            p Il n'y a pas encore de commentaires disponibles pour cette offre
+
+
+    else
+      p Cette maison n'existe pas encore...
