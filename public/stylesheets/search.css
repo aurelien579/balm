@@ -31,35 +31,27 @@
 .hover-style {
     animation-name: brighten;
     animation-duration: 0.4s;
+    filter: brightness(1);
+    -webkit-filter: brightness(1);
 }
 
 .hover-style:hover {
     animation-name: darken;
     animation-duration: 0.4s;
+    filter: brightness(0.8);
+    -webkit-filter: brightness(0.8);
 }
 
 @keyframes darken {
-    0%   {
+    0% {
         filter: brightness(1);
         -webkit-filter: brightness(1);
     }
-    100%  {
+    100% {
         filter: brightness(0.8);
         -webkit-filter: brightness(0.8);
     }
 }
-
-@keyframes brighten {
-    0%   {
-        filter: brightness(0.8);
-        -webkit-filter: brightness(0.8);
-    }
-    100%  {
-        filter: brightness(1);
-        -webkit-filter: brightness(1);
-    }
-}
-
 
 .contour {
   /*border: 2px solid red;*/

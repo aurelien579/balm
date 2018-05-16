@@ -1,21 +1,25 @@
 .titre-maison {
-  padding-top: 1%;
+    padding-top: 1%;
 }
-.gris{
-  color: #E8EEEE;
+
+.gris {
+    color: #E8EEEE;
 }
+
 .carousel {
-  position: relative;;
+    position: relative;
+    ;
 }
 
 .carousel-inner {
-      position: relative;
-      max-height: 500px;
+    position: relative;
+    max-height: 500px;
 }
 
-.page{
-  padding-bottom: 20px;
+.page {
+    padding-bottom: 20px;
 }
+
 .carousel-indicators {
     position: absolute;
     right: 0;
@@ -30,33 +34,36 @@
     margin-right: 15%;
     margin-left: 15%;
     list-style: none;
-  }
-.container{
-    background-color:#B2DCDC;
-    padding-top: 10px;
+}
 
+.container {
+    background-color: #B2DCDC;
+    padding-top: 10px;
     padding-bottom: 10px;
 }
 
 .inline {
-  display: inline;
+    display: inline;
 }
-.button{
-  margin: 5%;
+
+.button {
+    margin: 5%;
 }
 
 .commentaires {
-  margin-top: 5%;
-  padding-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: : 1px;
-  background-color:#8BCBCB;
-  border-radius: 10px;
+    margin-top: 5%;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: : 1px;
+    background-color: #8BCBCB;
+    border-radius: 10px;
 }
-.etoile{
-  color: #ffc107;
+
+.etoile {
+    color: #ffc107;
 }
+
 .form-control-lg {
     padding-top: 0.2rem;
     padding-right: 0.5rem;
@@ -67,30 +74,30 @@
     border-radius: .3rem;
 }
 
-.reservation{
+.reservation {
+    height: 100%;
+    width: 100%;
+    background-color: #64B9B9;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2%;
+}
 
-  height: 100%;
-  width: 100%;
-  background-color: #64B9B9;
-  border-radius: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 2%;
+.cadre {
+    margin-right: 15px;
+}
 
+.padding-res {
+    padding: 3%;
 }
-.cadre{
-  margin-right: 15px;
-}
-.padding-res{
-  padding: 3%;
-}
+
 .body {
-  max-width: 30em;
-  margin: 1em auto;
-  text-align: center;
+    max-width: 30em;
+    margin: 1em auto;
+    text-align: center;
 }
 
 .demo {
-  text-align: left;
-
+    text-align: left;
 }
