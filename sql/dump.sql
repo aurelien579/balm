@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1    Database: Balm
 -- ------------------------------------------------------
 -- Server version	5.7.22-0ubuntu18.04.1
-Use Balm;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -30,7 +30,7 @@ CREATE TABLE `Availability` (
   PRIMARY KEY (`id`),
   KEY `fk_Availability_1_idx` (`offerId`),
   CONSTRAINT `fk_Availability_1` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `Availability` (
 
 LOCK TABLES `Availability` WRITE;
 /*!40000 ALTER TABLE `Availability` DISABLE KEYS */;
-INSERT INTO `Availability` VALUES (1,2,'2018-05-09','2018-05-20'),(2,3,'2019-05-09','2019-05-20'),(3,12,'2018-05-18','2018-05-30');
+INSERT INTO `Availability` VALUES (1,2,'2018-05-09','2018-05-20'),(2,3,'2019-05-09','2019-05-20'),(3,12,'2018-05-18','2018-05-30'),(4,13,'2018-05-18','2018-05-30'),(5,14,'2018-05-18','2018-05-30'),(6,15,'2018-05-18','2018-05-30'),(7,16,'2018-05-18','2018-05-30'),(8,17,'2018-05-18','2018-05-30'),(9,19,'2018-05-18','2018-05-30'),(10,20,'2018-05-18','2018-05-30'),(11,25,'2018-05-18','2018-05-30'),(12,26,'2018-05-18','2018-05-30'),(13,27,'2018-05-18','2018-05-30');
 /*!40000 ALTER TABLE `Availability` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +144,7 @@ CREATE TABLE `Image` (
   PRIMARY KEY (`id`),
   KEY `OfferIdFK_idx` (`offerId`),
   CONSTRAINT `OfferIdFK` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +153,7 @@ CREATE TABLE `Image` (
 
 LOCK TABLES `Image` WRITE;
 /*!40000 ALTER TABLE `Image` DISABLE KEYS */;
-INSERT INTO `Image` VALUES (1,1,'/images/offers/1-1.jpg'),(2,1,'/images/offers/1-2.jpg');
+INSERT INTO `Image` VALUES (1,1,'/images/offers/1-1.jpg'),(2,1,'/images/offers/1-2.jpg'),(3,25,'/images/offers/25-1NaNhtm'),(4,26,'images/offers/26-1.htm'),(5,27,'public/images/offers/27-1.htm');
 /*!40000 ALTER TABLE `Image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +178,7 @@ CREATE TABLE `Offer` (
   PRIMARY KEY (`id`),
   KEY `fk_Offer_1_idx` (`userId`),
   CONSTRAINT `UserIdKey` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,7 +187,7 @@ CREATE TABLE `Offer` (
 
 LOCK TABLES `Offer` WRITE;
 /*!40000 ALTER TABLE `Offer` DISABLE KEYS */;
-INSERT INTO `Offer` VALUES (1,1,69000,'Maison en banlieue Lyonnaise','Très belle maison à proximité de Lyon. Piscine, terrasse et 3 chambres pouvant accueillir jusqu\'à 6 personnes ! proximité avec un arret de bus pour se rendre dans le centre ville.','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein'),(2,1,69000,'Maison de Campagne','Belle vue avec piscine','159','Lyon','Rhone','Rhone-Alpes','19 Avenue Albert Einstein'),(3,1,69000,'Maison en centre ville','Beaucoup de pollution','185','Lyon','Rhone','Rhone-Alpes','15 rue Barthélémy'),(4,2,69000,'Appartement','Cool man !','58','Lyon','Rhone','Rhone-Alpes','850 boulevard lafayette'),(5,3,69800,'Prairie','Pleins de champs','800','Villeurbanne','Rhone','Rhone-Alpes','8 rue des champs'),(9,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(10,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(11,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(12,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi');
+INSERT INTO `Offer` VALUES (1,1,69000,'Maison en banlieue Lyonnaise','Très belle maison à proximité de Lyon. Piscine, terrasse et 3 chambres pouvant accueillir jusqu\'à 6 personnes ! proximité avec un arret de bus pour se rendre dans le centre ville.','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein'),(2,1,69000,'Maison de Campagne','Belle vue avec piscine','159','Lyon','Rhone','Rhone-Alpes','19 Avenue Albert Einstein'),(3,1,69000,'Maison en centre ville','Beaucoup de pollution','185','Lyon','Rhone','Rhone-Alpes','15 rue Barthélémy'),(4,2,69000,'Appartement','Cool man !','58','Lyon','Rhone','Rhone-Alpes','850 boulevard lafayette'),(5,3,69800,'Prairie','Pleins de champs','800','Villeurbanne','Rhone','Rhone-Alpes','8 rue des champs'),(9,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(10,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(11,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(12,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(13,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(14,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(15,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(16,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(17,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(18,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(19,1,69000,'Nouvelle maison 3','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(20,1,69000,'Nouvelle maison 4','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(21,1,69000,'Nouvelle maison 5','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(22,1,69000,'Nouvelle maison 5','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(23,1,69000,'Nouvelle maison 5','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(24,1,69000,'Nouvelle maison 5','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(25,1,69000,'Nouvelle maison 5','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(26,1,69000,'Nouvelle maison 6','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(27,1,69000,'Nouvelle maison 7','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi');
 /*!40000 ALTER TABLE `Offer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,7 +243,7 @@ CREATE TABLE `Reservation` (
 
 LOCK TABLES `Reservation` WRITE;
 /*!40000 ALTER TABLE `Reservation` DISABLE KEYS */;
-INSERT INTO `Reservation` VALUES (1,2,2,'2018-05-02','2018-06-02',0),(2,5,1,'2018-01-31','2018-12-01',0);
+INSERT INTO `Reservation` VALUES (1,2,2,'2018-05-02','2018-06-02',1),(2,5,1,'2018-01-31','2018-12-01',0);
 /*!40000 ALTER TABLE `Reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,11 +259,11 @@ CREATE TABLE `User` (
   `firstName` varchar(45) NOT NULL,
   `lastName` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `imagePath` varchar(45) DEFAULT '/images/users/default.png',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,7 +272,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'Aurélien','Martin','aurelien.martin@insa-lyon.fr','toto','/images/users/default.png'),(2,'Camille','Moriot','camille.moriot@insa-lyon.fr','toto','/images/users/default.png'),(3,'Alexandre','Sabathier','alexandre.sabathier@insa-lyon.fr','toto','/images/users/2.jpg'),(4,'Mael','Brouard','mael.brouard@insa-lyon.fr','toto','/images/users/default.png'),(5,'Test','Test','test@test.co','test','/images/users/default.png'),(6,'Test','Test','test@tttt.c','tttt','/images/users/default.png');
+INSERT INTO `User` VALUES (1,'a','a','a@a.a','$2b$10$7/WbUOmfjMChXW11BztOyOMOD97wU/83MHxcoooxSdrVVog1z82OW','/images/users/default.png'),(2,'Camille','Moriot','camille.moriot@insa-lyon.fr','toto','/images/users/default.png'),(3,'Alexandre','Sabathier','alexandre.sabathier@insa-lyon.fr','toto','/images/users/2.jpg'),(4,'Mael','Brouard','mael.brouard@insa-lyon.fr','toto','/images/users/default.png'),(5,'Test','Test','test@test.co','test','/images/users/default.png'),(6,'Test','Test','test@tttt.c','tttt','/images/users/default.png'),(7,'aaa','aaa','test@test.c','$2b$10$KCQ1lOssvoBm5FIc9cC3meCgBp64cbbRfSSK8bwjNi6hhwufKdC3O','/images/users/default.png'),(8,'Aurélien','Martin','aurelien.martin@insa-lyon.fr','toto','/images/users/default.png');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -285,4 +285,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-11 12:28:02
+-- Dump completed on 2018-05-16 14:40:07
