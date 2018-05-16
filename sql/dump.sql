@@ -1,9 +1,9 @@
 -- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: Balm
+-- Host: localhost    Database: Balm
 -- ------------------------------------------------------
--- Server version	5.7.22-0ubuntu18.04.1
-Use Balm;
+-- Server version	5.7.22-0ubuntu0.17.10.1
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -26,11 +26,11 @@ CREATE TABLE `Availability` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `offerId` int(11) NOT NULL,
   `start` date NOT NULL,
-  `end` varchar(45) NOT NULL,
+  `end` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Availability_1_idx` (`offerId`),
   CONSTRAINT `fk_Availability_1` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `Availability` (
 
 LOCK TABLES `Availability` WRITE;
 /*!40000 ALTER TABLE `Availability` DISABLE KEYS */;
-INSERT INTO `Availability` VALUES (1,2,'2018-05-09','2018-05-20'),(2,3,'2019-05-09','2019-05-20'),(3,12,'2018-05-18','2018-05-30');
+INSERT INTO `Availability` VALUES (1,2,'2018-05-09','2018-05-20'),(2,3,'2019-05-09','2019-05-20'),(3,12,'2018-05-18','2018-05-30'),(4,1,'2018-05-09','2019-05-20'),(5,4,'2018-05-09','2019-05-20'),(6,9,'2018-05-09','2019-05-20'),(7,10,'2018-05-09','2019-05-20'),(8,11,'2018-05-09','2019-05-20');
 /*!40000 ALTER TABLE `Availability` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,8 +173,12 @@ CREATE TABLE `Offer` (
   `price` varchar(45) NOT NULL,
   `city` varchar(45) NOT NULL,
   `department` varchar(45) NOT NULL,
-  `region` varchar(45) DEFAULT NULL,
+  `region` varchar(45) NOT NULL,
   `address` varchar(45) NOT NULL,
+  `nbpeople` varchar(45) NOT NULL,
+  `pool` tinyint(1) NOT NULL,
+  `garden` tinyint(1) NOT NULL,
+  `citycenter` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Offer_1_idx` (`userId`),
   CONSTRAINT `UserIdKey` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -187,7 +191,7 @@ CREATE TABLE `Offer` (
 
 LOCK TABLES `Offer` WRITE;
 /*!40000 ALTER TABLE `Offer` DISABLE KEYS */;
-INSERT INTO `Offer` VALUES (1,1,69000,'Maison en banlieue Lyonnaise','Très belle maison à proximité de Lyon. Piscine, terrasse et 3 chambres pouvant accueillir jusqu\'à 6 personnes ! proximité avec un arret de bus pour se rendre dans le centre ville.','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein'),(2,1,69000,'Maison de Campagne','Belle vue avec piscine','159','Lyon','Rhone','Rhone-Alpes','19 Avenue Albert Einstein'),(3,1,69000,'Maison en centre ville','Beaucoup de pollution','185','Lyon','Rhone','Rhone-Alpes','15 rue Barthélémy'),(4,2,69000,'Appartement','Cool man !','58','Lyon','Rhone','Rhone-Alpes','850 boulevard lafayette'),(5,3,69800,'Prairie','Pleins de champs','800','Villeurbanne','Rhone','Rhone-Alpes','8 rue des champs'),(9,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(10,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(11,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi'),(12,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone',NULL,'Chez moi');
+INSERT INTO `Offer` VALUES (1,1,69000,'Maison en banlieue Lyonnaise','Très belle maison à proximité de Lyon. Piscine, terrasse et 3 chambres pouvant accueillir jusqu\'à 6 personnes ! proximité avec un arret de bus pour se rendre dans le centre ville.','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein','5',0,0,1),(2,1,69000,'Maison de Campagne','Belle vue avec piscine','159','Lyon','Rhone','Rhone-Alpes','19 Avenue Albert Einstein','4',1,1,0),(3,1,69000,'Maison en centre ville','Beaucoup de pollution','185','Lyon','Rhone','Rhone-Alpes','15 rue Barthélémy','4',1,1,1),(4,2,69000,'Appartement','Cool man !','58','Lyon','Rhone','Rhone-Alpes','850 boulevard lafayette','4',0,0,1),(5,3,69800,'Prairie','Pleins de champs','800','Villeurbanne','Rhone','Rhone-Alpes','8 rue des champs','5',1,1,0),(9,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone','Rhone-Alpes','Chez moi','2',0,0,1),(10,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone','Rhone-Alpes','Chez moi','2',1,0,0),(11,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone','Rhone-Alpes','Chez moi','3',0,1,1),(12,1,69000,'Nouvelle maison 2','La maison la plus belle','10000','Lyon','Rhone','Rhone-Alpes','Chez moi','4',1,1,1);
 /*!40000 ALTER TABLE `Offer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +263,7 @@ CREATE TABLE `User` (
   `firstName` varchar(45) NOT NULL,
   `lastName` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `imagePath` varchar(45) DEFAULT '/images/users/default.png',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
@@ -285,4 +289,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-11 12:28:02
+-- Dump completed on 2018-05-16 15:06:39
