@@ -15,7 +15,7 @@ h5.card-title Mes Offres
             .col-lg-9
               p #{offer.description}
               .text-right
-                a.btn.btn-primary.mr-2(href="/goods/update/" + offer.id) Modifier
+                a.btn.btn-primary.mr-2(href="/goods/edit/" + offer.id) Modifier
                 a.btn.btn-danger.mr-2(href="/goods/delete/" + offer.id) Supprimer
   else
     p Vous n'avez pas d'offres actuellement

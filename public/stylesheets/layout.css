@@ -12,6 +12,8 @@ body {
     /* pour anciens Chrome et Safari */
     background-size: cover;
     /* version standardisée */
+
+    margin-bottom: 30px;
 }
 
 .jumbotron-custom {
