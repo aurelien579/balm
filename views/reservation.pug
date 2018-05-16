@@ -8,11 +8,12 @@ block content
     if successMessage
       div(class='alert alert-success' role='alert') #{successMessage}
     .container
-      div(class="row")
-        h4(class="display-4") Récapitulatif de votre demande de réservation
-      div(class="row")
-        h1() Arrivée le : #{from}
-      div(class="row")
-        h1() Départ le : #{to}
-      div(class="row")
-        h1() Nombre de personnes voyageant : #{numberpers}
+      .color
+        div(class="row")
+          h4(class="display-4") Récapitulatif de votre demande de réservation
+        div(class="row")
+          h1() Arrivée le : #{from}
+        div(class="row")
+          h1() Départ le : #{to}
+        div(class="row")
+          h1() Nombre de personnes voyageant : #{numberpers}

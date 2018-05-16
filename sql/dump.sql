@@ -3,7 +3,7 @@
 -- Host: localhost    Database: Balm
 -- ------------------------------------------------------
 -- Server version	5.7.22-0ubuntu0.17.10.1
-
+Use Balm;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;

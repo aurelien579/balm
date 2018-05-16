@@ -9,18 +9,26 @@ const reservationModel = require('../models/reservation');
 const app = require('../app');
 const utils = require('./utils');
 
-router.get('/new', function(req, res, next) {
-    let from = req.query.from;
-    let to = req.query.to;
-    let numberpers = req.query.numberpers;
-    let id = req.query.id;
+function getDate(date) {
+    var jour = Date.getDate(date);
+    var mois = Date.getMonth(date);
+    var année = Date.getFullYear(date);
+    console.log(datesql);
+}
 
+
+
+router.post('/new', utils.mustBeConnectedToBook, function(req, res, next) {
+    let from = new Date(req.body.from);
+    let to = new Date(req.body.to);
+    let numberpers = req.body.numberpers;
+    let id = req.body.id;
     reservationModel.createReservation(id, req.session.user.id, from, to, 0)
         .then((result) => {
             res.render('reservation', {
                 successMessage: "Votre demande de reservation a bien été prise en compte",
-                from: from,
-                to: to,
+                from: new Date(req.body.from),
+                to: new Date(req.body.to),
                 numberpers: numberpers,
                 id: id
             });

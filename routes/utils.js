@@ -9,7 +9,7 @@ function mustBeConnected(req, res, next) {
 
 function mustBeConnectedToBook(req, res, next) {
     if (!req.session.user) {
-        res.redirect('/user/login?prev=/goods/' + req.query.id);
+        res.redirect('/user/login?prev=/goods/' + req.body.id);
     } else {
         next();
     }
