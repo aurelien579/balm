@@ -27,7 +27,7 @@ function setupDatepicker(elem) {
 
     elem.datepicker().on('changeDate', function(e) {
         if (e.dates.length > 0)
-            updateDateToSend(elem, date.toString());
+            updateDateToSend(elem, e.date);
         else
             updateDateToSend(elem, "");
     });

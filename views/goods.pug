@@ -1,8 +1,6 @@
 extends layout
 block header
   link(rel='stylesheet', href='/stylesheets/goods.css')
-  link(rel='stylesheet', href='/stylesheets/calendrier.css')
-  script(src='/js/calendrier.js')
 
 block content
   .container
@@ -60,7 +58,7 @@ block content
 
 
           div(class="col-sm-5 cadre reservation")
-            form(action='/reservation/new' method='get')
+            form(action='/reservation/new' method='post')
               div(class = "row-res")
                 h1(class = "lead") Demande de réservation :
               div(class="row")
@@ -77,8 +75,9 @@ block content
                   label(for="" class="sr-only") Nombre de personne
                   input(class="form-control" placeholder="Nombre de personne" name="numberpers" required )
                 div(class="col-sm padding-res")
+                  input(type="hidden" name="id" value=id)
                   button(type="submit" class="btn btn-info form-control") Réserver
-              input(type="hidden" name="id" value=id)
+
 
         div(class = "commentaires  border-0")
           h4(class="text-justify") Commentaires
