@@ -1,26 +1,4 @@
 /* *** Résultat ***/
-.titre {
-  margin: 0 auto;
-  width: 100%;
-  text-align: center;
-}
-
-.titre1 {
-  color: white;
-  border-radius: 5px;
-  background-color: none;
-  text-shadow: 2px 2px 8px black;
-  display: inline-flex;
-  text-align: center;
-  /*margin: 10px;*/
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.titre1 h1 {
-  font-size: 500%;
-  font-weight: bold;
-}
 
 .nbres1 {
   margin: 0 auto;
@@ -45,6 +23,43 @@
   font-weight: bold;
 }
 
+.remove-border {
+    width: 101%;
+    margin: -1px;
+}
+
+.hover-style {
+    animation-name: brighten;
+    animation-duration: 0.4s;
+}
+
+.hover-style:hover {
+    animation-name: darken;
+    animation-duration: 0.4s;
+}
+
+@keyframes darken {
+    0%   {
+        filter: brightness(1);
+        -webkit-filter: brightness(1);
+    }
+    100%  {
+        filter: brightness(0.8);
+        -webkit-filter: brightness(0.8);
+    }
+}
+
+@keyframes brighten {
+    0%   {
+        filter: brightness(0.8);
+        -webkit-filter: brightness(0.8);
+    }
+    100%  {
+        filter: brightness(1);
+        -webkit-filter: brightness(1);
+    }
+}
+
 
 .contour {
   /*border: 2px solid red;*/
@@ -67,14 +82,14 @@
   margin: 10px;
   -webkit-transform: scale(1);
   transform: scale(1);
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
+  -webkit-transition: .4s ease-in-out;
+  transition: .4s ease-in-out;
 }
 
 .square:hover {
   z-index: 1;
-  webkit-transform: scale(1.02);
-  transform: scale(1.02);
+  webkit-transform: scale(1.04);
+  transform: scale(1.04);
   background-color: #f3f5ef;
   text-decoration: none;
 }

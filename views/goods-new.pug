@@ -2,11 +2,11 @@ extends layout
 
 block content
   .container
-    .jumbotron.jumbotron-custom
-      h1.text-center Nouvelle annonce
+    .jumbotron.jumbotron-transparent
+      h1.titre Nouvelle annonce
     br
     
-    .card
+    .card.box-shadow
       .card-body
         if errors
           for err in errors

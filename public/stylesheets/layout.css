@@ -28,5 +28,24 @@ body {
 }
 
 .box-shadow {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+.header {
+  color: white;
+  border-radius: 5px;
+  background-color: none;
+  display: inline-flex;
+  text-align: center;
+  /*margin: 10px;*/
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.titre {
+    text-align: center;
+
+    font-size: 3em;
+    font-weight: bold;
+    text-shadow: 3px 3px 6px black;
 }

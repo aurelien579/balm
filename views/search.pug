@@ -12,9 +12,7 @@ block content
         div(class="zres2") Nouvelle Recherche
     if house.total_lgt > 0
       div(class="jumbotron jumbotron-transparent")
-        div(class="titre")
-          div(class="titre1")
-            h1 #{search.text}
+        h1.titre #{search.text}
         div(class="nbres1")
           div(class="nbres2")
             if house.total_lgt > 1
@@ -56,8 +54,8 @@ block content
                 if !elem
                   div(class="card inutile")
                 else
-                  a(class="card square" href="goods/" + elem.id)
-                    img(class="card-img-top" src="images/maison_search.png" alt="Card image cap")
+                  a(class="hover-style box-shadow card square" href="goods/" + elem.id)
+                    img(class="card-img-top remove-border " src="images/maison_search.png" alt="Card image cap")
                     div(class="card-body")
                       p(class="Offer_Title")   #{elem.title}
                       p(class="Offer_Price")   #{elem.price}€
