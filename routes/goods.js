@@ -70,11 +70,12 @@ router.get('/new', utils.mustBeConnected, async function(req, res, next) {
     res.render('goods-new');
 });
 
-router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, res, next) {
+router.post('/new', utils.mustBeConnected, /*goodsValidators,*/ async function(req, res, next) {
     const errors = validationResult(req);
     const mapped = errors.mapped();
     const from = new Date(req.body.from);
     const to = new Date(req.body.to);
+    console.log(req.body.from);
 
     if (from > to || from < Date.now()) {
         mapped.dates = {
@@ -125,42 +126,28 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
         });
 });
 
-router.get('/:id', function(req, res, next) {
-    //  var sea = req.params.searchText;
-    let id = req.params.id;
-    let offer;
-    let comments;
-    let images;
-    let availability;
+router.get('/:id', async function(req, res, next) {
+    try {
+        let id = req.params.id;
+        let offer = (await commentModel.getByOfferId(id))[0];
+        let comments = await commentModel.getByOfferId(id);
+        let images = await imageModel.getByOfferId(id);
+        let avail = await availabilityModel.getAvailabilityByOfferId(id);
 
-    goodsModel.getById(id)
-        .then((_offers) => {
-            offer = _offers[0];
-            return commentModel.getByOfferId(id);
-        })
-        .then((_comments) => {
-            comments = _comments;
-            return imageModel.getByOfferId(id);
-        })
-        .then((_images) => {
-            images = _images;
-            return availabilityModel.getAvailabilityByOfferId(id);
-        })
-        .then((availability) => {
-            res.render('goods', {
-                offer: offer,
-                comments: comments,
-                images: images,
-                id: id,
-                availability: availability
-            });
-        })
-        .catch((err) => {
-            res.render('error', {
-                error: err
-            });
+        console.log(avail);
+
+        res.render('goods', {
+            offer: offer,
+            comments: comments,
+            images: images,
+            id: id,
+            avail: avail
         });
-
+    } catch (ex) {
+        res.render('error', {
+            error: ex
+        })
+    }
 });
 
 router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {

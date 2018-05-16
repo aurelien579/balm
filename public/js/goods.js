@@ -1,8 +1,14 @@
 function updateDateToSend(elem, value) {
     let alt = $("#" + elem.attr('id') + "Sent");
     alt.val(value);
+}
 
-    console.log("update!");
+function formatDate(date) {
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+
+    return day + '/' + (monthIndex + 1) + '/' + year;
 }
 
 function setupDatepicker(elem) {
@@ -58,8 +64,69 @@ function setupDatepicker(elem) {
     }
 }
 
+function dateAvailable(date, avails) {
+    for (let i = 0; i < avails.length; i++) {
+        let start = new Date(avails[i].start);
+        let end = new Date(avails[i].end);
+
+        if (date >= start && date <= end) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function setAvailableDates(elem, dates) {
+    let min = new Date(dates[0].start);
+    let max = new Date(dates[0].end);
+    let unavail = [];
+
+    for (let i = 1; i < dates.length; i++) {
+        let start = new Date(dates[i].start);
+        let end = new Date(dates[i].end);
+
+        if (start < min) min = start;
+        if (end > max) max = end;
+    }
+
+    setStartDate(elem, min);
+    setEndDate(elem, max);
+
+    for (let currentDate = new Date(min); currentDate < max; currentDate.setDate(currentDate.getDate() + 1)) {
+        if (!dateAvailable(currentDate, avail)) {
+            unavail.push(formatDate(currentDate));
+        }
+    }
+
+    elem.datepicker('setDatesDisabled', unavail);
+}
+
+function setStartDate(elem, date) {
+    let actualStart = elem.datepicker('getStartDate');
+    if (date > actualStart) {
+        elem.datepicker('setStartDate', date);
+        return true;
+    }
+
+    return false;
+}
+
+function setEndDate(elem, date) {
+    let actualEnd = elem.datepicker('getEndDate');
+    if (date < actualEnd) {
+        elem.datepicker('setEndDate', date);
+        return true;
+    }
+
+    return false;
+}
+
 $(function() {
     $('.datepicker').each((i, elem) => {
         setupDatepicker($(elem));
+        if (avail !== undefined) {
+            setAvailableDates($(elem), avail);
+        }
     });
 });
