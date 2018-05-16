@@ -10,7 +10,6 @@ async function cityExists(city) {
 
 async function departmentExists(department) {
     let result = await db.sqlQuery(sqlGetDepartment, [department]);
-    console.log(result);
     return result[0].count > 0;
 }
 

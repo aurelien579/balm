@@ -125,9 +125,6 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
         });
 });
 
-
-
-
 router.get('/:id', function(req, res, next) {
     //  var sea = req.params.searchText;
     let id = req.params.id;
@@ -183,8 +180,6 @@ router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {
             }];
         }
 
-        console.log(good);
-
         return res.render('goods-edit', {
             offer: good
         });
@@ -196,7 +191,17 @@ router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {
 });
 
 router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(req, res, next) {
+    try {
+        const errors = validationResult(req);
+        const mapped = errors.mapped();
 
+        console.log(errors, mapped);
+        console.log(new Date(req.body.from));
+    } catch (ex) {
+        console.log(ex);
+    }
+
+    next();
 });
 
 router.get('/delete/:id', utils.mustBeConnected, function(req, res, next) {

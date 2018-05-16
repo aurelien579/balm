@@ -3,10 +3,9 @@ extends layout
 block content
   .container
     .jumbotron.jumbotron-transparent
-      h1.titre Nouvelle annonce
-    br
-    
-    
+      h1.titre Modification de votre annonce
+    br  
+
     .card.box-shadow
       .card-body
         if errors
@@ -15,7 +14,7 @@ block content
         if successMessage
           .alert.alert-success #{successMessage}
         
-        form(action='/edit/' + offer.id method='post' enctype="multipart/form-data")
+        form(action='/goods/edit/' + offer.id method='post' enctype="multipart/form-data")
           .form-group.row
             label.col-lg-3.col-form-label Titre de l'annonce
             .col-lg-9
@@ -51,11 +50,13 @@ block content
             label.col-lg-3.col-form-label Disponible du
             .col-lg-4
               .input-group.date
-                input.form-control.datepicker(name="from" type="text" mydate=offer.avail[0].start)
+                input.form-control.datepicker#date0(type="text" mydate=offer.avail[0].start end="date1")
+                input#date0Sent(name="from" type="hidden")
             label.col-lg-1.col-form-label au
             .col-lg-4
               .input-group.date
-                input.form-control.datepicker(name="to" type="text" mydate=offer.avail[0].end)
+                input.form-control.datepicker#date1(type="text" mydate=offer.avail[0].end start="date0")
+                input#date1Sent(name="to" type="hidden")
           
           br
           .form-group.row.col-lg-4
