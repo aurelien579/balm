@@ -64,8 +64,14 @@ block content
               div(class = "row-res")
                 h1(class = "lead") Demande de réservation :
               div(class="row")
-                    include calendrier.pug
-
+                div(class="col-sm-6 padding-res")
+                  .input-group.date
+                    input.form-control.datepicker#date0(type="text" end="date1")
+                    input#date0Sent(name="from" type="hidden")
+                div(class="col-sm-6 padding-res")
+                  .input-group.date
+                    input.form-control.datepicker#date1(type="text" start="date0")
+                    input#date1Sent(name="to" type="hidden")
               div(class="row")
                 div(class="col-sm padding-res")
                   label(for="" class="sr-only") Nombre de personne
@@ -89,3 +95,6 @@ block content
 
     else
       p Cette maison n'existe pas encore...
+
+block scripts
+  script(src="/js/goods.js")
