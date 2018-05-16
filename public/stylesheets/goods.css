@@ -101,3 +101,10 @@
 .demo {
     text-align: left;
 }
+.recavance2 img{
+  display: inline;
+  height: 30px;
+  border-radius: 25%;
+  margin:2%;
+  background-color: #8BCBCB;
+}

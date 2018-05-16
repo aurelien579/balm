@@ -53,6 +53,20 @@ block content
             else
               h1() Pas de notes disponibles
 
+            div()
+              if offer.pool ==1
+                div(class="row-res recavance2 inline")
+                    img(src="/images/l_pool.png")
+                    h6(class="inline") Piscine
+              if offer.garden ==1
+                div(class="row-res recavance2 inline")
+                    img(src="/images/l_leaf.png")
+                    h6(class="inline") Jardin
+              if offer.citycenter ==1
+                div(class="row-res recavance2 inline")
+                    img(src="/images/l_city.png")
+                    h6(class="inline") Centre-Ville
+
             h4(class="text-justify") Description
             p(class="text-justify") #{offer.description}
 
@@ -95,8 +109,8 @@ block content
     else
       p Cette maison n'existe pas encore...
 
-block scripts  
+block scripts
   script.
     let avail = !{JSON.stringify(avail)};
-  
+
   script(src="/js/goods.js")

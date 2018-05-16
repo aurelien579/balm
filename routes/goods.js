@@ -129,7 +129,7 @@ router.post('/new', utils.mustBeConnected, /*goodsValidators,*/ async function(r
 router.get('/:id', async function(req, res, next) {
     try {
         let id = req.params.id;
-        let offer = (await commentModel.getByOfferId(id))[0];
+        let offer = (await goodsModel.getById(id))[0];
         let comments = await commentModel.getByOfferId(id);
         let images = await imageModel.getByOfferId(id);
         let avail = await availabilityModel.getAvailabilityByOfferId(id);
