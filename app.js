@@ -6,7 +6,19 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload');
 
+const fs = require('fs');
+const https = require('https');
+
+const hskey = fs.readFileSync('key.pem');
+const hscert = fs.readFileSync('cert.pem')
+
+const options = { key: hskey, cert: hscert };
+
 const app = express();
+const httpsServer = https.createServer(options, app);
+
+httpsServer.listen(3443);
+
 module.exports = app;
 
 const indexRouter = require('./routes/index');
@@ -58,5 +70,7 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+
 
 module.exports = app;
