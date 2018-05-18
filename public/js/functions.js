@@ -25,7 +25,8 @@ function setminvalue() {
   }
 }
 
-
+var vid = document.getElementById("myVideo");
+vid.volume = 0.1;
 /*------------------------------  Autocomplete  ------------------------------------*/
 var currentFocus;
 var inp = document.getElementById("searchbar");
