@@ -234,6 +234,7 @@
 
 .pagcolor {
   background-color: : #FF8800;
+  color: orange;
 }
 
 .pagcolor li {
@@ -241,16 +242,15 @@
 }
 
 .pagact {
-  background-color: #00FF00;
+  background-color: orange;
+  border-color: orange;
 }
-
 /*
 .pagination {
   list-style: none;
   display: inline-block;
   padding: 0;
   margin-top: 10px;
-  text-align: center;
 }
 .pagination li {
   display: inline;
@@ -297,4 +297,9 @@
   background: #4285F4;
   color: #fff;
 }
-*/
+
+.test {
+  display: block;
+    margin-left: auto;
+    margin-right: auto
+}*/
