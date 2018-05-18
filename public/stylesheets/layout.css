@@ -9,10 +9,7 @@
 body {
     background: url("../images/test.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
-    /* pour anciens Chrome et Safari */
     background-size: cover;
-    /* version standardisée */
-
     margin-bottom: 30px;
 }
 
