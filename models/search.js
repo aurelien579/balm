@@ -12,7 +12,7 @@ const offerSql = {
                 LEFT JOIN Image AS I ON I.id =
                 (
                 	SELECT id FROM Image
-                	WHERE I.offerId = O.id
+                	WHERE Image.offerId = O.id
                 	ORDER BY id
                 	LIMIT 1
                 )
