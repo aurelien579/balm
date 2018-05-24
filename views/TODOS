@@ -5,8 +5,6 @@ Alex    | Backend de la modification d'annonce
 
 A faire:
         | Adapter calendrier
-Alex    | Ombres barre de recherche
-
 Aurel   | Ajouter plusieurs disponibilités lors de la création d'une annonce
 Aurel   | Upload des images lors de la création d'un annonce
         | Trouver des images pour /search et /index
