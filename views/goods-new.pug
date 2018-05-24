@@ -21,11 +21,11 @@ block content
           .form-group.row
             label.col-lg-3.col-form-label Titre de l'annonce
             .col-lg-9
-              input.form-control(name="title", type="text" placeholder="Titre de l'annonce")
+              input.form-control(name="title", type="text" placeholder="Titre de l'annonce" value=body.title)
           .form-group.row
             label.col-lg-3.col-form-label Description
             .col-lg-9
-              textarea.form-control(name="description", type="text" placeholder="Description")
+              textarea.form-control(name="description", type="text" placeholder="Description" value=body.description)
           .form-group.row
             label.col-lg-3.col-form-label Prix par nuit
             .col-lg-2
@@ -67,21 +67,21 @@ block content
             .col-lg-4
               .image-upload
                 label(for='file')
-                  img#preview0(src="http://goo.gl/pB9rpQ")
+                  img#preview0(src="/images/icon-add.png")
                 input#file(type='file' name='image1' onchange='updatePreview(this);'
                            preview="preview0" accept="image/gif, image/jpeg, image/png")
 
             .col-lg-4
               .image-upload
                 label(for='file1')
-                  img#preview1(src="http://goo.gl/pB9rpQ")
+                  img#preview1(src="/images/icon-add.png")
                 input#file1(type='file' name='image2' onchange='updatePreview(this);'
                            preview="preview1" accept="image/gif, image/jpeg, image/png")
 
             .col-lg-4
               .image-upload
                 label(for='file2')
-                  img#preview2(src="http://goo.gl/pB9rpQ")
+                  img#preview2(src="/images/icon-add.png")
                 input#file2(type='file' name='image3' onchange='updatePreview(this);'
                            preview="preview2" accept="image/gif, image/jpeg, image/png")
           button.form-control.btn.btn-success(type="submit") Déposer

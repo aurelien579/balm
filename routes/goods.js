@@ -67,15 +67,17 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/new', /*utils.mustBeConnected,*/ async function(req, res, next) {
-    res.render('goods-new');
+    res.render('goods-new', {
+        body: {}
+    });
 });
 
-router.post('/new', /*utils.mustBeConnected, goodsValidators,*/ async function(req, res, next) {
+router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, res, next) {
     const errors = validationResult(req);
     const mapped = errors.mapped();
     const from = new Date(req.body.from);
     const to = new Date(req.body.to);
-    console.log(req.body.from);
+    console.log(req.body);
 
     if (from > to || from < Date.now()) {
         mapped.dates = {
@@ -85,7 +87,8 @@ router.post('/new', /*utils.mustBeConnected, goodsValidators,*/ async function(r
 
     if (Object.keys(mapped).length > 0) {
         return res.render('goods-new', {
-            errors: mapped
+            errors: mapped,
+            body: req.body
         });
     }
 
@@ -117,12 +120,14 @@ router.post('/new', /*utils.mustBeConnected, goodsValidators,*/ async function(r
         })
         .then((result) => {
             res.render('goods-new', {
-                successMessage: "Votre annonce a bien été déposé"
+                successMessage: "Votre annonce a bien été déposé",
+                body: req.body
             });
         })
         .catch((err) => {
             res.render('goods-new', {
-                errorMessage: 'Il existe déjà une annonce avec ce titre'
+                errorMessage: 'Il existe déjà une annonce avec ce titre',
+                body: req.body
             })
         });
 });
