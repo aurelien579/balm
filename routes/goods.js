@@ -66,11 +66,11 @@ router.get('/', function(req, res, next) {
     next();
 });
 
-router.get('/new', utils.mustBeConnected, async function(req, res, next) {
+router.get('/new', /*utils.mustBeConnected,*/ async function(req, res, next) {
     res.render('goods-new');
 });
 
-router.post('/new', utils.mustBeConnected, /*goodsValidators,*/ async function(req, res, next) {
+router.post('/new', /*utils.mustBeConnected, goodsValidators,*/ async function(req, res, next) {
     const errors = validationResult(req);
     const mapped = errors.mapped();
     const from = new Date(req.body.from);
@@ -102,10 +102,11 @@ router.post('/new', utils.mustBeConnected, /*goodsValidators,*/ async function(r
             for (let property in req.files) {
                 if (req.files.hasOwnProperty(property)) {
                     let file = req.files[property];
+                    let path = "/images/offers/" + result.insertId + "-" + i + "." + file.name.split('.').pop();
+                    let realPath = 'public' + path;
 
-                    let path = "public/images/offers/" + result.insertId + "-" + i + "." + file.name.split('.').pop();
                     imageModel.add(result.insertId, path);
-                    file.mv(path, function(err) {
+                    file.mv(realPath, function(err) {
                         console.log("Move error: ", err);
                     });
                 }

@@ -13,7 +13,7 @@ block content
             .alert.alert-danger #{err.msg}
         if successMessage
           .alert.alert-success #{successMessage}
-        
+
         form(action='/goods/edit/' + offer.id method='post' enctype="multipart/form-data")
           .form-group.row
             label.col-lg-3.col-form-label Titre de l'annonce

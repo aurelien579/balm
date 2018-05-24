@@ -1,0 +1,23 @@
+.image-upload input {
+    display: none;
+}
+
+.image-upload img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    cursor: pointer;
+}
+
+.image-upload {
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    padding-top: 80%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
