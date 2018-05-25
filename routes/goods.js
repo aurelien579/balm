@@ -187,11 +187,26 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
     try {
         const errors = validationResult(req);
         const mapped = errors.mapped();
+        const from = new Date(req.body.from);
+        const to = new Date(req.body.to);
 
         console.log(errors, mapped);
-        console.log(new Date(req.body.from));
+        console.log(from);
 
-        goodsModel.sqlEdit(req.params.id,
+        if (from > to || from < Date.now()) {
+            mapped.dates = {
+                msg: 'Les dates ne sont pas correctes'
+            }
+        }
+
+        if (Object.keys(mapped).length > 0) {
+            return res.render('goods-edit', {
+                errors: mapped,
+                body: req.body
+            });
+        }
+
+        goodsModel.edit(req.params.id,
                 req.body.title,
                 req.body.description,
                 req.body.price,
@@ -200,7 +215,7 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
                 req.body.postcode,
                 req.body.address)
             .then((result) => {
-              
+
             })
             .then((result) => {
                 res.render('goods-edit', {

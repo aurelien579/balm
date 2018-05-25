@@ -57,11 +57,11 @@ function deleteOffer(offerId) {
     return db.sqlQuery(sqlDelete, [offerId]);
 }
 
-function.sqlEdit(OfferId, title, description, price, department, city, postcode, address) {
+function edit(OfferId, title, description, price, department, city, postcode, address) {
     return db.sqlQuery(sqlEdit, [title, description, price, department, city, postcode, address, OfferId]);
 }
 
-exports.sqlEdit = sqlEdit;
+exports.edit = edit;
 exports.getUserId = getUserId;
 exports.deleteOffer = deleteOffer;
 exports.getByUserId = getByUserId;
