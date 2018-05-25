@@ -156,15 +156,17 @@ router.get('/:id', async function(req, res, next) {
     }
 });
 
-router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {
+router.get('/edit/:id', /*utils.mustBeConnected, */async function(req, res, next) {
     try {
         const offerId = Number(req.params.id);
         const good = (await goodsModel.getById(offerId))[0];
 
-        if (good.userId != req.session.user.id)
-            return res.render('hack');
+        /*if (good.userId != req.session.user.id)
+            return res.render('hack');*/
 
         good.avail = await availabilityModel.getAvailabilityByOfferId(offerId);
+        good.avail[0].start = good.avail[0].start.toString();
+        good.avail[0].end = good.avail[0].end.toString();
 
         if (good.avail.length == 0) {
             good.avail = [{
@@ -202,7 +204,7 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
         if (Object.keys(mapped).length > 0) {
             return res.render('goods-edit', {
                 errors: mapped,
-                body: req.body
+                offer: req.body
             });
         }
 
