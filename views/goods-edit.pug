@@ -1,5 +1,9 @@
 extends layout
 
+block header
+  link(rel='stylesheet', href='/stylesheets/goods-new.css')
+
+
 block content
   .container
     .jumbotron.jumbotron-transparent
@@ -64,19 +68,26 @@ block content
           
           .form-group.row
             .col-lg-4
-              .custom-file
-                input.custom-file-input#file(type='file' name='image1')
-                label.custom-file-label(for="file") Choisir une image
+              .image-upload
+                label(for='file')
+                  img#preview0(src=offer.images[0].path)                    
+                input#file(type='file' name='image1' onchange='updatePreview(this);'
+                           preview="preview0" accept="image/gif, image/jpeg, image/png")
+                  
 
             .col-lg-4
-              .custom-file
-                input.custom-file-input#file1(type='file' name='image2')
-                label.custom-file-label(for="file1") Choisir une image
+              .image-upload
+                label(for='file1')
+                  img#preview1(src=offer.images[1].path)
+                input#file1(type='file' name='image2' onchange='updatePreview(this);'
+                           preview="preview1" accept="image/gif, image/jpeg, image/png")
 
             .col-lg-4
-              .custom-file
-                input.custom-file-input#file2(type='file' name='image3')
-                label.custom-file-label(for="file2") Choisir une image
+              .image-upload
+                label(for='file2')
+                  img#preview2(src=offer.images[2].path)
+                input#file2(type='file' name='image3' onchange='updatePreview(this);'
+                           preview="preview2" accept="image/gif, image/jpeg, image/png")
           button.form-control.btn.btn-success(type="submit") Modifier
 
 block scripts

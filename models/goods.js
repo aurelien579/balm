@@ -1,4 +1,6 @@
 const db = require('./db');
+const availabilityModel = require('./availability');
+const imageModel = require('./image');
 
 const sqlGetById = 'SELECT * FROM Offer WHERE id = ?;';
 const sqlGetUserId = 'SELECT Offer.userId FROM Offer WHERE id = ?;';
@@ -61,6 +63,31 @@ function edit(OfferId, title, description, price, department, city, postcode, ad
     return db.sqlQuery(sqlEdit, [title, description, price, department, city, postcode, address, OfferId]);
 }
 
+async function getFullWithDefault(offerId) {
+    let offer = (await getById(offerId))[0];
+    offer.images = await imageModel.getByOfferId(offer.id);
+
+    for (let i = 0; i < 3; i++) {
+        if (typeof offer.images[i] == 'undefined') {
+            offer.images[i] = {
+                id: -i - 1,
+                path: '/images/icon-add.png'
+            };
+        }
+    }
+
+    offer.avail = await availabilityModel.getAvailabilityByOfferId(offer.id);
+
+    if (offer.avail.length == 0) {
+        offer.avail = [{
+            start: Date.now().toString(),
+            end: Date.now().toString()
+        }];
+    }
+
+    return offer;
+}
+
 exports.edit = edit;
 exports.getUserId = getUserId;
 exports.deleteOffer = deleteOffer;
@@ -68,3 +95,4 @@ exports.getByUserId = getByUserId;
 exports.getById = getById;
 exports.getByUserIdWithFirstImage = getByUserIdWithFirstImage;
 exports.create = create;
+exports.getFullWithDefault = getFullWithDefault;

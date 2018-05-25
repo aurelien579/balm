@@ -156,24 +156,12 @@ router.get('/:id', async function(req, res, next) {
     }
 });
 
-router.get('/edit/:id', /*utils.mustBeConnected, */async function(req, res, next) {
+router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {
     try {
-        const offerId = Number(req.params.id);
-        const good = (await goodsModel.getById(offerId))[0];
-
-        /*if (good.userId != req.session.user.id)
-            return res.render('hack');*/
-
-        good.avail = await availabilityModel.getAvailabilityByOfferId(offerId);
-        good.avail[0].start = good.avail[0].start.toString();
-        good.avail[0].end = good.avail[0].end.toString();
-        console.log(good.avail[0].end.toString())
-        if (good.avail.length == 0) {
-            good.avail = [{
-                start: Date.now().toString(),
-                end: Date.now().toString()
-            }];
-        }
+        const good = await goodsModel.getFullWithDefault(parseInt(req.params.id));
+        console.log(good);
+        if (good.userId != req.session.user.id)
+            return res.render('hack');
 
         return res.render('goods-edit', {
             offer: good
@@ -191,9 +179,7 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
         const mapped = errors.mapped();
         const from = new Date(req.body.from);
         const to = new Date(req.body.to);
-
-        console.log(errors, mapped);
-        console.log(from);
+        const offer = await goodsModel.getFullWithDefault(req.params.id);
 
         if (from > to || from < Date.now()) {
             mapped.dates = {
@@ -204,38 +190,51 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
         if (Object.keys(mapped).length > 0) {
             return res.render('goods-edit', {
                 errors: mapped,
-                offer: req.body
+                offer: offer /* TODO: Vérifier si c'est necessaire */
             });
         }
 
-        goodsModel.edit(req.params.id,
-                req.body.title,
-                req.body.description,
-                req.body.price,
-                req.body.department,
-                req.body.city,
-                req.body.postcode,
-                req.body.address)
-            .then((result) => {
+        await goodsModel.edit(req.params.id,
+            req.body.title,
+            req.body.description,
+            req.body.price,
+            req.body.department,
+            req.body.city,
+            req.body.postcode,
+            req.body.address);
 
-            })
-            .then((result) => {
-                res.render('goods-edit', {
-                    successMessage: "Votre annonce a bien été modifié",
-                    body: req.body
+        let i = 1;
+        for (let name in req.files) {
+            if (req.files.hasOwnProperty(name)) {
+                let imageId = parseInt(name.replace('image', ''));
+                let file = req.files[name];
+                let path = "/images/offers/" + offer.id + "-" + imageId + "." + file.name.split('.').pop();
+                let realPath = 'public' + path;
+
+                imageModel.add(offer.id, path);
+
+                file.mv(realPath, function(err) {
+                    console.log("Move error: ", err);
                 });
-            })
-            .catch((err) => {
-                res.render('goods-edit', {
-                    errorMessage: 'Impossible de modifier l\'annonce',
-                    body: req.body
-                })
-            });
-    } catch (ex) {
-        console.log(ex);
-    }
+            }
+            i++;
+        }
 
-    next();
+        // TODO: Modifier les disponibilités
+
+        console.log(offer.avail);
+        res.render('goods-edit', {
+            successMessage: "Votre annonce a bien été modifié",
+            body: req.body,
+            offer: offer
+        });
+    } catch (err) {
+        console.log('ERROR: ', err);
+        res.render('error', {
+            message: 'Impossible de modifier l\'annonce',
+            error: err
+        });
+    }
 });
 
 router.get('/delete/:id', utils.mustBeConnected, function(req, res, next) {
