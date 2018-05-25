@@ -26,6 +26,8 @@ const sqlCreate =
      VALUES
         (?, ?, ?, ?, ?, ?, ?, ?);`
 
+const sqlEdit = "UPDATE Offer SET title = ?, description = ?, price = ?, department = ?, city = ?, postcode = ?, address = ? WHERE id = ?;"
+
 function getById(id) {
     return db.sqlQuery(sqlGetById, [id]);
 }
@@ -55,6 +57,11 @@ function deleteOffer(offerId) {
     return db.sqlQuery(sqlDelete, [offerId]);
 }
 
+function.sqlEdit(OfferId, title, description, price, department, city, postcode, address) {
+    return db.sqlQuery(sqlEdit, [title, description, price, department, city, postcode, address, OfferId]);
+}
+
+exports.sqlEdit = sqlEdit;
 exports.getUserId = getUserId;
 exports.deleteOffer = deleteOffer;
 exports.getByUserId = getByUserId;
