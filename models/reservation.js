@@ -3,6 +3,8 @@ const db = require('./db');
 const WAITING = 0;
 const ACCEPTED = 1;
 const REJECTED = 2;
+const ABORTED = 3;
+
 const sqlAccept = 'UPDATE Reservation SET status = 1 WHERE id = ?;';
 const sqlReject = 'UPDATE Reservation SET status = 2 WHERE id = ?;';
 const sqlGetStatus = 'SELECT status FROM Reservation WHERE id = ?;';
@@ -66,7 +68,11 @@ WHERE
 `;
 
 const sqlAddReservation = `INSERT INTO Reservation(offerId, userId, \`from\`, \`to\`,\`status\`) VALUES(?, ?, ?, ?, ?); `;
-
+const sqlAbortOverlapping = `
+    UPDATE Reservation SET status = 4
+    WHERE offerId = ? AND
+		  ((\`from\` >= ? AND \`from\` <= ?) OR (\`to\` >= ? AND \`to\` <= ?)) AND
+          status = 0;`;
 
 function createReservation(offerId, userId, from, to, status) {
     return db.sqlQuery(sqlAddReservation, [offerId, userId, from, to, status]);
@@ -92,13 +98,24 @@ function getStatus(reservationId) {
     return db.sqlQuery(sqlGetStatus, [reservationId]);
 }
 
+function get(id) {
+    return db.sqlQuery('SELECT * FROM Reservation WHERE id = ?;', [id]);
+}
+
+function abortOverlapping(offerId, start, end) {
+    return db.sqlQuery(sqlAbortOverlapping, [offerId, start, end, start, end]);
+}
+
 exports.getByUserId = getByUserId;
 exports.createReservation = createReservation;
 exports.getDemandsTo = getDemandsTo;
 exports.accept = accept;
 exports.reject = reject;
 exports.getStatus = getStatus;
+exports.get = get;
+exports.abortOverlapping = abortOverlapping;
 
 exports.WAITING = WAITING;
 exports.ACCEPTED = ACCEPTED;
 exports.REJECTED = REJECTED;
+exports.ABORTED = ABORTED;

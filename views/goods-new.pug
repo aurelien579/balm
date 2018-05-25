@@ -17,47 +17,58 @@ block content
         if successMessage
           .alert.alert-success #{successMessage}
         
-        form(action='/goods/new' method='post' enctype="multipart/form-data")
+        form(action='/goods/new' method='post'
+             enctype="multipart/form-data")
           .form-group.row
             label.col-lg-3.col-form-label Titre de l'annonce
             .col-lg-9
-              input.form-control(name="title", type="text" placeholder="Titre de l'annonce" value=body.title)
+              input.form-control(name="title", type="text"
+                                 placeholder="Titre de l'annonce"
+                                 value=body.title)
           .form-group.row
             label.col-lg-3.col-form-label Description
             .col-lg-9
-              textarea.form-control(name="description", type="text" placeholder="Description" value=body.description)
+              textarea.form-control(name="description" type="text"
+                                    placeholder="Description")
+              | #{body.description}
           .form-group.row
             label.col-lg-3.col-form-label Prix par nuit
             .col-lg-2
               .input-group
-                input.form-control(name="price", type="text" placeholder="Prix")
+                input.form-control(name="price" type="text"
+                                   placeholder="Prix" value=body.price)
                 .input-group-append
                   span.input-group-text €
           .form-group.row
             label.col-lg-3.col-form-label Département
             .col-lg-4
-              input.form-control(name="department", type="text" placeholder="Département")
+              input.form-control(name="department", type="text"
+                                 placeholder="Département" value=body.department)
           .form-group.row
             label.col-lg-3.col-form-label Ville
             .col-lg-4
-              input.form-control(name="city", type="text" placeholder="Ville")
+              input.form-control(name="city" type="text"
+                                 placeholder="Ville" value=body.city)
           .form-group.row
             label.col-lg-3.col-form-label Code postal
             .col-lg-4
-              input.form-control(name="postcode", type="text" placeholder="Code postal")
+              input.form-control(name="postcode" type="text"
+                                 placeholder="Code postal" value=body.postcode)
           .form-group.row
             label.col-lg-3.col-form-label Adresse
             .col-lg-4
-              input.form-control(name="address", type="text" placeholder="Adresse")
+              input.form-control(name="address" type="text"
+                                 placeholder="Adresse" value=body.address)
           .form-group.row
             label.col-lg-3.col-form-label Disponible du
             .col-lg-4
               .input-group.date
-                input.form-control(name="from" type="date")
+                input.form-control(name="from" type="date" 
+                                   value=body.from)
             label.col-lg-1.col-form-label au
             .col-lg-4
               .input-group.date
-                input.form-control(name="to" type="date")
+                input.form-control(name="to" type="date" value=body.to)
           
           br
           .form-group.row.col-lg-4

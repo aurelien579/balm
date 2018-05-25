@@ -41,16 +41,39 @@ router.post('/new', utils.mustBeConnectedToBook, function(req, res, next) {
         });
 });
 
-router.get('/:id/accept', utils.mustBeConnected, async function(req, res, next) {
-    let id = parseInt(req.params.id);
-    let status = (await reservationModel.getStatus(id))[0].status;
+router.get('/:id/accept', /*utils.mustBeConnected,*/ async function(req, res, next) {
+    try {
+        let id = parseInt(req.params.id);
+        let reservation = (await reservationModel.get(id))[0];
+        reservation.from = new Date(reservation.from);
+        reservation.to = new Date(reservation.to);
 
-    if (status == reservationModel.WAITING) {
-        console.log("waiting");
-        await reservationModel.accept(id);
+        if (parseInt(reservation.status) == reservationModel.WAITING) {
+            await reservationModel.accept(reservation.id);
+
+            await availabilityModel.setUnavailable(
+                reservation.offerId,
+                reservation.from,
+                reservation.to
+            );
+
+            await reservationModel.abortOverlapping(
+                reservation.offerId,
+                reservation.from,
+                reservation.to
+            );
+        } else {
+            res.render('error', {
+                message: 'Invalid reservation status for accepting'
+            });
+        }
+
+        res.redirect('/index');
+    } catch (ex) {
+        res.render('error', {
+            error: ex
+        });
     }
-
-    res.redirect('/user');
 });
 
 router.get('/:id/reject', utils.mustBeConnected, async function(req, res, next) {

@@ -156,15 +156,17 @@ router.get('/:id', async function(req, res, next) {
     }
 });
 
-router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {
+router.get('/edit/:id', /*utils.mustBeConnected, */async function(req, res, next) {
     try {
         const offerId = Number(req.params.id);
         const good = (await goodsModel.getById(offerId))[0];
 
-        if (good.userId != req.session.user.id)
-            return res.render('hack');
+        /*if (good.userId != req.session.user.id)
+            return res.render('hack');*/
 
         good.avail = await availabilityModel.getAvailabilityByOfferId(offerId);
+        good.avail[0].start = good.avail[0].start.toString();
+        good.avail[0].end = good.avail[0].end.toString();
 
         if (good.avail.length == 0) {
             good.avail = [{
@@ -187,9 +189,48 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
     try {
         const errors = validationResult(req);
         const mapped = errors.mapped();
+        const from = new Date(req.body.from);
+        const to = new Date(req.body.to);
 
         console.log(errors, mapped);
-        console.log(new Date(req.body.from));
+        console.log(from);
+
+        if (from > to || from < Date.now()) {
+            mapped.dates = {
+                msg: 'Les dates ne sont pas correctes'
+            }
+        }
+
+        if (Object.keys(mapped).length > 0) {
+            return res.render('goods-edit', {
+                errors: mapped,
+                offer: req.body
+            });
+        }
+
+        goodsModel.edit(req.params.id,
+                req.body.title,
+                req.body.description,
+                req.body.price,
+                req.body.department,
+                req.body.city,
+                req.body.postcode,
+                req.body.address)
+            .then((result) => {
+
+            })
+            .then((result) => {
+                res.render('goods-edit', {
+                    successMessage: "Votre annonce a bien été modifié",
+                    body: req.body
+                });
+            })
+            .catch((err) => {
+                res.render('goods-edit', {
+                    errorMessage: 'Impossible de modifier l\'annonce',
+                    body: req.body
+                })
+            });
     } catch (ex) {
         console.log(ex);
     }
