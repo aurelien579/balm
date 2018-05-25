@@ -167,7 +167,7 @@ router.get('/edit/:id', /*utils.mustBeConnected, */async function(req, res, next
         good.avail = await availabilityModel.getAvailabilityByOfferId(offerId);
         good.avail[0].start = good.avail[0].start.toString();
         good.avail[0].end = good.avail[0].end.toString();
-
+        console.log(good.avail[0].end.toString())
         if (good.avail.length == 0) {
             good.avail = [{
                 start: Date.now().toString(),
