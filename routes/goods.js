@@ -196,13 +196,9 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
         }
 
         await goodsModel.edit(req.params.id,
-            req.body.title,
             req.body.description,
-            req.body.price,
-            req.body.department,
-            req.body.city,
-            req.body.postcode,
-            req.body.address);
+            req.body.price);
+
 
         let i = 1;
         for (let name in req.files) {
@@ -221,13 +217,12 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
             i++;
         }
 
-        return availabilityModel.update(req.body.avail[0].from, req.body.avail[0].to,req.body.avail[0].id);
+        availabilityModel.update(offer.avail[0].id, from, to);
 
-        console.log(offer.avail);
-        res.render('goods-edit', {
+        res.render('user/user', {
             successMessage: "Votre annonce a bien été modifié",
-            body: req.body,
-            offer: offer
+            //body: req.body,
+            //offer: offer
         });
     } catch (err) {
         console.log('ERROR: ', err);

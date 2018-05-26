@@ -8,7 +8,9 @@ block content
     .jumbotron.jumbotron-transparent
       h1.text-center Mon Compte
     br
-    
+    if successMessage
+      .alert.alert-success #{successMessage}
+          
     .card.text-center.box-shadow
       .card-header
         ul.nav.nav-tabs.card-header-tabs#cardHeader
