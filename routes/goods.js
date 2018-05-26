@@ -186,6 +186,7 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
                 msg: 'Les dates ne sont pas correctes'
             }
         }
+        console.log(offer);
 
         if (Object.keys(mapped).length > 0) {
             return res.render('goods-edit', {
@@ -220,7 +221,7 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
             i++;
         }
 
-        // TODO: Modifier les disponibilités
+        return availabilityModel.update(req.body.avail[0].from, req.body.avail[0].to,req.body.avail[0].id);
 
         console.log(offer.avail);
         res.render('goods-edit', {

@@ -8,6 +8,7 @@ FROM Availability WHERE offerId = ?;
 `;
 
 const sqlAdd = "INSERT INTO Availability (offerId, start, end) VALUES (?, ?, ?)";
+const sqlUpdate = "UPDATE Availability SET start = ?, end = ? WHERE id = ?;"
 
 function add(offerId, from, to) {
     return db.sqlQuery(sqlAdd, [offerId, from, to]);
@@ -29,7 +30,7 @@ function getByOfferIdContaining(offerId, start, end) {
 }
 
 function update(id, start, end) {
-    return db.sqlQuery('UPDATE Availability SET start = ?, end = ? WHERE id = ?', [start, end, id]);
+    return db.sqlQuery(sqlUpdate, [start, end, id]);
 }
 
 async function setUnavailable(offerId, start, end) {
@@ -50,6 +51,7 @@ async function setUnavailable(offerId, start, end) {
     }
 }
 
+exports.update = update;
 exports.add = add;
 exports.getAvailabilityByOfferId = getAvailabilityByOfferId;
 exports.getByOfferIdFormatted = getByOfferIdFormatted;
