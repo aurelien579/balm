@@ -2,11 +2,10 @@
 Mael    | SLL/HTTPS
 Camille | Barre d'en bas (aide, copyright...)
 Aurel   | Ajouter plusieurs disponibilités lors de la création d'une annonce
-Alex    | Chill
+Alex    | Video index
 
 A faire:
         | Adapter calendrier
-Aurel   | Ajouter plusieurs disponibilités lors de la création d'une annonce
-Aurel   | Upload des images lors de la création d'un annonce
         | Trouver des images pour /search et /index
         | Harmoniser le style
+        | Definir un head pour toutes les pages
