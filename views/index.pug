@@ -4,49 +4,51 @@ block header
     link(rel='stylesheet', href='/stylesheets/index.css')
 
 block content
-  video(autoplay loop id="myVideo")
-    source(src="images/video_test.mp4" type="video/mp4")
-  form(id="form" action='/search' autocomplete="off" method='get')
-    div(class="row")
-      div(id="input1" class="input-group")
-        input(type="text" class="typeahead form-control" data-provide="typeahead" id="searchbar" name="searchText" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2" )      
-        button(id="button1" class="btn" type="submit")
-          i(class="fa fa-search")
-      button(id="button2" class="btn" type="button" data-toggle="collapse" href="#input2" aria-controls="input2") Options avancées
-    div(id="input2" class="collapse")
-      div(class="card")
-        div(class="form-group row")
-          label(class="control-label" for="date") Date de départ :
-          input(id="date" class="form-control" name="datedep" type="text" )
-        div(class="form-group row")
-          label(class="control-label" for="date2") Date de retour :
-          input(id="date2" class="form-control" name="datearr" type="text" onclick="setminvalue()")
-        div(class="form-group")
-          label(for="FormControlSelect1") Nombre de personnes :
-          select(class="form-control" name="numberpers" id="FormControlSelect1")
-            option() 
-            option() 1
-            option() 2
-            option() 3
-            option() 4
-            option() 5
-            option() 6
-            option() 7
-            option() 8
-            option() 9
-            option() 10+
-        div(class="form-group")
-            div(class="text") Et pour les plus exigeants :
-            div(class="row")
-              div(class="col form-check form-check-inline")
-                input(id="defaultCheck1" class="form-check-input" type="checkbox" name="pool" value="1")
-                label(class="form-check-label" for="defaultCheck1") Piscine
-              div(class="col form-check form-check-inline")
-                input(id="defaultCheck2" class="form-check-input" type="checkbox" name="garden" value="1")
-                label(class="form-check-label" for="defaultCheck2") Jardin
-              div(class="col form-check form-check-inline")
-                input(id="defaultCheck3" class="form-check-input" type="checkbox" name="city" value="1")
-                label(class="form-check-label" for="defaultCheck3") Centre ville
+  .container
+    video(autoplay loop id="myVideo")
+      source(src="00003.mp4" type="video/mp4")
+    form(id="form" action='/search' autocomplete="off" method='get')
+      div(class="row")
+        div(id="input1" class="input-group")
+          input(type="text" class="typeahead form-control" data-provide="typeahead" id="searchbar" name="searchText" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2" )
+          button(id="button1" class="btn" type="submit")
+            i(class="fa fa-search")
+        button(id="button2" class="btn" type="button" data-toggle="collapse" href="#input2" aria-controls="input2") Options avancées
+      div(id="input2" class="collapse")
+        div(class="card")
+          div(class="form-group row")
+            label(class="control-label" for="date") Date de départ :
+            input(id="date" class="form-control" name="datedep" type="text" )
+          div(class="form-group row")
+            label(class="control-label" for="date2") Date de retour :
+            input(id="date2" class="form-control" name="datearr" type="text" onclick="setminvalue()")
+          div(class="form-group")
+            label(for="FormControlSelect1") Nombre de personnes :
+            select(class="form-control" name="numberpers" id="FormControlSelect1")
+              option()
+              option() 1
+              option() 2
+              option() 3
+              option() 4
+              option() 5
+              option() 6
+              option() 7
+              option() 8
+              option() 9
+              option() 10+
+          div(class="form-group")
+              div(class="text") Et pour les plus exigeants :
+              div(class="row")
+                div(class="col form-check form-check-inline")
+                  input(id="defaultCheck1" class="form-check-input" type="checkbox" name="pool" value="1")
+                  label(class="form-check-label" for="defaultCheck1") Piscine
+                div(class="col form-check form-check-inline")
+                  input(id="defaultCheck2" class="form-check-input" type="checkbox" name="garden" value="1")
+                  label(class="form-check-label" for="defaultCheck2") Jardin
+                div(class="col form-check form-check-inline")
+                  input(id="defaultCheck3" class="form-check-input" type="checkbox" name="city" value="1")
+                  label(class="form-check-label" for="defaultCheck3") Centre ville
+
 
 block scripts
   script(src="js/functions.js")

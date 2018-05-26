@@ -38,7 +38,7 @@ function setupDatepicker(elem) {
             updateDateToSend(elem, "");
     });
 
-    elem.datepicker('setDate', initialDate.toString());
+    elem.datepicker('setDate', formatDate(new Date(initialDate)));
 
     let endAttr = elem.attr('end');
     let startAttr = elem.attr('start');
@@ -140,7 +140,7 @@ function updatePreview(input) {
 $(function() {
     $('.datepicker').each((i, elem) => {
         setupDatepicker($(elem));
-        if (avail !== undefined) {
+        if (typeof avail != 'undefined') {
             setAvailableDates($(elem), avail);
         }
     });

@@ -4,8 +4,8 @@ const DEFAULT_OFFER_IMAGE = "/images/offers/default.png";
 
 const sqlGetByUserId = "SELECT path, offerId FROM Image, Offer, User WHERE User.id = Offer.userId AND Image.offerId = Offer.id AND User.id = ?;";
 const sqlGetFirstByOfferId = "SELECT path FROM Image WHERE offerId = ? LIMIT 1;";
-const sqlGetByOfferId = "SELECT path FROM Image WHERE offerId = ?;";
-const sqlInsertImage = "INSERT INTO Image (offerId, path) VALUES (?, ?);"
+const sqlGetByOfferId = "SELECT * FROM Image WHERE offerId = ?;";
+const sqlInsertImage = "INSERT IGNORE INTO Image (offerId, path) VALUES (?, ?);"
 
 function getByUserId(userId) {
     return db.sqlQuery(sqlGetByUserId, [userId]);

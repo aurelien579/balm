@@ -97,24 +97,25 @@ block content
             .col-lg-4
               .image-upload
                 label(for='file')
-                  img#preview0(src="http://goo.gl/pB9rpQ")
+                  img#preview0(src=offer.images[0].path)                    
                 input#file(type='file' name='image1' onchange='updatePreview(this);'
                            preview="preview0" accept="image/gif, image/jpeg, image/png")
+                  
 
             .col-lg-4
               .image-upload
                 label(for='file1')
-                  img#preview1(src="http://goo.gl/pB9rpQ")
+                  img#preview1(src=offer.images[1].path)
                 input#file1(type='file' name='image2' onchange='updatePreview(this);'
                            preview="preview1" accept="image/gif, image/jpeg, image/png")
 
             .col-lg-4
               .image-upload
                 label(for='file2')
-                  img#preview2(src="http://goo.gl/pB9rpQ")
+                  img#preview2(src=offer.images[2].path)
                 input#file2(type='file' name='image3' onchange='updatePreview(this);'
                            preview="preview2" accept="image/gif, image/jpeg, image/png")
-          button.form-control.btn.btn-success(type="submit") Déposer
+          button.form-control.btn.btn-success(type="submit") Modifier
 
 block scripts
   script(src="/js/goods.js")

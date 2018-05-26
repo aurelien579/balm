@@ -33,7 +33,7 @@
     height: 45px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    border: 1px solid #00FF00;
+    border: 1px solid #FF8C00;
 }
 
 #input2 {
@@ -44,7 +44,7 @@
     position: relative;
     right: 0px;
     margin-right: 160px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
 }
 
 #button1:hover {
@@ -55,7 +55,7 @@
     outline: none !important;
     box-shadow: none;
     width: 45px;
-    background: #00FF00;
+    background: #FF8C00;
     border-radius: 0px;
     color: white;
     border-top-right-radius: 5px;
@@ -72,20 +72,23 @@
     position: absolute;
     right: 0;
     height: 45px;
-    background: #00FF00;
+    background: #FF8C00;
     border-radius: 5px;
     color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    /*width: 150px;*/
+
 }
 
 .card {
     min-width: 250px;
     padding-top: 20px;
     padding-left: 30px;
-    border-rad  ius: 5px;
-    border: 1px solid #00FF00;
-    border-bottom: 2px solid #00FF00;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: 1px solid #FF8C00;
+    border-bottom: 2px solid #FF8C00;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+
 }
 
 .form-group {

@@ -67,10 +67,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/new', /*utils.mustBeConnected,*/ async function(req, res, next) {
-    res.render('goods-new');
+    res.render('goods-new', {
+        body: {}
+    });
 });
 
-router.post('/new', /*utils.mustBeConnected, goodsValidators,*/ async function(req, res, next) {
+router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, res, next) {
     const errors = validationResult(req);
     const mapped = errors.mapped();
     const from = new Date(req.body.from);
@@ -84,7 +86,8 @@ router.post('/new', /*utils.mustBeConnected, goodsValidators,*/ async function(r
 
     if (Object.keys(mapped).length > 0) {
         return res.render('goods-new', {
-            errors: mapped
+            errors: mapped,
+            body: req.body
         });
     }
 
@@ -131,12 +134,14 @@ router.post('/new', /*utils.mustBeConnected, goodsValidators,*/ async function(r
         })
         .then((result) => {
             res.render('goods-new', {
-                successMessage: "Votre annonce a bien été déposé"
+                successMessage: "Votre annonce a bien été déposé",
+                body: req.body
             });
         })
         .catch((err) => {
             res.render('goods-new', {
-                errorMessage: 'Il existe déjà une annonce avec ce titre'
+                errorMessage: 'Il existe déjà une annonce avec ce titre',
+                body: req.body
             })
         });
 });
@@ -167,20 +172,10 @@ router.get('/:id', async function(req, res, next) {
 
 router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {
     try {
-        const offerId = Number(req.params.id);
-        const good = (await goodsModel.getById(offerId))[0];
-
+        const good = await goodsModel.getFullWithDefault(parseInt(req.params.id));
+        console.log(good);
         if (good.userId != req.session.user.id)
             return res.render('hack');
-
-        good.avail = await availabilityModel.getAvailabilityByOfferId(offerId);
-
-        if (good.avail.length == 0) {
-            good.avail = [{
-                start: Date.now().toString(),
-                end: Date.now().toString()
-            }];
-        }
 
         return res.render('goods-edit', {
             offer: good
@@ -196,14 +191,60 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
     try {
         const errors = validationResult(req);
         const mapped = errors.mapped();
+        const from = new Date(req.body.from);
+        const to = new Date(req.body.to);
+        const offer = await goodsModel.getFullWithDefault(req.params.id);
 
-        console.log(errors, mapped);
-        console.log(new Date(req.body.from));
-    } catch (ex) {
-        console.log(ex);
+        if (from > to || from < Date.now()) {
+            mapped.dates = {
+                msg: 'Les dates ne sont pas correctes'
+            }
+        }
+        console.log(offer);
+
+        if (Object.keys(mapped).length > 0) {
+            return res.render('goods-edit', {
+                errors: mapped,
+                offer: offer /* TODO: Vérifier si c'est necessaire */
+            });
+        }
+
+        await goodsModel.edit(req.params.id,
+            req.body.description,
+            req.body.price);
+
+
+        let i = 1;
+        for (let name in req.files) {
+            if (req.files.hasOwnProperty(name)) {
+                let imageId = parseInt(name.replace('image', ''));
+                let file = req.files[name];
+                let path = "/images/offers/" + offer.id + "-" + imageId + "." + file.name.split('.').pop();
+                let realPath = 'public' + path;
+
+                imageModel.add(offer.id, path);
+
+                file.mv(realPath, function(err) {
+                    console.log("Move error: ", err);
+                });
+            }
+            i++;
+        }
+
+        availabilityModel.update(offer.avail[0].id, from, to);
+
+        res.render('user/user', {
+            successMessage: "Votre annonce a bien été modifié",
+            //body: req.body,
+            //offer: offer
+        });
+    } catch (err) {
+        console.log('ERROR: ', err);
+        res.render('error', {
+            message: 'Impossible de modifier l\'annonce',
+            error: err
+        });
     }
-
-    next();
 });
 
 router.get('/delete/:id', utils.mustBeConnected, function(req, res, next) {
