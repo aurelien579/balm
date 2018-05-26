@@ -4,14 +4,8 @@
     bottom: 0;
     min-width: 100%;
     min-height: 100%;
-    /*-webkit-filter: blur(5px);
-           -moz-filter: blur(5px);
-            -ms-filter: blur(5px);
-             -o-filter: blur(5px);
-                filter: blur(5px);*/
 }
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 #form {
     position: absolute;
     top: 50%;
@@ -103,7 +97,6 @@
     position: absolute;
     border-left: 2px solid #B9121B;
     z-index: 99;
-    /*position the autocomplete items to be the same width as the container:*/
     top: 100%;
     left: 0;
     right: 0;
