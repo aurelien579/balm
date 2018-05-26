@@ -28,7 +28,7 @@ const sqlCreate =
      VALUES
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
 
-const sqlEdit = "UPDATE Offer SET description = ?, price = ? WHERE id = ?;"
+const sqlEdit = `UPDATE Offer SET title = ?, description = ?, price = ?, region = ?, department = ?, city = ?, postcode = ?, address = ?, nbpeople = ?, pool = ?, garden = ?, citycenter = ? WHERE id = ?;`
 
 function getById(id) {
     return db.sqlQuery(sqlGetById, [id]);
@@ -59,8 +59,8 @@ function deleteOffer(offerId) {
     return db.sqlQuery(sqlDelete, [offerId]);
 }
 
-function edit(OfferId, description, price) {
-    return db.sqlQuery(sqlEdit, [description, price, OfferId]);
+function edit(OfferId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter) {
+    return db.sqlQuery(sqlEdit, [title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, OfferId]);
 }
 
 async function getFullWithDefault(offerId) {
