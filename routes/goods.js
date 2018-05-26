@@ -75,7 +75,6 @@ router.post('/new', /*utils.mustBeConnected, goodsValidators,*/ async function(r
     const mapped = errors.mapped();
     const from = new Date(req.body.from);
     const to = new Date(req.body.to);
-    console.log(req.body.from);
 
     if (from > to || from < Date.now()) {
         mapped.dates = {
@@ -89,14 +88,29 @@ router.post('/new', /*utils.mustBeConnected, goodsValidators,*/ async function(r
         });
     }
 
+    if (req.body.pool === undefined) {
+      req.body.pool = 0;
+    }
+    if (req.body.garden === undefined) {
+      req.body.garden = 0;
+    }
+    if (req.body.citycenter === undefined) {
+      req.body.citycenter = 0;
+    }
+
     goodsModel.create(req.session.user.id,
             req.body.title,
             req.body.description,
             req.body.price,
+            req.body.region,
             req.body.department,
             req.body.city,
             req.body.postcode,
-            req.body.address)
+            req.body.address,
+            req.body.nbpeople,
+            req.body.pool,
+            req.body.garden,
+            req.body.citycenter)
         .then((result) => {
             let i = 1;
             for (let property in req.files) {

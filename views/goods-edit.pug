@@ -1,5 +1,8 @@
 extends layout
 
+block header
+  link(rel='stylesheet', href='/stylesheets/goods-new.css')
+
 block content
   .container
     .jumbotron.jumbotron-transparent
@@ -18,11 +21,35 @@ block content
           .form-group.row
             label.col-lg-3.col-form-label Titre de l'annonce
             .col-lg-9
-              input.form-control(name="title", type="text" value=offer.title readonly)
+              input.form-control(name="title", type="text" value=offer.title)
           .form-group.row
             label.col-lg-3.col-form-label Description
             .col-lg-9
               textarea.form-control(name="description", type="text") #{offer.description}
+          .form-group.row
+            .form-check.form-check-inline.mar10.decright
+              if offer.pool == 1
+                input.form-check-input(name="pool" type="checkbox" id="inlineCheckbox1" value="1" checked)
+              else
+                input.form-check-input(name="pool" type="checkbox" id="inlineCheckbox1" value="1")
+              label.form-check-label(for="inlineCheckbox1") Piscine
+            .form-check.form-check-inline.mar10
+              if offer.garden == 1
+                input.form-check-input(name="garden" type="checkbox" id="inlineCheckbox2" value="1" checked)
+              else
+                input.form-check-input(name="garden" type="checkbox" id="inlineCheckbox2" value="1")
+              label.form-check-label(for="inlineCheckbox2") Jardin
+            .form-check.form-check-inline.mar10
+              if offer.citycenter == 1
+                input.form-check-input(name="citycenter" type="checkbox" id="inlineCheckbox3" value="1" checked)
+              else
+                input.form-check-input(name="citycenter" type="checkbox" id="inlineCheckbox3" value="1")
+              label.form-check-label(for="inlineCheckbox3") Centre-Ville
+          .form-group.row
+            label.col-lg-3.col-form-label Nombre de personnes
+            .col-lg-2
+              .input-group
+                input.form-control(name="nbpeople", type="text" value=offer.nbpeople)
           .form-group.row
             label.col-lg-3.col-form-label Prix par nuit
             .col-lg-2
@@ -30,6 +57,10 @@ block content
                 input.form-control(name="price", type="text" value=offer.price)
                 .input-group-append
                   span.input-group-text €
+          .form-group.row
+            label.col-lg-3.col-form-label Région
+            .col-lg-4
+              input.form-control(name="region", type="text" value=offer.region readonly)
           .form-group.row
             label.col-lg-3.col-form-label Département
             .col-lg-4
@@ -64,20 +95,26 @@ block content
           
           .form-group.row
             .col-lg-4
-              .custom-file
-                input.custom-file-input#file(type='file' name='image1')
-                label.custom-file-label(for="file") Choisir une image
+              .image-upload
+                label(for='file')
+                  img#preview0(src="http://goo.gl/pB9rpQ")
+                input#file(type='file' name='image1' onchange='updatePreview(this);'
+                           preview="preview0" accept="image/gif, image/jpeg, image/png")
 
             .col-lg-4
-              .custom-file
-                input.custom-file-input#file1(type='file' name='image2')
-                label.custom-file-label(for="file1") Choisir une image
+              .image-upload
+                label(for='file1')
+                  img#preview1(src="http://goo.gl/pB9rpQ")
+                input#file1(type='file' name='image2' onchange='updatePreview(this);'
+                           preview="preview1" accept="image/gif, image/jpeg, image/png")
 
             .col-lg-4
-              .custom-file
-                input.custom-file-input#file2(type='file' name='image3')
-                label.custom-file-label(for="file2") Choisir une image
-          button.form-control.btn.btn-success(type="submit") Modifier
+              .image-upload
+                label(for='file2')
+                  img#preview2(src="http://goo.gl/pB9rpQ")
+                input#file2(type='file' name='image3' onchange='updatePreview(this);'
+                           preview="preview2" accept="image/gif, image/jpeg, image/png")
+          button.form-control.btn.btn-success(type="submit") Déposer
 
 block scripts
   script(src="/js/goods.js")

@@ -22,9 +22,9 @@ const slqGetByUserIdWithFirstImage =
 
 const sqlCreate =
     `INSERT INTO Offer
-        (userId, title, description, price, department, city, postcode, address)
+        (userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter)
      VALUES
-        (?, ?, ?, ?, ?, ?, ?, ?);`
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
 
 function getById(id) {
     return db.sqlQuery(sqlGetById, [id]);
@@ -38,8 +38,8 @@ function getByUserIdWithFirstImage(userId) {
     return db.sqlQuery(slqGetByUserIdWithFirstImage, [userId]);
 }
 
-function create(userId, title, description, price, department, city, postcode, address) {
-    return db.sqlQuery(sqlCreate, [userId, title, description, price, department, city, postcode, address]);
+function create(userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter) {
+    return db.sqlQuery(sqlCreate, [userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter]);
 }
 
 function getUserId(offerId) {
