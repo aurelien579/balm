@@ -68,6 +68,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/new', /*utils.mustBeConnected,*/ async function(req, res, next) {
     res.render('goods-new', {
+        title: "Nouvelle annonce",
         body: {}
     });
 });

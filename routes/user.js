@@ -96,6 +96,7 @@ router.get('/logout', utils.mustBeConnected, function(req, res, next) {
 
 router.get('/', utils.mustBeConnected, function(req, res, next) {
     res.render('user/user', {
+        title: "Mon compte",
         user: req.session.user
     });
 });
