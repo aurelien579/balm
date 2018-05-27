@@ -32,23 +32,26 @@
 
 .autocomplete-items {
     position: absolute;
-    border-left: 2px solid #B9121B;
     z-index: 99;
     top: 100%;
     left: 0;
     right: 0;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 .autocomplete-items div {
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
     background-color: #fff;
-    border-bottom: 1px solid #d4d4d4;
+    border: 1px solid #d4d4d4;
+    border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .autocomplete-items div:hover {
     /*when hovering an item:*/
-    background-color: #B9121B;
+    background-color: #d4d4d4;
     color: white;
 }
 
