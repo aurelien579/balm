@@ -7,13 +7,22 @@ h5.card-title Mes Réservations
           .col-lg-3.img-col
             .crop
               img.offer-img(src=res.path)
-          .col-lg-9
+          .col-lg-12
             h5 
               a(href="/goods/" + res.offerId) #{res.title} 
               | - #{res.price} € par nuit
             br
             h6 Du #{res.from} au #{res.to}
-            if res.status == 0
+            if past == 1
+              h6 Etat de la réservation : 
+                span.text-success.font-weight-bold Effectuée
+              h6 Laisser un commentaire :
+              //form(action='/user' method='post' enctype="multipart/form-data")
+                .form-group.row
+                  label.col-lg-3.col-form-label
+                  .col-lg-9
+                    input.form-control(name="region", type="text" placeholder="Laisser un commentaire .." value=body.addcomment)
+            else if res.status == 0
               h6 Etat de la réservation : 
                 span.text-warning.font-weight-bold En attente
             else
@@ -21,3 +30,4 @@ h5.card-title Mes Réservations
                 span.text-success.font-weight-bold Acceptée
   else
     p Vous n'avez pas encore fait de réservations
+  
