@@ -154,9 +154,8 @@ router.get('/:id', async function(req, res, next) {
         let images = await imageModel.getByOfferId(id);
         let avail = await availabilityModel.getAvailabilityByOfferId(id);
 
-        console.log(avail);
-
         res.render('goods', {
+            title: offer.title,
             offer: offer,
             comments: comments,
             images: images,
@@ -177,6 +176,7 @@ router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {
             return res.render('hack');
 
         return res.render('goods-edit', {
+            title: "Modification : " + good.title,
             offer: good
         });
     } catch (ex) {
