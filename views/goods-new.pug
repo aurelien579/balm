@@ -57,17 +57,18 @@ block content
           .form-group.row
             label.col-lg-3.col-form-label Région
             .col-lg-4
-              input.form-control(name="region", type="text" placeholder="Région")
+              input.form-control(name="region", type="text" id="searchbar1" 
+                                  placeholder="Région" value=body.department autocomplete="off")
           .form-group.row
             label.col-lg-3.col-form-label Département
             .col-lg-4
-              input.form-control(name="department", type="text"
-                                 placeholder="Département" value=body.department)
+              input.form-control(name="department", type="text" id="searchbar2"
+                                 placeholder="Département" value=body.department autocomplete="off")
           .form-group.row
             label.col-lg-3.col-form-label Ville
             .col-lg-4
-              input.form-control(name="city" type="text"
-                                 placeholder="Ville" value=body.city)
+              input.form-control(name="city" type="text" id="searchbar3"
+                                 placeholder="Ville" value=body.city autocomplete="off")
           .form-group.row
             label.col-lg-3.col-form-label Code postal
             .col-lg-4
@@ -118,3 +119,4 @@ block content
 
 block scripts
   script(src="/js/goods.js")
+  script(src="/js/autocomplete.js")
