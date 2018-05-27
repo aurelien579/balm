@@ -12,6 +12,24 @@ body {
     background-size: cover;
     margin-bottom: 30px;
 }
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+}
+.footer{
+  position: relative;
+  background-color: rgba(255,255,255,0.8);
+  width: 100%;
+  padding: 0.5%;
+  text-align: center;
+  margin-top: 2%;
+  bottom: 0;
+  height: 60px;
+}
 
 .jumbotron-custom {
     padding-bottom: 20px;
@@ -31,7 +49,11 @@ body {
 .box-shadow {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
 }
+.container {
+  min-height: 100%;
+  padding-bottom: 60px;
 
+}
 .header {
     color: white;
     border-radius: 5px;

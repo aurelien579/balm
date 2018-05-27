@@ -33,10 +33,23 @@ html
           else
             li(class='nav-item')
               a(class='nav-link', href='/user/login') Connexion
+              
 
     block content
-    
-    
+
+    footer(class= "footer")
+       button(type="button" class="btn " data-toggle="modal" data-target="#exampleModalLong") Aide
+       div(class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true")
+         div(class="modal-dialog" role="document")
+           div(class="modal-content")
+             div(class="modal-header")
+               h5(class="modal-title" id="exampleModalLongTitle") Aide
+               button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                 span(aria-hidden="true") &times;
+             div(class="modal-body")
+             div(class="modal-footer")
+               button(type="button" class="btn btn-secondary" data-dismiss="modal") Fermer l'aide
+
     script(src='/js/popper.min.js')
     script(src='/js/jquery-3.3.1.min.js')
     script(src='/js/bootstrap.min.js')
