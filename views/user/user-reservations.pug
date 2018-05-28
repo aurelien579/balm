@@ -2,7 +2,7 @@ h5.card-title Mes Réservations
 .card-content
   if reservations.length > 0
     ul.list-group
-      each res in reservations
+      each res, i in reservations
         li.list-group-item
           .col-lg-3.img-col
             .crop
@@ -13,21 +13,37 @@ h5.card-title Mes Réservations
               | - #{res.price} € par nuit
             br
             h6 Du #{res.from} au #{res.to}
-            if past == 1
+            if res.past && !res.commented
               h6 Etat de la réservation : 
                 span.text-success.font-weight-bold Effectuée
-              h6 Laisser un commentaire :
-              //form(action='/user' method='post' enctype="multipart/form-data")
-                .form-group.row
-                  label.col-lg-3.col-form-label
-                  .col-lg-9
-                    input.form-control(name="region", type="text" placeholder="Laisser un commentaire .." value=body.addcomment)
+              button.btn.btn-primary(data-toggle="modal" data-target="#modal" + i) Laisser un avis
+            else if res.past && res.commented
+              h6 Etat de la réservation :
+                span.text-success.font-weight-bold Effectuée et commenté
             else if res.status == 0
               h6 Etat de la réservation : 
                 span.text-warning.font-weight-bold En attente
             else
               h6 Etat de la réservation : 
                 span.text-success.font-weight-bold Acceptée
+
+        .modal.fade(id="modal" + i)
+          .modal-dialog
+            .modal-content
+              .modal-header
+                h5.modal-title Commentaire
+                button.button.close(data-dismiss="modal" aria-label="Close")
+              .modal-body
+                .container-fluid
+                  form#commentForm(offer-id=res.offerId modal-id="modal" + i action="/comment" method="POST")
+                    .form-group.row
+                      label(for="rating") Note:
+                      input.form-control#rating(name="rating" type="number" min=0 max=5 step=1 required)
+                    .form-group.row
+                      label(for="content") Commentaire:
+                      textarea.form-control#content(name="content" required)
+              .modal-footer
+                button.btn.btn-secondary(data-dismiss="modal") Fermer
+                input.btn.btn-primary(type="submit" form="commentForm" value="Valider")                
   else
     p Vous n'avez pas encore fait de réservations
-  

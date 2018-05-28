@@ -1,9 +1,10 @@
 $(function() {
-    function ajax(url) {
+    function ajax(url, callback) {
         $.ajax({
             url: url,
             success: function(result) {
                 $("#ajaxContent").html(result);
+                if (callback) callback();
             }
         });
     }
@@ -29,7 +30,22 @@ $(function() {
     });
 
     $('#reservationsButton').click(function() {
-        ajax('/user/reservations');
+        ajax('/user/reservations', function() {
+            const $form = $("#commentForm");
+            $form.submit(function(event) {
+                event.preventDefault();
+                const $form = $(this);
+                const url = $form.attr('action');
+                $.post(url, {
+                    offerId: $("#commentForm").attr("offer-id"),
+                    rating: $('#rating').val(),
+                    content: $('#content').val()
+                });
+
+                $("#" + $form.attr('modal-id')).modal('toggle');
+            });
+        });
+
         setActive($('#reservationsButton'));
     });
 

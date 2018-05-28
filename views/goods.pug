@@ -78,27 +78,26 @@ block content
 
           div(class="col-sm-5 cadre reservation")
             form(action='/reservation/new' method='post')
-              div(class = "row-res")
-                h1(class = "lead") Demande de réservation :
-              div(class="row")
-                div(class="col-sm-6 padding-res")
+              div(class="row-res")
+                h1(class="lead") Demande de réservation :
+              div(class="form-group row")
+                div(class="col")
                   .input-group.date
                     input.form-control.datepicker#date0(type="text" end="date1")
-                    input#date0Sent(name="from" type="hidden")
-                div(class="col-sm-6 padding-res")
+                  input#date0Sent(name="from" type="hidden")
+                div(class="col")
                   .input-group.date
                     input.form-control.datepicker#date1(type="text" start="date0")
-                    input#date1Sent(name="to" type="hidden")
-              div(class="row")
-                div(class="col-sm padding-res")
+                  input#date1Sent(name="to" type="hidden")
+              div(class="form-group row")
+                div(class="col")
                   label(for="" class="sr-only") Nombre de personne
                   input(class="form-control" placeholder="Nombre de personne" name="numberpers" required )
-                div(class="col-sm padding-res")
+                div(class="col")
                   input(type="hidden" name="id" value=id)
                   button(type="submit" class="btn btn-info form-control") Réserver
 
-
-        div(class = "commentaires  border-0")
+        div(class="commentaires border-0")
           h4(class="text-justify") Commentaires
           if comments
             each row in comments

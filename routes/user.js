@@ -141,15 +141,17 @@ router.get('/comments', utils.mustBeConnected, function(req, res, next) {
 router.get('/reservations', utils.mustBeConnected, function(req, res, next) {
     reservationModel.getByUserId(req.session.user.id)
         .then((results) => {
-            var now = new Date();
-            var to = new Date(results[0].to2);
-            var past = 0;
-            if (to < now) {
-              past = 1;
-            }
+            const now = new Date();
+
+            results.forEach((reservation) => {
+                let to = new Date(reservation.to2);
+                if (to < now) {
+                  reservation.past = 1;
+                }
+            });
+
             res.render('user/user-reservations', {
-                reservations: results,
-                past: past
+                reservations: results
             })
         })
         .catch((error) => {
