@@ -4,9 +4,15 @@ h5.card-title Mes Offres
     ul.list-group
       each offer in offers
         li.list-group-item
-          h5 
-            a(href="/goods/" + offer.id) #{offer.title} 
-            | - #{offer.price} € par nuit
+          h5
+            a(href="/goods/" + offer.offerId) #{offer.title} 
+            case offer.type
+              when 0
+                | (Location) à #{offer.price} € par nuit
+              when 1
+                | (Echange)
+              when 2
+                | (Hébergement)
           .row
             .col-lg-3
               .crop

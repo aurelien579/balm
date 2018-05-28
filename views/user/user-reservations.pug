@@ -8,24 +8,36 @@ h5.card-title Mes Réservations
             .crop
               img.offer-img(src=res.path)
           .col-lg-12
-            h5 
+            h5
               a(href="/goods/" + res.offerId) #{res.title} 
-              | - #{res.price} € par nuit
+              case res.type
+                when 0
+                  | (Location) à #{res.price} € par nuit
+                when 1
+                  | (Echange)
+                when 2
+                  | (Hébergement)
             br
-            h6 Du #{res.from} au #{res.to}
-            if res.past && !res.commented
-              h6 Etat de la réservation : 
-                span.text-success.font-weight-bold Effectuée
-              button.btn.btn-primary(data-toggle="modal" data-target="#modal" + i) Laisser un avis
-            else if res.past && res.commented
-              h6 Etat de la réservation :
-                span.text-success.font-weight-bold Effectuée et commenté
-            else if res.status == 0
-              h6 Etat de la réservation : 
-                span.text-warning.font-weight-bold En attente
-            else
-              h6 Etat de la réservation : 
-                span.text-success.font-weight-bold Acceptée
+            .row
+              .col-lg-6
+                h6 Du #{res.from} au #{res.to}
+                if res.past && !res.commented                
+                  h6 Etat de la réservation : 
+                    span.text-success.font-weight-bold Effectuée
+                else if res.past && res.commented
+                  h6 Etat de la réservation :
+                    span.text-success.font-weight-bold Effectuée et commenté
+                else if res.status == 0
+                  h6 Etat de la réservation : 
+                    span.text-warning.font-weight-bold En attente
+                else
+                  h6 Etat de la réservation : 
+                    span.text-success.font-weight-bold Acceptée
+                
+              if res.past && !res.commented
+                .col-lg-6
+                  .text-right
+                    button.btn.btn-primary(data-toggle="modal" data-target="#modal" + i) Laisser un avis
 
         .modal.fade(id="modal" + i)
           .modal-dialog
@@ -44,6 +56,6 @@ h5.card-title Mes Réservations
                       textarea.form-control#content(name="content" required)
               .modal-footer
                 button.btn.btn-secondary(data-dismiss="modal") Fermer
-                input.btn.btn-primary(type="submit" form="commentForm" value="Valider")                
+                input.btn.btn-primary(type="submit" form="commentForm" value="Valider")
   else
     p Vous n'avez pas encore fait de réservations

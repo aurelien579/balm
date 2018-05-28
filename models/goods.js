@@ -17,7 +17,7 @@ const sqlDeleteCom = 'DELETE FROM Comment WHERE idOffer = ?;';
 const sqlDeleteDisp = 'DELETE FROM Availability WHERE offerId = ?;';
 
 const slqGetByUserIdWithFirstImage =
-    `SELECT Offer.id, Offer.title, Offer.description, Offer.price, COALESCE(Image.path, '/images/offers/default.jpg') AS path
+    `SELECT Offer.id, Offer.title, Offer.description, Offer.price, Offer.type, COALESCE(Image.path, '/images/offers/default.jpg') AS path
     FROM Offer LEFT JOIN Image ON Image.id =
     (
     	SELECT id FROM Image

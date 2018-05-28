@@ -22,6 +22,8 @@ const sqlGetByUserId =
             AND User.id = Comment.idUser;
     `;
 
+const sqlCreate = 'INSERT INTO Comment (idOffer, idUser, rating, content) VALUES (?, ?, ?, ?);';
+
 function getByOfferId(id) {
     return db.sqlQuery(sqlGetById, [id]);
 }
@@ -30,5 +32,10 @@ function getByUserId(userId) {
     return db.sqlQuery(sqlGetByUserId, [userId]);
 }
 
+function create(offerId, userId, rating, content) {
+    return db.sqlQuery(sqlCreate, [offerId, userId, rating, content]);
+}
+
 exports.getByUserId = getByUserId;
 exports.getByOfferId = getByOfferId;
+exports.create = create;
