@@ -68,6 +68,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/new', /*utils.mustBeConnected,*/ async function(req, res, next) {
     res.render('goods-new', {
+        title: "Nouvelle Annonce",
         body: {}
     });
 });
@@ -169,6 +170,7 @@ router.get('/:id', async function(req, res, next) {
 
 
         res.render('goods', {
+            title: offer.title,
             offer: offer,
             comments: comments,
             images: images,
@@ -189,6 +191,7 @@ router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {
             return res.render('hack');
 
         return res.render('goods-edit', {
+            title: "Modification : " + good.title,
             offer: good
         });
     } catch (ex) {
