@@ -135,26 +135,25 @@ router.get('/comments', utils.mustBeConnected, function(req, res, next) {
 });
 
 router.get('/reservations', utils.mustBeConnected, function(req, res, next) {
-    reservationModel.getByUserId(req.session.user.id)
-        .then((results) => {
-            const now = new Date();
+    try {
+        const results = await reservationModel.getByUserIdWithCommentCount(req.session.user.id);
+        const now = new Date();
 
-            results.forEach((reservation) => {
-                let to = new Date(reservation.to2);
-                if (to < now) {
-                    reservation.past = 1;
-                }
-            });
-
-            res.render('user/user-reservations', {
-                reservations: results
-            })
-        })
-        .catch((error) => {
-            res.render('error', {
-                error: error
-            });
+        results.forEach((reservation) => {
+            let to = new Date(reservation.to2);
+            if (to < now) {
+                reservation.past = 1;
+            }
         });
+
+        res.render('user/user-reservations', {
+            reservations: results
+        });
+    } catch (ex) {
+        res.render('error', {
+            error: ex
+        });
+    }
 });
 
 router.get('/demands', utils.mustBeConnected, function(req, res, next) {

@@ -37,6 +37,39 @@ WHERE
         AND Offer.id = Reservation.offerId;
 `;
 
+const sqlGetByUserIdWithCommentCount = `
+SELECT
+    DATE_FORMAT(Reservation.from, '%d %M %Y') AS 'from',
+    DATE_FORMAT(Reservation.to, '%d %M %Y') AS 'to',
+    DATE_FORMAT(Reservation.to, '%Y-%m-%d') AS 'to2',
+    Reservation.status,
+    Reservation.offerId,
+    Offer.title,
+    Offer.price,
+    Offer.type,
+    COALESCE(Image.path, '/images/offers/default.jpg') AS path,
+    COUNT(Comment.idOffer) AS commentsCount
+FROM
+    Comment,
+    Reservation,
+    Offer
+        LEFT JOIN
+    Image ON Image.id = (SELECT
+            id
+        FROM
+            Image
+        WHERE
+            Image.offerId = Offer.id
+        ORDER BY id
+        LIMIT 1)
+WHERE
+    Reservation.userId = ?
+        AND Offer.id = Reservation.offerId
+        AND Offer.id = Comment.idOffer
+        AND Comment.idUser = Reservation.userId
+GROUP BY Reservation.status
+`;
+
 const sqlGetDemandsTo = `
 SELECT
     Reservation.id AS reservationId,
@@ -106,6 +139,10 @@ function get(id) {
 
 function abortOverlapping(offerId, start, end) {
     return db.sqlQuery(sqlAbortOverlapping, [offerId, start, end, start, end]);
+}
+
+function getByUserIdWithCommentCount(userId) {
+    return db.sqlQuery(sqlGetByUserId, [userId]);
 }
 
 exports.getByUserId = getByUserId;
