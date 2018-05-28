@@ -38,7 +38,7 @@ function setupDatepicker(elem) {
             updateDateToSend(elem, "");
     });
 
-    elem.datepicker('setDate', formatDate(new Date(initialDate)));
+    //elem.datepicker('setDate', formatDate(new Date(initialDate)));
 
     let endAttr = elem.attr('end');
     let startAttr = elem.attr('start');
