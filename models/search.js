@@ -5,7 +5,7 @@ const offerSql = {
                 O.*,
                 AVG(C.rating) AS avg,
                 count(C.content) AS nbCom,
-                COALESCE(I.path, '/images/maison_search.png') AS path
+                COALESCE(I.path, '/images/offers/default.jpg') AS path
           FROM
                 Availability AS A,
                 Offer AS O LEFT JOIN Comment AS C ON C.idOffer = O.id
