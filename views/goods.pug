@@ -3,7 +3,7 @@ block header
   link(rel='stylesheet', href='/stylesheets/goods.css')
 
 block content
-  .container
+  .container.box-shadow
     if offer
       if images.length>0
         div(id="carouselExampleIndicators" class="carousel" data-ride="carousel" data-interval ="5000")
@@ -75,28 +75,48 @@ block content
             h4(class="text-justify") Description
             p(class="text-justify") #{offer.description}
 
-
-          div(class="col-sm-5 cadre reservation")
-            form(action='/reservation/new' method='post')
-              div(class="row-res")
-                h1(class="lead") Demande de réservation :
-              div(class="form-group row")
-                div(class="col")
-                  .input-group.date
-                    input.form-control.datepicker#date0(type="text" end="date1")
-                  input#date0Sent(name="from" type="hidden")
-                div(class="col")
-                  .input-group.date
-                    input.form-control.datepicker#date1(type="text" start="date0")
-                  input#date1Sent(name="to" type="hidden")
-              div(class="form-group row")
-                div(class="col")
-                  label(for="" class="sr-only") Nombre de personne
-                  input(class="form-control" placeholder="Nombre de personne" name="numberpers" required )
-                div(class="col")
-                  input(type="hidden" name="id" value=id)
-                  button(type="submit" class="btn btn-info form-control") Réserver
-
+          if offer.type != 1
+            div(class="col-sm-5 cadre reservation")
+              form(action='/reservation/new' method='post')
+                div(class="row-res")
+                  h1(class="lead") Demande de réservation :
+                div(class="form-group row")
+                  div(class="col")
+                    .input-group.date
+                      input.form-control.datepicker#date0(type="text" end="date1")
+                    input#date0Sent(name="from" type="hidden")
+                  div(class="col")
+                    .input-group.date
+                      input.form-control.datepicker#date1(type="text" start="date0")
+                    input#date1Sent(name="to" type="hidden")
+                div(class="form-group row")
+                  div(class="col")
+                    label(for="" class="sr-only") Nombre de personne
+                    input(class="form-control" placeholder="Nombre de personne" name="numberpers" required )
+                  div(class="col")
+                    input(type="hidden" name="id" value=id)
+                    button(type="submit" class="btnRed btn-outline-danger form-control") Réserver
+          else
+            div(class="col-sm-5 cadre reservation")
+              form(action='/reservation/new' method='post')
+                div(class="row-res")
+                  h1(class="lead") Demande d'échange :
+                div(class="form-group row")
+                  div(class="col")
+                    .input-group.date
+                      input.form-control.datepicker#date0(type="text" end="date1")
+                    input#date0Sent(name="from" type="hidden")
+                  div(class="col")
+                    .input-group.date
+                      input.form-control.datepicker#date1(type="text" start="date0")
+                    input#date1Sent(name="to" type="hidden")
+                div(class="form-group row")
+                  div(class="col")
+                    select(class="form-control")
+                      option() maison 1
+                  div(class="col")
+                    input(type="hidden" name="id" value=id)
+                    button(type="submit" class="btnRed btn-outline-danger form-control") Réserver
         div(class="commentaires border-0")
           h4(class="text-justify") Commentaires
           if comments

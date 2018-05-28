@@ -21,7 +21,7 @@ html
         ul(class='navbar-nav mr-auto')
           li(class='nav-item')
             a(class='nav-link', href='/') Accueil
-
+            
         ul(class='navbar-nav ml-auto')
           if session
             li.nav-item
@@ -33,7 +33,61 @@ html
           else
             li(class='nav-item')
               a(class='nav-link', href='/user/login') Connexion
-              
+        
+      form(id="form-layout" action='/search' autocomplete="off" method='get')
+        div(class="row")
+          div(id="input1" class="input-group")
+            input(type="text" class="form-control" id="searchbar_head" name="searchText" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2" )
+            button(id="button1" class="btn" type="submit")
+              i(class="fa fa-search")
+          button(id="button2" class="btn" type="button" data-toggle="collapse" href="#options-avancées" aria-controls="options-avancées") Options avancées
+                  
+        div(id="options-avancées" class="collapse card")
+          div(class="form-group row" id ="option")
+            label(class="control-label" for="date") Date de départ :
+            input(id="date" class="form-control" name="datedep" type="text" )
+          div(class="form-group row" id ="option")
+            label(class="control-label" for="date2") Date de retour :
+            input(id="date2" class="form-control" name="datearr" type="text" onclick="setminvalue()")
+          div(class="form-group row" id ="option")
+            label(for="FormControlSelect1") Nombre de personnes :
+            select(class="form-control" name="numberpers" id="FormControlSelect1")
+              option()
+              option() 1
+              option() 2
+              option() 3
+              option() 4
+              option() 5
+              option() 6
+              option() 7
+              option() 8
+              option() 9
+              option() 10+
+          div(class="form-group row")
+            div(class="text") Type de service :
+            div(class="row")
+              div(class="col form-check form-check-inline")
+                input(id="echange" class="form-check-input" type="checkbox" name="echange" value="1")
+                label(class="form-check-label" for="echange") Echange
+              div(class="col form-check form-check-inline")
+                input(id="hebergement" class="form-check-input" type="checkbox" name="hebergement" value="1")
+                label(class="form-check-label" for="hebergement") Hebergement
+              div(class="col form-check form-check-inline")
+                input(id="location" class="form-check-input" type="checkbox" name="location" value="1")
+                label(class="form-check-label" for="location") Location
+          div(class="form-group row")
+            div(class="text") Et pour les plus exigeants :
+            div(class="row")
+              div(class="col form-check form-check-inline")
+                input(id="pool" class="form-check-input" type="checkbox" name="pool" value="1")
+                label(class="form-check-label" for="pool") Piscine
+              div(class="col form-check form-check-inline")
+                input(id="garden" class="form-check-input" type="checkbox" name="garden" value="1")
+                label(class="form-check-label" for="garden") Jardin
+              div(class="col form-check form-check-inline")
+                input(id="city" class="form-check-input" type="checkbox" name="city" value="1")
+                label(class="form-check-label" for="city") Centre ville
+
 
     block content
 
@@ -54,4 +108,6 @@ html
     script(src='/js/jquery-3.3.1.min.js')
     script(src='/js/bootstrap.min.js')
     script(src='/js/bootstrap-datepicker.min.js')
+    script(src='/js/layout.js')
+    script(src="/js/autocomplete.js")
     block scripts

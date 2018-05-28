@@ -24,9 +24,9 @@ const offerSql = {
     pool: ` AND O.pool = 1`,
     garden: ` AND O.garden = 1`,
     city: ` AND O.citycenter = 1`,
-    hebergement: ` AND O.type = 0`,
+    hebergement: ` AND O.type = 2`,
     echange: ` AND O.type = 1`,
-    location: ` AND O.prix != 0`,
+    location: ` AND O.type = 0`,
     close: ` GROUP BY O.id, I.path;`
 };
 

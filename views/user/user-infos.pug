@@ -1,9 +1,21 @@
 h5.card-title Informations personelles
 .card-content
-  .col-lg-3.img-col
-    .crop
-      img.offer-img(src=user.imagePath)
+  img.offer-img2(src=user.imagePath)
   .col-lg-6
-    p Prénom: #{user.firstName}
-    p Nom de famille: #{user.lastName}
-    p Email: #{user.email}
+    form
+      div(class="form-group row")
+        label(for="staticEmail" class="col-sm-4 col-form-label") Email :
+        div(class="col-sm-8")
+          input(type="text" class="form-control" id="staticEmail" value= user.email readonly)
+      div(class="form-group row")
+        label(for="inputPassword" class="col-sm-4 col-form-label") Nom :
+        div(class="col-sm-8")
+          input(type="text" class="form-control" id="inputPassword" value= user.firstName readonly)
+      div(class="form-group row")
+        label(for="inputPassword" class="col-sm-4 col-form-label") Prénom :
+        div(class="col-sm-8")
+          input(type="text" class="form-control" id="inputPassword" value= user.lastName readonly)
+      //div(class="form-group row")
+        label(for="inputPassword" class="col-sm-4 col-form-label") Mot de passe :
+        div(class="col-sm-8")
+          input(type="password" class="form-control" id="inputPassword" placeholder="Password")

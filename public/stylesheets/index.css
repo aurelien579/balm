@@ -15,9 +15,9 @@
     transform: translate(-50%, -50%);
 }
 
-.typeahead {
+/*.typeahead {
     z-index: 1051;
-}
+}*/
 
 #searchbar {
     outline: none !important;

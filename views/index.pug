@@ -5,7 +5,7 @@ block header
 
 block content
   .container
-    video(autoplay loop id="myVideo")
+    //video(autoplay loop id="myVideo")
       source(src="//videos/IMG_2478.MOV" type="video/mp4")
     form(id="form" action='/search' autocomplete="off" method='get')
       div(class="row")
@@ -14,6 +14,7 @@ block content
           button(id="button1" class="btn" type="submit")
             i(class="fa fa-search")
         button(id="button2" class="btn" type="button" data-toggle="collapse" href="#input2" aria-controls="input2") Options avancées
+        
       div(id="input2" class="collapse")
         div(class="card")
           div(class="form-group row")
@@ -49,7 +50,7 @@ block content
                 input(id="location" class="form-check-input" type="checkbox" name="location" value="1")
                 label(class="form-check-label" for="location") Location
             div(class="text") Et pour les plus exigeants :
-            div(class="row")
+            div(class="row" id ="option")
               div(class="col form-check form-check-inline")
                 input(id="pool" class="form-check-input" type="checkbox" name="pool" value="1")
                 label(class="form-check-label" for="pool") Piscine
@@ -62,5 +63,4 @@ block content
 
 
 block scripts
-  script(src="js/autocomplete.js")
   script(src="js/functions.js")
