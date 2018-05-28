@@ -44,5 +44,5 @@ function setminvalue() {
   }
 }
 
-var vid = document.getElementById("myVideo");
-vid.volume = 0;
+/*var vid = document.getElementById("myVideo");
+vid.volume = 0;*/
