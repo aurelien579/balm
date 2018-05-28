@@ -1,4 +1,4 @@
-  $("#searchbar_head, #searchbar, #searchbar1, #searchbar2, #searchbar3").keyup(function(e) {
+  $("#searchbar_head, #searchbar, #region, #departement, #city").keyup(function(e) {
     var id = this.id;
     var name = this.name;
     let count = 0;
