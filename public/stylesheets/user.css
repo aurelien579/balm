@@ -24,6 +24,13 @@
     border-radius: 4px;
 }
 
+.offer-img2 {
+    position: absolute;
+    left: 80%;
+    bottom: 0;
+    height: 200px;
+}
+
 .offer-img {
     position: absolute;
     top: 0;

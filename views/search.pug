@@ -58,10 +58,10 @@ block content
                     img(class="card-img-top remove-border Offer_Image" src=elem.path alt="Card image cap")
                     div(class="card-body")
                       p(class="Offer_Title")   #{elem.title}
-                      if elem.Hebergement ==1
-                        p(class="Offer_Price") Hébergement Gratuit
-                      else if elem.Echange ==1
-                        p(class="Offer_Price") Echange de Maison
+                      if elem.type == 1
+                        p(class="Offer_Price") Echange
+                      else if elem.type == 2
+                        p(class="Offer_Price") Hébergement
                       else
                         p(class="Offer_Price")   #{elem.price}€
                         p(class="Offer_Night")  la nuit.
