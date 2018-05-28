@@ -30,7 +30,7 @@
   margin-left: 27%;
 }
 
-.autocomplete-items {
+/*.autocomplete-items {
     position: absolute;
     z-index: 99;
     top: 100%;
@@ -50,13 +50,13 @@
 }
 
 .autocomplete-items div:hover {
-    /*when hovering an item:*/
+
     background-color: #d4d4d4;
     color: white;
 }
 
 .autocomplete-active {
-    /*when navigating through the items using the arrow keys:*/
+
     background-color: DodgerBlue !important;
     color: #ffffff;
-}
+}*/
