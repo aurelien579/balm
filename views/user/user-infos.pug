@@ -2,20 +2,46 @@ h5.card-title Informations personelles
 .card-content
   img.offer-img2(src=user.imagePath)
   .col-lg-6
-    form
-      div(class="form-group row")
-        label(for="staticEmail" class="col-sm-4 col-form-label") Email :
-        div(class="col-sm-8")
-          input(type="text" class="form-control" id="staticEmail" value= user.email readonly)
-      div(class="form-group row")
-        label(for="inputPassword" class="col-sm-4 col-form-label") Nom :
-        div(class="col-sm-8")
-          input(type="text" class="form-control" id="inputPassword" value= user.firstName readonly)
-      div(class="form-group row")
-        label(for="inputPassword" class="col-sm-4 col-form-label") Prénom :
-        div(class="col-sm-8")
-          input(type="text" class="form-control" id="inputPassword" value= user.lastName readonly)
-      //div(class="form-group row")
-        label(for="inputPassword" class="col-sm-4 col-form-label") Mot de passe :
-        div(class="col-sm-8")
-          input(type="password" class="form-control" id="inputPassword" placeholder="Password")
+    if modify == 0
+      form(action='/user/info' method='get' enctype="multipart/form-data")
+        div(class="form-group row")
+          label(for="staticEmail" class="col-sm-4 col-form-label") Email :
+          div(class="col-sm-8")
+            input(type="text" class="form-control" id="staticEmail" value=user.email readonly)
+        div(class="form-group row")
+          label(for="inputPassword" class="col-sm-4 col-form-label") Nom :
+          div(class="col-sm-8")
+            input(type="text" class="form-control" id="inputPassword" value=user.firstName readonly)
+        div(class="form-group row")
+          label(for="inputPassword" class="col-sm-4 col-form-label") Prénom :
+          div(class="col-sm-8")
+            input(type="text" class="form-control" id="inputPassword" value=user.lastName readonly)
+        div(class="form-group row")
+          label(for="inputPassword" class="col-sm-4 col-form-label")
+          input(id="prodId" name="modify" type="hidden" value="1")
+          div(class="col-sm-8")
+            button(type="submit" class="btn btn-primary") Modifier
+    else if modify == 1
+      form(action='/user' method='post' enctype="multipart/form-data")
+        div(class="form-group row")
+          label(for="staticEmail" class="col-sm-4 col-form-label") Email :
+            div(class="col-sm-8")
+              input(type="text" class="form-control" id="staticEmail" name="email" value=user.email)
+          div(class="form-group row")
+            label(for="inputPassword" class="col-sm-4 col-form-label") Nom :
+            div(class="col-sm-8")
+              input(type="text" class="form-control" id="inputPassword" name="firstname" value=user.firstName)
+          div(class="form-group row")
+            label(for="inputPassword" class="col-sm-4 col-form-label") Prénom :
+            div(class="col-sm-8")
+              input(type="text" class="form-control" id="inputPassword" name="lastname" value=user.lastName)
+          //div(class="form-group row")
+            label(for="inputPassword" class="col-sm-4 col-form-label") Mot de passe :
+            div(class="col-sm-8")
+              input(type="password" class="form-control" id="inputPassword" placeholder="Password")
+          div(class="form-group row")
+            label(for="inputPassword" class="col-sm-4 col-form-label")
+            input(id="prodId" name="modify" type="hidden" value="2")
+            div(class="col-sm-8")
+              button(type="submit" class="btn btn-primary") Sauvegarder
+      
