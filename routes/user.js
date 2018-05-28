@@ -12,14 +12,10 @@ const app = require('../app');
 
 function createSession(req, user) {
     req.session.user = user;
-    app.locals.session = {
-        email: user.email
-    };
 }
 
 function clearSession(req) {
     req.session.user = undefined;
-    app.locals.session = undefined;
 }
 
 router.post('/login', async function(req, res, next) {
@@ -133,7 +129,7 @@ router.get('/offers', utils.mustBeConnected, function(req, res, next) {
 });
 
 router.get('/comments', utils.mustBeConnected, function(req, res, next) {
-  console.log("salut");
+    console.log("salut");
     commentModel.getByUserId(req.session.user.id)
         .then((comments) => {
             res.render('user/user-comments', {
@@ -156,7 +152,7 @@ router.get('/reservations', utils.mustBeConnected, function(req, res, next) {
             results.forEach((reservation) => {
                 let to = new Date(reservation.to2);
                 if (to < now) {
-                  reservation.past = 1;
+                    reservation.past = 1;
                 }
             });
 

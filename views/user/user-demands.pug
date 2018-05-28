@@ -12,7 +12,13 @@ h5.card-title Mes Demandes de Réservation
               h5 
                 | Demande de réservation pour 
                 a(href="/goods/" + demand.offerId) #{demand.title} 
-                | à #{demand.price} € par nuit
+                case demand.type
+                  when 0
+                    | (Location) à #{demand.price} € par nuit
+                  when 1
+                    | (Echange)
+                  when 2
+                    | (Hébergement)
               h6 Du #{demand.from} au #{demand.to}, par #{demand.firstName}
               if demand.status == 0
                 .text-right.pt-4

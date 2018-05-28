@@ -37,10 +37,10 @@ block content
         div(class="row")
           div(class="col-sm")
             h4(class="text-justify")  Lieux : #{offer.city}
-            if offer.Hebergement ==1
-              h4(class= "text-justify inline") Hébergement Gratuit
-            else if offer.Echange ==1
-              h4(class="text-justify inline") Echange de Maison
+            if offer.type == 2
+              h4(class= "text-muted inline font-italic gris ") Hébergement Gratuit
+            else if offer.type == 1
+              h4(class="text-muted inline font-italic gris ") Echange de Maison
             else
               h4(class = "text-justify inline" ) #{offer.price} €
               h6(small class="text-muted inline font-italic gris ")       .par nuit
@@ -83,12 +83,12 @@ block content
                 div(class="form-group row")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date0(type="text" end="date1")
-                    input#date0Sent(name="from" type="hidden")
+                      input.form-control.datepicker#date0(type="text" end="date1" placeholder ="Arrivée")
+                    input#date0Sent(name="from" type="hidden" placeholder ="Arrivée")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date1(type="text" start="date0")
-                    input#date1Sent(name="to" type="hidden")
+                      input.form-control.datepicker#date1(type="text" start="date0" placeholder = "Départ")
+                    input#date1Sent(name="to" type="hidden" placeholder="Départ")
                 div(class="form-group row")
                   div(class="col")
                     label(for="" class="sr-only") Nombre de personne
@@ -104,16 +104,18 @@ block content
                 div(class="form-group row")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date0(type="text" end="date1")
-                    input#date0Sent(name="from" type="hidden")
+                      input.form-control.datepicker#date0(type="text" end="date1" placeholder = "Arrivée")
+                    input#date0Sent(name="from" type="hidden" placeholder ="Arrivée")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date1(type="text" start="date0")
-                    input#date1Sent(name="to" type="hidden")
+                      input.form-control.datepicker#date1(type="text" start="date0" placeholder = "Départ")
+                    input#date1Sent(name="to" type="hidden" placeholder = "Départ")
                 div(class="form-group row")
                   div(class="col")
-                    select(class="form-control")
-                      option() maison 1
+                    if user
+                      select(class="form-control")
+                        each row in result
+                          option() #{row.title} 
                   div(class="col")
                     input(type="hidden" name="id" value=id)
                     button(type="submit" class="btnRed btn-outline-danger form-control") Réserver

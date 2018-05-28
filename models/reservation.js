@@ -18,6 +18,7 @@ SELECT
     Reservation.offerId,
     Offer.title,
     Offer.price,
+    Offer.type,
     COALESCE(Image.path, '/images/offers/default.jpg') AS path
 FROM
     Reservation,

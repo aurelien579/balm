@@ -2,9 +2,9 @@ const db = require('./db');
 const availabilityModel = require('./availability');
 const imageModel = require('./image');
 
-const RENTING = 0;
-const EXCHANGE = 1;
-const HOSTING = 2;
+const RENTING = 0; /* Location */
+const EXCHANGE = 1; /* Echange */
+const HOSTING = 2; /* Hébergement */
 
 const sqlGetById = 'SELECT * FROM Offer WHERE id = ?;';
 const sqlGetUserId = 'SELECT Offer.userId FROM Offer WHERE id = ?;';
@@ -17,7 +17,7 @@ const sqlDeleteCom = 'DELETE FROM Comment WHERE idOffer = ?;';
 const sqlDeleteDisp = 'DELETE FROM Availability WHERE offerId = ?;';
 
 const slqGetByUserIdWithFirstImage =
-    `SELECT Offer.id, Offer.title, Offer.description, Offer.price, COALESCE(Image.path, '/images/offers/default.jpg') AS path
+    `SELECT Offer.id, Offer.title, Offer.description, Offer.price, Offer.type, COALESCE(Image.path, '/images/offers/default.jpg') AS path
     FROM Offer LEFT JOIN Image ON Image.id =
     (
     	SELECT id FROM Image

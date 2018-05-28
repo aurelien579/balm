@@ -2,9 +2,11 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
+const mysqlStore = require('express-mysql-session')(session);
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload');
+const db = require('./models/db')
 
 const app = express();
 module.exports = app;
@@ -32,10 +34,26 @@ app.use(bodyParser.json());
 app.use(fileUpload());
 
 app.use(session({
+    store: new mysqlStore({}, db.pool),
     secret: 'qsfqsdlgjksdfmjxcbxcvvfuhvlzks',
-    resave: false,
+    resave: true,
     saveUninitialized: true
 }));
+
+app.use(function(req, res, next) {
+    const user = req.session.user;
+
+    if (typeof req.locals == 'undefined')
+        req.locals = {};
+
+    if (user) {
+        app.locals.session = {
+            email: user.email
+        }
+    }
+
+    next();
+});
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);

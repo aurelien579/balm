@@ -1,32 +1,20 @@
-#myVideo {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-}
-
 #form {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 45%;
+    width: 60%;
     min-width: 300px;
     transform: translate(-50%, -50%);
 }
-
-/*.typeahead {
-    z-index: 1051;
-}*/
 
 #searchbar {
     outline: none !important;
     box-shadow: none;
     border-radius: 0px;
-    height: 45px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border: 1px solid #B9121B;
+    font-size: 20px;
 }
 
 #input2 {
@@ -35,8 +23,9 @@
 
 #input1 {
     position: relative;
+    height: 60px;
     right: 0px;
-    margin-right: 160px;
+    margin-right: 220px;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
 }
@@ -48,7 +37,7 @@
 #button1 {
     outline: none !important;
     box-shadow: none;
-    width: 45px;
+    width: 60px;
     background: #B9121B;
     border-radius: 0px;
     color: white;
@@ -65,11 +54,12 @@
     box-shadow: none;
     position: absolute;
     right: 0;
-    height: 45px;
+    height: 60px;
     background: #B9121B;
     border-radius: 5px;
     color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    font-size: 20px;
     /*width: 150px;*/
 
 }
@@ -92,32 +82,4 @@
 .row {
     margin-left: 0px;
     margin-right: 0px;
-}
-
-.autocomplete-items {
-    position: absolute;
-    border-left: 2px solid #B9121B;
-    z-index: 99;
-    top: 100%;
-    left: 0;
-    right: 0;
-}
-
-.autocomplete-items div {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #fff;
-    border-bottom: 1px solid #d4d4d4;
-}
-
-.autocomplete-items div:hover {
-    /*when hovering an item:*/
-    background-color: #B9121B;
-    color: white;
-}
-
-.autocomplete-active {
-    /*when navigating through the items using the arrow keys:*/
-    background-color: DodgerBlue !important;
-    color: #ffffff;
 }
