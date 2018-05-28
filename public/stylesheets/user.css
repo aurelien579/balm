@@ -26,9 +26,11 @@
 
 .offer-img2 {
     position: absolute;
+    top: 40%;
     left: 80%;
     bottom: 0;
-    height: 200px;
+    max-height: 150px;
+    max-width: 150px;
 }
 
 .offer-img {
