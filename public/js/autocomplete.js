@@ -1,4 +1,4 @@
-  $("#searchbar_head, #searchbar, #region, #departement, #city").keyup(function(e) {
+  $("#searchbar_head, #searchbar, #region, #departement, #cities").keyup(function(e) {
     var id = this.id;
     var name = this.name;
     let count = 0;
@@ -18,7 +18,6 @@
           for (var k = 0; k < result.length; k++) {
             data[k] = result[k].name;
           }
-          /*console.log(data);*/
           autocomplete(data, id);
         }
       });
