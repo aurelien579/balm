@@ -27,13 +27,13 @@ block content
                                  value=body.title)
           .form-group.row
              .form-check.form-check-inline.mar10.decright
-               input.form-check-input(name="hebergement" type="checkbox" id="inlineCheckbox1" value="1")
+               input.form-check-input(name="hebergement" type="checkbox" value="1")
                label.form-check-label(for="inlineCheckbox1") Hébergement
              .form-check.form-check-inline.mar10
-               input.form-check-input(name="echange" type="checkbox" id="inlineCheckbox2" value="1")
+               input.form-check-input(name="echange" type="checkbox" value="1")
                label.form-check-label(for="inlineCheckbox2") Echange
              .form-check.form-check-inline.mar10
-               input.form-check-input(name="location" type="checkbox" id="inlineCheckbox3" value="1")
+               input.form-check-input(name="location" type="checkbox" value="1")
                label.form-check-label(for="inlineCheckbox3") Location
           .form-group.row
             label.col-lg-3.col-form-label Description
@@ -43,30 +43,34 @@ block content
               | #{body.description}
           .form-group.row
             .form-check.form-check-inline.mar10.decright
-              input.form-check-input(name="pool" type="checkbox" id="inlineCheckbox1" value="1")
+              input.form-check-input(name="pool" type="checkbox" value="1")
               label.form-check-label(for="inlineCheckbox1") Piscine
             .form-check.form-check-inline.mar10
-              input.form-check-input(name="garden" type="checkbox" id="inlineCheckbox2" value="1")
+              input.form-check-input(name="garden" type="checkbox" value="1")
               label.form-check-label(for="inlineCheckbox2") Jardin
             .form-check.form-check-inline.mar10
-              input.form-check-input(name="citycenter" type="checkbox" id="inlineCheckbox3" value="1")
+              input.form-check-input(name="citycenter" type="checkbox" value="1")
               label.form-check-label(for="inlineCheckbox3") Centre-Ville
           .form-group.row
             label.col-lg-3.col-form-label Nombre de personnes
             .col-lg-2
               .input-group
                 input.form-control(name="nbpeople", type="text" placeholder="1")
-
+                  
           .form-group.row
+            label.col-lg-3.col-form-label Type d'offre
+            .col-lg-2
+              select.form-control(id="offerType" onchange="updatePriceGroupVisibility();")
+                option(value="location") Location
+                option(value="hebergement") Hébergement
+                option(value="echange") Echange
+
+          .form-group.row#priceGroup
             label.col-lg-3.col-form-label Prix par nuit
             .col-lg-2
               .input-group
                 input.form-control(name="price" type="text"
                                    placeholder="Prix" value=body.price)
-                if echange
-                  price = 0;
-                if hebergement
-                  price = 0;
                 .input-group-append
                   span.input-group-text €
           .form-group.row

@@ -137,6 +137,19 @@ function updatePreview(input) {
     }
 }
 
+function updatePriceGroupVisibility() {
+    const val = $("#offerType").val();
+    const $price = $("#priceGroup");
+
+    console.log(val);
+
+    if (val == 'echange') {
+        $price.hide(500);
+    } else {
+        $price.show(500);
+    }
+}
+
 $(function() {
     $('.datepicker').each((i, elem) => {
         setupDatepicker($(elem));
@@ -144,4 +157,6 @@ $(function() {
             setAvailableDates($(elem), avail);
         }
     });
+
+    updatePriceGroupVisibility();
 });
