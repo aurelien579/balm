@@ -48,11 +48,11 @@ SELECT
     Offer.price,
     Offer.type,
     COALESCE(Image.path, '/images/offers/default.jpg') AS path,
-    COUNT(Comment.idOffer) AS commentsCount
+    COUNT(Comment.id) AS commentsCount
 FROM
-    Comment,
-    Reservation,
-    Offer
+    Reservation
+		INNER JOIN
+    Offer ON Offer.id = Reservation.offerId
         LEFT JOIN
     Image ON Image.id = (SELECT
             id
@@ -62,12 +62,11 @@ FROM
             Image.offerId = Offer.id
         ORDER BY id
         LIMIT 1)
+        LEFT JOIN
+	Comment ON Comment.reservationId = Reservation.id
 WHERE
     Reservation.userId = ?
-        AND Offer.id = Reservation.offerId
-        AND Offer.id = Comment.idOffer
-        AND Comment.idUser = Reservation.userId
-GROUP BY Reservation.status
+GROUP BY Reservation.id, Image.id;
 `;
 
 const sqlGetDemandsTo = `
@@ -142,7 +141,7 @@ function abortOverlapping(offerId, start, end) {
 }
 
 function getByUserIdWithCommentCount(userId) {
-    return db.sqlQuery(sqlGetByUserId, [userId]);
+    return db.sqlQuery(sqlGetByUserIdWithCommentCount, [userId]);
 }
 
 exports.getByUserId = getByUserId;
@@ -153,6 +152,7 @@ exports.reject = reject;
 exports.getStatus = getStatus;
 exports.get = get;
 exports.abortOverlapping = abortOverlapping;
+exports.getByUserIdWithCommentCount = getByUserIdWithCommentCount;
 
 exports.WAITING = WAITING;
 exports.ACCEPTED = ACCEPTED;
