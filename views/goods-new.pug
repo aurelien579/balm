@@ -18,7 +18,7 @@ block content
           .alert.alert-success #{successMessage}
 
         form(action='/goods/new' method='post'
-             enctype="multipart/form-data")
+             enctype="multipart/form-data", autocomplete="off")
           .form-group.row
             label.col-lg-3.col-form-label Titre de l'annonce
             .col-lg-9
