@@ -37,17 +37,28 @@ block content
               option() 9
               option() 10+
           div(class="form-group")
-              div(class="text") Et pour les plus exigeants :
-              div(class="row")
-                div(class="col form-check form-check-inline")
-                  input(id="defaultCheck1" class="form-check-input" type="checkbox" name="pool" value="1")
-                  label(class="form-check-label" for="defaultCheck1") Piscine
-                div(class="col form-check form-check-inline")
-                  input(id="defaultCheck2" class="form-check-input" type="checkbox" name="garden" value="1")
-                  label(class="form-check-label" for="defaultCheck2") Jardin
-                div(class="col form-check form-check-inline")
-                  input(id="defaultCheck3" class="form-check-input" type="checkbox" name="city" value="1")
-                  label(class="form-check-label" for="defaultCheck3") Centre ville
+            div(class="text") Type de service :
+            div(class="row")
+              div(class="col form-check form-check-inline")
+                input(id="defaultCheck1" class="form-check-input" type="checkbox" name="echange" value="1")
+                label(class="form-check-label" for="defaultCheck1") Echange
+              div(class="col form-check form-check-inline")
+                input(id="defaultCheck2" class="form-check-input" type="checkbox" name="hebergement" value="1")
+                label(class="form-check-label" for="defaultCheck2") Hebergement
+              div(class="col form-check form-check-inline")
+                input(id="defaultCheck3" class="form-check-input" type="checkbox" name="location" value="1")
+                label(class="form-check-label" for="defaultCheck3") Location
+            div(class="text") Et pour les plus exigeants :
+            div(class="row")
+              div(class="col form-check form-check-inline")
+                input(id="defaultCheck1" class="form-check-input" type="checkbox" name="pool" value="1")
+                label(class="form-check-label" for="defaultCheck1") Piscine
+              div(class="col form-check form-check-inline")
+                input(id="defaultCheck2" class="form-check-input" type="checkbox" name="garden" value="1")
+                label(class="form-check-label" for="defaultCheck2") Jardin
+              div(class="col form-check form-check-inline")
+                input(id="defaultCheck3" class="form-check-input" type="checkbox" name="city" value="1")
+                label(class="form-check-label" for="defaultCheck3") Centre ville
 
 
 block scripts

@@ -24,11 +24,11 @@ const slqGetByUserIdWithFirstImage =
 
 const sqlCreate =
     `INSERT INTO Offer
-        (userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter)
+        (userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, Hebergement, Echange)
      VALUES
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
 
-const sqlEdit = `UPDATE Offer SET title = ?, description = ?, price = ?, region = ?, department = ?, city = ?, postcode = ?, address = ?, nbpeople = ?, pool = ?, garden = ?, citycenter = ? WHERE id = ?;`
+const sqlEdit = `UPDATE Offer SET title = ?, description = ?, price = ?, region = ?, department = ?, city = ?, postcode = ?, address = ?, nbpeople = ?, pool = ?, garden = ?, citycenter = ?, Hebergement = ?, Echange = ?, WHERE id = ?;`
 
 function getById(id) {
     return db.sqlQuery(sqlGetById, [id]);
@@ -42,8 +42,8 @@ function getByUserIdWithFirstImage(userId) {
     return db.sqlQuery(slqGetByUserIdWithFirstImage, [userId]);
 }
 
-function create(userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter) {
-    return db.sqlQuery(sqlCreate, [userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter]);
+function create(userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, hebergement, echange) {
+    return db.sqlQuery(sqlCreate, [userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, hebergement, echange]);
 }
 
 function getUserId(offerId) {
@@ -60,7 +60,7 @@ function deleteOffer(offerId) {
 }
 
 function edit(OfferId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter) {
-    return db.sqlQuery(sqlEdit, [title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, OfferId]);
+    return db.sqlQuery(sqlEdit, [title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, OfferId, hebergement, echange]);
 }
 
 async function getFullWithDefault(offerId) {

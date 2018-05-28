@@ -68,7 +68,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/new', /*utils.mustBeConnected,*/ async function(req, res, next) {
     res.render('goods-new', {
-        title: "Nouvelle annonce",
         body: {}
     });
 });
@@ -93,13 +92,19 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
     }
 
     if (req.body.pool === undefined) {
-      req.body.pool = 0;
+        req.body.pool = 0;
     }
     if (req.body.garden === undefined) {
-      req.body.garden = 0;
+        req.body.garden = 0;
     }
     if (req.body.citycenter === undefined) {
-      req.body.citycenter = 0;
+        req.body.citycenter = 0;
+    }
+    if (req.body.hebergement === undefined) {
+        req.body.hebergement = 0;
+    }
+    if (req.body.echange === undefined) {
+        req.body.echange = 0;
     }
 
     goodsModel.create(req.session.user.id,
@@ -114,7 +119,9 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
             req.body.nbpeople,
             req.body.pool,
             req.body.garden,
-            req.body.citycenter)
+            req.body.citycenter,
+            req.body.hebergement,
+            req.body.echange)
         .then((result) => {
             let i = 1;
             for (let property in req.files) {
@@ -155,8 +162,8 @@ router.get('/:id', async function(req, res, next) {
         let images = await imageModel.getByOfferId(id);
         let avail = await availabilityModel.getAvailabilityByOfferId(id);
 
+
         res.render('goods', {
-            title: offer.title,
             offer: offer,
             comments: comments,
             images: images,
@@ -177,7 +184,6 @@ router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {
             return res.render('hack');
 
         return res.render('goods-edit', {
-            title: "Modification : " + good.title,
             offer: good
         });
     } catch (ex) {
@@ -209,28 +215,36 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
         }
 
         if (req.body.pool === undefined) {
-          req.body.pool = 0;
+            req.body.pool = 0;
         }
         if (req.body.garden === undefined) {
-          req.body.garden = 0;
+            req.body.garden = 0;
         }
         if (req.body.citycenter === undefined) {
-          req.body.citycenter = 0;
+            req.body.citycenter = 0;
+        }
+        if (req.body.hebergement === undefined) {
+            req.body.hebergement = 0;
+        }
+        if (req.body.echange === undefined) {
+            req.body.echange = 0;
         }
 
         await goodsModel.edit(req.params.id,
-          req.body.title,
-          req.body.description,
-          req.body.price,
-          req.body.region,
-          req.body.department,
-          req.body.city,
-          req.body.postcode,
-          req.body.address,
-          req.body.nbpeople,
-          req.body.pool,
-          req.body.garden,
-          req.body.citycenter);
+            req.body.title,
+            req.body.description,
+            req.body.price,
+            req.body.region,
+            req.body.department,
+            req.body.city,
+            req.body.postcode,
+            req.body.address,
+            req.body.nbpeople,
+            req.body.pool,
+            req.body.garden,
+            req.body.citycenter,
+            req.body.hebergement,
+            req.body.echange);
 
 
         let i = 1;

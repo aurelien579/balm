@@ -37,8 +37,13 @@ block content
         div(class="row")
           div(class="col-sm")
             h4(class="text-justify")  Lieux : #{offer.city}
-            h4(class = "text-justify inline" ) #{offer.price} €
-            h6(small class="text-muted inline font-italic gris ")       .par nuit
+            if offer.Hebergement ==1
+              h4(class= "text-justify inline") Hébergement Gratuit
+            else if offer.Echange ==1
+              h4(class="text-justify inline") Echange de Maison
+            else
+              h4(class = "text-justify inline" ) #{offer.price} €
+              h6(small class="text-muted inline font-italic gris ")       .par nuit
             h1()
             if comments
               - var somme =0;

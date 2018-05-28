@@ -7,7 +7,7 @@ block content
   .container
     .jumbotron.jumbotron-transparent
       h1.titre Modification de votre annonce
-    br  
+    br
 
     .card.box-shadow
       .card-body
@@ -22,6 +22,16 @@ block content
             label.col-lg-3.col-form-label Titre de l'annonce
             .col-lg-9
               input.form-control(name="title", type="text" value=offer.title)
+          .form-group.row
+             .form-check.form-check-inline.mar10.decright
+               input.form-check-input(name="hebergement" type="checkbox" id="inlineCheckbox1" value="1")
+               label.form-check-label(for="inlineCheckbox1") Hébergement
+             .form-check.form-check-inline.mar10
+               input.form-check-input(name="echange" type="checkbox" id="inlineCheckbox2" value="1")
+               label.form-check-label(for="inlineCheckbox2") Echange
+             .form-check.form-check-inline.mar10
+               input.form-check-input(name="location" type="checkbox" id="inlineCheckbox3" value="1")
+               label.form-check-label(for="inlineCheckbox3") Location
           .form-group.row
             label.col-lg-3.col-form-label Description
             .col-lg-9
@@ -88,19 +98,19 @@ block content
               .input-group.date
                 input.form-control.datepicker#date1(type="text" mydate=offer.avail[0].end start="date0")
                 input#date1Sent(name="to" type="hidden")
-          
+
           br
           .form-group.row.col-lg-4
             | Images
-          
+
           .form-group.row
             .col-lg-4
               .image-upload
                 label(for='file')
-                  img#preview0(src=offer.images[0].path)                    
+                  img#preview0(src=offer.images[0].path)
                 input#file(type='file' name='image1' onchange='updatePreview(this);'
                            preview="preview0" accept="image/gif, image/jpeg, image/png")
-                  
+
 
             .col-lg-4
               .image-upload

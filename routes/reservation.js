@@ -20,6 +20,7 @@ function getDate(date) {
 
 router.post('/new', utils.mustBeConnectedToBook, function(req, res, next) {
     let from = new Date(req.body.from);
+    console.log(from);
     let to = new Date(req.body.to);
     let numberpers = req.body.numberpers;
     let id = req.body.id;
@@ -27,8 +28,8 @@ router.post('/new', utils.mustBeConnectedToBook, function(req, res, next) {
         .then((result) => {
             res.render('reservation', {
                 successMessage: "Votre demande de reservation a bien été prise en compte",
-                from: new Date(req.body.from),
-                to: new Date(req.body.to),
+                from: (from.toLocaleDateString('FR')),
+                to: (to.toLocaleDateString('FR')),
                 numberpers: numberpers,
                 id: id
             });
