@@ -167,21 +167,29 @@ router.get('/:id', async function(req, res, next) {
         let comments = await commentModel.getByOfferId(id);
         let images = await imageModel.getByOfferId(id);
         let avail = await availabilityModel.getAvailabilityByOfferId(id);
+        let user = req.session.user;
+        console.log(user);
+        goodsModel.getByUserId(user.id)
+            .then((result) => {
+                console.log(result)
+                res.render('goods', {
+                    title: offer.title,
+                    offer: offer,
+                    comments: comments,
+                    images: images,
+                    id: id,
+                    avail: avail,
+                    user: user,
+                    result: result
 
-
-        res.render('goods', {
-            title: offer.title,
-            offer: offer,
-            comments: comments,
-            images: images,
-            id: id,
-            avail: avail
-        });
+                });
+            })
     } catch (ex) {
         res.render('error', {
             error: ex
         })
     }
+
 });
 
 router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {
