@@ -25,16 +25,7 @@ block content
               input.form-control(name="title", type="text"
                                  placeholder="Titre de l'annonce"
                                  value=body.title)
-          .form-group.row
-             .form-check.form-check-inline.mar10.decright
-               input.form-check-input(name="hebergement" type="checkbox" value="1")
-               label.form-check-label(for="inlineCheckbox1") Hébergement
-             .form-check.form-check-inline.mar10
-               input.form-check-input(name="echange" type="checkbox" value="1")
-               label.form-check-label(for="inlineCheckbox2") Echange
-             .form-check.form-check-inline.mar10
-               input.form-check-input(name="location" type="checkbox" value="1")
-               label.form-check-label(for="inlineCheckbox3") Location
+
           .form-group.row
             label.col-lg-3.col-form-label Description
             .col-lg-9
@@ -43,27 +34,36 @@ block content
               | #{body.description}
           .form-group.row
             .form-check.form-check-inline.mar10.decright
-              input.form-check-input(name="pool" type="checkbox" value="1")
-              label.form-check-label(for="inlineCheckbox1") Piscine
+              input.form-check-input(name="pool" type="checkbox" value="1" checked=(body.pool == 1))
+              label.form-check-label(for="pool") Piscine
             .form-check.form-check-inline.mar10
-              input.form-check-input(name="garden" type="checkbox" value="1")
-              label.form-check-label(for="inlineCheckbox2") Jardin
+              input.form-check-input(name="garden" type="checkbox" value="1" checked=(body.garden == 1))
+              label.form-check-label(for="garden") Jardin
             .form-check.form-check-inline.mar10
-              input.form-check-input(name="citycenter" type="checkbox" value="1")
-              label.form-check-label(for="inlineCheckbox3") Centre-Ville
+              input.form-check-input(name="citycenter" type="checkbox" value="1" checked=(body.citycenter == 1))
+              label.form-check-label(for="citycenter") Centre-Ville
           .form-group.row
             label.col-lg-3.col-form-label Nombre de personnes
             .col-lg-2
               .input-group
-                input.form-control(name="nbpeople", type="text" placeholder="1")
+                input.form-control(name="nbpeople", type="text" placeholder="1" value=body.nbpeople)
                   
           .form-group.row
             label.col-lg-3.col-form-label Type d'offre
             .col-lg-2
-              select.form-control(id="offerType" onchange="updatePriceGroupVisibility();")
-                option(value="location") Location
-                option(value="hebergement") Hébergement
-                option(value="echange") Echange
+              select.form-control(id="offerType" name="offerType" onchange="updatePriceGroupVisibility();" selected=body.offerType)
+                if body.offerType == 'location'
+                  option(value="location" selected='selected') Location
+                else
+                  option(value="location") Location
+                if body.offerType == 'hebergement'
+                  option(value="hebergement" selected='selected') Hébergement
+                else
+                  option(value="hebergement") Hébergement
+                if body.offerType == 'echange'
+                  option(value="echange" selected='selected') Echange
+                else
+                  option(value="echange") Echange
 
           .form-group.row#priceGroup
             label.col-lg-3.col-form-label Prix par nuit
@@ -76,7 +76,8 @@ block content
           .form-group.row
             label.col-lg-3.col-form-label Région
             .col-lg-4
-              input.form-control(name="region", type="text" placeholder="Région")
+              input.form-control(name="region", type="text" placeholder="Région"
+                                 value=body.region)
           .form-group.row
             label.col-lg-3.col-form-label Département
             .col-lg-4

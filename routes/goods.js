@@ -72,16 +72,33 @@ router.get('/new', /*utils.mustBeConnected,*/ async function(req, res, next) {
     });
 });
 
-router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, res, next) {
+router.post('/new', /*utils.mustBeConnected,*/ goodsValidators, async function(req, res, next) {
     const errors = validationResult(req);
     const mapped = errors.mapped();
     const from = new Date(req.body.from);
     const to = new Date(req.body.to);
+    let offerType = goodsModel.RENTING;
+    let price = req.body.price;
 
+    /* Validation and sanitization */
     if (from > to || from < Date.now()) {
         mapped.dates = {
             msg: 'Les dates ne sont pas correctes'
         }
+    }
+
+    if (req.body.pool === undefined)
+        req.body.pool = 0;
+    if (req.body.garden === undefined)
+        req.body.garden = 0;
+    if (req.body.citycenter === undefined)
+        req.body.citycenter = 0;
+
+    if (req.body.offerType == 'echange') {
+        offerType = goodsModel.EXCHANGE;
+    } else if (req.body.offerType == 'hebergement') {
+        offerType = goodsModel.HOSTING;
+        price = 0;
     }
 
     if (Object.keys(mapped).length > 0) {
@@ -91,26 +108,11 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
         });
     }
 
-    if (req.body.pool === undefined) {
-        req.body.pool = 0;
-    }
-    if (req.body.garden === undefined) {
-        req.body.garden = 0;
-    }
-    if (req.body.citycenter === undefined) {
-        req.body.citycenter = 0;
-    }
-    if (req.body.hebergement === undefined) {
-        req.body.hebergement = 0;
-    }
-    if (req.body.echange === undefined) {
-        req.body.echange = 0;
-    }
-
-    goodsModel.create(req.session.user.id,
+    try {
+        let insertResult = await goodsModel.create(req.session.user.id,
             req.body.title,
             req.body.description,
-            req.body.price,
+            price,
             req.body.region,
             req.body.department,
             req.body.city,
@@ -120,38 +122,41 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
             req.body.pool,
             req.body.garden,
             req.body.citycenter,
-            req.body.hebergement,
-            req.body.echange)
-        .then((result) => {
-            let i = 1;
-            for (let property in req.files) {
-                if (req.files.hasOwnProperty(property)) {
-                    let file = req.files[property];
-                    let path = "/images/offers/" + result.insertId + "-" + i + "." + file.name.split('.').pop();
-                    let realPath = 'public' + path;
+            offerType);
 
-                    imageModel.add(result.insertId, path);
-                    file.mv(realPath, function(err) {
+        /* Save uploaded images */
+        let i = 1;
+        for (let property in req.files) {
+            if (req.files.hasOwnProperty(property)) {
+                let file = req.files[property];
+                let path = "/images/offers/" + insertResult.insertId + "-" + i + "." + file.name.split('.').pop();
+                let fsPath = 'public' + path;
+
+                imageModel.add(insertResult.insertId, path);
+                file.mv(fsPath, function(err) {
+                    if (err)
                         console.log("Move error: ", err);
-                    });
-                }
-                i++;
+                });
             }
+            i++;
+        }
 
-            return availabilityModel.add(result.insertId, req.body.from, req.body.to);
-        })
-        .then((result) => {
-            res.render('goods-new', {
-                successMessage: "Votre annonce a bien été déposé",
-                body: req.body
-            });
-        })
-        .catch((err) => {
-            res.render('goods-new', {
-                errorMessage: 'Il existe déjà une annonce avec ce titre',
-                body: req.body
-            })
+        availabilityModel.add(insertResult.insertId, req.body.from, req.body.to);
+
+        res.render('goods-new', {
+            successMessage: "Votre annonce a bien été déposé",
+            body: req.body
         });
+    } catch (ex) {
+        console.log('Goods new error:', ex);
+        /*
+        res.render('goods-new', {
+            errorMessage: 'Il existe déjà une annonce avec ce titre',
+            body: req.body
+        })
+        */
+        next();
+    }
 });
 
 router.get('/:id', async function(req, res, next) {

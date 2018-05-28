@@ -2,6 +2,10 @@ const db = require('./db');
 const availabilityModel = require('./availability');
 const imageModel = require('./image');
 
+const RENTING = 0;
+const EXCHANGE = 1;
+const HOSTING = 2;
+
 const sqlGetById = 'SELECT * FROM Offer WHERE id = ?;';
 const sqlGetUserId = 'SELECT Offer.userId FROM Offer WHERE id = ?;';
 const sqlGetByUserId = 'SELECT * FROM Offer WHERE userId = ?;';
@@ -24,11 +28,11 @@ const slqGetByUserIdWithFirstImage =
 
 const sqlCreate =
     `INSERT INTO Offer
-        (userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, Hebergement, Echange)
+        (userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, type)
      VALUES
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
 
-const sqlEdit = `UPDATE Offer SET title = ?, description = ?, price = ?, region = ?, department = ?, city = ?, postcode = ?, address = ?, nbpeople = ?, pool = ?, garden = ?, citycenter = ?, Hebergement = ?, Echange = ?, WHERE id = ?;`
+const sqlEdit = `UPDATE Offer SET title = ?, description = ?, price = ?, nbpeople = ?, type = ? WHERE id = ?;`
 
 function getById(id) {
     return db.sqlQuery(sqlGetById, [id]);
@@ -42,25 +46,25 @@ function getByUserIdWithFirstImage(userId) {
     return db.sqlQuery(slqGetByUserIdWithFirstImage, [userId]);
 }
 
-function create(userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, hebergement, echange) {
-    return db.sqlQuery(sqlCreate, [userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, hebergement, echange]);
+function create(userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, offerType) {
+    return db.sqlQuery(sqlCreate, [userId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, offerType]);
 }
 
 function getUserId(offerId) {
     return db.sqlQuery(sqlGetUserId, [offerId]);
 }
 
-function deleteOffer(offerId) {
-    db.sqlQuery(sqlDeleteRes, [offerId]);
-    db.sqlQuery(sqlDeleteDisp, [offerId]);
-    db.sqlQuery(sqlDeleteImg, [offerId]);
-    db.sqlQuery(sqlDeleteCom, [offerId]);
+async function deleteOffer(offerId) {
+    await db.sqlQuery(sqlDeleteRes, [offerId]);
+    await db.sqlQuery(sqlDeleteDisp, [offerId]);
+    await db.sqlQuery(sqlDeleteImg, [offerId]);
+    await db.sqlQuery(sqlDeleteCom, [offerId]);
 
-    return db.sqlQuery(sqlDelete, [offerId]);
+    return await db.sqlQuery(sqlDelete, [offerId]);
 }
 
-function edit(OfferId, title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter) {
-    return db.sqlQuery(sqlEdit, [title, description, price, region, department, city, postcode, address, nbpeople, pool, garden, citycenter, OfferId, hebergement, echange]);
+function edit(offerId, title, description, price, nbpeople) {
+    return db.sqlQuery(sqlEdit, [title, description, price, nbpeople, offerId]);
 }
 
 async function getFullWithDefault(offerId) {
@@ -96,3 +100,7 @@ exports.getById = getById;
 exports.getByUserIdWithFirstImage = getByUserIdWithFirstImage;
 exports.create = create;
 exports.getFullWithDefault = getFullWithDefault;
+
+exports.RENTING = RENTING;
+exports.EXCHANGE = EXCHANGE;
+exports.HOSTING = HOSTING;
