@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: Balm
+-- Host: localhost    Database: Balm
 -- ------------------------------------------------------
--- Server version	5.7.22-0ubuntu18.04.1
+-- Server version	5.7.22-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +30,7 @@ CREATE TABLE `Availability` (
   PRIMARY KEY (`id`),
   KEY `fk_Availability_1_idx` (`offerId`),
   CONSTRAINT `fk_Availability_1` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `Availability` (
 
 LOCK TABLES `Availability` WRITE;
 /*!40000 ALTER TABLE `Availability` DISABLE KEYS */;
-INSERT INTO `Availability` VALUES (1,2,'2018-05-09','2018-05-20'),(2,3,'2019-05-09','2019-05-20'),(3,12,'2018-05-18','2018-05-30'),(4,1,'2018-05-09','2019-05-20'),(5,4,'2018-05-09','2019-05-20'),(6,9,'2018-05-09','2019-05-20'),(7,10,'2018-05-09','2019-05-20'),(8,11,'2018-05-09','2019-05-20');
+INSERT INTO `Availability` VALUES (1,2,'2018-05-09','2018-05-20'),(2,3,'2019-05-09','2019-05-20'),(3,12,'2018-05-18','2018-05-30'),(4,1,'2018-05-09','2019-05-20'),(5,4,'2018-05-09','2019-05-20'),(6,9,'2018-05-09','2019-05-20'),(7,10,'2018-05-09','2019-05-20'),(8,11,'2018-05-09','2019-05-20'),(9,14,'2018-05-07','2018-07-20'),(10,17,'2018-05-07','2018-07-20');
 /*!40000 ALTER TABLE `Availability` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +144,7 @@ CREATE TABLE `Image` (
   PRIMARY KEY (`id`),
   KEY `OfferIdFK_idx` (`offerId`),
   CONSTRAINT `OfferIdFK` FOREIGN KEY (`offerId`) REFERENCES `Offer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +153,7 @@ CREATE TABLE `Image` (
 
 LOCK TABLES `Image` WRITE;
 /*!40000 ALTER TABLE `Image` DISABLE KEYS */;
-INSERT INTO `Image` VALUES (1,1,'/images/offers/1-1.jpg'),(2,1,'/images/offers/1-2.jpg'),(3,15,'/images/offers/15-1.jpg');
+INSERT INTO `Image` VALUES (1,1,'/images/offers/1-1.jpg'),(2,1,'/images/offers/1-2.jpg'),(3,15,'/images/offers/15-1.jpg'),(4,14,'/images/offers/14-1.jpg');
 /*!40000 ALTER TABLE `Image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +183,7 @@ CREATE TABLE `Offer` (
   PRIMARY KEY (`id`),
   KEY `fk_Offer_1_idx` (`userId`),
   CONSTRAINT `UserIdKey` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +192,7 @@ CREATE TABLE `Offer` (
 
 LOCK TABLES `Offer` WRITE;
 /*!40000 ALTER TABLE `Offer` DISABLE KEYS */;
-INSERT INTO `Offer` VALUES (1,1,69000,'Maison en banlieue Lyonnaise','Très belle maison à proximité de Lyon. Piscine, terrasse et 3 chambres pouvant accueillir jusqu\'à 6 personnes ! proximité avec un arret de bus pour se rendre dans le centre ville.','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein','5',1,1,1,0),(2,1,69000,'Maison de Campagne','Belle vue avec piscine','159','Lyon','Rhone','Rhone-Alpes','19 Avenue Albert Einstein','4',1,1,0,0),(3,1,69000,'Maison en centre ville','Beaucoup de pollution','185','Lyon','Rhone','Rhone-Alpes','15 rue Barthélémy','4',1,1,1,0),(4,2,69000,'Appartement','Cool man !','58','Lyon','Rhone','Rhone-Alpes','850 boulevard lafayette','4',0,0,1,0),(5,3,69800,'Prairie','Pleins de champs','800','Villeurbanne','Rhone','Rhone-Alpes','8 rue des champs','5',1,1,0,0),(9,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone','Rhone-Alpes','Chez moi','2',0,0,1,0),(10,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone','Rhone-Alpes','Chez moi','2',1,0,0,0),(11,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone','Rhone-Alpes','Chez moi','3',0,1,1,0),(12,1,69000,'Nouvelle maison 2','La maison la plus belle','10000','Lyon','Rhone','Rhone-Alpes','Chez moi','4',1,1,1,0),(14,4,69000,'Echange de maison Lyon','Je recherche des gens voulant faire un échange de maison, de préfèrence dans le sud de la France. Ma maison est grande et spacieuse, elle peut acceuillir un groupe allant jusqu\'à 8 personnes.','0','Lyon','Rhone','Rhone-Alpes','20 avenue du bonheur','8',0,0,0,1),(15,4,69000,'Hebergement','J\'heberge gratuitement contre un peu d\'aide pour les courses et le ménage. Une grande chambre privée, mais salle de bain commune. ','0','Lyon','Rhone','Rhone-Alpes','3 boulevard de la générosité','2',0,0,1,0),(16,7,26000,'Hébergement dans la Drome pour 2 semaines','offre d\'herbergement pour deux personnes max durant deux semaines.','0','Valence','Drome','','route blabla','',0,0,0,0);
+INSERT INTO `Offer` VALUES (1,1,69000,'Maison en banlieue Lyonnaise','Très belle maison à proximité de Lyon. Piscine, terrasse et 3 chambres pouvant accueillir jusqu\'à 6 personnes ! proximité avec un arret de bus pour se rendre dans le centre ville.','100','Lyon','Rhone','Rhone Aple','20 avenue albert einstein','5',1,1,1,0),(2,1,69000,'Maison de Campagne','Belle vue avec piscine','159','Lyon','Rhone','Rhone-Alpes','19 Avenue Albert Einstein','4',1,1,0,0),(3,1,69000,'Maison en centre ville','Beaucoup de pollution','185','Lyon','Rhone','Rhone-Alpes','15 rue Barthélémy','4',1,1,1,0),(4,2,69000,'Appartement','Cool man !','58','Lyon','Rhone','Rhone-Alpes','850 boulevard lafayette','4',0,0,1,0),(5,3,69800,'Prairie','Pleins de champs','800','Villeurbanne','Rhone','Rhone-Alpes','8 rue des champs','5',1,1,0,0),(9,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone','Rhone-Alpes','Chez moi','2',0,0,1,0),(10,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone','Rhone-Alpes','Chez moi','2',1,0,0,0),(11,1,69000,'Nouvelle maison 2','La maison la plus belle','10','Lyon','Rhone','Rhone-Alpes','Chez moi','3',0,1,1,0),(12,1,69000,'Nouvelle maison 2','La maison la plus belle','10000','Lyon','Rhone','Rhone-Alpes','Chez moi','4',1,1,1,0),(14,4,69000,'Echange de maison Lyon','Je recherche des gens voulant faire un échange de maison, de préfèrence dans le sud de la France. Ma maison est grande et spacieuse, elle peut acceuillir un groupe allant jusqu\'à 8 personnes.','0','Lyon','Rhone','Rhone-Alpes','20 avenue du bonheur','8',0,0,0,1),(15,4,69000,'Hebergement','J\'heberge gratuitement contre un peu d\'aide pour les courses et le ménage. Une grande chambre privée, mais salle de bain commune. ','0','Lyon','Rhone','Rhone-Alpes','3 boulevard de la générosité','2',0,0,1,2),(16,7,26000,'Hébergement dans la Drome pour 2 semaines','offre d\'herbergement pour deux personnes max durant deux semaines.','0','Valence','Drome','','route blabla','',0,0,0,2),(17,7,26240,'Echange maison drome','belle maison','0','Saint Barthelemy de Vals','Drome','Rhone-Alpes','le grand caire','5',1,1,0,1);
 /*!40000 ALTER TABLE `Offer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,6 +234,7 @@ CREATE TABLE `Reservation` (
   `from` date NOT NULL,
   `to` date NOT NULL,
   `status` int(11) NOT NULL,
+  `idEchange` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Reservation_1_idx` (`offerId`),
   KEY `fk_Reservation_2_idx` (`userId`),
@@ -248,7 +249,7 @@ CREATE TABLE `Reservation` (
 
 LOCK TABLES `Reservation` WRITE;
 /*!40000 ALTER TABLE `Reservation` DISABLE KEYS */;
-INSERT INTO `Reservation` VALUES (1,2,2,'2018-05-02','2018-06-02',0),(2,5,1,'2018-01-31','2018-12-01',0),(3,1,1,'2018-05-16','2018-05-16',0),(4,1,7,'2018-05-16','2018-05-23',0),(5,1,7,'2018-05-16','2018-05-23',0),(6,1,7,'2018-05-16','2018-05-23',0),(7,1,7,'2018-05-16','2018-05-24',0),(8,1,7,'2018-05-16','2018-05-23',0),(9,1,7,'2018-05-16','2018-05-23',0),(10,1,7,'2018-05-16','2018-05-23',0),(11,1,7,'2018-05-16','2018-05-23',0),(12,1,7,'2018-05-18','2018-05-25',0),(13,1,8,'2018-05-18','2018-05-29',0),(14,1,8,'2018-05-18','2018-05-29',0),(15,1,8,'2018-05-18','2018-05-29',0),(16,1,8,'2018-05-18','2018-05-29',0),(17,1,8,'2018-05-18','2018-05-29',0),(18,1,8,'2018-05-18','2018-05-29',0),(19,1,8,'2018-05-18','2018-05-29',0),(20,1,8,'2018-05-18','2018-05-29',0),(21,1,8,'2018-05-18','2018-05-29',0),(22,1,8,'2018-05-18','2018-05-29',0),(23,1,8,'2018-05-18','2018-05-29',0),(24,1,8,'2018-05-18','2018-05-29',0),(25,1,8,'2018-05-18','2018-05-29',0),(26,1,8,'2018-05-18','2018-05-29',0),(27,1,8,'2018-05-18','2018-05-29',0),(28,1,8,'2018-05-18','2018-05-29',0),(29,1,8,'2018-05-18','2018-05-29',0),(30,1,7,'2018-05-18','2018-05-22',0),(31,1,7,'2018-05-18','2018-05-22',0),(32,1,7,'2018-05-18','2018-05-22',0),(33,1,7,'2018-05-18','2018-05-28',0),(34,1,7,'2018-05-18','2018-05-19',0),(35,1,7,'2018-05-18','2018-05-20',0),(36,1,7,'2018-05-18','2018-05-20',0),(37,1,7,'2018-05-18','2018-05-23',0),(38,1,7,'2018-05-18','2018-05-22',0),(39,1,7,'2018-05-18','2018-05-22',0),(40,1,7,'2018-05-24','2018-05-31',0),(41,1,7,'2018-05-27','2018-05-27',0),(42,1,7,'2018-05-27','2018-05-27',0),(43,1,7,'2018-05-27','2018-05-27',0),(44,1,7,'2018-05-27','2018-05-27',0),(45,1,7,'2018-05-27','2018-05-27',0),(46,1,7,'2018-05-27','2018-05-27',0),(47,1,7,'2018-05-27','2018-05-27',0),(48,1,7,'2018-05-27','2018-05-27',0),(49,1,7,'2018-05-28','2018-05-29',0),(50,1,7,'2018-05-28','2018-05-29',0),(51,1,7,'2018-05-28','2018-05-29',0),(52,1,7,'2018-05-28','2018-05-28',0),(53,1,7,'2018-05-28','2018-05-28',0),(54,1,7,'2018-05-28','2018-05-28',0),(55,1,7,'2018-05-28','2018-05-29',0);
+INSERT INTO `Reservation` VALUES (1,2,2,'2018-05-02','2018-06-02',0,0),(2,5,1,'2018-01-31','2018-12-01',0,0),(3,1,1,'2018-05-16','2018-05-16',0,0),(4,1,7,'2018-05-16','2018-05-23',0,0),(5,1,7,'2018-05-16','2018-05-23',0,0),(6,1,7,'2018-05-16','2018-05-23',0,0),(7,1,7,'2018-05-16','2018-05-24',0,0),(8,1,7,'2018-05-16','2018-05-23',0,0),(9,1,7,'2018-05-16','2018-05-23',0,0),(10,1,7,'2018-05-16','2018-05-23',0,0),(11,1,7,'2018-05-16','2018-05-23',0,0),(12,1,7,'2018-05-18','2018-05-25',0,0),(13,1,8,'2018-05-18','2018-05-29',0,0),(14,1,8,'2018-05-18','2018-05-29',0,0),(15,1,8,'2018-05-18','2018-05-29',0,0),(16,1,8,'2018-05-18','2018-05-29',0,0),(17,1,8,'2018-05-18','2018-05-29',0,0),(18,1,8,'2018-05-18','2018-05-29',0,0),(19,1,8,'2018-05-18','2018-05-29',0,0),(20,1,8,'2018-05-18','2018-05-29',0,0),(21,1,8,'2018-05-18','2018-05-29',0,0),(22,1,8,'2018-05-18','2018-05-29',0,0),(23,1,8,'2018-05-18','2018-05-29',0,0),(24,1,8,'2018-05-18','2018-05-29',0,0),(25,1,8,'2018-05-18','2018-05-29',0,0),(26,1,8,'2018-05-18','2018-05-29',0,0),(27,1,8,'2018-05-18','2018-05-29',0,0),(28,1,8,'2018-05-18','2018-05-29',0,0),(29,1,8,'2018-05-18','2018-05-29',0,0),(30,1,7,'2018-05-18','2018-05-22',0,0),(31,1,7,'2018-05-18','2018-05-22',0,0),(32,1,7,'2018-05-18','2018-05-22',0,0),(33,1,7,'2018-05-18','2018-05-28',0,0),(34,1,7,'2018-05-18','2018-05-19',0,0),(35,1,7,'2018-05-18','2018-05-20',0,0),(36,1,7,'2018-05-18','2018-05-20',0,0),(37,1,7,'2018-05-18','2018-05-23',0,0),(38,1,7,'2018-05-18','2018-05-22',0,0),(39,1,7,'2018-05-18','2018-05-22',0,0),(40,1,7,'2018-05-24','2018-05-31',0,0),(41,1,7,'2018-05-27','2018-05-27',0,0),(42,1,7,'2018-05-27','2018-05-27',0,0),(43,1,7,'2018-05-27','2018-05-27',0,0),(44,1,7,'2018-05-27','2018-05-27',0,0),(45,1,7,'2018-05-27','2018-05-27',0,0),(46,1,7,'2018-05-27','2018-05-27',0,0),(47,1,7,'2018-05-27','2018-05-27',0,0),(48,1,7,'2018-05-27','2018-05-27',0,0),(49,1,7,'2018-05-28','2018-05-29',0,0),(50,1,7,'2018-05-28','2018-05-29',0,0),(51,1,7,'2018-05-28','2018-05-29',0,0),(52,1,7,'2018-05-28','2018-05-28',0,0),(53,1,7,'2018-05-28','2018-05-28',0,0),(54,1,7,'2018-05-28','2018-05-28',0,0),(55,1,7,'2018-05-28','2018-05-29',0,0);
 /*!40000 ALTER TABLE `Reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,6 +281,35 @@ LOCK TABLES `User` WRITE;
 INSERT INTO `User` VALUES (1,'Aurélien','Martin','aurelien.martin@insa-lyon.fr','toto','/images/users/default.png'),(2,'Camille','Moriot','camille.moriot@insa-lyon.fr','toto','/images/users/default.png'),(3,'Alexandre','Sabathier','alexandre.sabathier@insa-lyon.fr','toto','/images/users/2.jpg'),(4,'Mael','Brouard','mael.brouard@insa-lyon.fr','toto','/images/users/default.png'),(5,'Test','Test','test@test.co','test','/images/users/default.png'),(6,'Test','Test','test@tttt.c','tttt','/images/users/default.png'),(7,'Camille','mo','camimot@hotmail.fr','$2b$10$IG65PezFlRl5iuqSxcYA7On56k2GEJ9LszezsrczS0baX2Cf8UcC6','/images/users/default.png'),(8,'b','b','b@b.b','$2b$10$DEyCRpuAzPZ4d8mXB75xyeIHajJB77u.EpXfHxgiEaaFKXofB9zY.','/images/users/default.png');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sessions` (
+  `session_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `expires` int(11) unsigned NOT NULL,
+  `data` text COLLATE utf8_bin,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+INSERT INTO `sessions` VALUES ('7Uj7Hi0fgO2HGLrpuvj4lQ9aF-gLan36',1527608320,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"user\":{\"id\":7,\"firstName\":\"Camille\",\"lastName\":\"mo\",\"email\":\"camimot@hotmail.fr\",\"password\":\"$2b$10$IG65PezFlRl5iuqSxcYA7On56k2GEJ9LszezsrczS0baX2Cf8UcC6\",\"imagePath\":\"/images/users/default.png\"}}');
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'Balm'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -290,4 +320,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-28 15:29:47
+-- Dump completed on 2018-05-28 17:52:54
