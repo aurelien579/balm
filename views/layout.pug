@@ -22,13 +22,12 @@ html
           li(class='nav-item')
             a(class='nav-link', href='/') Accueil
             
-        ul(class='navbar-nav mr-auto')
+        ul(class='navbar-nav')
           form(id="form-layout" action='/search' autocomplete="off" method='get')
-            div(class="row")
-              div(id="input1_head" class="input-group")
-                input(type="text" class="form-control" id="searchbar_head" name="searchText" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2" )
-                button(id="button1_head" class="btn" type="submit")
-                  i(class="fa fa-search")
+            div(id="input1_head" class="input-group")
+              input(type="text" class="form-control" id="searchbar_head" name="searchText" placeholder="Ou voulez-vous aller ?" aria-label="Ou voulez-vous aller ?" aria-describedby="basic-addon2" )
+              button(id="button1_head" class="btn" type="submit")
+                i(class="fa fa-search")
               button(id="button2_head" class="btn" type="button" data-toggle="collapse" href="#options-avancées" aria-controls="options-avancées") Options avancées
                       
             div(id="options-avancées" class="collapse card")

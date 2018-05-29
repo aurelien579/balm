@@ -73,20 +73,13 @@ body {
     text-shadow: 3px 3px 6px black;
 }
 
-
 #form-layout {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 300px;
-    transform: translate(-50%, -50%);
+  max-width: 100%;
 }
 
 #searchbar_head {
-    outline: none !important;
-    box-shadow: none;
+    max-height: 100%;
     border-radius: 0px;
-    height: 45px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border: 1px solid #B9121B;
@@ -94,21 +87,16 @@ body {
 
 #options-avancées {
     position: absolute;
-    z-index: 98 ;
     padding-top: 20px;
     padding-left: 30px;
+    padding-right: 30px;
     border-radius: 5px;
     border: 1px solid #B9121B;
     border-bottom: 2px solid #B9121B;
     margin-top: 5px;
-
-
 }
 
 #input1_head {
-    position: relative;
-    right: 0px;
-    margin-right: 160px;
     border-radius: 5px;
 }
 
@@ -118,11 +106,8 @@ body {
 }
 
 #button1_head {
-    outline: none !important;
     border: 1px solid #B9121B;
     border-left: none;
-    box-shadow: none;
-    width: 45px;
     background: white;
     border-radius: 0px;
     color: black;
@@ -136,17 +121,11 @@ body {
 }
 
 #button2_head {
-    outline: none !important;
-    box-shadow: none;
-    position: absolute;
-    right: 0;
-    height: 45px;
+    margin-left: 5px;
     border-radius: 5px;
     background: white;
     color: black;
     border: 1px solid #B9121B;
-    /*width: 150px;*/
-
 }
 
 #option_head {
