@@ -3,7 +3,7 @@
 /*--  reset page if relaod  --*/
 document.getElementById("form").reset();
 
-$(function() {
+/*$(function() {
   $("#date").datepicker({
     format: "yyyy-mm-dd",
     startDate: '+d1',
@@ -20,7 +20,7 @@ $(function() {
     orientation: "bottom"
   })
 });
-/*--  set date du jour en minimum  --*/
+
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
@@ -34,15 +34,14 @@ var yyyy = today.getFullYear();
 
 today = yyyy+'-'+mm+'-'+dd;
 document.getElementById("date").setAttribute("min", today);
+*/
 
-/*--  set min value to second calendar  --*/
-function setminvalue() {
-  if (document.getElementById("date").value=="") {
-    document.getElementById("date2").setAttribute("min", today);
-  } else {
-    document.getElementById("date2").setAttribute("min", document.getElementById("date").value);
+/*function setminvalue() {
+  console.log("test");
+  console.log(document.getElementById("date").value);
+  console.log(document.getElementById("date2").datepicker);
+  if (document.getElementById("date").value != "") {
+    console.log(document.getElementById("date2").datepicker);
+    document.getElementById("date2").setAttribute("startDate", document.getElementById("date").value);
   }
-}
-
-/*var vid = document.getElementById("myVideo");
-vid.volume = 0;*/
+}*/
