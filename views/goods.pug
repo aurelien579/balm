@@ -56,7 +56,7 @@ block content
               - for (var x = 0; x < moyenne; x++)
                 h1(class = "display-4 inline etoile") &#9733
             else
-              h1() Pas de notes disponibles
+                h1() Pas de notes disponibles
 
             div()
               if offer.pool ==1
@@ -115,13 +115,13 @@ block content
                     if user
                       select(class="form-control")
                         each row in result
-                          option() #{row.title} 
+                          option() #{row.title}
                   div(class="col")
                     input(type="hidden" name="id" value=id)
                     button(type="submit" class="btnRed btn-outline-danger form-control") Réserver
         div(class="commentaires border-0")
           h4(class="text-justify") Commentaires
-          if comments
+          if comments 
             each row in comments
               h4(small class="text-muted inline font-italic") #{row.firstName} :
               - for (var x = 0; x < row.rating; x++)
@@ -129,7 +129,7 @@ block content
               p(class="text-justify") #{row.content}
 
           else
-            p Il n'y a pas encore de commentaires disponibles pour cette offre
+              p(class = "text-justify") Il n'y a pas encore de commentaires disponibles pour cette offre
 
 
     else
