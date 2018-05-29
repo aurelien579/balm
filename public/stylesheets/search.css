@@ -246,17 +246,3 @@
   font-weight: bold;
   text-shadow: 2px 2px 8px black;
 }
-
-.pagcolor {
-  background-color: : #FF8800;
-  color: orange;
-}
-
-.pagcolor li {
-  border-color: #00FF00;
-}
-
-.pagact {
-  background-color: orange;
-  border-color: orange;
-}
