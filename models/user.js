@@ -8,6 +8,16 @@ const EMAIL_EXISTS = 2;
 const userGetSql = 'SELECT * FROM User WHERE email = ?';
 const userInsertSql = 'INSERT INTO User(email, firstName, lastName, password) VALUES(?, ?, ?, ?);';
 
+const usersqlEdit = `UPDATE User SET email = ?, firstName = ?, lastName = ? WHERE id = ?;`
+
+function editUsername(res) {
+  db.pool.query(usersqlEdit, [res.email, res.firstName, res.lastName, res.userId], (err, result) => {
+    if (err) {
+        return err;
+    }
+  });
+}
+
 function getByUsername(email, callback) {
     db.pool.query(userGetSql, [email], (err, results) => {
         if (err) {
@@ -36,6 +46,7 @@ function create(email, firstName, lastName, password, callback) {
 
 exports.create = create;
 exports.getByUsername = getByUsername;
+exports.editUsername = editUsername;
 exports.USERNAME_EXISTS = USERNAME_EXISTS;
 exports.EMAIL_EXISTS = EMAIL_EXISTS;
 exports.ERROR = ERROR;

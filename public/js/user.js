@@ -15,8 +15,6 @@ $(function() {
     }
 
     function setupUserInfo() {
-        console.log('setup');
-
         const $button = $('#modifyButton');
         const $divPassword = $('#divPassword');
         const $modifyForm = $('#modifyForm');
@@ -33,10 +31,10 @@ $(function() {
                 }
             });
 
-            if ($button.innerText == 'Modifier') {
-                $button.innerText = 'Valider';
+            if ($button.text() == 'Modifier') {
+                $button.text('Valider');
             } else {
-                $button.innerText = 'Modifier';
+                $button.text('Modifier');
             }
 
             if ($divPassword.is('[hidden]')) {
@@ -48,15 +46,13 @@ $(function() {
 
         $modifyForm.submit((event) => {
             event.preventDefault();
-
-            /*const url = $modifyForm.attr('action');
+            const url = $modifyForm.attr('action');
             $.post(url, {
-                offerId: $("#commentForm").attr("offer-id"),
-                rating: $('#rating').val(),
-                content: $('#content').val()
+                userId: $("#userId").val(),
+                email: $("#email").val(),
+                firstName: $('#firstName').val(),
+                lastName: $('#lastName').val()
             });
-
-            $("#" + $form.attr('modal-id')).modal('toggle');*/
         });
     }
 

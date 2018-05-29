@@ -63,8 +63,8 @@ async function deleteOffer(offerId) {
     return await db.sqlQuery(sqlDelete, [offerId]);
 }
 
-function edit(offerId, title, description, price, nbpeople) {
-    return db.sqlQuery(sqlEdit, [title, description, price, nbpeople, offerId]);
+function edit(offerId, title, description, price, nbpeople, type) {
+    return db.sqlQuery(sqlEdit, [title, description, price, nbpeople, type, offerId]);
 }
 
 async function getFullWithDefault(offerId) {

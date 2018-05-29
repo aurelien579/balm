@@ -212,7 +212,7 @@ router.get('/edit/:id', utils.mustBeConnected, async function(req, res, next) {
         const good = await goodsModel.getFullWithDefault(parseInt(req.params.id));
         if (good.userId != req.session.user.id)
             return res.render('hack');
-
+        console.log(good);
         return res.render('goods-edit', {
             title: "Modification : " + good.title,
             offer: good
@@ -231,11 +231,20 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
         const from = new Date(req.body.from);
         const to = new Date(req.body.to);
         const offer = await goodsModel.getFullWithDefault(req.params.id);
+        let offerType = goodsModel.RENTING;
+        let price = req.body.price;
 
         if (from > to || from < Date.now()) {
             mapped.dates = {
                 msg: 'Les dates ne sont pas correctes'
             }
+        }
+
+        if (req.body.offerType == 'echange') {
+            offerType = goodsModel.EXCHANGE;
+        } else if (req.body.offerType == 'hebergement') {
+            offerType = goodsModel.HOSTING;
+            price = 0;
         }
 
         if (Object.keys(mapped).length > 0) {
@@ -245,37 +254,12 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
             });
         }
 
-        if (req.body.pool === undefined) {
-            req.body.pool = 0;
-        }
-        if (req.body.garden === undefined) {
-            req.body.garden = 0;
-        }
-        if (req.body.citycenter === undefined) {
-            req.body.citycenter = 0;
-        }
-        if (req.body.hebergement === undefined) {
-            req.body.hebergement = 0;
-        }
-        if (req.body.echange === undefined) {
-            req.body.echange = 0;
-        }
-
         await goodsModel.edit(req.params.id,
             req.body.title,
             req.body.description,
-            req.body.price,
-            req.body.region,
-            req.body.department,
-            req.body.city,
-            req.body.postcode,
-            req.body.address,
+            price,
             req.body.nbpeople,
-            req.body.pool,
-            req.body.garden,
-            req.body.citycenter,
-            req.body.hebergement,
-            req.body.echange);
+            offerType);
 
 
         let i = 1;
