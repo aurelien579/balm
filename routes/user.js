@@ -91,7 +91,7 @@ router.get('/logout', utils.mustBeConnected, function(req, res, next) {
 });
 
 router.get('/', utils.mustBeConnected, function(req, res, next) {
-  console.log(req.body);
+    console.log(req.body);
     res.render('user/user', {
         title: "Mon compte",
         user: req.session.user
@@ -102,10 +102,10 @@ router.get('/infos', utils.mustBeConnected, function(req, res, next) {
     var modify = req.body.modify;
     console.log(modify);
     if (modify == 2) {
-      console.log("Bien reçu");
-      modify = 0;
+        console.log("Bien reçu");
+        modify = 0;
     } else if (modify == undefined) {
-      modify = 0;
+        modify = 0;
     }
     res.render('user/user-infos', {
         modify: modify,
@@ -144,7 +144,7 @@ router.get('/comments', utils.mustBeConnected, function(req, res, next) {
         });
 });
 
-router.get('/reservations', utils.mustBeConnected, function(req, res, next) {
+router.get('/reservations', utils.mustBeConnected, async function(req, res, next) {
     try {
         const results = await reservationModel.getByUserIdWithCommentCount(req.session.user.id);
         const now = new Date();
