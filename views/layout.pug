@@ -21,7 +21,7 @@ html
         ul(class='navbar-nav w-100')
           li(class='nav-item')
             a(class='nav-link', href='/') Accueil
-            
+
           li(class='nav-item mx-auto')
             form(id="form-layout" action='/search' autocomplete="off" method='get')
               div(id="input1_head" class="input-group")
@@ -29,7 +29,7 @@ html
                 button(id="button1_head" class="btn" type="submit")
                   i(class="fa fa-search")
                 button(id="button2_head" class="btn" type="button" data-toggle="collapse" href="#options-avancées" aria-controls="options-avancées") Options avancées
-                        
+
               div(id="options-avancées" class="collapse card")
                 div(class="form-group row")
                   label(class="control-label" for="date0") Date de départ :
@@ -75,7 +75,7 @@ html
                     div(class="col form-check form-check-inline")
                       input(id="city" class="form-check-input" type="checkbox" name="city" value="1")
                       label(class="form-check-label" for="city") Centre ville
-          
+
           li(class='nav-item')
             if session
               li.nav-item.dropdown.ml-auto
@@ -92,7 +92,9 @@ html
     block content
 
     footer(class= "footer")
-       button(type="button" class="btn " data-toggle="modal" data-target="#exampleModalLong") Aide
+       button(type="button " class="btn buttonBarreBas") A propos
+       button(type="button" class="btn buttonBarreBas " data-toggle="modal" data-target="#exampleModalLong") Aide
+
        div(class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true")
          div(class="modal-dialog" role="document")
            div(class="modal-content")
@@ -101,12 +103,24 @@ html
                button(type="button" class="close" data-dismiss="modal" aria-label="Close")
                  span(aria-hidden="true") &times;
              div(class="modal-body")
+               h6() Objectif du site :
                p() Ce site permet de mettre en relation des particuliers afin de sous-louer leurs maisons, de proposer un hébergement ou d'échanger sa maison.
+               h6() Compte utilisateur :
                p() Pour utiliser ce site, vous devez créer un compte en fournissant les informations suivantes : Nom, Prénom, Adresse mail et Mot de passe.
+               h6() Transactions bancaires :
                p() Ce site ne permet pas de faire des transactions bancaires, celles-ci doivent être organisé par les particuliers.
+               h6() Service de Messagerie :
                p() Pour toutes communications, nous vous mettons à disposition un service de communication via le site.
+               h6() Effectuer une recherhe :
                p() Grâce à la barre de recherche vous pouvez acceder rapidement à de nombreuses offres mise en ligne. Il vous suffit de taper le nom d'une destination, d'une region, d'une ville, et nous vous trouvons toutes les offres à proximités. Vous pouvez aussi affiner votre recherches en précisant vos dates d'aller et de retour, le type d'offres que vous rechercher, un nombre de personne et certaines caractéristiques que vous rechercher dans les offres.
-               
+               p() Vous pouvez voir les pages détaillant les offres affichées en cliquant dessus.
+               p() Sur la page d'une offre vous pourrez faire une demande de reservation, attention il faut être connecté pour en faire !
+               p() Si vous souhaitez faire un échange de maison, vous devez en contrepartie inscrire votre maison sur le site et la selectionner lorsque vous faites une demande d'échange.
+               h6() Espace personnel :
+               p() Vous pourrez acceder à toutes vos informations personnelles en vous connectant et en cliquant sur votre nom en haut à droite de l'écran.
+               p() Sur votre espace personel, vous retrouverez vos annonces, vos demandes de réservations, ainsi que le demandes que vous avez faite. Vous pourrez aussi consulter les messages envoyés par les autres utilisateurs et déposer des commentaires lorsque vous aurez visité un bien.
+
+
              div(class="modal-footer")
                button(type="button" class="btn btn-secondary" data-dismiss="modal") Fermer l'aide
 
