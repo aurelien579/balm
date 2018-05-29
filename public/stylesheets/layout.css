@@ -105,46 +105,51 @@ body {
 
 }
 
-#input1 {
+#input1_head {
     position: relative;
     right: 0px;
     margin-right: 160px;
     border-radius: 5px;
 }
 
-#button1:hover {
-    color: black;
+#button1_head:hover {
+    color: white;
+    background: #B9121B;
 }
 
-#button1 {
+#button1_head {
     outline: none !important;
+    border: 1px solid #B9121B;
+    border-left: none;
     box-shadow: none;
     width: 45px;
-    background: #B9121B;
+    background: white;
     border-radius: 0px;
-    color: white;
+    color: black;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
-#button2:hover {
-    color: black;
+#button2_head:hover {
+    color: white;
+    background: #B9121B;
 }
 
-#button2 {
+#button2_head {
     outline: none !important;
     box-shadow: none;
     position: absolute;
     right: 0;
     height: 45px;
-    background: #B9121B;
     border-radius: 5px;
-    color: white;
+    background: white;
+    color: black;
+    border: 1px solid #B9121B;
     /*width: 150px;*/
 
 }
 
-#option {
+#option_head {
     padding-right: 70px;
 }
 
