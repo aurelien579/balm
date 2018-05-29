@@ -164,3 +164,7 @@ body {
     background-color: DodgerBlue !important;
     color: #ffffff;
 }
+.modal-dialog {
+    max-width: 80%;
+    text-align: justify;
+}

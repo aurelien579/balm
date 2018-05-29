@@ -21,7 +21,7 @@ html
         ul(class='navbar-nav mr-auto')
           li(class='nav-item')
             a(class='nav-link', href='/') Accueil
-            
+
         ul(class='navbar-nav')
           form(id="form-layout" action='/search' autocomplete="off" method='get')
             div(id="input1_head" class="input-group")
@@ -29,7 +29,7 @@ html
               button(id="button1_head" class="btn" type="submit")
                 i(class="fa fa-search")
               button(id="button2_head" class="btn" type="button" data-toggle="collapse" href="#options-avancées" aria-controls="options-avancées") Options avancées
-                      
+
             div(id="options-avancées" class="collapse card")
               div(class="form-group row" id ="option")
                 label(class="control-label" for="date") Date de départ :
@@ -75,7 +75,7 @@ html
                   div(class="col form-check form-check-inline")
                     input(id="city" class="form-check-input" type="checkbox" name="city" value="1")
                     label(class="form-check-label" for="city") Centre ville
-        
+
         ul(class='navbar-nav ml-auto')
           if session
             li.nav-item
@@ -101,6 +101,12 @@ html
                button(type="button" class="close" data-dismiss="modal" aria-label="Close")
                  span(aria-hidden="true") &times;
              div(class="modal-body")
+               p() Ce site permet de mettre en relation des particuliers afin de sous-louer leurs maisons, de proposer un hébergement ou d'échanger sa maison.
+               p() Pour utiliser ce site, vous devez créer un compte en fournissant les informations suivantes : Nom, Prénom, Adresse mail et Mot de passe.
+               p() Ce site ne permet pas de faire des transactions bancaires, celles-ci doivent être organisé par les particuliers.
+               p() Pour toutes communications, nous vous mettons à disposition un service de communication via le site.
+               p() Grâce à la barre de recherche vous pouvez acceder rapidement à de nombreuses offres mise en ligne. Il vous suffit de taper le nom d'une destination, d'une region, d'une ville, et nous vous trouvons toutes les offres à proximités. Vous pouvez aussi affiner votre recherches en précisant vos dates d'aller et de retour, le type d'offres que vous rechercher, un nombre de personne et certaines caractéristiques que vous rechercher dans les offres.
+               
              div(class="modal-footer")
                button(type="button" class="btn btn-secondary" data-dismiss="modal") Fermer l'aide
 
