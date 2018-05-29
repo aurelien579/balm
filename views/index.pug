@@ -16,11 +16,11 @@ block content
       div(id="input2" class="collapse")
         div(class="card")
           div(class="form-group row")
-            label(class="control-label" for="date") Date de départ :
-            input(id="date" class="form-control" name="datedep" type="text" )
+            label(class="control-label" for="date0") Date de départ :
+            input.form-control.datepicker(id='date0' name="datedep" type='text' end='date1')
           div(class="form-group row")
-            label(class="control-label" for="date2") Date de retour :
-            input(id="date2" class="form-control" name="datearr" type="text" onclick="setminvalue()")
+            label(class="control-label" for="date1") Date de retour :
+            input.form-control.datepicker(id='date1' name="datearr" type='text' start='date0')
           div(class="form-group")
             label(for="FormControlSelect1") Nombre de personnes :
             select(class="form-control" name="numberpers" id="FormControlSelect1")
@@ -51,14 +51,15 @@ block content
             div(class="row" id ="option")
               div(class="col form-check form-check-inline")
                 input(id="pool" class="form-check-input" type="checkbox" name="pool" value="1")
-                label(class="form-check-label" for="pool") Piscine
+                label.form-check-label(for="pool") Piscine
               div(class="col form-check form-check-inline")
                 input(id="garden" class="form-check-input" type="checkbox" name="garden" value="1")
-                label(class="form-check-label" for="garden") Jardin
+                label.form-check-label(for="garden") Jardin
               div(class="col form-check form-check-inline")
                 input(id="city" class="form-check-input" type="checkbox" name="city" value="1")
-                label(class="form-check-label" for="city") Centre ville
+                label.form-check-label(for="city") Centre ville
 
 
 block scripts
+  script(src='js/goods.js')
   script(src="js/functions.js")
