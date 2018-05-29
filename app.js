@@ -44,9 +44,6 @@ app.use(session({
 app.use(function(req, res, next) {
     const user = req.session.user;
 
-    if (typeof req.locals == 'undefined')
-        req.locals = {};
-
     if (user) {
         app.locals.session = {
             email: user.email
