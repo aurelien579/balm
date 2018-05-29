@@ -176,23 +176,28 @@
   margin-top: 2%;
   width: 45%;
   border-radius: 5px;
-  border: 1px solid #FF8800;
+  border: 1px solid #B9121B;
   color: white;
-  background-color : #FF8800;
+  background-color : #B9121B;
   text-align: center;
   font-weight: bold;
   font-size: 200%;
   box-shadow: 2px 2px 8px black;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: .4s ease-in-out;
+  transition: .4s ease-in-out;
 }
 
 .zres3:hover {
-  background-color: #ffbb33;
   text-decoration: none;
 }
 
 .zres2:hover {
+  z-index: 1;
+  webkit-transform: scale(1.04);
+  transform: scale(1.04);
   text-decoration: none;
-  background-color: #ffbb33;
 }
 
 .zres4 {
