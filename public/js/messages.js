@@ -14,10 +14,6 @@ $(function() {
         elem.addClass('active');
     }
 
-    function updateConv(reservationId) {
-        ajax('/message/' + reservationId);
-    }
-
     function setupConv(reservationId) {
         window.reservationId = reservationId;
 
@@ -28,14 +24,12 @@ $(function() {
 
             const url = $form.attr('action');
 
-            console.log(url);
-
             $.post({
                 url: url.toString(),
                 data: {
                     destUserId: $form.attr("destUserId"),
                     sourceUserId: $form.attr("sourceUserId"),
-                    reservationId: $form.attr("reservationId"),
+                    reservationId: reservationId,
                     content: $("#content").val()
                 },
                 dataType: 'text',
@@ -51,6 +45,8 @@ $(function() {
         const reservationId = $elem.attr('reservationId');
 
         $elem.click(function() {
+            window.reservationId = reservationId;
+
             ajax('/message/' + reservationId, () => {
                 setupConv(reservationId);
             });
@@ -59,8 +55,19 @@ $(function() {
     });
 
     function windowUpdate() {
-        if (typeof window.reservationId != 'undefined')
-            updateConv(window.reservationId);
+        if (typeof window.reservationId != 'undefined') {
+            const $content = $("#content");
+            const content = $content.val();
+            const focused = $content.is(':focus');
+
+            ajax('/message/' + window.reservationId, () => {
+                setupConv(window.reservationId);
+                $('#content').val(content);
+                if (focused) {
+                    $("#content").focus();
+                }
+            });
+        }
         window.setTimeout(windowUpdate, 5000);
     }
 

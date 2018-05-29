@@ -17,7 +17,6 @@ router.get('/', utils.mustBeConnected, async function(req, res, next) {
 
 router.post('/', utils.mustBeConnected, async function(req, res, next) {
     try {
-        console.log(req.body);
         await messageModel.create(req.body.reservationId,
             req.body.destUserId,
             req.body.sourceUserId,
