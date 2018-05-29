@@ -1,31 +1,46 @@
 const db = require('./db');
 
-const sqlGetById =
+const sqlGetByOfferId =
     `
-                    SELECT
-                      Comment.rating, Comment.content, User.firstName
-                    FROM
-                      Comment, User
-                    WHERE
-                      Comment.idOffer = ?
-                      AND Comment.idUser = User.id ;
-                    `;
+SELECT
+    Comment.rating,
+    Comment.content,
+    User.firstName
+FROM
+    Comment,
+    User,
+    Reservation
+WHERE
+    Comment.reservationId = Reservation.id
+        AND Reservation.offerId = ?
+        AND Comment.userId = User.id;
+`;
+
 const sqlGetByUserId =
     `
-    SELECT
-        Comment.idOffer, User.firstName, Comment.rating, Comment.content, Offer.title, User.imagePath
-    FROM
-        Offer, Comment, User
-    WHERE
-        Offer.userId = ?
-            AND Offer.id = Comment.idOffer
-            AND User.id = Comment.idUser;
-    `;
+SELECT
+    Offer.id AS offerId,
+    Comment.rating,
+    Comment.content,
+    Offer.title,
+    User.imagePath,
+    User.firstName
+FROM
+    Offer,
+    Comment,
+    Reservation,
+    User
+WHERE
+    Offer.userId = ?
+        AND Offer.id = Reservation.offerId
+        AND Reservation.id = Comment.reservationId
+        AND User.id = Comment.userId;
+`;
 
 const sqlCreate = 'INSERT INTO Comment (idOffer, idUser, rating, content) VALUES (?, ?, ?, ?);';
 
 function getByOfferId(id) {
-    return db.sqlQuery(sqlGetById, [id]);
+    return db.sqlQuery(sqlGetByOfferId, [id]);
 }
 
 function getByUserId(userId) {

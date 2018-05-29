@@ -91,7 +91,7 @@ router.get('/logout', utils.mustBeConnected, function(req, res, next) {
 });
 
 router.get('/', utils.mustBeConnected, function(req, res, next) {
-  console.log(req.body);
+    console.log(req.body);
     res.render('user/user', {
         title: "Mon compte",
         user: req.session.user
@@ -102,10 +102,10 @@ router.get('/infos', utils.mustBeConnected, function(req, res, next) {
     var modify = req.body.modify;
     console.log(modify);
     if (modify == 2) {
-      console.log("Bien reçu");
-      modify = 0;
+        console.log("Bien reçu");
+        modify = 0;
     } else if (modify == undefined) {
-      modify = 0;
+        modify = 0;
     }
     res.render('user/user-infos', {
         modify: modify,
@@ -128,23 +128,18 @@ router.get('/offers', utils.mustBeConnected, function(req, res, next) {
         });
 });
 
-router.get('/comments', utils.mustBeConnected, function(req, res, next) {
-    console.log("salut");
-    commentModel.getByUserId(req.session.user.id)
-        .then((comments) => {
-            res.render('user/user-comments', {
-                user: req.session.user,
-                comments: comments
-            })
-        })
-        .catch((err) => {
-            res.render('error', {
-                error: err
-            });
+router.get('/comments', utils.mustBeConnected, async function(req, res, next) {
+    try {
+        res.locals.comments = await commentModel.getByUserId(req.session.user.id);
+        res.render('user/user-comments');
+    } catch (error) {
+        res.render('error', {
+            error: error
         });
+    }
 });
 
-router.get('/reservations', utils.mustBeConnected, function(req, res, next) {
+router.get('/reservations', utils.mustBeConnected, async function(req, res, next) {
     try {
         const results = await reservationModel.getByUserIdWithCommentCount(req.session.user.id);
         const now = new Date();
@@ -166,18 +161,15 @@ router.get('/reservations', utils.mustBeConnected, function(req, res, next) {
     }
 });
 
-router.get('/demands', utils.mustBeConnected, function(req, res, next) {
-    reservationModel.getDemandsTo(req.session.user.id)
-        .then((results) => {
-            res.render('user/user-demands', {
-                demands: results
-            });
-        })
-        .catch((err) => {
-            res.render('error', {
-                error: error
-            });
-        })
+router.get('/demands', utils.mustBeConnected, async function(req, res, next) {
+    try {
+        res.locals.demands = await reservationModel.getDemandsTo(req.session.user.id);
+        res.render('user/user-demands');
+    } catch (error) {
+        res.render('error', {
+            error: error
+        });
+    }
 });
 
 module.exports = router;
