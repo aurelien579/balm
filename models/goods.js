@@ -75,7 +75,7 @@ async function getFullWithDefault(offerId) {
         if (typeof offer.images[i] == 'undefined') {
             offer.images[i] = {
                 id: -i - 1,
-                path: '/images/icon-add.png'
+                path: '/images/icons/icon-add.png'
             };
         }
     }
