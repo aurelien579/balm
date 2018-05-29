@@ -30,8 +30,7 @@ block content
             label.col-lg-3.col-form-label Description
             .col-lg-9
               textarea.form-control(name="description" type="text"
-                                    placeholder="Description")
-              | #{body.description}
+                                    placeholder="Description") #{body.description}
           .form-group.row
             .form-check.form-check-inline.mar10.decright
               input.form-check-input(name="pool" type="checkbox" value="1" checked=(body.pool == 1))
@@ -102,11 +101,13 @@ block content
             label.col-lg-3.col-form-label Disponible du
             .col-lg-4
               .input-group.date
-                input.form-control.datepicker(id='date0' name="from" type='text' value=body.from end='date1')
+                input.form-control.datepicker(id='date0' type='text' value=body.from end='date1')
+                input(id='date0Sent' name="from" type='text' hidden)
             label.col-lg-1.col-form-label au
             .col-lg-4
               .input-group.date
-                input.form-control.datepicker(id='date1' name="to" type='text' value=body.to start='date0')
+                input.form-control.datepicker(id='date1' type='text' value=body.to start='date0')
+                input(id='date1Sent' name="to" type='text' hidden)
 
           br
           .form-group.row.col-lg-4

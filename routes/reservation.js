@@ -77,7 +77,7 @@ router.get('/:id/accept', utils.mustBeConnected, async function(req, res, next) 
             });
         }
 
-        res.redirect('/index');
+        res.redirect('/user');
     } catch (ex) {
         res.render('error', {
             error: ex

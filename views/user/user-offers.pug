@@ -5,7 +5,7 @@ h5.card-title Mes Offres
       each offer in offers
         li.list-group-item
           h5
-            a(href="/goods/" + offer.offerId) #{offer.title} 
+            a(href="/goods/" + offer.id) #{offer.title} 
             case offer.type
               when 0
                 | (Location) à #{offer.price} € par nuit

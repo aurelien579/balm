@@ -22,7 +22,7 @@ const slqGetByUserIdWithFirstImage =
     (
     	SELECT id FROM Image
     	WHERE Image.offerId = Offer.id
-    	ORDER BY id
+    	ORDER BY Image.id
     	LIMIT 1
     ) WHERE Offer.userId = ?;`;
 

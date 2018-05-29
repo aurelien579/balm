@@ -41,15 +41,6 @@ const goodsValidators = [
     check('description', 'Description incorrecte (elle doit faire plus de 20 charactères)').isLength({
         min: 20
     }),
-    check('from', 'Première disponibilité incorrecte (date de départ)').exists()
-    .custom((from) => {
-        return !isNaN(new Date(from));
-    }),
-    check('to', 'Première disponibilité incorrecte (date de fin)').exists()
-    .custom((to) => {
-        return !isNaN(new Date(to));
-    }),
-    check('price', 'Prix incorrect').isInt(),
     check('address', 'Adresse incorrecte')
     .isLength({
         min: 8
@@ -82,7 +73,7 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
     let price = req.body.price;
 
     /* Validation and sanitization */
-    if (from > to || from < Date.now()) {
+    if (from > to) {
         mapped.dates = {
             msg: 'Les dates ne sont pas correctes'
         }
@@ -97,10 +88,12 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
 
     if (req.body.offerType == 'echange') {
         offerType = goodsModel.EXCHANGE;
+        price = 0;
     } else if (req.body.offerType == 'hebergement') {
         offerType = goodsModel.HOSTING;
         price = 0;
     }
+    console.log(req.body.offerType == 'echange');
 
     if (Object.keys(mapped).length > 0) {
         return res.render('goods-new', {
@@ -128,10 +121,14 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
         /* Save uploaded images */
         let i = 1;
         for (let property in req.files) {
+            console.log('processing', property);
             if (req.files.hasOwnProperty(property)) {
                 let file = req.files[property];
                 let path = "/images/offers/" + insertResult.insertId + "-" + i + "." + file.name.split('.').pop();
                 let fsPath = 'public' + path;
+
+                console.log('path:', path);
+                console.log('fspath:', fsPath);
 
                 imageModel.add(insertResult.insertId, path);
                 file.mv(fsPath, function(err) {
@@ -234,7 +231,7 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
         let offerType = goodsModel.RENTING;
         let price = req.body.price;
 
-        if (from > to || from < Date.now()) {
+        if (from > to) {
             mapped.dates = {
                 msg: 'Les dates ne sont pas correctes'
             }
@@ -242,6 +239,7 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
 
         if (req.body.offerType == 'echange') {
             offerType = goodsModel.EXCHANGE;
+            price = 0;
         } else if (req.body.offerType == 'hebergement') {
             offerType = goodsModel.HOSTING;
             price = 0;

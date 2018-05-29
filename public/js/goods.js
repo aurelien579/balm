@@ -1,6 +1,12 @@
 function updateDateToSend(elem, value) {
     let alt = $("#" + elem.attr('id') + "Sent");
-    alt.val(value);
+    value = new Date(value);
+
+    var day = value.getDate();
+    var monthIndex = value.getMonth();
+    var year = value.getFullYear();
+
+    alt.val(year + '-' + (monthIndex + 1) + '-' + day);
 }
 
 function formatDate(date) {
