@@ -8,8 +8,8 @@
 }
 
 #searchbar {
-    outline: none !important;
-    box-shadow: none;
+    /*outline: none !important;
+    box-shadow: none;*/
     border-radius: 0px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -35,8 +35,8 @@
 }
 
 #button1 {
-    outline: none !important;
-    box-shadow: none;
+    /*outline: none !important;
+    box-shadow: none;*/
     width: 60px;
     background: #B9121B;
     border-radius: 0px;
@@ -50,8 +50,8 @@
 }
 
 #button2 {
-    outline: none !important;
-    box-shadow: none;
+    /*outline: none !important;
+    box-shadow: none;*/
     position: absolute;
     right: 0;
     height: 60px;
