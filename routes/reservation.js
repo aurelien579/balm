@@ -32,12 +32,14 @@ router.post('/new', utils.mustBeConnectedToBook, function(req, res, next) {
     console.log(idOfferEchange);
     reservationModel.createReservation(id, req.session.user.id, from, to, 0, numberpers, idOfferEchange)
         .then((result) => {
+            let idResa = result.insertId;
             res.render('reservation', {
                 successMessage: "Votre demande de reservation a bien été prise en compte",
                 from: (from.toLocaleDateString('FR')),
                 to: (to.toLocaleDateString('FR')),
                 numberpers: numberpers,
-                id: id
+                id: id,
+                idResa: idResa
             });
         })
         .catch((err) => {
