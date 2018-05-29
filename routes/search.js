@@ -17,6 +17,11 @@ router.get('/', function(req, res, next) {
     search.garden = req.query.garden;
     search.city = req.query.city;
 
+    if (search.datedep == search.datearr) {
+      search.datearr = "";
+      search.datedep = "";
+    }
+    
     searchModel.getByOffer(search)
         .then((results) => {
 

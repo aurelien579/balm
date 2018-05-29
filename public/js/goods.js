@@ -27,7 +27,7 @@ function setupDatepicker(elem) {
 
     elem.datepicker({
         format: 'dd/mm/yyyy',
-        startDate: startDate.toString(),
+        startDate: startDate.toString()
         todayHighlight: true
     });
 
