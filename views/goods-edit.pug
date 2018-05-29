@@ -69,7 +69,7 @@ block content
                 else
                   option(value="echange") Echange
                   
-          .form-group.row
+          .form-group.row#priceGroup
             label.col-lg-3.col-form-label Prix par nuit
             .col-lg-2
               .input-group
@@ -134,7 +134,7 @@ block content
                   img#preview2(src=offer.images[2].path)
                 input#file2(type='file' name='image3' onchange='updatePreview(this);'
                            preview="preview2" accept="image/gif, image/jpeg, image/png")
-          button.form-control.btn.btn-success(type="submit") Modifier
+          button.form-control.btn.btn-danger(type="submit") Modifier
 
 block scripts
   script(src="/js/goods.js")
