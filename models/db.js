@@ -9,13 +9,13 @@ const pool = mysql.createPool({
 
 pool.query('SET lc_time_names = "fr_FR";');
 
-pool.on('connection', function(connection) {
+/*pool.on('connection', function(connection) {
     connection.on('enqueue', function(sequence) {
         if ('Query' === sequence.constructor.name) {
             console.log('SQL ', sequence.sql);
         }
     });
-});
+});*/
 
 function sqlQuery(sql, args) {
     return new Promise(function(resolve, reject) {
