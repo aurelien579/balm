@@ -1,4 +1,5 @@
 const db = require('./db');
+const mysql = require('mysql');
 
 const offerSql = {
     base: `SELECT
@@ -36,22 +37,22 @@ var getByOffer = function(search) {
 
     if (!!search.text) {
         offerGetSql += offerSql.text;
-        offerGetSql = offerGetSql.replace(/\?/g, "'" + search.text + "'");
+        offerGetSql = offerGetSql.replace(/\?/g,mysql.escape(search.text));
     }
 
     if (!!search.datedep) {
         offerGetSql += offerSql.datedep;
-        offerGetSql = offerGetSql.replace(/\?/g, "'" + search.datedep + "'");
+        offerGetSql = offerGetSql.replace(/\?/g,mysql.escape(search.datedep));
     }
 
     if (!!search.datearr) {
         offerGetSql += offerSql.datearr;
-        offerGetSql = offerGetSql.replace(/\?/g, "'" + search.datearr + "'");
+        offerGetSql = offerGetSql.replace(/\?/g,mysql.escape(search.datearr));
     }
 
     if (!!search.numberpers) {
         offerGetSql += offerSql.nbpeople;
-        offerGetSql = offerGetSql.replace(/\?/g, "'" + search.numberpers + "'");
+        offerGetSql = offerGetSql.replace(/\?/g,mysql.escape(search.numberpers));
     }
 
     if (search.echange && !(search.location || search.hebergement)) {
