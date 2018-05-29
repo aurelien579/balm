@@ -8,7 +8,9 @@ const offerSql = {
                 COALESCE(I.path, '/images/offers/default.jpg') AS path
           FROM
                 Availability AS A,
-                Offer AS O LEFT JOIN Comment AS C ON C.idOffer = O.id
+                Offer AS O
+                    LEFT JOIN Reservation AS R ON R.offerId = O.id
+                    LEFT JOIN Comment AS C ON C.reservationId = R.id
                 LEFT JOIN Image AS I ON I.id =
                 (
                 	SELECT id FROM Image

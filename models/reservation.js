@@ -48,7 +48,8 @@ SELECT
     Offer.price,
     Offer.type,
     COALESCE(Image.path, '/images/offers/default.jpg') AS path,
-    COUNT(Comment.id) AS commentsCount
+    COUNT(Comment.id) AS commentsCount,
+    Reservation.to <= CURDATE() AS past
 FROM
     Reservation
 		INNER JOIN

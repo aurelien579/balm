@@ -142,14 +142,6 @@ router.get('/comments', utils.mustBeConnected, async function(req, res, next) {
 router.get('/reservations', utils.mustBeConnected, async function(req, res, next) {
     try {
         const results = await reservationModel.getByUserIdWithCommentCount(req.session.user.id);
-        const now = new Date();
-
-        results.forEach((reservation) => {
-            let to = new Date(reservation.to2);
-            if (to < now) {
-                reservation.past = 1;
-            }
-        });
 
         res.render('user/user-reservations', {
             reservations: results
