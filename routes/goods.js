@@ -141,7 +141,7 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
 
         availabilityModel.add(insertResult.insertId, req.body.from, req.body.to);
 
-        res.render('goods-new', {
+        res.render('user/user', {
             successMessage: "Votre annonce a bien été déposé",
             body: req.body
         });
@@ -237,6 +237,13 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
             }
         }
 
+        if (req.body.pool === undefined)
+            req.body.pool = 0;
+        if (req.body.garden === undefined)
+            req.body.garden = 0;
+        if (req.body.citycenter === undefined)
+            req.body.citycenter = 0;
+
         if (req.body.offerType == 'echange') {
             offerType = goodsModel.EXCHANGE;
             price = 0;
@@ -255,6 +262,9 @@ router.post('/edit/:id', utils.mustBeConnected, goodsValidators, async function(
         await goodsModel.edit(req.params.id,
             req.body.title,
             req.body.description,
+            req.body.pool,
+            req.body.garden,
+            req.body.citycenter,
             price,
             req.body.nbpeople,
             offerType);
@@ -299,7 +309,10 @@ router.get('/delete/:id', utils.mustBeConnected, function(req, res, next) {
             if (results[0].userId == req.session.user.id) {
                 goodsModel.deleteOffer(Number(req.params.id))
                     .then((results) => {
-                        return res.redirect('/user');
+                        successMessage: "Votre annonce a bien été supprimé"
+                        res.render('user/user', {
+                            successMessage: "Votre annonce a bien été supprimé",
+                        })
                     })
                     .catch((err) => {
                         return res.render('error', {

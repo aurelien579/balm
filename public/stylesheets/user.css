@@ -58,3 +58,7 @@
 .card-content a:hover {
     text-decoration: none;
 }
+
+.yellow {
+    color: #ffc107;
+}

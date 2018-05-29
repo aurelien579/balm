@@ -21,7 +21,9 @@ router.get('/', function(req, res, next) {
       search.datearr = "";
       search.datedep = "";
     }
-    
+    console.log(search.datedep);
+    console.log(search.datearr);
+
     searchModel.getByOffer(search)
         .then((results) => {
 

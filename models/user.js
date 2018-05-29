@@ -11,11 +11,8 @@ const userInsertSql = 'INSERT INTO User(email, firstName, lastName, password) VA
 const usersqlEdit = `UPDATE User SET email = ?, firstName = ?, lastName = ? WHERE id = ?;`
 
 function editUsername(res) {
-  db.pool.query(usersqlEdit, [res.email, res.firstName, res.lastName, res.userId], (err, result) => {
-    if (err) {
-        return err;
-    }
-  });
+    console.log(res);
+    return db.pool.query(usersqlEdit, [res.email, res.firstName, res.lastName, parseInt(res.userId)]);
 }
 
 function getByUsername(email, callback) {

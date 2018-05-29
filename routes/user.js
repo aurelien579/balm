@@ -107,14 +107,21 @@ router.get('/infos', utils.mustBeConnected, function(req, res, next) {
     });
 });
 
-router.post('/infos', utils.mustBeConnected, function(req, res, next) {
-    userModel.editUsername(req.body)
-      .then((res) => {
-        console.log("edit_info_V");
-      })
-      .catch((err) => {
-        console.log("edit_info_F");
-      });
+router.post('/infos', utils.mustBeConnected, async function(req, res, next) {
+    try {
+        await userModel.editUsername(req.body);
+        userModel.getByUsername(req.body.email, (error, result) => {
+            req.session.user = result;
+            console.log('TESTTTTTTTTTTTTTTTTTTTT:', result);
+            res.render('user/user-infos', {
+                user: req.session.user
+            });
+        });
+
+    } catch (error) {
+      console.log("edit_info_F");
+      res.render('error:', {error: error});
+    }
 });
 
 router.get('/offers', utils.mustBeConnected, function(req, res, next) {

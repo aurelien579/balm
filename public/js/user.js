@@ -44,16 +44,18 @@ $(function() {
             }
         });
 
-        $modifyForm.submit((event) => {
-            event.preventDefault();
-            const url = $modifyForm.attr('action');
-            $.post(url, {
-                userId: $("#userId").val(),
-                email: $("#email").val(),
-                firstName: $('#firstName').val(),
-                lastName: $('#lastName').val()
+        if ($button.text() == 'Modifier') {
+            $modifyForm.submit((event) => {
+                event.preventDefault();
+                const url = $modifyForm.attr('action');
+                $.post(url, {
+                    userId: $("#userId").val(),
+                    email: $("#email").val(),
+                    firstName: $('#firstName').val(),
+                    lastName: $('#lastName').val()
+                });
             });
-        });
+        }
     }
 
     $('#userInfoButton').click(function() {

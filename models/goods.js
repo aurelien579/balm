@@ -13,7 +13,7 @@ const sqlGetByUserId = 'SELECT * FROM Offer WHERE userId = ?;';
 const sqlDelete = 'DELETE FROM Offer WHERE id = ?;';
 const sqlDeleteRes = 'DELETE FROM Reservation WHERE offerid = ?;';
 const sqlDeleteImg = 'DELETE FROM Image WHERE offerId = ?;';
-const sqlDeleteCom = 'DELETE FROM Comment WHERE offerId = ?;';
+const sqlDeleteCom = 'DELETE FROM Comment WHERE reservationId IN (SELECT Reservation.id FROM Reservation INNER JOIN Offer ON Offer.id = Reservation.offerId WHERE Offer.id = ?);';
 const sqlDeleteDisp = 'DELETE FROM Availability WHERE offerId = ?;';
 
 const slqGetByUserIdWithFirstImage =
@@ -32,7 +32,7 @@ const sqlCreate =
      VALUES
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
 
-const sqlEdit = `UPDATE Offer SET title = ?, description = ?, price = ?, nbpeople = ?, type = ? WHERE id = ?;`
+const sqlEdit = `UPDATE Offer SET title = ?, description = ?, pool = ?, garden = ?, citycenter = ?, price = ?, nbpeople = ?, type = ? WHERE id = ?;`
 
 function getById(id) {
     return db.sqlQuery(sqlGetById, [id]);
@@ -63,8 +63,8 @@ async function deleteOffer(offerId) {
     return await db.sqlQuery(sqlDelete, [offerId]);
 }
 
-function edit(offerId, title, description, price, nbpeople, type) {
-    return db.sqlQuery(sqlEdit, [title, description, price, nbpeople, type, offerId]);
+function edit(offerId, title, description, pool, garden, citycenter, price, nbpeople, type) {
+    return db.sqlQuery(sqlEdit, [title, description, pool, garden, citycenter, price, nbpeople, type, offerId]);
 }
 
 async function getFullWithDefault(offerId) {

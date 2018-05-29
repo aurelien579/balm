@@ -33,10 +33,12 @@ html
               div(id="options-avancées" class="collapse card")
                 div(class="form-group row")
                   label(class="control-label" for="date0") Date de départ :
-                  input.form-control.datepicker(id='date0' name="datedep" type='text' end='date1')
+                  input.form-control.datepicker(id='date0' type='text' end='date1')
+                  input(id='date0Sent'  name="datedep" type='text' hidden)
                 div(class="form-group row")
                   label(class="control-label" for="date1") Date de retour :
-                  input.form-control.datepicker(id='date1' name="datearr" type='text' start='date0')
+                  input.form-control.datepicker(id='date1' type='text' start='date0')
+                  input(id='date1Sent'  name="datearr" type='text' hidden)
                 div(class="form-group row" id ="option")
                   label(for="FormControlSelect1") Nombre de personnes :
                   select(class="form-control" name="numberpers" id="FormControlSelect1")
@@ -131,4 +133,5 @@ html
     script(src='/js/bootstrap-datepicker.min.js')
     script(src='/js/layout.js')
     script(src="/js/autocomplete.js")
+    script(src='/js/goods.js')
     block scripts

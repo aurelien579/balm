@@ -7,6 +7,11 @@ const messageModel = require('../models/message');
 router.get('/', utils.mustBeConnected, async function(req, res, next) {
     try {
         res.locals.reservations = await reservationModel.getByUserId(req.session.user.id);
+        const demands = await reservationModel.getDemandsTo(req.session.user.id);
+        demands.forEach((el) => {
+            el.id = el.reservationId;
+            res.locals.reservations.push(el);
+        });
         res.render('messages');
     } catch (error) {
         res.render('error', {
@@ -34,8 +39,17 @@ router.get('/:id', utils.mustBeConnected, async function(req, res, next) {
         const reservationId = req.params.id;
 
         res.locals.messages = await messageModel.getByReservationId(reservationId);
-        res.locals.destinataire = (await reservationModel.getOwner(reservationId))[0];
-        res.locals.source = (await reservationModel.getClient(reservationId))[0];
+        const owner = (await reservationModel.getOwner(reservationId))[0];
+        const client = (await reservationModel.getClient(reservationId))[0];
+
+        if (owner.id == req.session.user.id) {
+            res.locals.destinataire = client;
+            res.locals.source = owner;
+        } else {
+            res.locals.destinataire = owner;
+            res.locals.source = client;
+        }
+
         res.locals.reservationId = reservationId;
         res.locals.myId = req.session.user.id;
 
