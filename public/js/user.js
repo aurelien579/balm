@@ -14,8 +14,54 @@ $(function() {
         elem.addClass('active');
     }
 
+    function setupUserInfo() {
+        console.log('setup');
+
+        const $button = $('#modifyButton');
+        const $divPassword = $('#divPassword');
+        const $modifyForm = $('#modifyForm');
+
+        $button.click(() => {
+            /* Parcours les inputs */
+            $('input').each((i, elem) => {
+                $elem = $(elem);
+
+                if ($elem.is('[readonly]')) {
+                    $elem.attr('readonly', false);
+                } else {
+                    $elem.attr('readonly', true);
+                }
+            });
+
+            if ($button.innerText == 'Modifier') {
+                $button.innerText = 'Valider';
+            } else {
+                $button.innerText = 'Modifier';
+            }
+
+            if ($divPassword.is('[hidden]')) {
+                $divPassword.attr('hidden', false);
+            } else {
+                $divPassword.attr('hidden', true);
+            }
+        });
+
+        $modifyForm.submit((event) => {
+            event.preventDefault();
+
+            /*const url = $modifyForm.attr('action');
+            $.post(url, {
+                offerId: $("#commentForm").attr("offer-id"),
+                rating: $('#rating').val(),
+                content: $('#content').val()
+            });
+
+            $("#" + $form.attr('modal-id')).modal('toggle');*/
+        });
+    }
+
     $('#userInfoButton').click(function() {
-        ajax('/user/infos');
+        ajax('/user/infos', setupUserInfo);
         setActive($('#userInfoButton'));
     });
 
@@ -54,6 +100,6 @@ $(function() {
         setActive($('#demandsButton'));
     });
 
-    ajax('/user/infos');
+    ajax('/user/infos', setupUserInfo);
     setActive($('#userInfoButton'));
 });
