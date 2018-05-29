@@ -118,9 +118,9 @@ block content
 
                 if user
                   div(class="form-group row")
-                    select(class="form-control" required)
+                    select(class="form-control" name="idOfferEchange" required)
                         each row in result
-                          option(name="idOfferEchange" value = row.id) #{row.title}
+                          option( value = row.id) #{row.title}
                   div(class = "form-group row")
                     label(for="" class="sr-only") Nombre de personne
                     input(class="form-control" placeholder="Nombre de personne" name="numberpers" required)
