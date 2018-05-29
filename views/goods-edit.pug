@@ -22,16 +22,7 @@ block content
             label.col-lg-3.col-form-label Titre de l'annonce
             .col-lg-9
               input.form-control(name="title", type="text" value=offer.title)
-          .form-group.row
-             .form-check.form-check-inline.mar10.decright
-               input.form-check-input(name="hebergement" type="checkbox" id="inlineCheckbox1" value="1")
-               label.form-check-label(for="inlineCheckbox1") Hébergement
-             .form-check.form-check-inline.mar10
-               input.form-check-input(name="echange" type="checkbox" id="inlineCheckbox2" value="1")
-               label.form-check-label(for="inlineCheckbox2") Echange
-             .form-check.form-check-inline.mar10
-               input.form-check-input(name="location" type="checkbox" id="inlineCheckbox3" value="1")
-               label.form-check-label(for="inlineCheckbox3") Location
+
           .form-group.row
             label.col-lg-3.col-form-label Description
             .col-lg-9
@@ -60,6 +51,24 @@ block content
             .col-lg-2
               .input-group
                 input.form-control(name="nbpeople", type="text" value=offer.nbpeople)
+                  
+          .form-group.row
+            label.col-lg-3.col-form-label Type d'offre
+            .col-lg-2
+              select.form-control(id="offerType" name="offerType" onchange="updatePriceGroupVisibility();" selected=offer.type)
+                if offer.type == '0'
+                  option(value="location" selected='selected') Location
+                else
+                  option(value="location") Location
+                if offer.type == '2'
+                  option(value="hebergement" selected='selected') Hébergement
+                else
+                  option(value="hebergement") Hébergement
+                if offer.type == '1'
+                  option(value="echange" selected='selected') Echange
+                else
+                  option(value="echange") Echange
+                  
           .form-group.row
             label.col-lg-3.col-form-label Prix par nuit
             .col-lg-2

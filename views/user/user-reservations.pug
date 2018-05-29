@@ -47,7 +47,7 @@ h5.card-title Mes Réservations
                 button.button.close(data-dismiss="modal" aria-label="Close")
               .modal-body
                 .container-fluid
-                  form#commentForm(offer-id=res.offerId modal-id="modal" + i action="/comment" method="POST")
+                  form(id="commentForm" + i reservation-id=res.id modal-id="modal" + i action="/comment" method="POST")
                     .form-group.row
                       label(for="rating") Note:
                       input.form-control#rating(name="rating" type="number" min=0 max=5 step=1 required)
@@ -56,6 +56,6 @@ h5.card-title Mes Réservations
                       textarea.form-control#content(name="content" required)
               .modal-footer
                 button.btn.btn-secondary(data-dismiss="modal") Fermer
-                input.btn.btn-primary(type="submit" form="commentForm" value="Valider")
+                input.btn.btn-primary(type="submit" form="commentForm" + i value="Valider")
   else
     p Vous n'avez pas encore fait de réservations

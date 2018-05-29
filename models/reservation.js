@@ -40,6 +40,7 @@ WHERE
 
 const sqlGetByUserIdWithCommentCount = `
 SELECT
+    Reservation.id,
     DATE_FORMAT(Reservation.from, '%d %M %Y') AS 'from',
     DATE_FORMAT(Reservation.to, '%d %M %Y') AS 'to',
     DATE_FORMAT(Reservation.to, '%Y-%m-%d') AS 'to2',
@@ -103,7 +104,7 @@ WHERE
         AND Offer.userId = ?;
 `;
 
-const sqlAddReservation = `INSERT INTO Reservation(offerId, userId, \`from\`, \`to\`,\`status\`) VALUES(?, ?, ?, ?, ?); `;
+const sqlAddReservation = `INSERT INTO Reservation(offerId, userId, \`from\`, \`to\`,\`status\`,nbPersonnes, echangeOfferId) VALUES(?, ?, ?, ?, ?, ?, ?); `;
 const sqlAbortOverlapping = `
     UPDATE Reservation SET status = 4
     WHERE offerId = ? AND
@@ -127,8 +128,8 @@ const sqlGetClient = `
     WHERE Reservation.id = ?;
 `;
 
-function createReservation(offerId, userId, from, to, status) {
-    return db.sqlQuery(sqlAddReservation, [offerId, userId, from, to, status]);
+function createReservation(offerId, userId, from, to, status, nbPersonnes, echangeOfferId) {
+    return db.sqlQuery(sqlAddReservation, [offerId, userId, from, to, status, nbPersonnes, echangeOfferId]);
 }
 
 function getByUserId(userId) {

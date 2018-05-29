@@ -45,7 +45,7 @@ block content
               h4(class = "text-justify inline" ) #{offer.price} €
               h6(small class="text-muted inline font-italic gris ")       .par nuit
             h1()
-            if comments
+            if comments.length > 0
               - var somme =0;
               -var nbNote =0;
               -var moyenne =0;
@@ -56,7 +56,7 @@ block content
               - for (var x = 0; x < moyenne; x++)
                 h1(class = "display-4 inline etoile") &#9733
             else
-                h1() Pas de notes disponibles
+                h1(class = "etoile") Nouveau !
 
             div()
               if offer.pool ==1
@@ -83,12 +83,14 @@ block content
                 div(class="form-group row")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date0(type="text" end="date1" placeholder ="Arrivée")
+                      input.form-control.datepicker#date0(type="text" end="date1" placeholder = "Arrivée" required)
                     input#date0Sent(name="from" type="hidden" placeholder ="Arrivée")
+                  div(class="col-sm-1")
+                    img(src="/images/icons/fleche.png")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date1(type="text" start="date0" placeholder = "Départ")
-                    input#date1Sent(name="to" type="hidden" placeholder="Départ")
+                      input.form-control.datepicker#date1(type="text" start="date0" placeholder = "Départ" required)
+                    input#date1Sent(name="to" type="hidden" placeholder = "Départ")
                 div(class="form-group row")
                   div(class="col")
                     label(for="" class="sr-only") Nombre de personne
@@ -104,24 +106,36 @@ block content
                 div(class="form-group row")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date0(type="text" end="date1" placeholder = "Arrivée")
+                      input.form-control.datepicker#date0(type="text" end="date1" placeholder = "Arrivée" required)
                     input#date0Sent(name="from" type="hidden" placeholder ="Arrivée")
+                  div(class="col-sm-1")
+                    img(src="/images/icons/fleche.png")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date1(type="text" start="date0" placeholder = "Départ")
+                      input.form-control.datepicker#date1(type="text" start="date0" placeholder = "Départ" required)
                     input#date1Sent(name="to" type="hidden" placeholder = "Départ")
-                div(class="form-group row")
-                  div(class="col")
-                    if user
-                      select(class="form-control")
+
+
+                if user
+                  div(class="form-group row")
+                    select(class="form-control" name="idOfferEchange" required)
                         each row in result
-                          option() #{row.title}
-                  div(class="col")
+                          option( value = row.id) #{row.title}
+                  div(class = "form-group row")
+                    label(for="" class="sr-only") Nombre de personne
+                    input(class="form-control" placeholder="Nombre de personne" name="numberpers" required)
+                  div(class = "form-group row")
+                    input(type="hidden" name="id" value=id)
+                    button(type="submit" class="btnRed btn-outline-danger form-control") Réserver
+                else
+                  div(class="form-group row")
+                    p() Vous devez vous connecter pour pouvoir proposer une de vos offres en échange.
+                  div(class = "form-group row")
                     input(type="hidden" name="id" value=id)
                     button(type="submit" class="btnRed btn-outline-danger form-control") Réserver
         div(class="commentaires border-0")
           h4(class="text-justify") Commentaires
-          if comments 
+          if comments.length > 0
             each row in comments
               h4(small class="text-muted inline font-italic") #{row.firstName} :
               - for (var x = 0; x < row.rating; x++)

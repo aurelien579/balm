@@ -14,7 +14,7 @@ block content
           ul.list-group
             for reservation in reservations
               a.list-group-item.list-group-item-action(reservationId=reservation.id) 
-               | #{reservation.title}
+               | #{reservation.title} du #{reservation.from} au #{reservation.to}
         .col-lg-7#messageContent
 
 block scripts

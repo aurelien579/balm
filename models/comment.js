@@ -13,7 +13,7 @@ FROM
 WHERE
     Comment.reservationId = Reservation.id
         AND Reservation.offerId = ?
-        AND Comment.idUser = User.id;
+        AND Comment.userId = User.id;
 `;
 
 const sqlGetByUserId =
@@ -34,10 +34,10 @@ WHERE
     Offer.userId = ?
         AND Offer.id = Reservation.offerId
         AND Reservation.id = Comment.reservationId
-        AND User.id = Comment.idUser;
+        AND User.id = Comment.userId;
 `;
 
-const sqlCreate = 'INSERT INTO Comment (idOffer, idUser, rating, content) VALUES (?, ?, ?, ?);';
+const sqlCreate = 'INSERT INTO Comment (reservationId, userId, rating, content) VALUES (?, ?, ?, ?);';
 
 function getByOfferId(id) {
     return db.sqlQuery(sqlGetByOfferId, [id]);
@@ -47,8 +47,8 @@ function getByUserId(userId) {
     return db.sqlQuery(sqlGetByUserId, [userId]);
 }
 
-function create(offerId, userId, rating, content) {
-    return db.sqlQuery(sqlCreate, [offerId, userId, rating, content]);
+function create(reservationId, userId, rating, content) {
+    return db.sqlQuery(sqlCreate, [reservationId, userId, rating, content]);
 }
 
 exports.getByUserId = getByUserId;

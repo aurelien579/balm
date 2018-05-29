@@ -9,11 +9,13 @@ block content
       div(class='alert alert-success' role='alert') #{successMessage}
     .container
       .color
-        div(class="row")
-          h4(class="display-4") Récapitulatif de votre demande de réservation
-        div(class="row")
-          h1() Arrivée le : #{from}
-        div(class="row")
-          h1() Départ le : #{to}
-        div(class="row")
-          h1() Nombre de personnes voyageant : #{numberpers}
+
+        h4() Récapitulatif de votre demande de réservation
+
+        p() Votre numéro de reservation : #{idResa}
+
+        p() Arrivée le : #{from}
+
+        p() Départ le : #{to}
+
+        p() Nombre de personnes voyageant : #{numberpers}
