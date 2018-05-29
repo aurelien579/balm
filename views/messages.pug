@@ -1,0 +1,33 @@
+extends layout
+
+block header
+  link(rel="stylesheet" href="/stylesheets/messages.css")
+
+block content
+  .container
+    .card
+      .card-body
+        .row
+          h2.card-title Mes messages
+      .row
+        .col-lg-5
+          ul.list-group
+            for reservation in reservations
+              a.list-group-item.list-group-item-action(reservationId=reservation.id) 
+               | #{reservation.title}
+        .col-lg-7#messageContent
+
+block scripts
+  script(src="/js/messages.js")
+
+//-
+  .container
+    .jumbotron.jumbotron-transparent
+      h3.text-center.titre Mes messages
+    .row
+      .col-lg-5
+        ul.list-group
+          for reservation in reservations
+            a.list-group-item.list-group-item-action(reservationId=reservation.id) 
+             | #{reservation.title}
+      .col-lg-7#messageContent

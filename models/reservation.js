@@ -11,6 +11,7 @@ const sqlGetStatus = 'SELECT status FROM Reservation WHERE id = ?;';
 
 const sqlGetByUserId = `
 SELECT
+    Reservation.id,
     DATE_FORMAT(Reservation.from, '%d %M %Y') AS 'from',
     DATE_FORMAT(Reservation.to, '%d %M %Y') AS 'to',
     DATE_FORMAT(Reservation.to, '%Y-%m-%d') AS 'to2',
@@ -35,6 +36,39 @@ FROM
 WHERE
     Reservation.userId = ?
         AND Offer.id = Reservation.offerId;
+`;
+
+const sqlGetByUserIdWithCommentCount = `
+SELECT
+    DATE_FORMAT(Reservation.from, '%d %M %Y') AS 'from',
+    DATE_FORMAT(Reservation.to, '%d %M %Y') AS 'to',
+    DATE_FORMAT(Reservation.to, '%Y-%m-%d') AS 'to2',
+    Reservation.status,
+    Reservation.offerId,
+    Offer.title,
+    Offer.price,
+    Offer.type,
+    COALESCE(Image.path, '/images/offers/default.jpg') AS path,
+    COUNT(Comment.id) AS commentsCount,
+    Reservation.to <= CURDATE() AS past
+FROM
+    Reservation
+		INNER JOIN
+    Offer ON Offer.id = Reservation.offerId
+        LEFT JOIN
+    Image ON Image.id = (SELECT
+            id
+        FROM
+            Image
+        WHERE
+            Image.offerId = Offer.id
+        ORDER BY id
+        LIMIT 1)
+        LEFT JOIN
+	Comment ON Comment.reservationId = Reservation.id
+WHERE
+    Reservation.userId = ?
+GROUP BY Reservation.id, Image.id;
 `;
 
 const sqlGetDemandsTo = `
@@ -76,6 +110,23 @@ const sqlAbortOverlapping = `
 		  ((\`from\` >= ? AND \`from\` <= ?) OR (\`to\` >= ? AND \`to\` <= ?)) AND
           status = 0;`;
 
+const sqlGetOwner = `
+    SELECT User.id, firstName, lastName
+    FROM
+        Reservation
+            INNER JOIN Offer ON Reservation.offerId = Offer.id
+            INNER JOIN User ON Offer.userId = User.id
+    WHERE Reservation.id = ?;
+`;
+
+const sqlGetClient = `
+    SELECT User.id, firstName, lastName
+    FROM
+        Reservation
+            INNER JOIN User ON Reservation.userId = User.id
+    WHERE Reservation.id = ?;
+`;
+
 function createReservation(offerId, userId, from, to, status) {
     return db.sqlQuery(sqlAddReservation, [offerId, userId, from, to, status]);
 }
@@ -108,6 +159,18 @@ function abortOverlapping(offerId, start, end) {
     return db.sqlQuery(sqlAbortOverlapping, [offerId, start, end, start, end]);
 }
 
+function getByUserIdWithCommentCount(userId) {
+    return db.sqlQuery(sqlGetByUserIdWithCommentCount, [userId]);
+}
+
+function getOwner(reservationId) {
+    return db.sqlQuery(sqlGetOwner, [reservationId]);
+}
+
+function getClient(reservationId) {
+    return db.sqlQuery(sqlGetClient, [reservationId]);
+}
+
 exports.getByUserId = getByUserId;
 exports.createReservation = createReservation;
 exports.getDemandsTo = getDemandsTo;
@@ -116,6 +179,9 @@ exports.reject = reject;
 exports.getStatus = getStatus;
 exports.get = get;
 exports.abortOverlapping = abortOverlapping;
+exports.getByUserIdWithCommentCount = getByUserIdWithCommentCount;
+exports.getOwner = getOwner;
+exports.getClient = getClient;
 
 exports.WAITING = WAITING;
 exports.ACCEPTED = ACCEPTED;

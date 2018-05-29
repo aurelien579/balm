@@ -21,10 +21,10 @@ h5.card-title Mes Réservations
             .row
               .col-lg-6
                 h6 Du #{res.from} au #{res.to}
-                if res.past && !res.commented                
+                if res.past == 1 && res.commentsCount == 0
                   h6 Etat de la réservation : 
                     span.text-success.font-weight-bold Effectuée
-                else if res.past && res.commented
+                else if res.past == 1 && res.commentsCount > 0
                   h6 Etat de la réservation :
                     span.text-success.font-weight-bold Effectuée et commenté
                 else if res.status == 0
@@ -33,8 +33,8 @@ h5.card-title Mes Réservations
                 else
                   h6 Etat de la réservation : 
                     span.text-success.font-weight-bold Acceptée
-                
-              if res.past && !res.commented
+
+              if res.past && res.commentsCount == 0
                 .col-lg-6
                   .text-right
                     button.btn.btn-primary(data-toggle="modal" data-target="#modal" + i) Laisser un avis

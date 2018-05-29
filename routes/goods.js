@@ -169,21 +169,36 @@ router.get('/:id', async function(req, res, next) {
         let avail = await availabilityModel.getAvailabilityByOfferId(id);
         let user = req.session.user;
         console.log(user);
-        goodsModel.getByUserId(user.id)
-            .then((result) => {
-                console.log(result)
-                res.render('goods', {
-                    title: offer.title,
-                    offer: offer,
-                    comments: comments,
-                    images: images,
-                    id: id,
-                    avail: avail,
-                    user: user,
-                    result: result
+        if (user === undefined) {
+            console.log(comments);
+            res.render('goods', {
+                title: offer.title,
+                offer: offer,
+                comments: comments,
+                images: images,
+                id: id,
+                avail: avail
 
-                });
-            })
+            });
+
+        } else {
+            goodsModel.getByUserId(user.id)
+                .then((result) => {
+                    console.log(result)
+                    res.render('goods', {
+                        title: offer.title,
+                        offer: offer,
+                        comments: comments,
+                        images: images,
+                        id: id,
+                        avail: avail,
+                        user: user,
+                        result: result
+
+                    });
+                })
+
+        }
     } catch (ex) {
         res.render('error', {
             error: ex

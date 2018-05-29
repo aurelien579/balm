@@ -6,7 +6,7 @@ h5 Mes Commentaires
         .list-group-item
           h5
             | #{comment.firstName} vous a laissé un commentaire sur 
-            a(href="/goods/" + comment.idOffer) #{comment.title}
+            a(href="/goods/" + comment.offerId) #{comment.title}
           .row
             .col-1
               img.profile-img(src=comment.imagePath, height="90", width="90")
