@@ -24,7 +24,13 @@ router.post('/new', utils.mustBeConnectedToBook, function(req, res, next) {
     let to = new Date(req.body.to);
     let numberpers = req.body.numberpers;
     let id = req.body.id;
-    reservationModel.createReservation(id, req.session.user.id, from, to, 0)
+    let idOfferEchange = req.body.idOfferEchange;
+    console.log(req.body);
+    if (req.body.idOfferEchange === undefined) {
+        idOfferEchange = 0;
+    }
+    console.log(idOfferEchange);
+    reservationModel.createReservation(id, req.session.user.id, from, to, 0, numberpers, idOfferEchange)
         .then((result) => {
             res.render('reservation', {
                 successMessage: "Votre demande de reservation a bien été prise en compte",

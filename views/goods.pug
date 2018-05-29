@@ -83,15 +83,14 @@ block content
                 div(class="form-group row")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date0(type="text" end="date1" placeholder = "Arrivée")
+                      input.form-control.datepicker#date0(type="text" end="date1" placeholder = "Arrivée" required)
                     input#date0Sent(name="from" type="hidden" placeholder ="Arrivée")
                   div(class="col-sm-1")
                     img(src="/images/icons/fleche.png")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date1(type="text" start="date0" placeholder = "Départ")
+                      input.form-control.datepicker#date1(type="text" start="date0" placeholder = "Départ" required)
                     input#date1Sent(name="to" type="hidden" placeholder = "Départ")
-
                 div(class="form-group row")
                   div(class="col")
                     label(for="" class="sr-only") Nombre de personne
@@ -107,21 +106,24 @@ block content
                 div(class="form-group row")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date0(type="text" end="date1" placeholder = "Arrivée")
+                      input.form-control.datepicker#date0(type="text" end="date1" placeholder = "Arrivée" required)
                     input#date0Sent(name="from" type="hidden" placeholder ="Arrivée")
                   div(class="col-sm-1")
                     img(src="/images/icons/fleche.png")
                   div(class="col")
                     .input-group.date
-                      input.form-control.datepicker#date1(type="text" start="date0" placeholder = "Départ")
+                      input.form-control.datepicker#date1(type="text" start="date0" placeholder = "Départ" required)
                     input#date1Sent(name="to" type="hidden" placeholder = "Départ")
 
 
                 if user
                   div(class="form-group row")
-                    select(class="form-control" placeholder = " Saisir un de vos bien en échange ")
+                    select(class="form-control" required)
                         each row in result
-                          option() #{row.title}
+                          option(name="idOfferEchange" value = row.id) #{row.title}
+                  div(class = "form-group row")
+                    label(for="" class="sr-only") Nombre de personne
+                    input(class="form-control" placeholder="Nombre de personne" name="numberpers" required)
                   div(class = "form-group row")
                     input(type="hidden" name="id" value=id)
                     button(type="submit" class="btnRed btn-outline-danger form-control") Réserver
