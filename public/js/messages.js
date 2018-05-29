@@ -34,7 +34,9 @@ $(function() {
                 },
                 dataType: 'text',
                 success: (result) => {
-                    ajax('/message/' + reservationId);
+                    ajax('/message/' + reservationId, () => {
+                        setupConv(reservationId);
+                    });
                 }
             });
         });
@@ -45,8 +47,6 @@ $(function() {
         const reservationId = $elem.attr('reservationId');
 
         $elem.click(function() {
-            window.reservationId = reservationId;
-
             ajax('/message/' + reservationId, () => {
                 setupConv(reservationId);
             });

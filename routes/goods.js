@@ -66,14 +66,14 @@ router.get('/', function(req, res, next) {
     next();
 });
 
-router.get('/new', /*utils.mustBeConnected,*/ async function(req, res, next) {
+router.get('/new', utils.mustBeConnected, async function(req, res, next) {
     res.render('goods-new', {
         title: "Nouvelle Annonce",
         body: {}
     });
 });
 
-router.post('/new', /*utils.mustBeConnected,*/ goodsValidators, async function(req, res, next) {
+router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, res, next) {
     const errors = validationResult(req);
     const mapped = errors.mapped();
     const from = new Date(req.body.from);
