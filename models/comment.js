@@ -13,7 +13,7 @@ FROM
 WHERE
     Comment.reservationId = Reservation.id
         AND Reservation.offerId = ?
-        AND Comment.userId = User.id;
+        AND Comment.idUser = User.id;
 `;
 
 const sqlGetByUserId =
@@ -34,7 +34,7 @@ WHERE
     Offer.userId = ?
         AND Offer.id = Reservation.offerId
         AND Reservation.id = Comment.reservationId
-        AND User.id = Comment.userId;
+        AND User.id = Comment.idUser;
 `;
 
 const sqlCreate = 'INSERT INTO Comment (idOffer, idUser, rating, content) VALUES (?, ?, ?, ?);';
