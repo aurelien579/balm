@@ -12,10 +12,14 @@ const app = require('../app');
 
 function createSession(req, user) {
     req.session.user = user;
+    app.locals.session = {
+        email: user.email
+    }
 }
 
 function clearSession(req) {
     req.session.user = undefined;
+    app.locals.session = undefined;
 }
 
 router.post('/login', async function(req, res, next) {
