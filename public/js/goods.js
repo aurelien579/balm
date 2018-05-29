@@ -27,7 +27,7 @@ function setupDatepicker(elem) {
 
     elem.datepicker({
         format: 'dd/mm/yyyy',
-        startDate: startDate.toString()
+        startDate: startDate.toString(),
         todayHighlight: true
     });
 
@@ -141,9 +141,7 @@ function updatePriceGroupVisibility() {
     const val = $("#offerType").val();
     const $price = $("#priceGroup");
 
-    console.log(val);
-
-    if (val == 'echange') {
+    if (val == 'echange' || val == 'hebergement') {
         $price.hide(500);
     } else {
         $price.show(500);

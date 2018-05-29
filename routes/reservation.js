@@ -50,7 +50,7 @@ router.post('/new', utils.mustBeConnectedToBook, function(req, res, next) {
         });
 });
 
-router.get('/:id/accept', /*utils.mustBeConnected,*/ async function(req, res, next) {
+router.get('/:id/accept', utils.mustBeConnected, async function(req, res, next) {
     try {
         let id = parseInt(req.params.id);
         let reservation = (await reservationModel.get(id))[0];
