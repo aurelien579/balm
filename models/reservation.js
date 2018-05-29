@@ -40,6 +40,7 @@ WHERE
 
 const sqlGetByUserIdWithCommentCount = `
 SELECT
+    Reservation.id,
     DATE_FORMAT(Reservation.from, '%d %M %Y') AS 'from',
     DATE_FORMAT(Reservation.to, '%d %M %Y') AS 'to',
     DATE_FORMAT(Reservation.to, '%Y-%m-%d') AS 'to2',

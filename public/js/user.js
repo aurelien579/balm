@@ -75,23 +75,33 @@ $(function() {
         setActive($('#offersButton'));
     });
 
-    $('#reservationsButton').click(function() {
+    function loadReservations() {
         ajax('/user/reservations', function() {
-            const $form = $("#commentForm");
+            const $form = $("form");
             $form.submit(function(event) {
                 event.preventDefault();
+
                 const $form = $(this);
                 const url = $form.attr('action');
-                $.post(url, {
-                    offerId: $("#commentForm").attr("offer-id"),
-                    rating: $('#rating').val(),
-                    content: $('#content').val()
-                });
 
                 $("#" + $form.attr('modal-id')).modal('toggle');
+                console.log($form.attr("reservation-id"));
+
+                $.post({
+                    url: url,
+                    data: {
+                        reservationId: $form.attr("reservation-id"),
+                        rating: $form.find('#rating').val(),
+                        content: $form.find('#content').val()
+                    },
+                    success: loadReservations
+                });
             });
         });
+    }
 
+    $('#reservationsButton').click(function() {
+        loadReservations();
         setActive($('#reservationsButton'));
     });
 

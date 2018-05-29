@@ -34,7 +34,7 @@ $(function() {
                 },
                 dataType: 'text',
                 success: (result) => {
-                    updateConv(reservationId);
+                    ajax('/message/' + reservationId);
                 }
             });
         });
