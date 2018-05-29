@@ -128,20 +128,15 @@ router.get('/offers', utils.mustBeConnected, function(req, res, next) {
         });
 });
 
-router.get('/comments', utils.mustBeConnected, function(req, res, next) {
-    console.log("salut");
-    commentModel.getByUserId(req.session.user.id)
-        .then((comments) => {
-            res.render('user/user-comments', {
-                user: req.session.user,
-                comments: comments
-            })
-        })
-        .catch((err) => {
-            res.render('error', {
-                error: err
-            });
+router.get('/comments', utils.mustBeConnected, async function(req, res, next) {
+    try {
+        res.locals.comments = await commentModel.getByUserId(req.session.user.id);
+        res.render('user/user-comments');
+    } catch (error) {
+        res.render('error', {
+            error: error
         });
+    }
 });
 
 router.get('/reservations', utils.mustBeConnected, async function(req, res, next) {
@@ -166,18 +161,15 @@ router.get('/reservations', utils.mustBeConnected, async function(req, res, next
     }
 });
 
-router.get('/demands', utils.mustBeConnected, function(req, res, next) {
-    reservationModel.getDemandsTo(req.session.user.id)
-        .then((results) => {
-            res.render('user/user-demands', {
-                demands: results
-            });
-        })
-        .catch((err) => {
-            res.render('error', {
-                error: error
-            });
-        })
+router.get('/demands', utils.mustBeConnected, async function(req, res, next) {
+    try {
+        res.locals.demands = await reservationModel.getDemandsTo(req.session.user.id);
+        res.render('user/user-demands');
+    } catch (error) {
+        res.render('error', {
+            error: error
+        });
+    }
 });
 
 module.exports = router;

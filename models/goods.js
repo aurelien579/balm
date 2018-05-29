@@ -13,7 +13,7 @@ const sqlGetByUserId = 'SELECT * FROM Offer WHERE userId = ?;';
 const sqlDelete = 'DELETE FROM Offer WHERE id = ?;';
 const sqlDeleteRes = 'DELETE FROM Reservation WHERE offerid = ?;';
 const sqlDeleteImg = 'DELETE FROM Image WHERE offerId = ?;';
-const sqlDeleteCom = 'DELETE FROM Comment WHERE idOffer = ?;';
+const sqlDeleteCom = 'DELETE FROM Comment WHERE offerId = ?;';
 const sqlDeleteDisp = 'DELETE FROM Availability WHERE offerId = ?;';
 
 const slqGetByUserIdWithFirstImage =
