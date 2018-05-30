@@ -6,6 +6,8 @@ function updateDateToSend(elem, value) {
     var monthIndex = value.getMonth();
     var year = value.getFullYear();
 
+    console.log('update: ', elem, year + '-' + (monthIndex + 1) + '-' + day);
+
     alt.val(year + '-' + (monthIndex + 1) + '-' + day);
 }
 
@@ -40,8 +42,8 @@ function setupDatepicker(elem) {
     elem.datepicker().on('changeDate', function(e) {
         if (e.dates.length > 0)
             updateDateToSend(elem, e.date);
-        else
-            updateDateToSend(elem, "");
+        /*else
+            updateDateToSend(elem, "");*/
     });
 
     elem.datepicker('setDate', formatDate(new Date(initialDate)));
@@ -49,7 +51,7 @@ function setupDatepicker(elem) {
     let endAttr = elem.attr('end');
     let startAttr = elem.attr('start');
 
-    if (typeof endAttr !== typeof undefined && endAttr !== false) {
+    if (typeof endAttr !== 'undefined' && endAttr !== false) {
         let endElem = $("#" + endAttr);
 
         elem.datepicker().on('changeDate', function(e) {

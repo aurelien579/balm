@@ -72,6 +72,8 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
     let offerType = goodsModel.RENTING;
     let price = req.body.price;
 
+    console.log(req.body);
+
     /* Validation and sanitization */
     if (from > to) {
         mapped.dates = {
@@ -93,7 +95,6 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
         offerType = goodsModel.HOSTING;
         price = 0;
     }
-    console.log(req.body.offerType == 'echange');
 
     if (Object.keys(mapped).length > 0) {
         return res.render('goods-new', {
@@ -139,7 +140,7 @@ router.post('/new', utils.mustBeConnected, goodsValidators, async function(req, 
             i++;
         }
 
-        availabilityModel.add(insertResult.insertId, req.body.from, req.body.to);
+        availabilityModel.add(insertResult.insertId, from, to);
 
         res.render('user/user', {
             successMessage: "Votre annonce a bien été déposé",
