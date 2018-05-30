@@ -10,16 +10,16 @@ const utils = require('./utils');
 
 const app = require('../app');
 
-function createSession(req, user) {
+function createSession(req, res, user) {
     req.session.user = user;
-    app.locals.session = {
+    res.locals.session = {
         email: user.email
     }
 }
 
-function clearSession(req) {
+function clearSession(req, res) {
     req.session.user = undefined;
-    app.locals.session = undefined;
+    res.locals.session = undefined;
 }
 
 router.post('/login', async function(req, res, next) {
@@ -32,7 +32,7 @@ router.post('/login', async function(req, res, next) {
 
             if (match) {
                 successMessage = "Vous êtes bien connecté";
-                createSession(req, user);
+                createSession(req, res, user);
                 if (req.query.prev) {
                     return res.redirect(req.query.prev);
                 }
@@ -90,7 +90,7 @@ router.post('/register', async function(req, res, next) {
 });
 
 router.get('/logout', utils.mustBeConnected, function(req, res, next) {
-    clearSession(req);
+    clearSession(req, res);
     res.redirect('/');
 });
 
@@ -119,8 +119,10 @@ router.post('/infos', utils.mustBeConnected, async function(req, res, next) {
         });
 
     } catch (error) {
-      console.log("edit_info_F");
-      res.render('error:', {error: error});
+        console.log("edit_info_F");
+        res.render('error:', {
+            error: error
+        });
     }
 });
 

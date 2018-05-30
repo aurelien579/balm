@@ -46,7 +46,7 @@ app.use(function(req, res, next) {
     const user = req.session.user;
 
     if (user) {
-        app.locals.session = {
+        res.locals.session = {
             email: user.email
         }
     }
