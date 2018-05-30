@@ -33,11 +33,11 @@ html
               div(id="options-avancées" class="collapse card")
                 div(class="form-group row")
                   label(class="control-label" for="date0") Date de départ :
-                  input.form-control.datepicker(id='date10' type='text' end='date1')
+                  input.form-control.datepicker(id='date10' type='text' end='date11')
                   input(id='date10Sent'  name="datedep" type='text' hidden)
                 div(class="form-group row")
                   label(class="control-label" for="date11") Date de retour :
-                  input.form-control.datepicker(id='date1' type='text' start='date0')
+                  input.form-control.datepicker(id='date1' type='text' start='date10')
                   input(id='date11Sent'  name="datearr" type='text' hidden)
                 div(class="form-group row" id ="option")
                   label(for="FormControlSelect1") Nombre de personnes :
