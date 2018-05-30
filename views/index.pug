@@ -16,11 +16,13 @@ block content
       div(id="input2" class="collapse")
         div(class="card")
           div(class="form-group row")
-            label(class="control-label" for="date0") Date de départ :
-            input.form-control.datepicker(id='date0' name="datedep" type='text' end='date1')
+            label(class="control-label" for="date10") Date de départ :
+            input.form-control.datepicker(id='date10' type='text' end='date11')
+            input(id='date10Sent' name="datedep" type='text' hidden)
           div(class="form-group row")
-            label(class="control-label" for="date1") Date de retour :
-            input.form-control.datepicker(id='date1' name="datearr" type='text' start='date0')
+            label(class="control-label" for="date11") Date de retour :
+            input.form-control.datepicker(id='date11' type='text' start='date10')
+            input(id='date11Sent' name="datedep" type='text' hidden)
           div(class="form-group")
             label(for="FormControlSelect1") Nombre de personnes :
             select(class="form-control" name="numberpers" id="FormControlSelect1")
